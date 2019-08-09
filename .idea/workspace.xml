@@ -14,8 +14,8 @@
       <file leaf-file-name="Run_Analysis.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/analysis/Run_Analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="558">
-              <caret line="34" column="34" lean-forward="false" selection-start-line="66" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+            <state relative-caret-position="1116">
+              <caret line="65" column="26" lean-forward="false" selection-start-line="65" selection-start-column="26" selection-end-line="65" selection-end-column="26" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -38,8 +38,8 @@
       <file leaf-file-name="Analysis.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/analysis/Analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="21" lean-forward="false" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
+            <state relative-caret-position="468">
+              <caret line="28" column="48" lean-forward="false" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -47,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PreAnalysis.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PreAnalysis.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/analysis/PreAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="79" column="26" lean-forward="false" selection-start-line="79" selection-start-column="26" selection-end-line="79" selection-end-column="26" />
+            <state relative-caret-position="792">
+              <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -79,11 +79,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Copy_Input_Data.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Copy_Input_Data.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/analysis/Copy_Input_Data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2754">
-              <caret line="158" column="40" lean-forward="false" selection-start-line="158" selection-start-column="40" selection-end-line="158" selection-end-column="40" />
+            <state relative-caret-position="360">
+              <caret line="85" column="51" lean-forward="false" selection-start-line="85" selection-start-column="51" selection-end-line="85" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="roistats.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/analysis/roistats.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="9288">
+              <caret line="518" column="31" lean-forward="false" selection-start-line="518" selection-start-column="27" selection-end-line="518" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ConfigGLMs.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/analysis/ConfigGLMs.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="80" column="16" lean-forward="false" selection-start-line="80" selection-start-column="16" selection-end-line="80" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -95,28 +115,6 @@
             <state relative-caret-position="882">
               <caret line="49" column="94" lean-forward="false" selection-start-line="49" selection-start-column="53" selection-end-line="49" selection-end-column="94" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Roistats.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/analysis/Roistats.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="1" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Format_Motion_Regressors.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/analysis/Format_Motion_Regressors.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="23" column="67" lean-forward="false" selection-start-line="23" selection-start-column="67" selection-end-line="23" selection-end-column="67" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -156,6 +154,8 @@
       <find>origin</find>
       <find>This</find>
       <find>This is</find>
+      <find>home/</find>
+      <find>home</find>
     </findStrings>
     <replaceStrings>
       <replace>regressor_label</replace>
@@ -170,22 +170,22 @@
         <option value="$PROJECT_DIR$/Run_Analysis.py" />
         <option value="$PROJECT_DIR$/analysis/Roistats.sh" />
         <option value="$PROJECT_DIR$/analysis/Surface_GLMs.py" />
-        <option value="$PROJECT_DIR$/analysis/roistats.py" />
-        <option value="$PROJECT_DIR$/analysis/ConfigGLMs.py" />
         <option value="$PROJECT_DIR$/analysis/Volume_Demean_Images.py" />
         <option value="$PROJECT_DIR$/analysis/Surface_Demean_Images.py" />
         <option value="$PROJECT_DIR$/analysis/Volume_GLMs.py" />
         <option value="$PROJECT_DIR$/analysis/00_calculate_FDs.sh" />
         <option value="$PROJECT_DIR$/analysis/calculate_stdDVARS.sh" />
         <option value="$PROJECT_DIR$/analysis/calculate_framewise_displacement.sh" />
-        <option value="$PROJECT_DIR$/analysis/Analysis.py" />
         <option value="$PROJECT_DIR$/analysis/Format_Motion_Regressors.py" />
         <option value="$PROJECT_DIR$/analysis/Demean_Motion.py" />
         <option value="$PROJECT_DIR$/analysis/Analysis_Pipeline.py" />
         <option value="$PROJECT_DIR$/analysis/RunShellFunc.py" />
         <option value="$PROJECT_DIR$/analysis/Run_Analysis.py" />
-        <option value="$PROJECT_DIR$/analysis/Copy_Input_Data.py" />
         <option value="$PROJECT_DIR$/analysis/PreAnalysis.py" />
+        <option value="$PROJECT_DIR$/analysis/Analysis.py" />
+        <option value="$PROJECT_DIR$/analysis/roistats.py" />
+        <option value="$PROJECT_DIR$/analysis/ConfigGLMs.py" />
+        <option value="$PROJECT_DIR$/analysis/Copy_Input_Data.py" />
       </list>
     </option>
   </component>
@@ -244,6 +244,23 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
+    <configuration name="PreAnalysis" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/analysis" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="AfniAnalysis" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/analysis/PreAnalysis.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <configuration name="RunShellFunc" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -295,18 +312,20 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.Run_Analysis" />
       <item index="1" class="java.lang.String" itemvalue="Python.Copy_Input_Data" />
       <item index="2" class="java.lang.String" itemvalue="Python.Volume_GLMs" />
       <item index="3" class="java.lang.String" itemvalue="Python.RunShellFunc" />
+      <item index="4" class="java.lang.String" itemvalue="Python.PreAnalysis" />
     </list>
     <recent_temporary>
-      <list size="4">
+      <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.Run_Analysis" />
-        <item index="1" class="java.lang.String" itemvalue="Python.Copy_Input_Data" />
-        <item index="2" class="java.lang.String" itemvalue="Python.RunShellFunc" />
-        <item index="3" class="java.lang.String" itemvalue="Python.Volume_GLMs" />
+        <item index="1" class="java.lang.String" itemvalue="Python.PreAnalysis" />
+        <item index="2" class="java.lang.String" itemvalue="Python.Copy_Input_Data" />
+        <item index="3" class="java.lang.String" itemvalue="Python.RunShellFunc" />
+        <item index="4" class="java.lang.String" itemvalue="Python.Volume_GLMs" />
       </list>
     </recent_temporary>
   </component>
@@ -325,6 +344,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="463" y="0" width="1841" height="1055" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2498642" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -516,16 +536,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/Analysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="21" lean-forward="false" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/analysis/Roistats.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -542,6 +552,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/analysis/Surface_GLMs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2430">
+          <caret line="137" column="37" lean-forward="false" selection-start-line="137" selection-start-column="37" selection-end-line="137" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analysis/Run_Analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1116">
+          <caret line="65" column="26" lean-forward="false" selection-start-line="65" selection-start-column="26" selection-end-line="65" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/analysis/Analysis_Pipeline.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
@@ -552,20 +579,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/Demean_Motion.py">
+    <entry file="file://$PROJECT_DIR$/analysis/PreAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="9" lean-forward="false" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/Run_Analysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="34" column="34" lean-forward="false" selection-start-line="66" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+        <state relative-caret-position="792">
+          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#22#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -578,28 +597,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/Copy_Input_Data.py">
+    <entry file="file://$PROJECT_DIR$/analysis/Analysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2754">
-          <caret line="158" column="40" lean-forward="false" selection-start-line="158" selection-start-column="40" selection-end-line="158" selection-end-column="40" />
-          <folding />
+        <state relative-caret-position="468">
+          <caret line="28" column="48" lean-forward="false" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/PreAnalysis.py">
+    <entry file="file://$PROJECT_DIR$/analysis/Demean_Motion.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="79" column="26" lean-forward="false" selection-start-line="79" selection-start-column="26" selection-end-line="79" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="18">
+          <caret line="1" column="9" lean-forward="false" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/analysis/ConfigGLMs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="548">
-          <caret line="71" column="93" lean-forward="false" selection-start-line="71" selection-start-column="93" selection-end-line="71" selection-end-column="93" />
+        <state relative-caret-position="288">
+          <caret line="80" column="16" lean-forward="false" selection-start-line="80" selection-start-column="16" selection-end-line="80" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -607,20 +626,16 @@
     <entry file="file://$PROJECT_DIR$/analysis/roistats.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="9288">
-          <caret line="518" column="78" lean-forward="false" selection-start-line="518" selection-start-column="21" selection-end-line="518" selection-end-column="78" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+          <caret line="518" column="31" lean-forward="false" selection-start-line="518" selection-start-column="27" selection-end-line="518" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/Surface_GLMs.py">
+    <entry file="file://$PROJECT_DIR$/analysis/Copy_Input_Data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2430">
-          <caret line="137" column="37" lean-forward="false" selection-start-line="137" selection-start-column="37" selection-end-line="137" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="360">
+          <caret line="85" column="51" lean-forward="false" selection-start-line="85" selection-start-column="51" selection-end-line="85" selection-end-column="51" />
+          <folding />
         </state>
       </provider>
     </entry>

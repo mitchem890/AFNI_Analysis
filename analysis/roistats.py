@@ -35,7 +35,7 @@ def block_roistats(subject, task, session, mb, data_dir, censor):
     else:
 
         for atlas in atlases:
-            rs.run_shell_command("bash /home/mitchell/dockerprojects/AfniAnalysis/analysis/Roistats.sh -i " + stats_file +
+            rs.run_shell_command("bash /home/Roistats.sh -i " + stats_file +
                                 " -n " + name + " -w " + os.path.join(work_dir, glm) +
                                 " -a " + os.path.join(atlases_dir, atlas) +
                                 " -e " + session +
@@ -103,7 +103,7 @@ def contrast_roistats(subject, task, session, mb, data_dir, censor):
 
             for atlas in atlases:
                 rs.run_shell_command(
-                    "bash /home/mitchell/dockerprojects/AfniAnalysis/analysis/Roistats.sh -i " + stats_file +
+                    "bash /home/Roistats.sh -i " + stats_file +
                     " -n " + contrast + " -w " + os.path.join(work_dir, glm) +
                     " -a " + os.path.join(atlases_dir, atlas) +
                     " -e " + session +
@@ -149,7 +149,7 @@ def mixed_roistats(subject, task, session, mb, data_dir, censor):
                     name = condition + "_BLOCKS"
 
                     rs.run_shell_command(
-                        "bash /home/mitchell/dockerprojects/AfniAnalysis/analysis/Roistats.sh -i " + stats_file +
+                        "bash /home/Roistats.sh -i " + stats_file +
                         " -n " + name + " -w " + os.path.join(work_dir, glm) +
                         " -a " + os.path.join(atlases_dir, atlas) +
                         " -e " + session +
@@ -160,7 +160,7 @@ def mixed_roistats(subject, task, session, mb, data_dir, censor):
                     name = condition + "_blockONandOFF"
 
                     rs.run_shell_command(
-                        "bash /home/mitchell/dockerprojects/AfniAnalysis/analysis/Roistats.sh -i " + stats_file +
+                        "bash /home/Roistats.sh -i " + stats_file +
                         " -n " + name + " -w " + os.path.join(work_dir, glm) +
                         " -a " + os.path.join(atlases_dir, atlas) +
                         " -e " + session +
@@ -171,7 +171,7 @@ def mixed_roistats(subject, task, session, mb, data_dir, censor):
                     name = condition + "_trials"
 
                     rs.run_shell_command(
-                    "bash /home/mitchell/dockerprojects/AfniAnalysis/analysis/Roistats.sh -i " + stats_file +
+                    "bash /home/Roistats.sh -i " + stats_file +
                     " -n " + name + " -w " + os.path.join(work_dir, glm) +
                     " -a " + os.path.join(atlases_dir, atlas) +
                     " -e " + session +
@@ -240,7 +240,7 @@ def single_regressors_roistats(subject, task, session, mb, data_dir, censor):
                 name = condition
 
                 rs.run_shell_command(
-                    "bash /home/mitchell/dockerprojects/AfniAnalysis/analysis/Roistats.sh -i " + stats_file +
+                    "bash /home/Roistats.sh -i " + stats_file +
                     " -n " + name + " -w " + os.path.join(work_dir, glm) +
                     " -a " + os.path.join(atlases_dir, atlas) +
                     " -e " + session +
@@ -288,7 +288,7 @@ def block_roistats_Surface(subject, task, session, mb, hemisphere, data_dir, cen
                 extension="_"+hemisphere+".func.gii"
             else:
                 extension="_"+hemisphere+".label.gii"
-            rs.run_shell_command("bash /home/mitchell/dockerprojects/AfniAnalysis/analysis/Roistats.sh -i " + stats_file +
+            rs.run_shell_command("bash /home/Roistats.sh -i " + stats_file +
                                 " -n " + name + " -w " + os.path.join(work_dir, glm) +
                                 " -a " + os.path.join(atlases_dir, atlas) +
                                 " -e " + session +
@@ -364,7 +364,7 @@ def contrast_roistats_Surface(subject, task, session, mb, hemisphere, data_dir, 
                     extension = "_" + hemisphere + ".label.gii"
 
                 rs.run_shell_command(
-                    "bash /home/mitchell/dockerprojects/AfniAnalysis/analysis/Roistats.sh -i " + stats_file +
+                    "bash /home/Roistats.sh -i " + stats_file +
                     " -n " + contrast + " -w " + os.path.join(work_dir, glm) +
                     " -a " + os.path.join(atlases_dir, atlas) +
                     " -e " + session +
@@ -417,7 +417,7 @@ def mixed_roistats_Surface(subject, task, session, mb, hemisphere, data_dir, cen
                     name = condition + "_BLOCKS"
 
                     rs.run_shell_command(
-                        "bash /home/mitchell/dockerprojects/AfniAnalysis/analysis/Roistats.sh -i " + stats_file +
+                        "bash /home/Roistats.sh -i " + stats_file +
                         " -n " + name + " -w " + os.path.join(work_dir, glm) +
                         " -a " + os.path.join(atlases_dir, atlas) +
                         " -e " + session +
@@ -428,7 +428,7 @@ def mixed_roistats_Surface(subject, task, session, mb, hemisphere, data_dir, cen
                     name = condition + "_blockONandOFF"
 
                     rs.run_shell_command(
-                        "bash /home/mitchell/dockerprojects/AfniAnalysis/analysis/Roistats.sh -i " + stats_file +
+                        "bash /home/Roistats.sh -i " + stats_file +
                         " -n " + name + " -w " + os.path.join(work_dir, glm) +
                         " -a " + os.path.join(atlases_dir, atlas) +
                         " -e " + session +
@@ -439,7 +439,7 @@ def mixed_roistats_Surface(subject, task, session, mb, hemisphere, data_dir, cen
                     name = condition + "_trials"
 
                     rs.run_shell_command(
-                    "bash /home/mitchell/dockerprojects/AfniAnalysis/analysis/Roistats.sh -i " + stats_file +
+                    "bash /home/Roistats.sh -i " + stats_file +
                     " -n " + name + " -w " + os.path.join(work_dir, glm) +
                     " -a " + os.path.join(atlases_dir, atlas) +
                     " -e " + session +
@@ -516,7 +516,7 @@ def single_regressors_roistats_Surface(subject, task, session, mb, hemisphere, d
                 name = condition
 
                 rs.run_shell_command(
-                    "bash /home/mitchell/dockerprojects/AfniAnalysis/analysis/Roistats.sh -i " + stats_file +
+                    "bash /home/Roistats.sh -i " + stats_file +
                     " -n " + name + " -w " + os.path.join(work_dir, glm) +
                     " -a " + os.path.join(atlases_dir, atlas) +
                     " -e " + session +

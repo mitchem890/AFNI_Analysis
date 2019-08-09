@@ -21,7 +21,7 @@ def cifti_split(input, output):
 #For use with the HCP data. Calculate the FDs from the Movement regressors
 def calculate_fd(input, output):
     print("Calculating Framewise Displacement")
-    rs.run_shell_command("bash /home/mitchell/dockerprojects/AfniAnalysis/analysis/calculate_framewise_displacement.sh" +
+    rs.run_shell_command("bash /home/calculate_framewise_displacement.sh" +
                          " " + input +
                          " " + output)
                           # Calculate and place both the FD.txt and FD_mask.txt
@@ -32,7 +32,7 @@ def calculate_dvars(nifti, output):
     # Creating standardized DVARS (from Tom Nichols' code)
     # output should look like "${series}/${subjects}_${name}_DVARS.txt"
 
-    rs.run_shell_command("bash /home/mitchell/dockerprojects/AfniAnalysis/analysis/dvars_nichols.sh " +
+    rs.run_shell_command("bash /home/dvars_nichols.sh " +
                          nifti +
                          " " + output)
 
@@ -83,7 +83,7 @@ def make_fd_mask(input, output):
 #resample the nifti image to fit to what is expected out of the hcp pipeline. for use with fmriprep
 def resample(input, output):
     print("Running 3dresample")
-    rs.run_shell_command("3dresample -master /home/mitchell/dockerprojects/AfniAnalysis/analysis/atlases/gordon_2p4_resampled_wsubcort_LPI.nii.gz" +
+    rs.run_shell_command("3dresample -master /home/atlases/gordon_2p4_resampled_wsubcort_LPI.nii.gz" +
                          " -input " + input +
                          " -prefix " + output)
     if os.path.exists(output):

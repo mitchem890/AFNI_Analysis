@@ -78,7 +78,7 @@ StroopReaEventModels = [Block + " " + blockONandOFF + " " + StroopEventTent + " 
 StroopReaSingleRegressorModels = [Block + " " + blockONandOFF + " " + HRF + " " + HRF + " " + HRF + " " + HRF + " " + HRF]
 
 #AtlasDirectory and Atlases
-Atlas_Dir="/home/mitchell/dockerprojects/AfniAnalysis/analysis/atlases"
+Atlas_Dir="/home/atlases"
 VolumeAtlasesMB4=["gordon_2p4_resampled_wsubcort_LPI", "communities_2p4_resampled_LPI", "HCP-MMP1_on_MNI152_ICBM2009a_nlin_2p4", "HCP-MMP1_L_on_MNI152_ICBM2009a_nlin_2p4", "HCP-MMP1_R_on_MNI152_ICBM2009a_nlin_2p4", "Schaefer2018_400Parcels_7Networks_order_FSLMNI152_2p4"]
 SurfaceAtlasesMB4=["gordon_333", "HCP-MMP_RelatedParcellation210.CorticalAreas_dil_Colors.32k_fs_LR", "Schaefer2018_400Parcels_7Networks_order"]
 SubCorticalAtlasesMB4=["gordon_222_resampled_wsubcort_LPI", "Schaefer2018_400Parcels_7Networks_order_FSLMNI152_222"]

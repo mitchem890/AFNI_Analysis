@@ -10,27 +10,25 @@ hemispheres = ['L','R']
 
 def analysis(destination, wave, subject, session, task, pipeline, run_volume, run_surface):
         if run_volume:
-            if False:
-                Volume_GLMs.event_glms(destination, subject, task, session)
-                Volume_GLMs.block_glms(destination, subject, task, session)
-                Volume_GLMs.mixed_glms(destination, subject, task, session)
-                Volume_GLMs.single_regressor_glm(destination, subject, task, session)
-                roistats.block_roistats(subject=subject, task=task, session=session, mb="4", data_dir=destination,
+            Volume_GLMs.event_glms(destination, subject, task, session)
+            Volume_GLMs.block_glms(destination, subject, task, session)
+            Volume_GLMs.mixed_glms(destination, subject, task, session)
+            Volume_GLMs.single_regressor_glm(destination, subject, task, session)
+            roistats.block_roistats(subject=subject, task=task, session=session, mb="4", data_dir=destination,
+                                    censor=True)
+            roistats.contrast_roistats(subject=subject, task=task, session=session, mb="4", data_dir=destination,
                                         censor=True)
-                roistats.contrast_roistats(subject=subject, task=task, session=session, mb="4", data_dir=destination,
-                                           censor=True)
-                roistats.mixed_roistats(subject=subject, task=task, session=session, mb="4", data_dir=destination,
-                                        censor=True)
-                roistats.single_regressors_roistats(subject=subject, task=task, session=session, mb="4",
-                                                    data_dir=destination, censor=True)
+            roistats.mixed_roistats(subject=subject, task=task, session=session, mb="4", data_dir=destination,
+                                    censor=True)
+            roistats.single_regressors_roistats(subject=subject, task=task, session=session, mb="4",
+                                                data_dir=destination, censor=True)
 
         if run_surface:
             for hemisphere in hemispheres:
-                if True:
-                    Surface_GLMs.event_glms(destination, subject, task, session, hemisphere)
-                    Surface_GLMs.block_glms(destination, subject, task, session, hemisphere)
-                    Surface_GLMs.mixed_glms(destination, subject, task, session, hemisphere)
-                    Surface_GLMs.single_regressor_glm(destination, subject, task, session, hemisphere)
+                Surface_GLMs.event_glms(destination, subject, task, session, hemisphere)
+                Surface_GLMs.block_glms(destination, subject, task, session, hemisphere)
+                Surface_GLMs.mixed_glms(destination, subject, task, session, hemisphere)
+                Surface_GLMs.single_regressor_glm(destination, subject, task, session, hemisphere)
 
             if pipeline == "fmriprep":
                 fsaverage5 = True
