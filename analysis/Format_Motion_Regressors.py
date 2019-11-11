@@ -56,13 +56,14 @@ def format_motion_regressors(path, subject, session, task):
 
         #TODO maybe write in a seperate func
         #read in the 12 column movement regressors csv
-        motion = pd.read_csv(mov_regs_out, delimiter='\t', encoding='utf-8')
+
+        motion = pd.read_csv(mov_regs_out, header=None, delimiter='\t', encoding='utf-8')
 
         #Just get the first 6 movement regressors
         data = motion.iloc[:, 0:6]
         #put them into a dataframe
         df = pd.DataFrame(data=data)
         #print them out to a csv
-        df.to_csv(mov_regs_six_out, sep='\t', index=False, quoting=csv.QUOTE_NONE)
+        df.to_csv(mov_regs_six_out, sep='\t', index=False, header=None, quoting=csv.QUOTE_NONE, float_format='%.8f')
 
 #        print("Could not format motion regressors: " + 'Movement_Regressors_' + task + session[0:3].title())

@@ -88,19 +88,23 @@ def event_glms(working_dir, subject, task, session,hemisphere):
         models = ConfigGLMs.StroopEventModels
         index = ConfigGLMs.StroopEventIDX
 
+
         if session == 'reactive':
             event_regressors = ConfigGLMs.StroopReaEventRegressors
+            models = ConfigGLMs.StroopReaEventModels
+
     event_contrasts = [c.replace("idx_buttons", ConfigGLMs.buttonIDX) for c in event_contrasts]
     event_contrasts = [c.replace("idx", index) for c in event_contrasts]
     for i in range(len(glm_labels)):
         contrast_labels = []
         contrasts = []
         for j in range(len(event_contrast_glm_ids)):
+
             if event_contrast_glm_ids[j] == glm_labels[i]:
                 contrast_labels.append(event_contrast_labels[j])
                 contrasts.append(event_contrasts[j])
-        glmMaker(working_dir=working_dir, subject=subject, task=task, session=session,hemisphere=hemisphere,
-                 regressor=event_regressors[i].split() , regressor_label=event_regressors[i].split(), regressor_model=models[i].split(),
+        glmMaker(working_dir=working_dir, subject=subject, task=task, session=session, hemisphere=hemisphere,
+                 regressor=event_regressors[i].split(), regressor_label=event_regressors[i].split(), regressor_model=models[i].split(),
                  contrast=contrasts, contrast_label=contrast_labels,
                  type='EVENTS', glm_label=glm_labels[i])
 
@@ -116,6 +120,7 @@ def single_regressor_glm(working_dir, subject, task, session, hemisphere):
         index = ConfigGLMs.HRFIDX
 
         if session == 'reactive':
+            event_contrast_glm_ids = ConfigGLMs.StroopReaSingleRegressorGLMids
             event_regressors = ConfigGLMs.StroopReaEventRegressors
             models = ConfigGLMs.StroopReaSingleRegressorModels
 
@@ -140,7 +145,6 @@ def single_regressor_glm(working_dir, subject, task, session, hemisphere):
 
 #Edit this fro Surface
 def glmMaker(working_dir, subject, task, session, hemisphere, regressor, regressor_label, regressor_model, type, glm_label="", contrast=[], contrast_label=[]):
-
 
     File1 = os.path.join(working_dir, subject, 'INPUT_DATA', task, session,
                          'lpi_scale_tfMRI_' + task + session[0:3].title() + '1_AP_'+hemisphere+'.func.gii')
@@ -170,7 +174,7 @@ def glmMaker(working_dir, subject, task, session, hemisphere, regressor, regress
             os.path.join(working_dir, subject, 'INPUT_DATA', task, session, subject + '_' + task + '_' + session +
                                    '_' + regressor[i+1] + '.txt') + " "+regressor_model[i+1]+" -stim_label " + str(i+2) + " " + regressor_label[i+1] +" \\"
 
-    command = command + "-ortvec " + os.path.join(working_dir, subject, 'INPUT_DATA', task, session, "motion_demean_baseline.1D") + " movregs \
+    command = command + "-ortvec " + os.path.join(working_dir, subject, 'INPUT_DATA', task, session, "motion_demean_"+session+".1D") + " movregs \
     -x1D X.xmat_"+hemisphere+".1D -xjpeg X_"+hemisphere+".jpg \
     -nobucket"
 

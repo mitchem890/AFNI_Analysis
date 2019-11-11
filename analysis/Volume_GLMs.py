@@ -92,6 +92,7 @@ def event_glms(working_dir, subject, task, session):
 
         if session == 'reactive':
             event_regressors = ConfigGLMs.StroopReaEventRegressors
+            models = ConfigGLMs.StroopReaEventModels
 
     event_contrasts = [c.replace("idx_buttons", ConfigGLMs.buttonIDX) for c in event_contrasts]
     event_contrasts = [c.replace("idx", index) for c in event_contrasts]
@@ -145,7 +146,6 @@ def single_regressor_glm(working_dir, subject, task, session):
 
 
 def glmMaker(working_dir, subject, task, session, regressor, regressor_label, regressor_model, type, glm_label="", contrast=[], contrast_label=[]):
-
     #Get the Inputs for the GLMs they should be AP and PA matched
     #TODO Check for correct run Number
     File1 = os.path.join(working_dir, subject, 'INPUT_DATA', task, session,
@@ -181,7 +181,7 @@ def glmMaker(working_dir, subject, task, session, regressor, regressor_label, re
             os.path.join(working_dir, subject, 'INPUT_DATA', task, session, subject + '_' + task + '_' + session +
                                    '_' + regressor[i+1] + '.txt') + " "+regressor_model[i+1]+" -stim_label " + str(i+2) + " " + regressor_label[i+1] +" \\"
 
-    command = command + "-ortvec " + os.path.join(working_dir, subject, 'INPUT_DATA', task, session, "motion_demean_baseline.1D") + " movregs \
+    command = command + "-ortvec " + os.path.join(working_dir, subject, 'INPUT_DATA', task, session, "motion_demean_"+session+".1D") + " movregs \
     -x1D X.xmat.1D -xjpeg X.jpg \
     -nobucket"
 

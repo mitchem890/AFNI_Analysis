@@ -42,12 +42,12 @@ def make_movement_regressors(input, output):
     print("Making Movement Regressors")
 
     motion = pd.read_csv(input, delimiter='\t', encoding='utf-8')
+
     data = {'trans_x': motion['trans_x'], 'trans_y': motion['trans_y'], 'trans_z': motion['trans_z'],
             'rot_x': motion['rot_x'], 'rot_y': motion['rot_y'], 'rot_z': motion['rot_z']}
     df = pd.DataFrame(data=data)
     df = df[['trans_x', 'trans_y', 'trans_z', 'rot_x', 'rot_y', 'rot_z']]
-
-    df.to_csv(output,sep='\t',header=False, index=False, quoting=csv.QUOTE_NONE)
+    df.to_csv(output, sep='\t', header=False, index=False, quoting=csv.QUOTE_NONE, float_format='%.8f')
 
 
 #Pull the FD out of fmriprep tsv for use with the fmriprep output
@@ -58,23 +58,23 @@ def make_fd(input, output):
     data = {'framewise_displacement': motion['framewise_displacement']}
     df = pd.DataFrame(data=data)
     df.iloc[0] = 0
-    df.to_csv(output, sep='\t', header=False, index=False, quoting=csv.QUOTE_NONE)
+    df.round(5)
+    df.to_csv(output, sep='\t', header=False, index=False, quoting=csv.QUOTE_NONE, float_format='%.8f')
 
 
 #Pull the DVARS out of fmriprep tsv for use with the fmriprep output
 def make_dvars(input, output):
     print("Making DVARs")
-
     motion = pd.read_csv(input, delimiter='\t', encoding='utf-8')
     data = {'std_dvars': motion['std_dvars']}
     df = pd.DataFrame(data=data)
     df.iloc[0] = 0
-    df.to_csv(output, sep='\t', index=False, header=False, quoting=csv.QUOTE_NONE)
+    df.round(5)
+    df.to_csv(output, sep='\t', index=False, header=False, quoting=csv.QUOTE_NONE, float_format='%.8f')
 
 #Create the FD mask with a threshold of .9 for use with the fmriprep output
 def make_fd_mask(input, output):
     print("Making FD Mask")
-
     data = rs.run_shell_command("1deval -expr 'within(a,0,0.9)' -a " + input, return_output=True)
     with open(output, 'w') as f:
         for i in data:

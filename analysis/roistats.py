@@ -43,7 +43,6 @@ def block_roistats(subject, task, session, mb, data_dir, censor):
                                 " -r \".nii.gz\" -o \"_blocks\"")
 
 
-
 def contrast_roistats(subject, task, session, mb, data_dir, censor):
     print("Running Volume Contrast Roistats: " + subject + " " + session + " " + task)
 
@@ -211,13 +210,13 @@ def single_regressors_roistats(subject, task, session, mb, data_dir, censor):
         glm_id = ConfigGLMs.SternSingleRegressorGLMids
         num_conditions = len(glm_id)
     elif task == "Stroop":
-        conditions = ConfigGLMs.SternSingleRegressorConditions
-        glm_id = ConfigGLMs.SternSingleRegressorGLMids
+        conditions = ConfigGLMs.StroopSingleRegressorConditions
+        glm_id = ConfigGLMs.StroopSingleRegressorGLMids
         num_conditions = len(glm_id)
 
     if task == "Stroop" and session.lower() == "reactive":
         conditions = ConfigGLMs.StroopSingleRegressorConditions
-        glm_id = ConfigGLMs.SternSingleRegressorGLMids
+        glm_id = ConfigGLMs.StroopSingleRegressorGLMids
         num_conditions = len(glm_id)
 
 
@@ -247,6 +246,113 @@ def single_regressors_roistats(subject, task, session, mb, data_dir, censor):
                     " -s " + subject +
                     " -r \".nii.gz\" -o \"_tents\"")
 
+
+def single_regressors_HRF_roistats(subject, task, session, mb, data_dir, censor):
+    #Only run single regressor HRF for Stroop
+    if task == "Stroop":
+
+        print("Running Volume Single Regressor Roistats: " + subject + " " + session + " " + task)
+
+        design="HRF_EVENTS"
+
+    #----- atlases
+        atlases_dir =ConfigGLMs.Atlas_Dir
+
+        if mb == "4":
+            atlases =ConfigGLMs.VolumeAtlasesMB4
+        elif mb == "8":
+            atlases =ConfigGLMs.VolumeAtlasesMB8
+        else:
+            print("ERROR :\tNo MB factor of " + mb)
+
+        work_dir = os.path.join(data_dir, subject, 'RESULTS', task)
+
+        if task == "Stroop":
+            conditions = ConfigGLMs.StroopSingleRegressorConditions
+            glm_id = ConfigGLMs.StroopSingleRegressorGLMids
+            num_conditions = len(glm_id)
+
+        if task == "Stroop" and session.lower() == "reactive":
+            conditions = ConfigGLMs.StroopSingleRegressorConditions
+            glm_id = ConfigGLMs.StroopSingleRegressorGLMids
+            num_conditions = len(glm_id)
+
+        for i in range(0, num_conditions):
+            condition = conditions[i]
+
+            glm = session + "_" + glm_id[i] + "_" + design
+
+            if censor == True:
+                glm = glm + "_censored"
+
+            stats_file = os.path.join(work_dir, glm, "STATS_" + subject + "_REML.nii.gz")
+
+            if not os.path.exists(stats_file):
+                print("WARNING: " + stats_file + "doesn't exist. Check if this is correct.")
+            else:
+
+                for atlas in atlases:
+                    # roistats
+                    name = condition
+
+                    rs.run_shell_command(
+                        "bash /home/Roistats.sh -i " + stats_file +
+                        " -n " + name + " -w " + os.path.join(work_dir, glm) +
+                        " -a " + os.path.join(atlases_dir, atlas) +
+                        " -e " + session +
+                        " -s " + subject +
+                        " -r \".nii.gz\" -o \"_HRF\"")
+
+
+def contrast_HRF_roistats(subject, task, session, mb, data_dir, censor):
+    #HRF ore only for the Stroop task
+    if task == 'Stroop':
+        print("Running Volume Contrast HRF Roistats: " + subject + " " + session + " " + task)
+
+        design="HRF_EVENTS"
+
+        work_dir = os.path.join(data_dir, subject, 'RESULTS', task)
+
+
+        # ----- atlases
+        atlases_dir = ConfigGLMs.Atlas_Dir
+
+        if mb == "4":
+            atlases =ConfigGLMs.VolumeAtlasesMB4
+        elif mb == "8":
+            atlases =ConfigGLMs.VolumeAtlasesMB8
+
+
+        if task == "Stroop":
+            glm_id = ConfigGLMs.StroopEventContrastsGLMids
+            contrasts = ConfigGLMs.StroopEventContrastLabels
+            num_contrasts =len(contrasts) # number of glms per task
+        else:
+            "ERROR: no task named ${task}"
+
+        for i in range(0, num_contrasts):
+
+            contrast=contrasts[i]
+
+            glm=session+"_"+glm_id[i]+"_"+design
+
+            if censor == True:
+                glm=glm+"_censored"
+
+            stats_file=os.path.join(work_dir,glm,"STATS_"+subject+"_REML.nii.gz")
+
+            if not os.path.exists(stats_file):
+                print("WARNING: "+stats_file+ "doesn't exist. Check if this is correct.")
+            else:
+
+                for atlas in atlases:
+                    rs.run_shell_command(
+                        "bash /home/Roistats.sh -i " + stats_file +
+                        " -n " + contrast + " -w " + os.path.join(work_dir, glm) +
+                        " -a " + os.path.join(atlases_dir, atlas) +
+                        " -e " + session +
+                        " -s " + subject +
+                        " -r \".nii.gz\" -o \"_HRF\"")
 
 def block_roistats_Surface(subject, task, session, mb, hemisphere, data_dir, censor, fsaverage5=False):
     print("Running Surface Block Roistats: " + subject + " " + session + " " + task)
@@ -285,16 +391,16 @@ def block_roistats_Surface(subject, task, session, mb, hemisphere, data_dir, cen
 
         for atlas in atlases:
             if atlas == "gordon_333":
-                extension="_"+hemisphere+".func.gii"
+                extension=".func.gii"
             else:
-                extension="_"+hemisphere+".label.gii"
+                extension=".label.gii"
+            atlas=atlas+"_"+hemisphere
             rs.run_shell_command("bash /home/Roistats.sh -i " + stats_file +
                                 " -n " + name + " -w " + os.path.join(work_dir, glm) +
                                 " -a " + os.path.join(atlases_dir, atlas) +
                                 " -e " + session +
                                 " -s " + subject +
                                 " -r \""+extension+"\" -o \"_blocks\"")
-
 
 
 def contrast_roistats_Surface(subject, task, session, mb, hemisphere, data_dir, censor, fsaverage5=False):
@@ -354,14 +460,15 @@ def contrast_roistats_Surface(subject, task, session, mb, hemisphere, data_dir, 
         stats_file=os.path.join(work_dir,glm,'STATS_'+subject+'_REML_' + hemisphere + '.func.gii')
 
         if not os.path.exists(stats_file):
-            print("WARNING: "+stats_file+ "doesn't exist. Check if this is correct.")
+            print("WARNING: "+stats_file+ " doesn't exist. Check if this is correct.")
         else:
 
             for atlas in atlases:
                 if atlas == "gordon_333":
-                    extension = "_" + hemisphere + ".func.gii"
+                    extension = ".func.gii"
                 else:
-                    extension = "_" + hemisphere + ".label.gii"
+                    extension = ".label.gii"
+                atlas = atlas + "_" + hemisphere
 
                 rs.run_shell_command(
                     "bash /home/Roistats.sh -i " + stats_file +
@@ -410,10 +517,10 @@ def mixed_roistats_Surface(subject, task, session, mb, hemisphere, data_dir, cen
 
                 for atlas in atlases:
                     if atlas == "gordon_333":
-                        extension = "_" + hemisphere + ".func.gii"
+                        extension = ".func.gii"
                     else:
-                        extension = "_" + hemisphere + ".label.gii"
-
+                        extension = ".label.gii"
+                    atlas = atlas + "_" + hemisphere
                     name = condition + "_BLOCKS"
 
                     rs.run_shell_command(
@@ -509,10 +616,10 @@ def single_regressors_roistats_Surface(subject, task, session, mb, hemisphere, d
             for atlas in atlases:
                 # roistats
                 if atlas == "gordon_333":
-                    extension = "_" + hemisphere + ".func.gii"
+                    extension = ".func.gii"
                 else:
-                    extension = "_" + hemisphere + ".label.gii"
-
+                    extension = ".label.gii"
+                atlas = atlas + "_" + hemisphere
                 name = condition
 
                 rs.run_shell_command(
@@ -524,3 +631,128 @@ def single_regressors_roistats_Surface(subject, task, session, mb, hemisphere, d
                     " -r \""+extension+"\" -o \"_tents\"")
 
 
+def single_regressors_HRF_roistats_Surface(subject, task, session, mb, hemisphere, data_dir, censor, fsaverage5=False):
+    # Only run single regressor HRF for Stroop
+    if task == "Stroop":
+
+        design = "HRF_EVENTS"
+
+        print("Running Surface Single Regressors HRF Roistats: " + subject + " " + session + " " + task)
+
+
+        # ----- atlases
+        atlases_dir =ConfigGLMs.Atlas_Dir
+
+        if mb == "4":
+            atlases =ConfigGLMs.VolumeAtlasesMB4
+        elif mb == "8":
+            atlases =ConfigGLMs.VolumeAtlasesMB8
+        else:
+            print("ERROR :\tNo MB factor of " + mb)
+
+        if fsaverage5:
+            atlases=ConfigGLMs.SurfaceAtlasesFS5
+
+        work_dir = os.path.join(data_dir, subject, "SURFACE_RESULTS", task)
+
+        if task == "Stroop":
+            conditions = ConfigGLMs.StroopSingleRegressorConditions
+            glm_id = ConfigGLMs.StroopSingleRegressorGLMids
+            num_conditions = len(glm_id)
+
+        if task == "Stroop" and session.lower() == "reactive":
+            conditions = ConfigGLMs.StroopReaSingleRegressorConditions
+            glm_id = ConfigGLMs.StroopReaSingleRegressorGLMids
+            num_conditions = len(glm_id)
+
+
+        for i in range(0, num_conditions):
+            condition =conditions[i]
+            glm = session+"_"+glm_id[i]+"_"+design
+
+            if censor == True:
+                glm = glm+"_censored"
+
+            stats_file = os.path.join(work_dir,glm,'STATS_'+subject+'_REML_' + hemisphere + '.func.gii')
+
+            if not os.path.exists(stats_file):
+                print("WARNING: "+stats_file+"doesn't exist. Check if this is correct.")
+            else:
+
+                for atlas in atlases:
+                    # roistats
+                    if atlas == "gordon_333":
+                        extension = ".func.gii"
+                    else:
+                        extension = ".label.gii"
+                    atlas = atlas + "_" + hemisphere
+                    name = condition
+
+                    rs.run_shell_command(
+                        "bash /home/Roistats.sh -i " + stats_file +
+                        " -n " + name + " -w " + os.path.join(work_dir, glm) +
+                        " -a " + os.path.join(atlases_dir, atlas) +
+                        " -e " + session +
+                        " -s " + subject +
+                        " -r \""+extension+"\" -o \"_tents\"")
+
+
+def contrast_HRF_roistats_Surface(subject, task, session, mb, hemisphere, data_dir, censor, fsaverage5=False):
+    # HRF ore only for the Stroop task
+    if task == 'Stroop':
+        print("Running Surface Contrast HRF Roistats: " + subject + " " + session + " " + task)
+
+        design = "HRF_EVENTS"
+
+        work_dir = os.path.join(data_dir, subject, 'SURFACE_RESULTS', task)
+
+
+        # ----- atlases
+        atlases_dir = ConfigGLMs.Atlas_Dir
+
+        if mb == "4":
+            atlases = ConfigGLMs.VolumeAtlasesMB4
+        elif mb == "8":
+            atlases = ConfigGLMs.VolumeAtlasesMB8
+
+        if fsaverage5:
+            atlases = ConfigGLMs.SurfaceAtlasesFS5
+
+
+        if task == "Stroop":
+
+            glm_id = ConfigGLMs.StroopEventContrastsGLMids
+            contrasts = ConfigGLMs.StroopEventContrastLabels
+            num_contrasts = len(contrasts)  # number of glms per task
+        else:
+            "ERROR: no task named ${task}"
+
+        for i in range(0, num_contrasts):
+
+            contrast = contrasts[i]
+
+            glm = session + "_" + glm_id[i] + "_" + design
+
+            if censor == True:
+                glm = glm + "_censored"
+
+            stats_file = os.path.join(work_dir, glm, 'STATS_' + subject + '_REML_' + hemisphere + '.func.gii')
+
+            if not os.path.exists(stats_file):
+                print("WARNING: " + stats_file + " doesn't exist. Check if this is correct.")
+            else:
+
+                for atlas in atlases:
+                    if atlas == "gordon_333":
+                        extension = ".func.gii"
+                    else:
+                        extension = ".label.gii"
+                    atlas = atlas + "_" + hemisphere
+
+                    rs.run_shell_command(
+                        "bash /home/Roistats.sh -i " + stats_file +
+                        " -n " + contrast + " -w " + os.path.join(work_dir, glm) +
+                        " -a " + os.path.join(atlases_dir, atlas) +
+                        " -e " + session +
+                        " -s " + subject +
+                        " -r \"" + extension + "\" -o \"_HRF\"")

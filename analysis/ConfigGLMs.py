@@ -72,7 +72,9 @@ StroopSingleRegressorModels = [Block + " " + blockONandOFF + " " + HRF + " " + H
 StroopSingleRegressorConditions=["block", "blockONandOFF", "PC50Con", "PC50InCon", "biasCon", "biasInCon"]
 StroopSingleRegressorGLMids = ["Congruency", "Congruency", "Congruency"]
 
-StroopReaEventRegressor=["block blockONandOFF PC50Con PC50InCon biasCon biasInCon buffCon"]
+StroopReaSingleRegressorGLMids = ["Congruency", "Congruency", "Congruency"]
+StroopReaSingleRegressorConditions=["block", "blockONandOFF", "PC50Con", "PC50InCon", "biasCon", "biasInCon","buffCon"]
+StroopReaEventRegressors=["block blockONandOFF PC50Con PC50InCon biasCon biasInCon buffCon"]
 StroopReaEventModels = [Block + " " + blockONandOFF + " " + StroopEventTent + " " + StroopEventTent + " "
                         + StroopEventTent + " " + StroopEventTent + " " + StroopEventTent]
 StroopReaSingleRegressorModels = [Block + " " + blockONandOFF + " " + HRF + " " + HRF + " " + HRF + " " + HRF + " " + HRF]

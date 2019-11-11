@@ -66,9 +66,13 @@ for subject in subjects:
             print(session)
             print(task)
                 #Allow for asyncronous processing of the Data 4 tasks x 3 sessions means that each subject could utilize 12 cores
-            pool.apply_async(Analysis_Pipeline.analysis_pipeline, args=(origin, destination, events, wave, subject, session, task, pipeline, run_volume, run_surface, run_preanalysis, run_analysis))
-        pool.close()
-        pool.join()
+            pool.apply_async(Analysis_Pipeline.analysis_pipeline, args=(origin, destination, events, wave, subject,
+                                                                        session, task, pipeline, run_volume,
+                                                                        run_surface, run_preanalysis, run_analysis))
+
+pool.close()
+pool.join()
+
 
 
 

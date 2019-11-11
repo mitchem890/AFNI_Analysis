@@ -20,7 +20,7 @@ docker run --rm kaczmarj/neurodocker:master generate docker \
 #RUN apt install gpgv
 
 #install workbench
-echo "RUN mkdir /src && cd /src && wget https://www.humanconnectome.org/storage/app/media/workbench/workbench-linux64-v1.3.2.zip && cd /opt && unzip /src/workbench-linux64-v1.3.2.zip">>Dockerfile
+echo "RUN mkdir /src && cd /src && wget https://www.humanconnectome.org/storage/app/media/workbench/workbench-linux64-v1.4.1.zip && cd /opt && unzip /src/workbench-linux64-v1.4.1.zip">>Dockerfile
 echo "COPY analysis /home/" >> Dockerfile
 echo "RUN chmod -R 777 /home/atlases" >> Dockerfile
 echo "ENV PATH=\"/opt/workbench/bin_linux64:\$PATH\"" >> Dockerfile
