@@ -55,28 +55,15 @@ if not os.path.exists(events):
 
 
 for subject in subjects:
-    print(subject)
-
     #Create the output Folder
     if not os.path.exists(os.path.join(destination, subject)): #If there is no subject folder in the destination create it
         os.mkdir(os.path.join(destination, subject))
     for session in sessions:
         for task in tasks:
-            print(subject)
-            print(session)
-            print(task)
-                #Allow for asyncronous processing of the Data 4 tasks x 3 sessions means that each subject could utilize 12 cores
+            #Allow for asyncronous processing of the Data 4 tasks x 3 sessions means that each subject could utilize 12 cores
             pool.apply_async(Analysis_Pipeline.analysis_pipeline, args=(origin, destination, events, wave, subject,
                                                                         session, task, pipeline, run_volume,
                                                                         run_surface, run_preanalysis, run_analysis))
 
 pool.close()
 pool.join()
-
-
-
-
-
-
-
-

@@ -3,7 +3,7 @@
 # This Script is a simplified script of the roistats_*.sh that are to be used with the python  Afni_analysis script
 
 
-while getopts i:n:d:w:a:e:s:r:o option
+while getopts :i:n:d:w:a:e:s:r:o: option
 do
 case "${option}"
 in
@@ -14,8 +14,8 @@ w) work_dir=${OPTARG};; #Where are all the inputs and outputs
 a) atlas=${OPTARG};; #The atlas that we will be using to parcellate should include directory path
 e) session=${OPTARG};;
 s) subject=${OPTARG};;
-o) postfix=${OPTARG};; 
 r) extension=${OPTARG};;
+o) postfix=${OPTARG};;
 esac
 done
 

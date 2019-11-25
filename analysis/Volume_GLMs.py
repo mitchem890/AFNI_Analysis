@@ -109,6 +109,7 @@ def event_glms(working_dir, subject, task, session):
                  contrast=contrasts, contrast_label=contrast_labels,
                  type='EVENTS', glm_label=glm_labels[i])
 
+
 def single_regressor_glm(working_dir, subject, task, session):
     print("Running Volume Single Regressor GLMs: " + subject + " " + session + " " + task)
 
@@ -136,7 +137,6 @@ def single_regressor_glm(working_dir, subject, task, session):
                 if event_contrast_glm_ids[j] == glm_labels[i]:
                     contrast_labels.append(event_contrast_labels[j])
                     contrasts.append(event_contrasts[j])
-                    print(glm_labels[i])
 
             glmMaker(working_dir=working_dir, subject=subject, task=task, session=session,
                      regressor=event_regressors[i].split(), regressor_label=event_regressors[i].split(), regressor_model=models[i].split(),
@@ -144,8 +144,22 @@ def single_regressor_glm(working_dir, subject, task, session):
                      type='HRF_EVENTS', glm_label=glm_labels[i])
 
 
-
 def glmMaker(working_dir, subject, task, session, regressor, regressor_label, regressor_model, type, glm_label="", contrast=[], contrast_label=[]):
+    #Inputs for the glmMaker
+    #working dir --the top level directory where all the work will be done. This would be analogous to /scratch1/${USERNAME}/DMCCPILOT/AFNI_ANALYSIS
+    #subject -- the subject number in string format
+    #task -- The task name
+    #session -- the session name
+    #regressor -- the list of regresors that will be put into this glm
+    #regressor label -- the list of labels that correspond to the regressors
+    #regressor model -- the list of models to be used for each regressor
+    #type -- the tag that will describe the type of glm that is being ran eg: EVENTS, ON_MIXED, HRF_EVENTS, ON_BLOCKS
+    #glm_label -- describes the more specific type of glm that is being ran. each task will have is own set of glm labels
+    #contrast -- the list of contrasts that will be used in the 3dremlfit
+    #contrast_label -- the list of labels corresponding to the contrasts
+
+
+
     #Get the Inputs for the GLMs they should be AP and PA matched
     #TODO Check for correct run Number
     File1 = os.path.join(working_dir, subject, 'INPUT_DATA', task, session,
@@ -176,6 +190,7 @@ def glmMaker(working_dir, subject, task, session, regressor, regressor_label, re
     -stim_times_AM1 1 " + os.path.join(working_dir, subject, 'INPUT_DATA', task, session,
                                            subject + '_' + task + '_' + session + '_'+regressor[0]+'.txt') + " " + regressor_model[0] + " -stim_label 1 " + regressor_label[0] + " \\"
 
+#Add in the variable amount of stim times with their labels models and file names
     for i in range(len(regressor)-1):
         command = command + "-stim_times " + str(i+2) + " " + \
             os.path.join(working_dir, subject, 'INPUT_DATA', task, session, subject + '_' + task + '_' + session +

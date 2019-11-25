@@ -288,7 +288,7 @@ def single_regressors_HRF_roistats(subject, task, session, mb, data_dir, censor)
             stats_file = os.path.join(work_dir, glm, "STATS_" + subject + "_REML.nii.gz")
 
             if not os.path.exists(stats_file):
-                print("WARNING: " + stats_file + "doesn't exist. Check if this is correct.")
+                print("WARNING: " + stats_file + " doesn't exist. Check if this is correct.")
             else:
 
                 for atlas in atlases:
@@ -301,7 +301,8 @@ def single_regressors_HRF_roistats(subject, task, session, mb, data_dir, censor)
                         " -a " + os.path.join(atlases_dir, atlas) +
                         " -e " + session +
                         " -s " + subject +
-                        " -r \".nii.gz\" -o \"_HRF\"")
+                        " -r \".nii.gz\"" +
+                        " -o \"_HRF\"")
 
 
 def contrast_HRF_roistats(subject, task, session, mb, data_dir, censor):
@@ -676,7 +677,7 @@ def single_regressors_HRF_roistats_Surface(subject, task, session, mb, hemispher
             stats_file = os.path.join(work_dir,glm,'STATS_'+subject+'_REML_' + hemisphere + '.func.gii')
 
             if not os.path.exists(stats_file):
-                print("WARNING: "+stats_file+"doesn't exist. Check if this is correct.")
+                print("WARNING: "+stats_file+" doesn't exist. Check if this is correct.")
             else:
 
                 for atlas in atlases:

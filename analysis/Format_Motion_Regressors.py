@@ -24,8 +24,8 @@ def append(filelist, outfile):
 #format the motion regressors so that we can run afni, basically append the 2 runs of movment regressors and FDs and DVARs together
 def format_motion_regressors(path, subject, session, task):
 
-        print("Format Motion regressors")
-        fullpath=os.path.join(path, subject,'INPUT_DATA', task, session)
+        print("Formatting Motion regressors: " + subject + ' ' + session + ' ' + ' ' + task)
+        fullpath=os.path.join(path, subject, 'INPUT_DATA', task, session)
         #List of motion regressors
         #TODO check for correct run Number
         move_regs=[os.path.join(fullpath, 'Movement_Regressors_' + task + session[0:3].title() + '1_AP.txt'),

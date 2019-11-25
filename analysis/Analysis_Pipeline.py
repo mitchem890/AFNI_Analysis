@@ -15,8 +15,6 @@ def analysis_pipeline(origin, destination, events, wave, subject, session, task,
     print(logfilename)
     logging.info('Running Subject ' + subject + '_' + wave + '_' + session + '_' + task)
 
-    print(run_preanalysis)
-    print(run_analysis)
     if run_preanalysis:
         PreAnalysis.preanalysis(origin, destination, events, wave, subject, session, task, pipeline, run_volume, run_surface)
     if run_analysis:

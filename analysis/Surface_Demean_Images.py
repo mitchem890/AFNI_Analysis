@@ -30,7 +30,7 @@ def Calc(input_a, input_b,  output):
 def reorient(input, output):
     if not os.path.isfile(output):
         print("Running Reorient")
-        rs.run_shell_command('3dresample -orient LPI'
+        rs.run_shell_command('3dresample ' +
                              ' -prefix ' + output +
                              ' -inset ' + input)
     else:

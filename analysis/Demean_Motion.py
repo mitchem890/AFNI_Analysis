@@ -14,7 +14,7 @@ def demean_motion(origin,subject,session,task):
         tr_count2=rs.run_shell_command("3dinfo -nv " + os.path.join(fullpath, hcp_volume_image_run2), return_output=True)
 
 #    log "TR counts ${subject} ${task} ${session} :\t" ${tr_count1} ${tr_count2} >> ${TLOG}
-        print("Computing Motion Enorms")
+        print("Computing Motion Enorms: " + subject + ' ' + session + ' ' + ' ' + task)
         enormpath=os.path.join(fullpath, 'motion_enorm_'+ session + '.1D')
         rs.run_shell_command('1d_tool.py -infile ' + os.path.join(fullpath, 'movregs6.txt') +
                              ' -set_run_lengths ' + str(tr_count1) + " " + str(tr_count2) +
@@ -23,7 +23,7 @@ def demean_motion(origin,subject,session,task):
                              ' -overwrite')
 
 # compute de-meaned motion parameters (for use in regression)
-        print("Computing demean motion Parameters")
+        print("Demeaning motion Parameters: " + subject + ' ' + session + ' ' + ' ' + task)
         demeanpath=os.path.join(fullpath,'motion_demean_' + session + '.1D')
         rs.run_shell_command('1d_tool.py -infile ' + os.path.join(fullpath,'movregs6.txt') +
                              ' -set_run_lengths ' + str(tr_count1) + " " + str(tr_count2) +
@@ -32,7 +32,7 @@ def demean_motion(origin,subject,session,task):
                              ' -overwrite')
 
 # compute motion parameter derivatives (just to have)
-        print("Computing Motion Parameter Derivatives")
+        print("Computing Motion Parameter Derivatives: " + subject + ' ' + session + ' ' + ' ' + task)
         derivpath=os.path.join(fullpath, 'motion_deriv_' + session + '.1D')
         rs.run_shell_command('1d_tool.py -infile ' + os.path.join(fullpath,'movregs6.txt') +
                              ' -set_run_lengths ' + str(tr_count1) + " " + str(tr_count2) +
@@ -42,7 +42,7 @@ def demean_motion(origin,subject,session,task):
                              ' -overwrite')
 
 # censor list
-        print("creating Censor List")
+        print("Creating Censor List: "+ subject + ' ' + session + ' ' + ' ' + task)
         rs.run_shell_command('1d_tool.py -infile ' + os.path.join(fullpath,'movregs6.txt') +
                              ' -set_run_lengths ' + str(tr_count1) + " " + str(tr_count2) +
                              ' -derivative' + ' -censor_prev_TR' +

@@ -108,6 +108,7 @@ def event_glms(working_dir, subject, task, session,hemisphere):
                  contrast=contrasts, contrast_label=contrast_labels,
                  type='EVENTS', glm_label=glm_labels[i])
 
+
 def single_regressor_glm(working_dir, subject, task, session, hemisphere):
     print("Running Surface Single Regressor GLMs: "+ subject + " " + session + " " + task + " " + hemisphere)
     if task == 'Stroop':

@@ -8,8 +8,6 @@ import RunShellFunc as rs
 #Split a given Cifti image into a left and right hemisphere gifti
 def cifti_split(input, output):
 
-    print("Running Cifti Split")
-
     rs.run_shell_command("wb_command -cifti-separate "
                          + input + " COLUMN -metric CORTEX_LEFT "
                          + output + "_L.func.gii") #make gifti left hemisphere
@@ -18,17 +16,17 @@ def cifti_split(input, output):
                          + input + " COLUMN -metric CORTEX_RIGHT "
                          + output + "_R.func.gii")  # make gifti Right hemisphere
 
+
 #For use with the HCP data. Calculate the FDs from the Movement regressors
 def calculate_fd(input, output):
-    print("Calculating Framewise Displacement")
     rs.run_shell_command("bash /home/calculate_framewise_displacement.sh" +
                          " " + input +
                          " " + output)
                           # Calculate and place both the FD.txt and FD_mask.txt
 
+
 #Calculate the DVARS from the Nifti for use with HCP data WARNING NOT CONFIRMED working
 def calculate_dvars(nifti, output):
-    print("Calculating DVARs")
     # Creating standardized DVARS (from Tom Nichols' code)
     # output should look like "${series}/${subjects}_${name}_DVARS.txt"
 
@@ -38,8 +36,6 @@ def calculate_dvars(nifti, output):
 
 #Pull the movement regressors out of fmriprep tsv for use with the fmriprep output
 def make_movement_regressors(input, output):
-
-    print("Making Movement Regressors")
 
     motion = pd.read_csv(input, delimiter='\t', encoding='utf-8')
 
@@ -52,7 +48,6 @@ def make_movement_regressors(input, output):
 
 #Pull the FD out of fmriprep tsv for use with the fmriprep output
 def make_fd(input, output):
-    print("Making Functional Displacement")
 
     motion = pd.read_csv(input, delimiter='\t', encoding='utf-8')
     data = {'framewise_displacement': motion['framewise_displacement']}
@@ -64,7 +59,6 @@ def make_fd(input, output):
 
 #Pull the DVARS out of fmriprep tsv for use with the fmriprep output
 def make_dvars(input, output):
-    print("Making DVARs")
     motion = pd.read_csv(input, delimiter='\t', encoding='utf-8')
     data = {'std_dvars': motion['std_dvars']}
     df = pd.DataFrame(data=data)
@@ -74,7 +68,6 @@ def make_dvars(input, output):
 
 #Create the FD mask with a threshold of .9 for use with the fmriprep output
 def make_fd_mask(input, output):
-    print("Making FD Mask")
     data = rs.run_shell_command("1deval -expr 'within(a,0,0.9)' -a " + input, return_output=True)
     with open(output, 'w') as f:
         for i in data:
@@ -82,7 +75,6 @@ def make_fd_mask(input, output):
 
 #resample the nifti image to fit to what is expected out of the hcp pipeline. for use with fmriprep
 def resample(input, output):
-    print("Running 3dresample")
     rs.run_shell_command("3dresample -master /home/atlases/gordon_2p4_resampled_wsubcort_LPI.nii.gz" +
                          " -input " + input +
                          " -prefix " + output)
@@ -94,7 +86,6 @@ def resample(input, output):
 
 #Check to make sure there are no blank evts for use with both fmriprep and hcp
 def check_evts(input):
-    print('Checking evts for blanks')
     files = os.listdir(input)
     for file in files:
         for line in file:
@@ -110,9 +101,8 @@ def check_evts(input):
 #Split the Cifti into Gifti's
 #Copy the Nifti to the Results
 #Copy the Movement regressors to the results
-
 def copy_input_data_hcp(subject, wave, session, task, encoding, runNum, origin, destination, events):
-    print("Copying Data")
+    print("Copying Data for " + subject + " " + session + " " + task + "run: " + runNum)
     origin=os.path.join(origin,subject,'MNINonLinear', 'Results', 'tfMRI_'+task.title()+session[0:3].title()+runNum+'_'+encoding) #Where the Data is found
     task_dest = os.path.join(destination, subject, 'INPUT_DATA', task, session) #Where the data is going
     hcp_volume_image = "tfMRI_" + task + session[0:3].title() + runNum + '_' + encoding + '.nii.gz' #Nifti Volume image
@@ -122,7 +112,6 @@ def copy_input_data_hcp(subject, wave, session, task, encoding, runNum, origin, 
     hcp_surface_image_R = hcp_surface_image + '_R.func.gii'
     evt_dir = os.path.join(events, subject, 'evts')
 
-    print(evt_dir)
     check_evts(evt_dir)
     #Get the correct evts
     for file in glob.glob(os.path.join(evt_dir, '*' + task + '*' + session + '*')):
@@ -130,21 +119,25 @@ def copy_input_data_hcp(subject, wave, session, task, encoding, runNum, origin, 
     #create a name template
     name=subject+"_tfMRI_"+task.title()+session[0:3].title()+runNum+'_'+encoding
 
+    print('Calculating FD of: ' + subject + ' ' + wave + ' ' + session + ' ' + ' ' + task)
     calculate_fd(input=origin, output=os.path.join(task_dest, name))
-    #calculate_dvars(nifti=os.path.join(origin, hcp_volume_image), output=os.path.join(task_dest, name+"_DVARS.txt"))
-    cifti_split(input=os.path.join(origin,hcp_cifti_image), output=os.path.join(task_dest,hcp_surface_image))
+    print('Calculating DVARs of: ' + subject + ' ' + wave + ' ' + session + ' ' + ' ' + task)
+    calculate_dvars(nifti=os.path.join(origin, hcp_volume_image), output=os.path.join(task_dest, name+"_DVARS.txt"))
+    print('Splitting the Cifti into Gifti\'s: ' + subject + ' ' + wave + ' ' + session + ' ' + ' ' + task)
+    cifti_split(input=os.path.join(origin, hcp_cifti_image), output=os.path.join(task_dest, hcp_surface_image))
 
     if not os.path.exists(task_dest):
         os.mkdir(task_dest)
     copyfile(os.path.join(origin, hcp_volume_image), os.path.join(task_dest, hcp_volume_image))
 
     origin_hcp_movement_regressors='Movement_Regressors.txt'
-    hcp_movement_regressors='Movement_Regressors_'+ task + session[0:3].title() + runNum + '_' + encoding+'.txt'
+    hcp_movement_regressors='Movement_Regressors_' + task + session[0:3].title() + runNum + '_' + encoding+'.txt'
+
     hcp_fd=subject+'_tfMRI_'+task + session[0:3].title() + runNum + '_' + encoding + '_FD.txt'
     hcp_dvars = subject + '_tfMRI_'+task + session[0:3].title() + runNum + '_' + encoding + '_DVARS.txt'
     hcp_fd_mask=subject+'_tfMRI_'+task + session[0:3].title() + runNum + '_' + encoding + '_FD_mask.txt'
 
-    copyfile(os.path.join(origin, origin_hcp_movement_regressors),os.path.join(task_dest, hcp_movement_regressors))
+    copyfile(os.path.join(origin, origin_hcp_movement_regressors), os.path.join(task_dest, hcp_movement_regressors))
 
 
 #check the evts for blanks
@@ -156,7 +149,7 @@ def copy_input_data_hcp(subject, wave, session, task, encoding, runNum, origin, 
 #make the fd masks
 #Resample the volume image to fit hcp format
 def copy_input_data_fmriprep(subject, wave, session, task, encoding, runNum, origin, destination, events):
-    print("Copying input Data: " + task)
+    print("Copying Data for " + subject + " " + session + " " + task + "run: " + runNum)
     origin= os.path.join(origin,"sub-"+str(subject), "ses-"+wave+session[0:3].lower(),"func")
     task_dest = os.path.join(destination, subject, 'INPUT_DATA', task, session)
 
@@ -182,8 +175,7 @@ def copy_input_data_fmriprep(subject, wave, session, task, encoding, runNum, ori
 
     evt_dir = os.path.join(events,subject,'evts')
 
-
-    print(evt_dir)
+    print('Checking evts of: ' + subject + ' ' + wave + ' ' + session + ' ' + ' ' + task)
     check_evts(evt_dir)
     for file in glob.glob(os.path.join(evt_dir,'*'+task+'*'+session+'*')):
         copyfile(file, os.path.join(task_dest, os.path.basename(file)))
@@ -201,11 +193,15 @@ def copy_input_data_fmriprep(subject, wave, session, task, encoding, runNum, ori
     hcp_fd_mask=subject+'_tfMRI_'+task + session[0:3].title() + runNum + '_' + encoding + '_FD_mask.txt'
     hcp_resampled_image = "tfMRI_" + task + session[0:3].title() + runNum + '_' + encoding + '_tmp.nii.gz'
 
-
+    print('Making movement regressors of: ' + subject + ' ' + wave + ' ' + session + ' ' + ' ' + task)
     make_movement_regressors(os.path.join(origin, fmriprep_regressors),os.path.join(task_dest, hcp_movement_regressors))
+    print('Making Functional Displacement of: ' + subject + ' ' + wave + ' ' + session + ' ' + ' ' + task)
     make_fd(os.path.join(origin, fmriprep_regressors),os.path.join(task_dest, hcp_fd))
+    print('Making DVARS of: ' + subject + ' ' + wave + ' ' + session + ' ' + ' ' + task)
     make_dvars(os.path.join(origin, fmriprep_regressors),os.path.join(task_dest, hcp_dvars))
+    print('Making FD mask of: ' + subject + ' ' + wave + ' ' + session + ' ' + ' ' + task)
     make_fd_mask(os.path.join(task_dest, hcp_fd), os.path.join(task_dest, hcp_fd_mask))
+    print('Resampling: ' + subject + ' ' + wave + ' ' + session + ' ' + ' ' + task)
     resample(os.path.join(task_dest, hcp_volume_image), os.path.join(task_dest, hcp_resampled_image))
 
 
