@@ -1,58 +1,61 @@
-import Surface_GLMs
-import Volume_GLMs
-import roistats
+import os
 
-encodings = ['AP', 'PA']
-runNums = ['1', '2']
-hemispheres = ['L','R']
+import RunShellFunc as rs
+from classes import TaskGLMs
 
-#This Section Includes all the GLMs and roistats
 
-def analysis(destination, wave, subject, session, task, pipeline, run_volume, run_surface):
-        if run_volume:
-            Volume_GLMs.event_glms(destination, subject, task, session)
-            Volume_GLMs.block_glms(destination, subject, task, session)
-            Volume_GLMs.mixed_glms(destination, subject, task, session)
-            Volume_GLMs.single_regressor_glm(destination, subject, task, session)
-            roistats.block_roistats(subject=subject, task=task, session=session, mb="4", data_dir=destination,
-                                    censor=True)
-            roistats.contrast_roistats(subject=subject, task=task, session=session, mb="4", data_dir=destination,
-                                        censor=True)
-            roistats.mixed_roistats(subject=subject, task=task, session=session, mb="4", data_dir=destination,
-                                    censor=True)
-            roistats.single_regressors_roistats(subject=subject, task=task, session=session, mb="4",
-                                                data_dir=destination, censor=True)
-            roistats.single_regressors_HRF_roistats(subject=subject, task=task, session=session, mb="4",
-                                                    data_dir=destination, censor=True)
-            roistats.contrast_HRF_roistats(subject=subject, task=task, session=session, mb="4", data_dir=destination,
-                                           censor=True)
+def run_volume_glms(GLM_set):
+    for glm in GLM_set.glms:
 
-        if run_surface:
-            for hemisphere in hemispheres:
-                Surface_GLMs.block_glms(destination, subject, task, session, hemisphere)
-                Surface_GLMs.mixed_glms(destination, subject, task, session, hemisphere)
-                Surface_GLMs.single_regressor_glm(destination, subject, task, session, hemisphere)
-                Surface_GLMs.event_glms(destination, subject, task, session, hemisphere)
+        print(f"Running {glm[0]}")
+        if not os.path.exists(glm[0].output_dir):
+            os.makedirs(glm[0].output_dir)
 
-                if pipeline == "fmriprep":
-                    fsaverage5 = True
-                else:
-                    fsaverage5 = False
-                roistats.block_roistats_Surface(subject=subject, task=task, session=session,
-                                                hemisphere=hemisphere, mb="4", data_dir=destination,
-                                                censor=True, fsaverage5=fsaverage5)
-                roistats.contrast_roistats_Surface(subject=subject, task=task, session=session,
-                                                   hemisphere=hemisphere, mb="4", data_dir=destination,
-                                                   censor=True, fsaverage5=fsaverage5)
-                roistats.mixed_roistats_Surface(subject=subject, task=task, session=session,
-                                                hemisphere=hemisphere, mb="4", data_dir=destination,
-                                                censor=True, fsaverage5=fsaverage5)
-                roistats.single_regressors_roistats_Surface(subject=subject, task=task, session=session,
-                                                            hemisphere=hemisphere, mb="4", data_dir=destination,
-                                                            censor=True, fsaverage5=fsaverage5)
-                roistats.single_regressors_HRF_roistats_Surface(subject=subject, task=task, session=session,
-                                                                hemisphere=hemisphere, mb="4", data_dir=destination,
-                                                                censor=True, fsaverage5=fsaverage5)
-                roistats.contrast_HRF_roistats_Surface(subject=subject, task=task, session=session,
-                                                       hemisphere=hemisphere, mb="4", data_dir=destination,
-                                                       censor=True, fsaverage5=fsaverage5)
+        os.chdir(glm[0].output_dir)
+        rs.run_shell_command(glm[0].deconvolve.command)
+        rs.run_shell_command(glm[0].remlfit.command)
+
+        for roistats in glm[0].roistats:
+            rs.run_shell_command(roistats.roistats.command)
+
+
+def run_surface_glms(GLM_set):
+    for glm in GLM_set.glms:
+        print(f"Running {glm[1]}")
+        if not os.path.exists(glm[1].output_dir):
+            os.makedirs(glm[1].output_dir)
+
+        os.chdir(glm[1].output_dir)
+        rs.run_shell_command(glm[1].deconvolve.command)
+        rs.run_shell_command(glm[1].remlfit.command)
+
+        for roistats in glm[1].roistats:
+            rs.run_shell_command(roistats.roistats.command)
+
+        print(f"Running {glm[2]}")
+        if not os.path.exists(glm[1].output_dir):
+            os.makedirs(glm[1].output_dir)
+
+        os.chdir(glm[1].output_dir)
+
+        rs.run_shell_command(glm[2].deconvolve.command)
+        rs.run_shell_command(glm[2].remlfit.command)
+
+        for roistats in glm[2].roistats:
+            rs.run_shell_command(roistats.roistats.command)
+
+
+# This Section Includes all the GLMs and roistats
+def analysis(destination, images, run_volume, run_surface):
+    if images[0].task == 'Axcpt':
+        GLM_set = TaskGLMs.AxcptGLMs(working_dir=destination,images=images)
+    elif images[0].task == 'Cuedts':
+        GLM_set = TaskGLMs.CuedtsGLMs(working_dir=destination,images=images)
+    elif images[0].task == 'Stern':
+        GLM_set = TaskGLMs.SternGLMs(working_dir=destination,images=images)
+    elif images[0].task == 'Stroop':
+        GLM_set = TaskGLMs.StroopGLMs(working_dir=destination,images=images)
+    if run_volume:
+        run_volume_glms(GLM_set)
+    if run_surface:
+        run_surface_glms(GLM_set)
