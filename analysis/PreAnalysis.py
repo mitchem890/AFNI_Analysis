@@ -20,7 +20,7 @@ def preAnalysis(destination, events, images, run_volume, run_surface):
     if not os.path.exists(
             os.path.join(destination, images[0].subject, 'INPUT_DATA', images[0].task, images[0].session)):
         os.makedirs(os.path.join(destination, images[0].subject, 'INPUT_DATA', images[0].task, images[0].session))
-
+    ##TODO For images outside
     Copy_Input_Data.copy_input_data(images, destination, events)
     Format_Motion_Regressors.format_motion_regressors(destination, images)  # format the motion regressors
     Demean_Motion.demean_motion(destination, images)  # Demean Motion

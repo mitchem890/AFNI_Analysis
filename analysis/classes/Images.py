@@ -60,6 +60,7 @@ class preprocessed_image(object):
         self.root_name = self.get_root_name()
         self.afni_ready_volume_file = self.get_afni_ready_volume_file()
         self.movement_regressor = self.get_movement_regessors_file()
+
     def __str__(self):
         return f"{self.subject} {self.session} {self.task} {self.encoding}"
 
@@ -74,7 +75,8 @@ class preprocessed_image(object):
     def create_temporary_surface_files(self, hemisphere):
         return {"baseFilename": f'tfMRI_{self.root_name}_{hemisphere}.func.gii',
                 "meanFilename": f'mean_tfMRI_{self.root_name}_{hemisphere}.func.gii',
-                "scaleFilename": f'scale_tfMRI_{self.root_name}_{hemisphere}.func.gii'}
+                }
+        #"scaleFilename": f'scale_tfMRI_{self.root_name}_{hemisphere}.func.gii'
 
     def get_afni_ready_volume_file(self):
         return f'lpi_scale_blur4_tfMRI_{self.root_name}.nii.gz'
@@ -88,10 +90,23 @@ class preprocessed_image(object):
     def get_movement_regessors_file(self):
         return f"Movement_Regressors_{self.root_name}.txt"
 
+    def get_regressor_files(self):
+        self.hcp_fd = f"{self.subject}_tfMRI_{self.root_name}_FD.txt"
+        self.hcp_dvars = f"{self.subject}_tfMRI_{self.root_name}_DVARS.txt"
+        self.hcp_fd_mask = f"{self.subject}_tfMRI_{self.root_name}_FD_mask.txt"
+
 class fmriprep_preprocessed_image(preprocessed_image):
     def __init__(self, file, wave, subject, session, task, pipeline):
         self.fsaverage = True
         preprocessed_image.__init__(self, file, wave, subject, session, task, pipeline)
+        self.fmriprep_root_name = f"sub-{str(self.subject)}_ses-{str(self.wave)}{str(self.session).lower()[0:3]}_task-{str(self.task)}_acq-mb4{str(self.encoding)}_run-{str(self.run_num)}"
+        self.fmriprep_regressors = f"{self.fmriprep_root_name}_desc-confounds_regressors.tsv"
+
+    def fmriprep_hcp_name_mapping(self):
+        return {f"{self.fmriprep_root_name}_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz": f"tfMRI_{self.root_name}.nii.gz",
+                f"{self.fmriprep_root_name}_space-fsaverage5_hemi-L.func.gii": f"tfMRI_{self.root_name}_L.func.gii",
+                f"{self.fmriprep_root_name}_space-fsaverage5_hemi-R.func.gii": f"tfMRI_{self.root_name}_R.func.gii"}
+
 
     def get_mb_factor(self):
         return os.path.basename(self.file).split('mb')[1][0]

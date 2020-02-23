@@ -1,7 +1,7 @@
 import argparse
 import multiprocessing as mp
 import os
-
+from config import globals
 import Run_Analysis_Pipeline
 import Validate_User_Input
 
@@ -27,6 +27,8 @@ parser.add_argument('--analysis', help='Run Analysis', action='store_true')
 parser.add_argument('--events', '-e', help='The event/onset files to be used in the glms', required=True)
 parser.add_argument('--pipeline', '-p', help='The pipeline used to process the input images', required=True)
 parser.add_argument('--ncpus', help='The Number of CPUs to use when processing the data', required=True)
+parser.add_argument('--overwrite', help='if previous file was found overwrite the output', action='store_true')
+
 ##TODO Type in in argparse
 args = parser.parse_args()
 
@@ -44,6 +46,8 @@ run_preanalysis = args.preanalysis
 run_analysis = args.analysis
 pipeline = args.pipeline
 ncpus = args.ncpus
+
+globals.set_overwrite(args.overwrite)
 
 Validate_User_Input.validate_user_input(origin=origin, destination=destination, events=events, wave=wave,
                                         subjects=subjects, sessions=sessions, tasks=tasks, pipeline=pipeline,

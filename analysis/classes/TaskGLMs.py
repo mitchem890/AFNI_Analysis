@@ -122,6 +122,7 @@ class TaskGLMs(object):
 
     # all the task use the on blocks glms with the same parameters in each one
     def create_on_blocks_glms(self):
+
         regressors_models_labels = [('block', self.block_model, 'ON_BLOCKS')]
         type = 'ON_BLOCKS'
         roistats_designs_postfixes = [('ON_BLOCKS', '_blocks')]
@@ -208,6 +209,7 @@ class AxcptGLMs(TaskGLMs):
                                contrasts_labels=contrasts_labels,
                                roistats_designs_postfixes=roistats_designs_postfixes)
 
+
     def create_buttons_events_glm(self, glm_type):
         glm_label = "Buttons"
         regressors_models_labels = [("block", self.block_model, "block"),
@@ -278,7 +280,7 @@ class CuedtsGLMs(TaskGLMs):
                                     ("ConInc", self.event_model, "ConInc"),
                                     ("ConNoInc", self.event_model, "ConNoInc"),
                                     ("InConInc", self.event_model, "InConInc"),
-                                    ("IncConNoInc", self.event_model, "IncConNoInc")]
+                                    ("InConNoInc", self.event_model, "InConNoInc")]
         contrasts_labels = [(
             "+0.5*ConInc[[" + self.idx + "]] +0.5*InConInc[[" + self.idx + "]] -0.5*ConNoInc[[" + self.idx + "]] -0.5*InConNoInc[[" + self.idx + "]]",
             "Inc_NoInc"),
@@ -318,8 +320,8 @@ class CuedtsGLMs(TaskGLMs):
         glm_label = "Buttons"
         regressors_models_labels = [("block", self.block_model, "block"),
                                     ("blockONandOFF", self.blockONandOFF_model, "blockONandOFF"),
-                                    ("button1", self.event_model, "button1"),
-                                    ("button2", self.event_model, " button2")]
+                                    ("button1", self.buttonPress_model, "button1"),
+                                    ("button2", self.buttonPress_model, " button2")]
         contrasts_labels = [("+button1[[" + self.button_idx + "]] -button2[[" + self.button_idx + "]]", "B1_B2")]
 
         roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
@@ -386,11 +388,11 @@ class SternGLMs(TaskGLMs):
         glm_label = "Buttons"
         regressors_models_labels = [("block", self.block_model, "block"),
                                     ("blockONandOFF", self.blockONandOFF_model, "blockONandOFF"),
-                                    ("button1", self.event_model, "button1"),
-                                    ("button2", self.event_model, "button2")]
+                                    ("button1", self.buttonPress_model, "button1"),
+                                    ("button2", self.buttonPress_model, "button2")]
 
         contrasts_labels = [
-            (f"+button1[[{self.buttonPress_model}]] -button2[[{self.buttonPress_model}]]", "B1_B2")]
+            (f"+button1[[{self.button_idx}]] -button2[[{self.button_idx}]]", "B1_B2")]
 
         return self.build_glms(glm_type=glm_type,
                                glm_label=glm_label,
@@ -430,15 +432,15 @@ class StroopGLMs(TaskGLMs):
                                     ("biasCon", model, "biasCon"),
                                     ("biasInCon", model, "biasInCon")]
 
-        if self.task is 'reactive':
-            regressors_models_labels.append(("buffCon", self.model, "buffCon"))
+        if self.images[0].session == 'reactive':
+            regressors_models_labels.append(("buffCon", model, "buffCon"))
 
         contrasts_labels = [(f"+biasInCon[[{idx}]] -biasCon[[{idx}]]", "InCon_Con_bias"),
                             (f"+PC50InCon[[{idx}]] -PC50Con[[{idx}]]", "InCon_Con_PC50"),
-                            (
-                                f"+0.5*biasInCon[[{idx}]] +0.5*PC50InCon[[{idx}]] -0.5*biasCon[[{idx}]] -0.5*PC50Con[[{idx}]]",
-                                "InCon_Con_PC50bias")]
-        if type is "HRF_EVENTS":
+                            (f"+0.5*biasInCon[[{idx}]] +0.5*PC50InCon[[{idx}]] -0.5*biasCon[[{idx}]] -0.5*PC50Con[[{idx}]]",
+                             "InCon_Con_PC50bias")]
+
+        if type == "HRF_EVENTS":
             model = '_HRF'
         else:
             model = '_tents'

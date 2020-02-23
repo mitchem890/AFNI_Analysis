@@ -1,5 +1,5 @@
 import os
-
+from config import globals
 import RunShellFunc as rs
 
 
@@ -17,7 +17,7 @@ class bash_command(object):
         return
 
     def run_command(self):
-        if not self.outfile_exist():
+        if (not self.outfile_exist()) or (globals.get_overwrite()):
             return rs.run_shell_command(self.command, return_output=self.return_output)
         else:
             print(f"Found previous {self.outfile} skipping")
@@ -76,6 +76,7 @@ class deconvolve(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.command = self.build_command()
+        self.outfile = self.x1D
         bash_command.__init__(self, command=self.command, return_output=False)
 
     def generate_force_tr(self):
@@ -136,6 +137,7 @@ class remlfit(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.command = self.build_command()
+        self.outfile = self.Rvar
         bash_command.__init__(self, command=self.command, return_output=False)
 
     def generate_options(self):
@@ -535,6 +537,7 @@ class Tstat(bash_command):
         return command
 
 
+#Runs calculation on the two input images
 class Calc(bash_command):
     def __init__(self, **kwargs):
         prop_defaults = {
@@ -561,12 +564,14 @@ class Calc(bash_command):
         return command
 
 
+#Reorients The image to given orientation Default is LPI
 class Reorient(bash_command):
     def __init__(self, **kwargs):
         prop_defaults = {
             "orient": 'LPI',
             "infile": None,
-            "outfile": None
+            "outfile": None,
+            "skip_reorient": False
         }
         for (prop, default) in prop_defaults.items():
             setattr(self, prop, kwargs.get(prop, default))

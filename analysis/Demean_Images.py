@@ -31,9 +31,9 @@ def surface_demean_pipeline(image, fullpath, hemisphere):
                                       outfile=os.path.join(fullpath, tmp_files['meanFilename'])))
     pipeline.append(BashCommand.Calc(infile_a=os.path.join(fullpath, tmp_files['baseFilename']),
                                      infile_b=os.path.join(fullpath, tmp_files['meanFilename']),
-                                     outfile=os.path.join(fullpath, tmp_files['scaleFilename'])))
-    pipeline.append(BashCommand.Reorient(infile=os.path.join(fullpath, tmp_files['scaleFilename']),
-                                         outfile=os.path.join(fullpath, image.get_afni_ready_surface_file(hemisphere))))
+                                     outfile=os.path.join(fullpath, image.get_afni_ready_surface_file(hemisphere))))
+    #pipeline.append(BashCommand.Reorient(infile=os.path.join(fullpath, tmp_files['scaleFilename']),
+    #                                     outfile=os.path.join(fullpath, image.get_afni_ready_surface_file(hemisphere))))
 
     return pipeline
 
