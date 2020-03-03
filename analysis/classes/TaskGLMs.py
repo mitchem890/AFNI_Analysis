@@ -4,6 +4,7 @@ from classes import GLMs
 from classes import Images
 from abc import abstractmethod
 
+#Last updated 02/27/20
 # This class is a collection of GLM objects.
 # The purpose of this class is to generalize as much as possible from all of the GLMs
 # Then to place what cannot be generalized into the sub classes for each task

@@ -46,8 +46,7 @@ class roistats(object):
 
 # This will add the take the standard inputs
 # to the roistats minus the atlas and extension
-# it will return a list of tuples of roistats objects, one for each atlas available
-# The tuples are organized in (Coef roistats objects, Tstat roistats object)
+# it will return a list of roistats objects, one for each atlas available
 def build_roistats(input_file='',
                    design='',
                    working_dir='',

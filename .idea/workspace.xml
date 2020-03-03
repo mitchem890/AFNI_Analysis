@@ -1,129 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c3c5ef9e-7a20-4e45-8f52-0a75b9b60b85" name="Default" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
+    <list default="true" id="c3c5ef9e-7a20-4e45-8f52-0a75b9b60b85" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Images.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/analysis/classes/Images.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24">
-              <caret line="88" column="57" lean-forward="false" selection-start-line="88" selection-start-column="57" selection-end-line="88" selection-end-column="57" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-                <element signature="e#808#1161#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BashCommand.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/analysis/classes/BashCommand.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1464">
-              <caret line="444" column="29" lean-forward="false" selection-start-line="444" selection-start-column="29" selection-end-line="444" selection-end-column="29" />
-              <folding>
-                <element signature="e#516#1022#0" expanded="false" />
-                <element signature="e#1022#1081#0" expanded="false" />
-                <element signature="e#3018#5139#0" expanded="false" />
-                <element signature="e#3963#4761#0" expanded="false" />
-                <element signature="e#5225#6771#0" expanded="false" />
-                <element signature="e#6808#7628#0" expanded="false" />
-                <element signature="e#7788#8531#0" expanded="false" />
-                <element signature="e#8641#9356#0" expanded="false" />
-                <element signature="e#9421#10156#0" expanded="false" />
-                <element signature="e#10203#11171#0" expanded="false" />
-                <element signature="e#11212#11705#0" expanded="false" />
-                <element signature="e#11803#12479#0" expanded="false" />
-                <element signature="e#12521#13112#0" expanded="false" />
-                <element signature="e#13283#13851#0" expanded="false" />
-                <element signature="e#14011#14587#0" expanded="false" />
-                <element signature="e#14730#15390#0" expanded="false" />
-                <element signature="e#15427#16025#0" expanded="false" />
-                <element signature="e#16064#16669#0" expanded="false" />
-                <element signature="e#16703#17242#0" expanded="false" />
-                <element signature="e#17275#17956#0" expanded="false" />
-                <element signature="e#17993#18604#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Copy_Input_Data.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/analysis/Copy_Input_Data.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="36" column="24" lean-forward="false" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
-              <folding>
-                <element signature="e#245#432#0" expanded="false" />
-                <element signature="e#489#713#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Demean_Images.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/analysis/Demean_Images.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="827">
-              <caret line="73" column="57" lean-forward="false" selection-start-line="73" selection-start-column="57" selection-end-line="73" selection-end-column="57" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConfigGLMs.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/analysis/config/ConfigGLMs.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="696">
-              <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Run_Analysis_Pipeline.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/analysis/Run_Analysis_Pipeline.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="22" column="26" lean-forward="false" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Format_Motion_Regressors.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/analysis/Format_Motion_Regressors.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="33" column="62" lean-forward="false" selection-start-line="33" selection-start-column="62" selection-end-line="33" selection-end-column="62" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test_TaskGLMs.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/analysis/tests/test_TaskGLMs.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="147" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-                <element signature="e#605#7330#0" expanded="false" />
-                <element signature="e#7502#8121#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -187,134 +72,18 @@
       <replace>image.movement_regressor</replace>
     </replaceStrings>
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/../FC_Matrix_Maker/FCMaker/FCDrawer.py" />
-        <option value="$PROJECT_DIR$/RunShellFunc.py" />
-        <option value="$PROJECT_DIR$/Run_Analysis.py" />
-        <option value="$PROJECT_DIR$/analysis/00_calculate_FDs.sh" />
-        <option value="$PROJECT_DIR$/analysis/calculate_stdDVARS.sh" />
-        <option value="$PROJECT_DIR$/analysis/calculate_framewise_displacement.sh" />
-        <option value="$PROJECT_DIR$/analysis/Roistats.sh" />
-        <option value="$PROJECT_DIR$/analysis/Surface_GLMs.py" />
-        <option value="$PROJECT_DIR$/analysis/Volume_GLMs.py" />
-        <option value="$PROJECT_DIR$/analysis/Run_Analysis.py" />
-        <option value="$PROJECT_DIR$/test_GLMs.py" />
-        <option value="$PROJECT_DIR$/analysis/test_TaskRoistatss.py" />
-        <option value="$PROJECT_DIR$/test_TaskGLMs.py" />
-        <option value="$PROJECT_DIR$/analysis/confounds_regressors_interface.py" />
-        <option value="$PROJECT_DIR$/analysis/AfniCommands.py" />
-        <option value="$PROJECT_DIR$/analysis/Surface_Demean_Images.py" />
-        <option value="$PROJECT_DIR$/analysis/Subject.py" />
-        <option value="$PROJECT_DIR$/analysis/TaskGLMs.py" />
-        <option value="$PROJECT_DIR$/analysis/Roistats.py" />
-        <option value="$PROJECT_DIR$/analysis/None+tlrc.HEAD" />
-        <option value="$PROJECT_DIR$/analysis/roistats.py" />
-        <option value="$PROJECT_DIR$/analysis/ConfigGLMs.py" />
-        <option value="$PROJECT_DIR$/analysis/Volume_Demean_Images.py" />
-        <option value="$PROJECT_DIR$/analysis/Analysis_Pipeline.py" />
-        <option value="$PROJECT_DIR$/analysis/GLMs.py" />
-        <option value="$PROJECT_DIR$/analysis/Images.py" />
-        <option value="$PROJECT_DIR$/analysis/utils/analysis_pipeline/PreAnalysis.py" />
-        <option value="$PROJECT_DIR$/analysis/api/run.py" />
-        <option value="$PROJECT_DIR$/analysis/utils/PreAnalysis.py" />
-        <option value="$PROJECT_DIR$/analysis/utils/__init__.py" />
-        <option value="$PROJECT_DIR$/analysis/utils/Analysis.py" />
-        <option value="$PROJECT_DIR$/BuildProject.sh" />
-        <option value="$PROJECT_DIR$/analysis/Confounds_Regressors_Interface.py" />
-        <option value="$PROJECT_DIR$/analysis/Demean_Motion.py" />
-        <option value="$PROJECT_DIR$/analysis/PreAnalysis.py" />
-        <option value="$PROJECT_DIR$/analysis/run.py" />
-        <option value="$PROJECT_DIR$/analysis/Run_Analysis_Pipeline.py" />
-        <option value="$PROJECT_DIR$/analysis/Validate_User_Input.py" />
-        <option value="$PROJECT_DIR$/analysis/RunShellFunc.py" />
-        <option value="$PROJECT_DIR$/analysis/config/ConfigGLMs.py" />
-        <option value="$PROJECT_DIR$/analysis/classes/Roistats.py" />
-        <option value="$PROJECT_DIR$/analysis/Analysis.py" />
-        <option value="$PROJECT_DIR$/analysis/classes/GLMs.py" />
-        <option value="$PROJECT_DIR$/analysis/classes/TaskGLMs.py" />
-        <option value="$PROJECT_DIR$/analysis/tests/test_TaskGLMs.py" />
-        <option value="$PROJECT_DIR$/analysis/Format_Motion_Regressors.py" />
-        <option value="$PROJECT_DIR$/analysis/classes/Images.py" />
-        <option value="$PROJECT_DIR$/analysis/Copy_Input_Data.py" />
-        <option value="$PROJECT_DIR$/analysis/Demean_Images.py" />
-        <option value="$PROJECT_DIR$/analysis/classes/BashCommand.py" />
-      </list>
-    </option>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="79" />
-    <option name="y" value="25" />
-    <option name="width" value="921" />
-    <option name="height" value="1055" />
-  </component>
-  <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="AfniAnalysis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AfniAnalysis" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AfniAnalysis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AfniAnalysis" type="462c0819:PsiDirectoryNode" />
-              <item name="analysis" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AfniAnalysis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AfniAnalysis" type="462c0819:PsiDirectoryNode" />
-              <item name="analysis" type="462c0819:PsiDirectoryNode" />
-              <item name="BashScripts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AfniAnalysis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AfniAnalysis" type="462c0819:PsiDirectoryNode" />
-              <item name="analysis" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AfniAnalysis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AfniAnalysis" type="462c0819:PsiDirectoryNode" />
-              <item name="analysis" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AfniAnalysis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AfniAnalysis" type="462c0819:PsiDirectoryNode" />
-              <item name="analysis" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AfniAnalysis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AfniAnalysis" type="462c0819:PsiDirectoryNode" />
-              <item name="analysis" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
-    </panes>
+  <component name="ProjectId" id="1YdMpmpAyTWLOB5Rayb2gYK7t2i" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
@@ -339,20 +108,9 @@
       <recent name="$PROJECT_DIR$/analysis" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager" selected="Python tests.Unittests in test_TaskGLMs.py">
     <configuration name="Run_Analysis" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="AfniAnalysis" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -363,87 +121,90 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="AfniAnalysis" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/analysis/run.py" />
       <option name="PARAMETERS" value="--wave wave1 --subject 150423 --session baseline --task Axcpt Cuedts Stern Stroop --origin $USER_HOME$/Desktop/fmriprep --destination $USER_HOME$/Desktop/Afni_Analysis --volume --surface --preanalysis --analysis --events $USER_HOME$/Desktop/onsets --pipeline fmriprep --ncpus 1" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="Unittests for test_TaskGLMs.TestStroop_GLMs.test_congruency_event_deconvolve_volume" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="AfniAnalysis" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs />
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/analysis/tests" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="AfniAnalysis" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;test_TaskGLMs.TestStroop_GLMs.test_congruency_event_deconvolve_volume&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
     </configuration>
     <configuration name="Unittests for test_TaskGLMs.TestStroop_Roistats.test_on_blocks_roistats_volume" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="AfniAnalysis" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs />
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/analysis/tests" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="AfniAnalysis" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;test_TaskGLMs.TestStroop_Roistats.test_on_blocks_roistats_volume&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
     </configuration>
     <configuration name="Unittests for tests.test_TaskGLMs.TestStroop_Roistats.test_on_blocks_roistats_volume" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="AfniAnalysis" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs />
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="AfniAnalysis" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;tests.test_TaskGLMs.TestStroop_Roistats.test_on_blocks_roistats_volume&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
     </configuration>
     <configuration name="Unittests in test_TaskGLMs.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="AfniAnalysis" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs />
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/analysis/tests" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="AfniAnalysis" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;$PROJECT_DIR$/analysis/tests/test_TaskGLMs.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
     </configuration>
-    <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.Run_Analysis" />
-      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests for tests.test_TaskGLMs.TestStroop_Roistats.test_on_blocks_roistats_volume" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in test_TaskGLMs.py" />
-      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for test_TaskGLMs.TestStroop_Roistats.test_on_blocks_roistats_volume" />
-      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests for test_TaskGLMs.TestStroop_GLMs.test_congruency_event_deconvolve_volume" />
+    <list>
+      <item itemvalue="Python.Run_Analysis" />
+      <item itemvalue="Python tests.Unittests for tests.test_TaskGLMs.TestStroop_Roistats.test_on_blocks_roistats_volume" />
+      <item itemvalue="Python tests.Unittests in test_TaskGLMs.py" />
+      <item itemvalue="Python tests.Unittests for test_TaskGLMs.TestStroop_Roistats.test_on_blocks_roistats_volume" />
+      <item itemvalue="Python tests.Unittests for test_TaskGLMs.TestStroop_GLMs.test_congruency_event_deconvolve_volume" />
     </list>
     <recent_temporary>
-      <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in test_TaskGLMs.py" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests for test_TaskGLMs.TestStroop_GLMs.test_congruency_event_deconvolve_volume" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for test_TaskGLMs.TestStroop_Roistats.test_on_blocks_roistats_volume" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for tests.test_TaskGLMs.TestStroop_Roistats.test_on_blocks_roistats_volume" />
-        <item index="4" class="java.lang.String" itemvalue="Python.Run_Analysis" />
+      <list>
+        <item itemvalue="Python tests.Unittests in test_TaskGLMs.py" />
+        <item itemvalue="Python tests.Unittests for test_TaskGLMs.TestStroop_GLMs.test_congruency_event_deconvolve_volume" />
+        <item itemvalue="Python tests.Unittests for test_TaskGLMs.TestStroop_Roistats.test_on_blocks_roistats_volume" />
+        <item itemvalue="Python tests.Unittests for tests.test_TaskGLMs.TestStroop_Roistats.test_on_blocks_roistats_volume" />
+        <item itemvalue="Python.Run_Analysis" />
       </list>
     </recent_temporary>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -487,32 +248,6 @@
       <configuration name="Unittests in test_TaskGLMs.py" configurationId="tests" />
     </history-entry>
   </component>
-  <component name="ToolWindowManager">
-    <frame x="79" y="25" width="1920" height="1082" extended-state="6" />
-    <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28375912" sideWeight="0.50625" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2817623" sideWeight="0.49375" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38145417" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32982087" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24932103" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33192834" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-    </layout>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -522,287 +257,6 @@
           <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="48" />
     </breakpoint-manager>
-    <watches-manager />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../FC_Matrix_Maker/FCMaker/FCDrawer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="21" column="145" lean-forward="false" selection-start-line="21" selection-start-column="126" selection-end-line="21" selection-end-column="145" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../CatCorr/CatCorr/CatCorr.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="80" column="0" lean-forward="true" selection-start-line="79" selection-start-column="4" selection-end-line="80" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/03_demean_motion.sh" />
-    <entry file="file://$PROJECT_DIR$/analysis/S05_demean_images_Surface.sh" />
-    <entry file="file://$PROJECT_DIR$/analysis/glm_session_events.sh" />
-    <entry file="file://$PROJECT_DIR$/analysis/02_format_motion_regressors.sh" />
-    <entry file="file://$PROJECT_DIR$/analysis/roistats_contrasts.sh" />
-    <entry file="file://$PROJECT_DIR$/analysis/roistats_mixed.sh" />
-    <entry file="file://$PROJECT_DIR$/analysis/roistats_blocks.sh" />
-    <entry file="file://$PROJECT_DIR$/analysis/roistats_single_regressors.sh" />
-    <entry file="file://$PROJECT_DIR$/analysis/glmMaker.sh" />
-    <entry file="file://$PROJECT_DIR$/analysis/configModel.sh" />
-    <entry file="file://$PROJECT_DIR$/analysis/00_calculate_FDs.sh" />
-    <entry file="file://$PROJECT_DIR$/analysis/00_calculate_stdDVARS.sh" />
-    <entry file="file://$USER_HOME$/anaconda2/envs/nipype36/lib/python3.6/multiprocessing/pool.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="321" column="0" lean-forward="false" selection-start-line="321" selection-start-column="0" selection-end-line="321" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../slim_DCM2BIDS/DCM2BIDS/DCM2BIDS.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../slim_DCM2BIDS/DCM2BIDS/DCM2BIDSFunc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="36" column="4" lean-forward="false" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/Surface_GLMs.py" />
-    <entry file="file://$PROJECT_DIR$/analysis/Volume_GLMs.py" />
-    <entry file="file://$PROJECT_DIR$/analysis/test_TaskRoistatss.py" />
-    <entry file="file://$PROJECT_DIR$/analysis/01_copy_input_data_fmriprep.sh.py" />
-    <entry file="file://$PROJECT_DIR$/analysis/BashScripts/calculate_framewise_displacement.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-144">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/None+tlrc.BRIK" />
-    <entry file="file://$PROJECT_DIR$/analysis/None+tlrc.HEAD" />
-    <entry file="file://$PROJECT_DIR$/analysis/roistats.py" />
-    <entry file="file://$PROJECT_DIR$/analysis/3dFWHMx.1D">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/3dFWHMx.1D.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/BashScripts/Roistats.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="559">
-          <caret line="46" column="9" lean-forward="true" selection-start-line="46" selection-start-column="9" selection-end-line="46" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/BashScripts/calculate_stdDVARS.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/copy_input_data_funcs.py" />
-    <entry file="file://$PROJECT_DIR$/analysis/Surface_Demean_Images.py" />
-    <entry file="file://$PROJECT_DIR$/analysis/utils/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BuildProject.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="27" column="43" lean-forward="false" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/Confounds_Regressors_Interface.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="35" column="8" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/Demean_Motion.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="53" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/PreAnalysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="31" selection-end-column="109" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="62" column="74" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="66" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/classes/Roistats.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="744">
-          <caret line="35" column="22" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/RunShellFunc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="29" column="51" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="57" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/Analysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="51" column="36" lean-forward="false" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/Validate_User_Input.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="93" column="32" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="119" selection-end-column="66" />
-          <folding>
-            <element signature="e#382#652#0" expanded="false" />
-            <element signature="e#688#832#0" expanded="false" />
-            <element signature="e#878#1026#0" expanded="false" />
-            <element signature="e#1067#1287#0" expanded="false" />
-            <element signature="e#1327#1714#0" expanded="false" />
-            <element signature="e#1746#1993#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/classes/TaskGLMs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="47" column="23" lean-forward="false" selection-start-line="47" selection-start-column="23" selection-end-line="47" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/tests/test_TaskGLMs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="147" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-            <element signature="e#605#7330#0" expanded="false" />
-            <element signature="e#7502#8121#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/classes/GLMs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="187" column="22" lean-forward="false" selection-start-line="187" selection-start-column="22" selection-end-line="187" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/config/ConfigGLMs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="696">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/Run_Analysis_Pipeline.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="22" column="26" lean-forward="false" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/Format_Motion_Regressors.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="33" column="62" lean-forward="false" selection-start-line="33" selection-start-column="62" selection-end-line="33" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/Copy_Input_Data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="36" column="24" lean-forward="false" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
-          <folding>
-            <element signature="e#245#432#0" expanded="false" />
-            <element signature="e#489#713#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/Demean_Images.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="827">
-          <caret line="73" column="57" lean-forward="false" selection-start-line="73" selection-start-column="57" selection-end-line="73" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/classes/Images.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="88" column="57" lean-forward="false" selection-start-line="88" selection-start-column="57" selection-end-line="88" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#808#1161#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/classes/BashCommand.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1464">
-          <caret line="444" column="29" lean-forward="false" selection-start-line="444" selection-start-column="29" selection-end-line="444" selection-end-column="29" />
-          <folding>
-            <element signature="e#516#1022#0" expanded="false" />
-            <element signature="e#1022#1081#0" expanded="false" />
-            <element signature="e#3018#5139#0" expanded="false" />
-            <element signature="e#3963#4761#0" expanded="false" />
-            <element signature="e#5225#6771#0" expanded="false" />
-            <element signature="e#6808#7628#0" expanded="false" />
-            <element signature="e#7788#8531#0" expanded="false" />
-            <element signature="e#8641#9356#0" expanded="false" />
-            <element signature="e#9421#10156#0" expanded="false" />
-            <element signature="e#10203#11171#0" expanded="false" />
-            <element signature="e#11212#11705#0" expanded="false" />
-            <element signature="e#11803#12479#0" expanded="false" />
-            <element signature="e#12521#13112#0" expanded="false" />
-            <element signature="e#13283#13851#0" expanded="false" />
-            <element signature="e#14011#14587#0" expanded="false" />
-            <element signature="e#14730#15390#0" expanded="false" />
-            <element signature="e#15427#16025#0" expanded="false" />
-            <element signature="e#16064#16669#0" expanded="false" />
-            <element signature="e#16703#17242#0" expanded="false" />
-            <element signature="e#17275#17956#0" expanded="false" />
-            <element signature="e#17993#18604#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
   </component>
 </project>

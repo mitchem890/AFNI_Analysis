@@ -181,10 +181,9 @@ class roistats(bash_command):
             "name": None,
             "working_dir": None,
             "atlas": None,
-            "session": None,
-            "subject": None,
             "extension": None,
-            "model": None
+            "subbrick": None,
+            "outfile": None
         }
 
         for (prop, default) in prop_defaults.items():
@@ -199,10 +198,9 @@ class roistats(bash_command):
 -n {self.name} \\
 -w {self.working_dir} \\
 -a {self.atlas} \\
--e {self.session} \\
--s {self.subject} \\
 -r \"{self.extension}\" \\
--o \"{self.model}\""""
+-b {self.subbrick} \\
+-f {self.outfile}"""
         return command
 
 
