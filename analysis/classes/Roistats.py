@@ -18,29 +18,36 @@ class roistats(object):
             "subject": None,
             "extension": None,
             "hemisphere": None,
-            "postfix": None
+            "postfix": None,
+            "subbrick": None
         }
 
         for (prop, default) in prop_defaults.items():
             setattr(self, prop, kwargs.get(prop, default))
 
+        self.outfile = self.generate_outfile()
         self.roistats = self.generate_command()
+
+
+    def generate_outfile(self):
+        atlas_file=os.path.basename(self.atlas)
+        return f"{self.subject}_timecourses_{self.session}_{self.design}_{self.subbrick}{self.postfix}_{atlas_file}.txt"
 
     def generate_command(self):
         command = BashCommand.roistats(input=self.input_file,
                                        name=self.design,
                                        working_dir=self.working_dir,
                                        atlas=self.atlas,
-                                       session=self.session,
-                                       subject=self.subject,
                                        extension=self.extension,
-                                       model=self.postfix)
+                                       subbrick=self.subbrick,
+                                       outfile=self.outfile)
         return command
 
 
 # This will add the take the standard inputs
 # to the roistats minus the atlas and extension
-# it will return a list of roistats objects, one for each atlas available
+# it will return a list of tuples of roistats objects, one for each atlas available
+# The tuples are organized in (Coef roistats objects, Tstat roistats object)
 def build_roistats(input_file='',
                    design='',
                    working_dir='',
@@ -59,8 +66,7 @@ def build_roistats(input_file='',
 
         if hemisphere:
             atlas = f"{atlas}_{hemisphere}"
-
-        roistats_list.append(roistats(
+        Coef_roistat=roistats(
             input_file=input_file,
             design=design,
             working_dir=working_dir,
@@ -69,7 +75,20 @@ def build_roistats(input_file='',
             subject=subject,
             extension=extension,
             hemisphere=hemisphere,
-            postfix=postfix))
+            postfix=postfix,
+            subbrick="Coef")
+        Tstat_roistat=roistats(
+            input_file=input_file,
+            design=design,
+            working_dir=working_dir,
+            atlas=os.path.join(atlases_dir, atlas),
+            session=session,
+            subject=subject,
+            extension=extension,
+            hemisphere=hemisphere,
+            postfix=postfix,
+            subbrick="Tstat")
+        roistats_list.append((Coef_roistat, Tstat_roistat))
 
     return roistats_list
 

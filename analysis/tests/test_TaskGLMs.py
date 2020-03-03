@@ -133,14 +133,13 @@ class TestStroop_Roistats(unittest.TestCase):
 -n ON_BLOCKS \\
 -w /mnt/afni_container_output/346945/RESULTS/Stroop/proactive_ON_BLOCKS_censored \\
 -a /home/atlases/gordon_2p4_resampled_wsubcort_LPI \\
--e proactive \\
--s 346945 \\
 -r ".nii.gz" \\
--o "_blocks"'''
+-b Coef \\
+-f 346945_timecourses_proactive_ON_BLOCKS_Coef_blocks_gordon_2p4_resampled_wsubcort_LPI.txt'''
 
         self.maxDiff = None
         self.assertEqual(output, TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=images)
-                         .glms[0][0].roistats[0].roistats.command)
+                         .glms[0][0].roistats[0][0].roistats.command)
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestStroop_Roistats)
