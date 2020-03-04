@@ -137,7 +137,7 @@ class remlfit(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.command = self.build_command()
-        self.outfile = self.Rvar
+        self.outfile = self.Rbuck
         bash_command.__init__(self, command=self.command, return_output=False)
 
     def generate_options(self):

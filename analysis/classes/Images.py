@@ -10,7 +10,7 @@ def get_fmriprep_images(origin, wave, subject, session, task, pipeline):
     origin = os.path.join(origin, f"sub-{str(subject)}", f"ses-{wave}{session[0:3].lower()}", "func")
 
     files = glob.glob(os.path.join(origin,
-                                   f'sub-{subject}_ses-{wave}{session[0:3].lower()}_task-{task.title()}_acq-mb***_run-*_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz'))
+                                   f'sub-{subject}_ses-{wave}{session[0:3].lower()}_task-{task.title()}_acq-mb???_run-?_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz'))
 
     for file in files:
         images.append(fmriprep_preprocessed_image(file, wave, subject, session, task, pipeline))
@@ -20,8 +20,8 @@ def get_fmriprep_images(origin, wave, subject, session, task, pipeline):
 # fing HCP images using pattern matching
 def get_hcp_images(origin, wave, subject, session, task, pipeline):
     images = []
-    origin = os.path.join(origin, subject, 'MNINonLinear', 'Results', f"tfMRI_{task}{session[0:3].title()}*_**")
-    files = glob.glob(os.path.join(origin, f"tfMRI_{task}{session[0:3].title()}*_**.nii.gz"))
+    origin = os.path.join(origin, subject, 'MNINonLinear', 'Results', f"tfMRI_{task}{session[0:3].title()}?_??")
+    files = glob.glob(os.path.join(origin, f"tfMRI_{task}{session[0:3].title()}?_??.nii.gz"))
 
     for file in files:
         images.append(hcp_preprocessed_image(file, wave, subject, session, task, pipeline))

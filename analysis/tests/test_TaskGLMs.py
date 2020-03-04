@@ -139,7 +139,7 @@ class TestStroop_Roistats(unittest.TestCase):
 
         self.maxDiff = None
         self.assertEqual(output, TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=images)
-                         .glms[0][0].roistats[0][0].roistats.command)
+                         .glms[0][0].roistats[0].roistats.command)
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestStroop_Roistats)

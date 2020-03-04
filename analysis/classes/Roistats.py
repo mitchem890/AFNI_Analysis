@@ -87,7 +87,7 @@ def build_roistats(input_file='',
             hemisphere=hemisphere,
             postfix=postfix,
             subbrick="Tstat")
-        roistats_list.append((Coef_roistat, Tstat_roistat))
+        roistats_list.extend([Coef_roistat, Tstat_roistat])
 
     return roistats_list
 

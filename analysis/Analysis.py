@@ -27,7 +27,7 @@ def run_surface_glms(GLM_set):
 
         os.chdir(glm[1].output_dir)
         glm[1].deconvolve.run_command()
-        glm[1].remlfit.command.run_command()
+        glm[1].remlfit.run_command()
 
         for roistats in glm[1].roistats:
             roistats.roistats.run_command()
