@@ -1,8 +1,9 @@
 import logging
 import os
+import sys
+sys.path.append(os.path.abspath("/home"))
 
-import Analysis
-import PreAnalysis
+from pipeline import Analysis, PreAnalysis
 from classes import Images
 
 
@@ -26,3 +27,4 @@ def analysis_pipeline(origin, destination, events, wave, subject, session, task,
         PreAnalysis.preAnalysis(destination, events, images, run_volume, run_surface)
     if run_analysis:
         Analysis.analysis(destination, images, run_volume, run_surface)
+    ###TODO Add file checker here?

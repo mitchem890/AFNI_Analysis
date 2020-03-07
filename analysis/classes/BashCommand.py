@@ -1,6 +1,9 @@
 import os
+import sys
+sys.path.append(os.path.abspath("/home"))
+
 from config import globals
-import RunShellFunc as rs
+from utils import RunShellFunc as rs
 
 
 # This fill contains the structure for all the bash

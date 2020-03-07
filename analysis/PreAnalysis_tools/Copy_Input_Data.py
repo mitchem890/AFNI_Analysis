@@ -1,8 +1,10 @@
 import glob
-import os
 from shutil import copyfile
+import os
+import sys
+sys.path.append(os.path.abspath("/home"))
 
-import Confounds_Regressors_Interface as cri
+from PreAnalysis_tools import Confounds_Regressors_Interface as cri
 from classes import Images, BashCommand
 
 
@@ -21,6 +23,14 @@ def copy_input_data(images, destination, events):
             copy_input_data_hcp(image, destination, events)
         elif image.pipeline == 'fmriprep':
             copy_input_data_fmriprep(image, destination, events)
+
+#This function will:
+#Check the evts for blanks
+#Calculate the FDs
+#calculate the DVARS
+#Split the Cifti into 2 giftis
+#copy the nifti files over
+#copy the movement regressor files over
 
 
 def copy_input_data_hcp(image: Images.preprocessed_image, destination, events):

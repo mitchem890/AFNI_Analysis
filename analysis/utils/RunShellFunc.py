@@ -4,6 +4,7 @@ import shlex
 import os
 
 
+
 def run_shell_command(command_line, return_output=False):
     logging.info('\nSubprocess: "' + command_line + '"')
     command_line = command_line.replace('\n', '')

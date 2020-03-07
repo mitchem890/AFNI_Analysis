@@ -1,9 +1,9 @@
 import os
-
-import RunShellFunc as rs
+import sys
+sys.path.append(os.path.abspath("/home/"))
 from classes import TaskGLMs
 
-
+#Run the volume 3ddeconvolve remlfit and roistats for each glm
 def run_volume_glms(GLM_set):
     for glm in GLM_set.glms:
 
@@ -18,7 +18,7 @@ def run_volume_glms(GLM_set):
         for roistats in glm[0].roistats:
             roistats.roistats.run_command()
 
-
+#Run the volume 3ddeconvolve remlfit and roistats for each glm
 def run_surface_glms(GLM_set):
     for glm in GLM_set.glms:
         print(f"Running {glm[1]}")
@@ -45,19 +45,26 @@ def run_surface_glms(GLM_set):
             roistats.roistats.run_command()
 
 
-# This Section Includes all the GLMs and roistats
+#Get the correct glm for the given session and task of the images This will return an object containing all of the glms and roistats
+def get_GLMs(destination, images):
+    if images[0].task == 'Axcpt':
+        GLM_set = TaskGLMs.AxcptGLMs(working_dir=destination, images=images)
+    elif images[0].task == 'Cuedts':
+        GLM_set = TaskGLMs.CuedtsGLMs(working_dir=destination, images=images)
+    elif images[0].task == 'Stern':
+        GLM_set = TaskGLMs.SternGLMs(working_dir=destination, images=images)
+    elif images[0].task == 'Stroop':
+        GLM_set = TaskGLMs.StroopGLMs(working_dir=destination, images=images)
+    return GLM_set
+
+
 def analysis(destination, images, run_volume, run_surface):
 
-    if images[0].task == 'Axcpt':
-        GLM_set = TaskGLMs.AxcptGLMs(working_dir=destination,images=images)
-    elif images[0].task == 'Cuedts':
-        GLM_set = TaskGLMs.CuedtsGLMs(working_dir=destination,images=images)
-    elif images[0].task == 'Stern':
-        GLM_set = TaskGLMs.SternGLMs(working_dir=destination,images=images)
-    elif images[0].task == 'Stroop':
-        GLM_set = TaskGLMs.StroopGLMs(working_dir=destination,images=images)
+    GLM_set = get_GLMs(destination, images)
 
     if run_volume:
         run_volume_glms(GLM_set)
     if run_surface:
         run_surface_glms(GLM_set)
+
+    return GLM_set

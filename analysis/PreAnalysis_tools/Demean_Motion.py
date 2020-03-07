@@ -1,9 +1,16 @@
 import os
+import sys
+sys.path.append(os.path.abspath("/home"))
 
 from classes import BashCommand
 
 
 # Run Some Sick stats on the movement regressors
+# This will get the trs for the image pair
+# compute the enorm for motion
+# demean_motion_parameters
+# comput the derivatives of the motion parameters
+#and create a censor list for the motion parameters
 def demean_motion(origin, images):
     fullpath = os.path.join(origin, images[0].subject, 'INPUT_DATA', images[0].task, images[0].session)
 

@@ -1,9 +1,12 @@
 import argparse
 import multiprocessing as mp
 import os
+import sys
+sys.path.append(os.path.abspath("/home"))
+
 from config import globals
-import Run_Analysis_Pipeline
-import Validate_User_Input
+from pipeline import Run_Analysis_Pipeline
+from utils import Validate_User_Input
 
 parser = argparse.ArgumentParser()
 
@@ -46,7 +49,7 @@ run_preanalysis = args.preanalysis
 run_analysis = args.analysis
 pipeline = args.pipeline
 ncpus = args.ncpus
-
+###TODO Makesure overwite flag is working
 globals.set_overwrite(args.overwrite)
 
 Validate_User_Input.validate_user_input(origin=origin, destination=destination, events=events, wave=wave,

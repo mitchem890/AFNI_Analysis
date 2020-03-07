@@ -1,6 +1,9 @@
 import unittest
 from classes import Images
 from classes import TaskGLMs
+import os
+import sys
+sys.path.append(os.path.abspath("/home"))
 
 image1 = Images.hcp_preprocessed_image(
     file='/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/tfMRI_StroopPro1_AP.nii.gz', wave='wave1',
@@ -8,7 +11,15 @@ image1 = Images.hcp_preprocessed_image(
 image2 = Images.hcp_preprocessed_image(
     file='/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/tfMRI_StroopPro2_PA.nii.gz', wave='wave1',
     subject='346945', session='proactive', task='Stroop', pipeline='hcp')
-images = [image1, image2]
+Stroop_Images = [image1, image2]
+
+image1= Images.hcp_preprocessed_image(
+    file='/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/tfMRI_AxcptBas1_AP.nii.gz', wave='wave1',
+    subject='346945', session='baseline', task='Axcpt', pipeline='hcp')
+image2 = Images.hcp_preprocessed_image(
+    file='/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/tfMRI_AxcptBas2_PA.nii.gz', wave='wave1',
+    subject='346945', session='baseline', task='Axcpt', pipeline='hcp')
+Axcpt_Images = [image1, image2]
 
 
 class TestStroop_GLMs(unittest.TestCase):
@@ -34,7 +45,7 @@ class TestStroop_GLMs(unittest.TestCase):
 -nobucket"""
 
         self.maxDiff = None
-        self.assertEqual(output, TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=images)
+        self.assertEqual(output, TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Images)
                          .glms[2][0].deconvolve.command)
 
     def test_congruency_event_remlfit_volume(self):
@@ -50,7 +61,7 @@ class TestStroop_GLMs(unittest.TestCase):
 -verb"""
         self.maxDiff = None
         self.assertEqual(output,
-                         TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=images).glms[0][
+                         TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Images).glms[0][
                              0].remlfit.command)
 
     def test_congruency_event_deconvolve_surface_L(self):
@@ -76,7 +87,7 @@ class TestStroop_GLMs(unittest.TestCase):
 -nobucket"""
 
         self.maxDiff = None
-        self.assertEqual(output, TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=images)
+        self.assertEqual(output, TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Images)
                          .glms[2][1].deconvolve.command)
 
     def test_congruency_event_remlfit_surface_L(self):
@@ -92,7 +103,7 @@ class TestStroop_GLMs(unittest.TestCase):
 -verb"""
         self.maxDiff = None
         self.assertEqual(output,
-                         TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=images).glms[0][
+                         TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Images).glms[0][
                              1].remlfit.command)
 
     def test_congruency_hrf_event_deconvolve_volume(self):
@@ -118,7 +129,7 @@ class TestStroop_GLMs(unittest.TestCase):
 
         self.maxDiff = None
         self.assertEqual(output,
-                         TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=images).glms[3][
+                         TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Images).glms[3][
                              0].deconvolve.command)
 
 
@@ -138,7 +149,7 @@ class TestStroop_Roistats(unittest.TestCase):
 -f 346945_timecourses_proactive_ON_BLOCKS_Coef_blocks_gordon_2p4_resampled_wsubcort_LPI.txt'''
 
         self.maxDiff = None
-        self.assertEqual(output, TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=images)
+        self.assertEqual(output, TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Images)
                          .glms[0][0].roistats[0].roistats.command)
 
 

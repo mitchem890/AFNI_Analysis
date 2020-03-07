@@ -1,6 +1,8 @@
 import os
-from abc import ABCMeta, abstractmethod
+import sys
+sys.path.append(os.path.abspath("/home"))
 
+from abc import ABCMeta, abstractmethod
 from classes import Roistats, BashCommand
 
 

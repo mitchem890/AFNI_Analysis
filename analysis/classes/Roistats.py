@@ -1,8 +1,12 @@
 import os
+import sys
 from abc import ABCMeta
 
+sys.path.append(os.path.abspath("/home/"))
 from classes import BashCommand
+from utils import atlas_utils
 from config import ConfigGLMs
+
 
 
 class roistats(object):
@@ -58,10 +62,10 @@ def build_roistats(input_file='',
                    fsaverage=True):
     roistats_list = []
     atlases_dir = ConfigGLMs.Atlas_Dir
-    atlases = get_correct_atlases(mb=mb, hemisphere=hemisphere, fsaverage=fsaverage)
+    atlases = atlas_utils.get_correct_atlases(mb=mb, hemisphere=hemisphere, fsaverage=fsaverage)
     for atlas in atlases:
 
-        extension = get_extension(atlas, hemisphere)
+        extension = atlas_utils.get_extension(atlas, hemisphere)
 
         if hemisphere:
             atlas = f"{atlas}_{hemisphere}"
@@ -91,29 +95,3 @@ def build_roistats(input_file='',
 
     return roistats_list
 
-
-def get_correct_atlases(mb, hemisphere, fsaverage):
-    if hemisphere is None:
-        if mb is '4':
-            atlases = ConfigGLMs.VolumeAtlasesMB4
-        elif mb is '8':
-            atlases = ConfigGLMs.VolumeAtlasesMB8
-    else:
-        if mb is '4':
-            atlases = ConfigGLMs.SurfaceAtlasesMB4
-        elif mb is '8':
-            atlases = ConfigGLMs.SurfaceAtlasesMB8
-        if fsaverage:
-            atlases = ConfigGLMs.SurfaceAtlasesFS5
-
-    return atlases
-
-
-def get_extension(atlas, hemisphere):
-    if hemisphere is None:
-        extension = '.nii.gz'
-    elif atlas is "gordon_333":
-        extension = ".func.gii"
-    else:
-        extension = ".label.gii"
-    return extension

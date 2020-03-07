@@ -1,4 +1,7 @@
 import os
+import sys
+sys.path.append(os.path.abspath("/home"))
+
 from typing import List
 from classes import GLMs
 from classes import Images

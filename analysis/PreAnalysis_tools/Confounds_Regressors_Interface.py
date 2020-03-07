@@ -1,7 +1,9 @@
 import csv
 
 import pandas as pd
-
+import os
+import sys
+sys.path.append(os.path.abspath("/home"))
 from classes import BashCommand
 
 
