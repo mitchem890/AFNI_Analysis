@@ -1,6 +1,5 @@
-import os
 import sys
-sys.path.append(os.path.abspath("/home"))
+sys.path.append("..") # Adds higher directory to python modules path.
 from config import ConfigGLMs
 #This will retrun the correct set of atlases for a sitiuation
 def get_correct_atlases(mb, hemisphere, fsaverage):

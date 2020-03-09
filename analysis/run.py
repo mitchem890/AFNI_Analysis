@@ -2,8 +2,7 @@ import argparse
 import multiprocessing as mp
 import os
 import sys
-sys.path.append(os.path.abspath("/home"))
-
+sys.path.append("..") # Adds higher directory to python modules path.
 from config import globals
 from pipeline import Run_Analysis_Pipeline
 from utils import Validate_User_Input

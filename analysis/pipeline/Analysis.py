@@ -1,6 +1,6 @@
 import os
 import sys
-sys.path.append(os.path.abspath("/home/"))
+sys.path.append("..") # Adds higher directory to python modules path.
 from classes import TaskGLMs
 
 #Run the volume 3ddeconvolve remlfit and roistats for each glm
@@ -60,6 +60,8 @@ def get_GLMs(destination, images):
 
 def analysis(destination, images, run_volume, run_surface):
 
+
+    ##TODO Add the Preparcellated here
     GLM_set = get_GLMs(destination, images)
 
     if run_volume:

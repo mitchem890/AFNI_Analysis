@@ -1,9 +1,7 @@
 import csv
-
-import pandas as pd
-import os
 import sys
-sys.path.append(os.path.abspath("/home"))
+sys.path.append("..") # Adds higher directory to python modules path.
+import pandas as pd
 from classes import BashCommand
 
 

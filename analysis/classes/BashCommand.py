@@ -1,7 +1,6 @@
 import os
 import sys
-sys.path.append(os.path.abspath("/home"))
-
+sys.path.append("..") # Adds higher directory to python modules path.
 from config import globals
 from utils import RunShellFunc as rs
 
@@ -196,7 +195,7 @@ class roistats(bash_command):
         bash_command.__init__(self, command=self.command, return_output=False)
 
     def build_command(self):
-        command = f"""bash /home/BashScripts/Roistats.sh \\
+        command = f"""bash /home/analysis/BashScripts/Roistats.sh \\
 -i {self.input} \\
 -n {self.name} \\
 -w {self.working_dir} \\
@@ -391,7 +390,7 @@ class calculate_fds(bash_command):
         return "Calculating FD's"
 
     def build_command(self):
-        command = f"""bash /home/BashScripts/calculate_framewise_displacement.sh \\
+        command = f"""bash /home/analysis/BashScripts/calculate_framewise_displacement.sh \\
 {self.infile} \\
 {self.outfile}"""
         return command
@@ -415,7 +414,7 @@ class calculate_dvars(bash_command):
         return f"Calculating Dvars"
 
     def build_command(self):
-        command = f"""bash /home/BashScripts/dvars_nichols.sh {self.infile} {self.outfile}"""
+        command = f"""bash /home/analysis/BashScripts/dvars_nichols.sh {self.infile} {self.outfile}"""
         return command
 
 
@@ -448,7 +447,7 @@ class make_fd_mask(bash_command):
 class resample(bash_command):
     def __init__(self, **kwargs):
         prop_defaults = {
-            "atlas": "/home/atlases/gordon_2p4_resampled_wsubcort_LPI.nii.gz",
+            "atlas": "/home/analysis/atlases/gordon_2p4_resampled_wsubcort_LPI.nii.gz",
             "infile": None,
             "outfile": None
         }

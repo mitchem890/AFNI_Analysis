@@ -1,10 +1,8 @@
 import csv
 import os
-import sys
-sys.path.append(os.path.abspath("/home"))
-
 import pandas as pd
-
+import sys
+sys.path.append("..") # Adds higher directory to python modules path.
 from classes import Images
 
 

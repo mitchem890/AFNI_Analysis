@@ -1,7 +1,6 @@
 import os
 import sys
-sys.path.append(os.path.abspath("/home"))
-
+sys.path.append("..") # Adds higher directory to python modules path.
 from PreAnalysis_tools import Copy_Input_Data, Format_Motion_Regressors, Demean_Images, Demean_Motion
 
 hemispheres = ['L', 'R']

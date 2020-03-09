@@ -2,8 +2,7 @@ import glob
 from shutil import copyfile
 import os
 import sys
-sys.path.append(os.path.abspath("/home"))
-
+sys.path.append("..") # Adds higher directory to python modules path.
 from PreAnalysis_tools import Confounds_Regressors_Interface as cri
 from classes import Images, BashCommand
 

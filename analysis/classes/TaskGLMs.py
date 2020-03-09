@@ -1,7 +1,6 @@
 import os
 import sys
-sys.path.append(os.path.abspath("/home"))
-
+sys.path.append("..") # Adds higher directory to python modules path.
 from typing import List
 from classes import GLMs
 from classes import Images

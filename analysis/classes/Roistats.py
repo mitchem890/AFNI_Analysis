@@ -1,8 +1,7 @@
 import os
-import sys
 from abc import ABCMeta
-
-sys.path.append(os.path.abspath("/home/"))
+import sys
+sys.path.append("..") # Adds higher directory to python modules path.
 from classes import BashCommand
 from utils import atlas_utils
 from config import ConfigGLMs

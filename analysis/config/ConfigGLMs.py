@@ -1,9 +1,7 @@
-#!/bin/bash
-# configModel.sh
 # This File will load in the relevent models for all of the glms as well as other information such as force TR and Results directories
 
 # AtlasDirectory and Atlases
-Atlas_Dir = "/home/atlases"
+Atlas_Dir = "/home/Atlases"
 VolumeAtlasesMB4 = ["gordon_2p4_resampled_wsubcort_LPI", "communities_2p4_resampled_LPI",
                     "HCP-MMP1_on_MNI152_ICBM2009a_nlin_2p4", "HCP-MMP1_L_on_MNI152_ICBM2009a_nlin_2p4",
                     "HCP-MMP1_R_on_MNI152_ICBM2009a_nlin_2p4", "Schaefer2018_400Parcels_7Networks_order_FSLMNI152_2p4"]
