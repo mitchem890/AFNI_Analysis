@@ -57,16 +57,17 @@ def get_GLMs(destination, images):
         GLM_set = TaskGLMs.StroopGLMs(working_dir=destination, images=images)
     return GLM_set
 
-
+#This section kicks off the rest of the Functions
 def analysis(destination, images, run_volume, run_surface):
+    GLM_set=[]
+    try:
+        ##TODO Add the Preparcellated here
+        GLM_set = get_GLMs(destination, images)
 
-
-    ##TODO Add the Preparcellated here
-    GLM_set = get_GLMs(destination, images)
-
-    if run_volume:
-        run_volume_glms(GLM_set)
-    if run_surface:
-        run_surface_glms(GLM_set)
-
+        if run_volume:
+            run_volume_glms(GLM_set)
+        if run_surface:
+            run_surface_glms(GLM_set)
+    except:
+        print("Error Running Analysis")
     return GLM_set

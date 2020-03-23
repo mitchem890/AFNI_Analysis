@@ -80,7 +80,7 @@ class TaskGLMs(object):
     # builds the volumetric left and right hemisphere GLM given the glm type, label, regressor parameters and the contrast parameters
     # returns three glms in a tuple
     def build_glms(self, glm_type="", glm_label="", regressors_models_labels=[], contrasts_labels=[],
-                   roistats_designs_postfixes=[]):
+                   roistats_designs_postfixes=[], polort = 'A'):
         if self.mb is '4':
             force_tr = '1.2'
         elif self.mb is '8':
@@ -91,6 +91,7 @@ class TaskGLMs(object):
                                     glm_type=glm_type,
                                     glm_label=glm_label,
                                     censor=self.censor,
+                                    polort=polort,
                                     regressors_models_labels=regressors_models_labels,
                                     contrasts_labels=contrasts_labels,
                                     ortvec=self.ortvec,
@@ -103,6 +104,7 @@ class TaskGLMs(object):
                                         glm_label=glm_label,
                                         force_tr=force_tr,
                                         censor=self.censor,
+                                        polort=polort,
                                         regressors_models_labels=regressors_models_labels,
                                         contrasts_labels=contrasts_labels,
                                         hemisphere='L',
@@ -115,6 +117,7 @@ class TaskGLMs(object):
                                         glm_label=glm_label,
                                         force_tr=force_tr,
                                         censor=self.censor,
+                                        polort=polort,
                                         regressors_models_labels=regressors_models_labels,
                                         contrasts_labels=contrasts_labels,
                                         hemisphere='R',
@@ -324,7 +327,7 @@ class CuedtsGLMs(TaskGLMs):
         regressors_models_labels = [("block", self.block_model, "block"),
                                     ("blockONandOFF", self.blockONandOFF_model, "blockONandOFF"),
                                     ("button1", self.buttonPress_model, "button1"),
-                                    ("button2", self.buttonPress_model, " button2")]
+                                    ("button2", self.buttonPress_model, "button2")]
         contrasts_labels = [("+button1[[" + self.button_idx + "]] -button2[[" + self.button_idx + "]]", "B1_B2")]
 
         roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
