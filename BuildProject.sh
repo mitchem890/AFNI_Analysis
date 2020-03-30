@@ -35,7 +35,7 @@ echo "ENV PATH=\"/opt/workbench/bin_linux64:\$PATH\"" >> Dockerfile
 echo "ENV PATH /opt/miniconda-latest/envs/neuro/bin:\$PATH" >> Dockerfile
 echo "ENTRYPOINT [\"python\",\"-u\",\"/home/analysis/run.py\"]" >> Dockerfile
 echo "ENV HOME=/home" >> Dockerfile
-echo "COPY .afnirc /home"
+echo "COPY .afnirc /home" >> Dockerfile
 sed -i 's/apt-get/apt-get -y/g' Dockerfile
 sed -i 's/nlibxmu-headers/libxmu-headers/g' Dockerfile
 sed -i 's/nmesa-common-dev/mesa-common-dev/g' Dockerfile

@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c3c5ef9e-7a20-4e45-8f52-0a75b9b60b85" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BuildProject.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BuildProject.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/classes/TaskGLMs.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/classes/TaskGLMs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../slim_DCM2BIDS/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../slim_DCM2BIDS/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,61 +20,6 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>ON</find>
-      <find>working_dir</find>
-      <find>postfix</find>
-      <find>BLOCKS</find>
-      <find>print</find>
-      <find>name</find>
-      <find>object</find>
-      <find>def __str__(self):</find>
-      <find>&quot; +</find>
-      <find>input</find>
-      <find>copyfile</find>
-      <find>image.</find>
-      <find>calc</find>
-      <find>calculate_dvars</find>
-      <find>demean</find>
-      <find>blur</find>
-      <find>$PROJECT_DIR$/../../../</find>
-      <find>self.sub</find>
-      <find>reor</find>
-      <find>))</find>
-      <find>image.tmp_volume_files</find>
-      <find>encodings</find>
-      <find>get_afni_ready_surface_file</find>
-      <find>bash</find>
-      <find>fsaverage</find>
-      <find>origin</find>
-      <find>runNum</find>
-      <find>movement</find>
-      <find>hcp_movement_regressors</find>
-      <find>root_name</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>regressor_label</replace>
-      <replace>regressor</replace>
-      <replace>regressors_models_labels</replace>
-      <replace>idx</replace>
-      <replace>&quot;+self.buttonPress_model+&quot;</replace>
-      <replace>&quot;+self.idx+&quot;</replace>
-      <replace>glm_type</replace>
-      <replace>.extend</replace>
-      <replace>create_on_blocks_glms</replace>
-      <replace>create_on_mixed_glms</replace>
-      <replace>create_events_glms</replace>
-      <replace>events_glms</replace>
-      <replace>.append</replace>
-      <replace>bash_command</replace>
-      <replace>images.</replace>
-      <replace>)))</replace>
-      <replace>tmp_files</replace>
-      <replace>bash /home/BashScripts/</replace>
-      <replace>image.movement_regressor</replace>
-    </replaceStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
@@ -84,7 +32,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../slim_DCM2BIDS/DCM2BIDS" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="PyConsoleOptionsProvider">
@@ -188,10 +136,10 @@
     </configuration>
     <list>
       <item itemvalue="Python.Run_Analysis" />
+      <item itemvalue="Python tests.Unittests for test_TaskGLMs.TestStroop_GLMs.test_congruency_event_deconvolve_volume" />
+      <item itemvalue="Python tests.Unittests for test_TaskGLMs.TestStroop_Roistats.test_on_blocks_roistats_volume" />
       <item itemvalue="Python tests.Unittests for tests.test_TaskGLMs.TestStroop_Roistats.test_on_blocks_roistats_volume" />
       <item itemvalue="Python tests.Unittests in test_TaskGLMs.py" />
-      <item itemvalue="Python tests.Unittests for test_TaskGLMs.TestStroop_Roistats.test_on_blocks_roistats_volume" />
-      <item itemvalue="Python tests.Unittests for test_TaskGLMs.TestStroop_GLMs.test_congruency_event_deconvolve_volume" />
     </list>
     <recent_temporary>
       <list>
@@ -248,15 +196,15 @@
       <configuration name="Unittests in test_TaskGLMs.py" configurationId="tests" />
     </history-entry>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/analysis/Validate_User_Input.py</url>
-          <line>54</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="WindowStateProjectService">
+    <state x="2702" y="310" width="424" height="484" key="FileChooserDialogImpl" timestamp="1585452265953">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2702" y="310" width="424" height="484" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1585452265953" />
+    <state x="2521" y="362" key="com.intellij.ide.util.TipDialog" timestamp="1585452252162">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2521" y="362" key="com.intellij.ide.util.TipDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1585452252162" />
+    <state x="655" y="380" key="com.intellij.ide.util.TipDialog/79.27.1841.1053@79.27.1841.1053" timestamp="1585328322816" />
   </component>
 </project>
