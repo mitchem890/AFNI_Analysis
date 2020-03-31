@@ -85,7 +85,10 @@ class GLM(object):
         return roistats
 
     def __str__(self):
-        return f"""{self.subject} {self.session} {self.task} {self.style} GLM: {self.glm_label}_{self.glm_type}"""
+        if self.strict_analysis:
+            return f"{self.subject} {self.session} {self.task} {self.style} GLM: STRICT {self.glm_label}_{self.glm_type}"
+        else:
+            return f"{self.subject} {self.session} {self.task} {self.style} GLM: STRICT {self.glm_label}_{self.glm_type}"
 
     @abstractmethod
     def generate_input(self):
