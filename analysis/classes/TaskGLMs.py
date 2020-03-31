@@ -49,7 +49,7 @@ image_list = List[Images.preprocessed_image]
 
 
 class TaskGLMs(object):
-    def __init__(self, working_dir, images: image_list):
+    def __init__(self, working_dir, images: image_list, strict_analysis: bool):
         self.images = images
         self.subject = images[0].subject
         self.session = images[0].session
@@ -64,8 +64,19 @@ class TaskGLMs(object):
         self.hrf_idx = "0..0"
         self.ortvec = self.generate_ortvec()
         self.censor = self.generate_censor()
+        self.strict_analysis = strict_analysis
 
         return
+
+    def append_strict(self, regressors_models_labels):
+        new_regressors_models_labels = []
+        for regressor_model_label_set in regressors_models_labels:
+            regressor = regressor_model_label_set[0]
+            model=regressor_model_label_set[1]
+            label = regressor_model_label_set[2]
+            new_regressors_models_labels.append((f"{regressor}_strict", model, label))
+
+        return new_regressors_models_labels
 
     # Every GLM that we are running is a censored glm all glms must have a censor file.
     def generate_censor(self):
@@ -80,7 +91,7 @@ class TaskGLMs(object):
     # builds the volumetric left and right hemisphere GLM given the glm type, label, regressor parameters and the contrast parameters
     # returns three glms in a tuple
     def build_glms(self, glm_type="", glm_label="", regressors_models_labels=[], contrasts_labels=[],
-                   roistats_designs_postfixes=[], polort = 'A'):
+                   roistats_designs_postfixes=[], polort='A'):
         if self.mb is '4':
             force_tr = '1.2'
         elif self.mb is '8':
@@ -96,7 +107,8 @@ class TaskGLMs(object):
                                     contrasts_labels=contrasts_labels,
                                     ortvec=self.ortvec,
                                     mb=self.mb,
-                                    roistats_designs_postfixes=roistats_designs_postfixes)
+                                    roistats_designs_postfixes=roistats_designs_postfixes,
+                                    strict_analysis=self.strict_analysis)
 
         surface_L_glm = GLMs.SurfaceGLM(images=self.images,
                                         working_dir=self.working_dir,
@@ -109,7 +121,8 @@ class TaskGLMs(object):
                                         contrasts_labels=contrasts_labels,
                                         hemisphere='L',
                                         ortvec=self.ortvec,
-                                        roistats_designs_postfixes=roistats_designs_postfixes)
+                                        roistats_designs_postfixes=roistats_designs_postfixes,
+                                        strict_analysis=self.strict_analysis)
 
         surface_R_glm = GLMs.SurfaceGLM(images=self.images,
                                         working_dir=self.working_dir,
@@ -122,7 +135,8 @@ class TaskGLMs(object):
                                         contrasts_labels=contrasts_labels,
                                         hemisphere='R',
                                         ortvec=self.ortvec,
-                                        roistats_designs_postfixes=roistats_designs_postfixes)
+                                        roistats_designs_postfixes=roistats_designs_postfixes,
+                                        strict_analysis=self.strict_analysis)
 
         return (volume_glm, surface_L_glm, surface_R_glm)
 
@@ -173,8 +187,8 @@ class TaskGLMs(object):
 
 
 class AxcptGLMs(TaskGLMs):
-    def __init__(self, working_dir, images: image_list):
-        TaskGLMs.__init__(self, working_dir, images)
+    def __init__(self, working_dir, images: image_list, strict_analysis: bool):
+        TaskGLMs.__init__(self, working_dir, images, strict_analysis)
         self.event_model = "'TENTzero(0,21.6,10)'"
         self.idx = "0..7"
         self.glms = []
@@ -195,6 +209,7 @@ class AxcptGLMs(TaskGLMs):
                                     ("BY", self.event_model, "BY"),
                                     ("Bng", self.event_model, "Bng")]
 
+
         contrasts_labels = [(
             f"+0.5*AX[[{self.idx}]] +0.5*AY[[{self.idx}]] -0.5*BX[[{self.idx}]] -0.5*BY[[{self.idx}]]",
             "Acue_Bcue"),
@@ -208,6 +223,8 @@ class AxcptGLMs(TaskGLMs):
         roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
                                                                               contrasts_labels,
                                                                               '_tents')
+        if self.strict_analysis:
+            regressors_models_labels = self.append_strict(regressors_models_labels)
 
         return self.build_glms(glm_type=glm_type,
                                glm_label=glm_label,
@@ -228,6 +245,8 @@ class AxcptGLMs(TaskGLMs):
         roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
                                                                               contrasts_labels,
                                                                               '_tents')
+        if self.strict_analysis:
+            regressors_models_labels = self.append_strict(regressors_models_labels)
 
         return self.build_glms(glm_type=glm_type,
                                glm_label=glm_label,
@@ -271,6 +290,8 @@ class CuedtsGLMs(TaskGLMs):
         roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
                                                                               contrasts_labels,
                                                                               '_tents')
+        if self.strict_analysis:
+            regressors_models_labels = self.append_strict(regressors_models_labels)
 
         return self.build_glms(glm_type=type,
                                glm_label=glm_label,
@@ -297,6 +318,8 @@ class CuedtsGLMs(TaskGLMs):
         roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
                                                                               contrasts_labels,
                                                                               '_tents')
+        if self.strict_analysis:
+            regressors_models_labels = self.append_strict(regressors_models_labels)
 
         return self.build_glms(glm_type=type,
                                glm_label=glm_label,
@@ -315,6 +338,8 @@ class CuedtsGLMs(TaskGLMs):
         roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
                                                                               contrasts_labels,
                                                                               '_tents')
+        if self.strict_analysis:
+            regressors_models_labels = self.append_strict(regressors_models_labels)
 
         return self.build_glms(glm_type=glm_type,
                                glm_label=glm_label,
@@ -333,6 +358,8 @@ class CuedtsGLMs(TaskGLMs):
         roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
                                                                               contrasts_labels,
                                                                               '_tents')
+        if self.strict_analysis:
+            regressors_models_labels = self.append_strict(regressors_models_labels)
 
         return self.build_glms(glm_type=glm_type,
                                glm_label=glm_label,
@@ -383,6 +410,8 @@ class SternGLMs(TaskGLMs):
             (
             f"+0.33*not5NP[[{self.idx}]] +0.33*not5NN[[{self.idx}]] +0.33*not5RN[[{self.idx}]] -0.33*LL5NP[[{self.idx}]] -0.33*LL5NN[[{self.idx}]] -0.33*LL5RN[[{self.idx}]]",
             "not5_LL5")]
+        if self.strict_analysis:
+            regressors_models_labels = self.append_strict(regressors_models_labels)
 
         return self.build_glms(glm_type=glm_type,
                                glm_label=glm_label,
@@ -399,6 +428,9 @@ class SternGLMs(TaskGLMs):
 
         contrasts_labels = [
             (f"+button1[[{self.button_idx}]] -button2[[{self.button_idx}]]", "B1_B2")]
+
+        if self.strict_analysis:
+            regressors_models_labels = self.append_strict(regressors_models_labels)
 
         return self.build_glms(glm_type=glm_type,
                                glm_label=glm_label,
@@ -453,6 +485,8 @@ class StroopGLMs(TaskGLMs):
         roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
                                                                               contrasts_labels,
                                                                               model)
+        if self.strict_analysis:
+            regressors_models_labels = self.append_strict(regressors_models_labels)
 
         return self.build_glms(glm_type=type,
                                glm_label=glm_label,

@@ -110,7 +110,8 @@ class VolumeGLM(GLM):
             "ortvec": "/path/to/MovementFile",
             "contrasts_labels": [],
             "roistats_designs_postfixes": [],
-            "extension": ".nii.gz"
+            "extension": ".nii.gz",
+            "strict_analysis": False
         }
 
         for (prop, default) in prop_defaults.items():
@@ -120,7 +121,8 @@ class VolumeGLM(GLM):
 
         self.style = "Volume"
         self.results_dir = "RESULTS"
-
+        if self.strict_analysis:
+            self.results_dir = f"STRICT_{self.results_dir}"
 
         self.input = self.generate_input()
         self.Rvar = f"stats_var_{self.images[0].subject}_REML.nii.gz"
@@ -206,7 +208,8 @@ class SurfaceGLM(GLM):
             "ortvec": "/path/to/MovementFile",
             "contrasts_labels": [],
             "roistats_designs_postfixes": [],
-            "extension": ".func.gii"
+            "extension": ".func.gii",
+            "strict_analysis": False
         }
 
         for (prop, default) in prop_defaults.items():
@@ -214,6 +217,8 @@ class SurfaceGLM(GLM):
 
         self.style = f"""Surface {self.hemisphere}"""
         self.results_dir = "SURFACE_RESULTS"
+        if self.strict_analysis:
+            self.results_dir = f"STRICT_{self.results_dir}"
         self.Rvar = f"stats_var_{self.images[0].subject}_REML_{self.hemisphere}.func.gii"
         self.Rbuck = f"STATS_{self.images[0].subject}_REML_{self.hemisphere}.func.gii"
 
