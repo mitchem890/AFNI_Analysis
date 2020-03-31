@@ -74,7 +74,7 @@ class TaskGLMs(object):
             regressor = regressor_model_label_set[0]
             model=regressor_model_label_set[1]
             label = regressor_model_label_set[2]
-            new_regressors_models_labels.append((f"{regressor}_strict", model, label))
+            new_regressors_models_labels.append((f"{regressor}_STRICT", model, label))
 
         return new_regressors_models_labels
 
