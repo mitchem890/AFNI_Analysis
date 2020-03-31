@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6a4a4563-0d02-4c2b-842d-a3101b7fcbac" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="ProjectId" id="1ZqxztBIx2RGEldEBBfcH5481ac" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6a4a4563-0d02-4c2b-842d-a3101b7fcbac" name="Default Changelist" comment="" />
+      <created>1585580690077</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585580690077</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Changed all tent functions and idx parameters to reflect one knot per TR stipulation">
+      <created>1585588982336</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1585588982336</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Changed all tent functions and idx parameters to reflect one knot per TR stipulation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed all tent functions and idx parameters to reflect one knot per TR stipulation" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="606" y="126" width="777" height="852" key="CommitChangelistDialog2" timestamp="1585588981179">
+      <screen x="79" y="27" width="1841" height="1053" />
+    </state>
+    <state x="606" y="126" width="777" height="852" key="CommitChangelistDialog2/79.27.1841.1053@79.27.1841.1053" timestamp="1585588981179" />
+    <state x="655" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1585662797347">
+      <screen x="79" y="27" width="1841" height="1053" />
+    </state>
+    <state x="655" y="380" key="com.intellij.ide.util.TipDialog/79.27.1841.1053@79.27.1841.1053" timestamp="1585662797347" />
+    <state x="767" y="472" width="454" height="160" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585589001866">
+      <screen x="79" y="27" width="1841" height="1053" />
+    </state>
+    <state x="767" y="472" width="454" height="160" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/79.27.1841.1053@79.27.1841.1053" timestamp="1585589001866" />
+  </component>
+</project>
