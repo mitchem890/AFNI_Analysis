@@ -147,6 +147,9 @@ class TaskGLMs(object):
         type = 'ON_BLOCKS'
         roistats_designs_postfixes = [('ON_BLOCKS', '_blocks')]
 
+        if self.strict_analysis:
+            regressors_models_labels = self.append_strict(regressors_models_labels)
+
         return self.build_glms(glm_type=type,
                                regressors_models_labels=regressors_models_labels,
                                roistats_designs_postfixes=roistats_designs_postfixes)
@@ -162,6 +165,9 @@ class TaskGLMs(object):
         roistats_designs_postfixes = [('ON_BLOCKS', '_blocks'),
                                       ('ON_blockONandOFF', '_tents'),
                                       ('ON_TRIALS', '_tents')]
+
+        if self.strict_analysis:
+            regressors_models_labels = self.append_strict(regressors_models_labels)
 
         return self.build_glms(glm_type=type,
                                regressors_models_labels=regressors_models_labels,

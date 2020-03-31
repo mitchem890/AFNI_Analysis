@@ -1,6 +1,6 @@
 import os
 import sys
-sys.path.append("..") # Adds higher directory to python modules path.
+sys.path.append("..")# Adds higher directory to python modules path.
 from abc import ABCMeta, abstractmethod
 from classes import Roistats, BashCommand
 
