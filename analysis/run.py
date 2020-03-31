@@ -49,6 +49,7 @@ run_preanalysis = args.preanalysis
 run_analysis = args.analysis
 pipeline = args.pipeline
 ncpus = args.ncpus
+strict_analysis = args.strict
 ###TODO Makesure overwite flag is working
 globals.set_overwrite(args.overwrite)
 
@@ -68,7 +69,8 @@ for subject in subjects:
             # Allow for asyncronous processing of the Data 4 tasks x 3 sessions means that each subject could utilize 12 cores
             pool.apply_async(Run_Analysis_Pipeline.analysis_pipeline, args=(origin, destination, events, wave, subject,
                                                                             session, task, pipeline, run_volume,
-                                                                            run_surface, run_preanalysis, run_analysis))
+                                                                            run_surface, run_preanalysis, run_analysis,
+                                                                            strict_analysis))
 
 pool.close()
 pool.join()

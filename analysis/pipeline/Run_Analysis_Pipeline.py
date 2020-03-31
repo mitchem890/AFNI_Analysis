@@ -17,14 +17,14 @@ def create_logger(subject, wave, session, task, destination):
 
 def analysis_pipeline(origin, destination, events, wave, subject,
                       session, task, pipeline, run_volume,
-                      run_surface, run_preanalysis, run_analysis):
+                      run_surface, run_preanalysis, run_analysis, strict_analysis):
     create_logger(subject=subject, wave=wave, session=session, task=task, destination=destination)
     images = Images.get_images(origin=origin, subject=subject, wave=wave, session=session, task=task, pipeline=pipeline)
 
     if run_preanalysis:
         PreAnalysis.preAnalysis(destination, events, images, run_volume, run_surface)
     if run_analysis:
-        GLM_set = Analysis.analysis(destination, images, run_volume, run_surface)
+        GLM_set = Analysis.analysis(destination, images, run_volume, run_surface, strict_analysis)
 
     #Check Files!
     OutputVerifier.outputVerifier(images=images, GLM_set=GLM_set)
