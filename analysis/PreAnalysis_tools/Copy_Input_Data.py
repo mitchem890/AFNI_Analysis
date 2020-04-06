@@ -5,23 +5,40 @@ import sys
 sys.path.append("..") # Adds higher directory to python modules path.
 from PreAnalysis_tools import Confounds_Regressors_Interface as cri
 from classes import Images, BashCommand
-
+import logging
 
 # Check to make sure there are no blank evts for use with both fmriprep and hcp
-def check_evts(input):
-    files = os.listdir(input)
+def check_evts(input, image, strict_analysis):
+
+    if strict_analysis:
+        files = glob.glob(os.path.join(input, f"{image.subject}*{image.task}*{image.session}*STRICT*"))
+    else:
+        files = glob.glob(os.path.join(input, f"{image.subject}*{image.task}*{image.session}*STRICT*"))
+
+    GoodFiles=[]
+
     for file in files:
-        for line in file:
-            if len(line.strip().strip('*')) == 0:
-                print('found empty line in file ' + str(file))
+        with open(os.path.join(input, file), "r") as a_file:
+            for line in a_file:
+                stripped_line = line.strip()
+                if len(line.strip().strip('*')) == 0:
+                    print('found empty line in file ' + str(file))
+                    logging.info(f'Found blank evt {str(file)}')
+                    GoodFiles.append(False)
+                else:
+                    GoodFiles.append(True)
+                if not any(GoodFiles):
+                    print("All of the evts had issues")
+                    logging.info(f'ERROR: All evts were blank')
+                    raise NameError(f'ERROR: All evts were blank for {image.subject} {image.session} {image.task}')
 
 
-def copy_input_data(images, destination, events):
+def copy_input_data(images, destination, events, strict_analysis):
     for image in images:
         if image.pipeline == 'hcp':
-            copy_input_data_hcp(image, destination, events)
+            copy_input_data_hcp(image, destination, events, strict_analysis)
         elif image.pipeline == 'fmriprep':
-            copy_input_data_fmriprep(image, destination, events)
+            copy_input_data_fmriprep(image, destination, events, strict_analysis)
 
 #This function will:
 #Check the evts for blanks
@@ -32,7 +49,7 @@ def copy_input_data(images, destination, events):
 #copy the movement regressor files over
 
 
-def copy_input_data_hcp(image: Images.preprocessed_image, destination, events):
+def copy_input_data_hcp(image: Images.preprocessed_image, destination, events, strict_analysis):
     print(f"Copying Data for {image}")
     origin = image.dirname  # Where the Data is found
     task_dest = os.path.join(destination, image.subject, 'INPUT_DATA', image.task,
@@ -42,7 +59,7 @@ def copy_input_data_hcp(image: Images.preprocessed_image, destination, events):
     hcp_cifti_image = f"tfMRI_{image.root_name}_Atlas.dtseries.nii"  # Cifti image name
     evt_dir = os.path.join(events, image.subject, 'evts')
 
-    check_evts(evt_dir)
+    check_evts(evt_dir, image,strict_analysis)
     # Get the correct evts
     for file in glob.glob(os.path.join(evt_dir, '*' + image.task + '*' + image.session + '*')):
         copyfile(file, os.path.join(task_dest, os.path.basename(file)))
@@ -90,7 +107,7 @@ def copy_input_data_hcp(image: Images.preprocessed_image, destination, events):
 # Make the DVARS
 # make the fd masks
 # Resample the volume image to fit hcp format
-def copy_input_data_fmriprep(image, destination, events):
+def copy_input_data_fmriprep(image, destination, events, strict_analysis):
     print(f"Copying Data for {image.subject} {image.session} {image.task} run: {image.run_num}")
     task_dest = os.path.join(destination, image.subject, 'INPUT_DATA', image.task, image.session)
 
@@ -108,7 +125,7 @@ def copy_input_data_fmriprep(image, destination, events):
     evt_dir = os.path.join(events, image.subject, 'evts')
 
     print(f'Checking evts of: {image.subject} {image.wave} {image.session} {image.task}')
-    check_evts(evt_dir)
+    check_evts(evt_dir, image, strict_analysis)
     for file in glob.glob(os.path.join(evt_dir, '*' + image.task + '*' + image.session + '*')):
         copyfile(file, os.path.join(task_dest, os.path.basename(file)))
 

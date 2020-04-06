@@ -11,7 +11,7 @@ hemispheres = ['L', 'R']
 # Format Motion Regressors
 # Demean Motion Regressors
 # Demean Volume and Surface images
-def preAnalysis(destination, events, images, run_volume, run_surface):
+def preAnalysis(destination, events, images, run_volume, run_surface, strict_analysis):
     try:
         print(f"Running Preanalysis on: {images[0]} and {images[1].encoding}")
 
@@ -21,7 +21,7 @@ def preAnalysis(destination, events, images, run_volume, run_surface):
             os.makedirs(os.path.join(destination, images[0].subject, 'INPUT_DATA', images[0].task, images[0].session))
 
         ##TODO For loop of images outside
-        Copy_Input_Data.copy_input_data(images, destination, events)
+        Copy_Input_Data.copy_input_data(images, destination, events, strict_analysis)
         Format_Motion_Regressors.format_motion_regressors(destination, images)  # format the motion regressors
         Demean_Motion.demean_motion(destination, images)  # Demean Motion
 

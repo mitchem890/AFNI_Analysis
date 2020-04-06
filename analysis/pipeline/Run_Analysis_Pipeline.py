@@ -20,9 +20,10 @@ def analysis_pipeline(origin, destination, events, wave, subject,
                       run_surface, run_preanalysis, run_analysis, strict_analysis):
     create_logger(subject=subject, wave=wave, session=session, task=task, destination=destination)
     images = Images.get_images(origin=origin, subject=subject, wave=wave, session=session, task=task, pipeline=pipeline)
-
+    for image in images:
+        print(f"Found {image}")
     if run_preanalysis:
-        PreAnalysis.preAnalysis(destination, events, images, run_volume, run_surface)
+        PreAnalysis.preAnalysis(destination, events, images, run_volume, run_surface, strict_analysis)
     if run_analysis:
         GLM_set = Analysis.analysis(destination, images, run_volume, run_surface, strict_analysis)
 
