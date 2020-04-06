@@ -384,10 +384,15 @@ class SternGLMs(TaskGLMs):
             f"+0.33*not5NP[[{self.idx}]] +0.33*not5NN[[{self.idx}]] +0.33*not5RN[[{self.idx}]] -0.33*LL5NP[[{self.idx}]] -0.33*LL5NN[[{self.idx}]] -0.33*LL5RN[[{self.idx}]]",
             "not5_LL5")]
 
+        roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
+                                                                              contrasts_labels,
+                                                                              '_tents')
+
         return self.build_glms(glm_type=glm_type,
                                glm_label=glm_label,
                                regressors_models_labels=regressors_models_labels,
-                               contrasts_labels=contrasts_labels)
+                               contrasts_labels=contrasts_labels,
+                               roistats_designs_postfixes=roistats_designs_postfixes)
 
     # subtype of Event_GLMs that need to be created
     def create_buttons_events_glms(self, glm_type):
@@ -400,10 +405,15 @@ class SternGLMs(TaskGLMs):
         contrasts_labels = [
             (f"+button1[[{self.button_idx}]] -button2[[{self.button_idx}]]", "B1_B2")]
 
+        roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
+                                                                              contrasts_labels,
+                                                                              '_tents')
+
         return self.build_glms(glm_type=glm_type,
                                glm_label=glm_label,
                                regressors_models_labels=regressors_models_labels,
-                               contrasts_labels=contrasts_labels)
+                               contrasts_labels=contrasts_labels,
+                               roistats_designs_postfixes=roistats_designs_postfixes)
 
     def create_events_glms(self):
         glm_type = "EVENTS"
