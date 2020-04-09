@@ -17,6 +17,12 @@ do
   esac
 done
 
+if [ ! -f "${input_file}" ]; then
+    echo "${input_file} does not exist exiting roistats"
+    exit
+fi
+
+
 TFILE=$(mktemp)
 
 # Get the index of the subbricks
