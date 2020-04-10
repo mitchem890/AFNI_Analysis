@@ -1,11 +1,11 @@
 import glob
-from shutil import copyfile
+from shutil import copyfile, move
 import os
 import sys
 sys.path.append("..") # Adds higher directory to python modules path.
 from PreAnalysis_tools import Confounds_Regressors_Interface as cri
 from classes import Images, BashCommand
-
+import logging
 
 # Check to make sure there are no blank evts for use with both fmriprep and hcp
 def check_evts(input):
@@ -136,3 +136,6 @@ def copy_input_data_fmriprep(image, destination, events):
     print(f"Resampling: {image.subject} {image.wave} {image.session} {image.task}")
     BashCommand.resample(infile=os.path.join(task_dest, hcp_volume_image),
                          outfile=os.path.join(task_dest, hcp_resampled_image)).run_command()
+    print(f"Renaming the resampled image back to the original name")
+    logging.info(f"moving {os.path.join(task_dest, hcp_resampled_image)} to {os.path.join(task_dest, hcp_volume_image)}")
+    move(os.path.join(task_dest, hcp_resampled_image), os.path.join(task_dest, hcp_volume_image))

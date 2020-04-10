@@ -4,7 +4,7 @@
     <list default="true" id="8f45c1ab-be8a-479b-9d6b-01e7292a538c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/BashCommand.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/BashCommand.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PreAnalysis_tools/Copy_Input_Data.py" beforeDir="false" afterPath="$PROJECT_DIR$/PreAnalysis_tools/Copy_Input_Data.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
