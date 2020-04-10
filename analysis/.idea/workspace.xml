@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6d0ac0aa-3e10-42b9-9ad3-3f4140e19029" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/classes/TaskGLMs.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/TaskGLMs.py" afterDir="false" />
+    <list default="true" id="8f45c1ab-be8a-479b-9d6b-01e7292a538c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/BashCommand.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/BashCommand.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +18,6 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
