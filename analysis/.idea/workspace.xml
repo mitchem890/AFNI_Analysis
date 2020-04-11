@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8f45c1ab-be8a-479b-9d6b-01e7292a538c" name="Default Changelist" comment="">
+    <list default="true" id="854c2d2a-f695-425e-9dd1-5d0240b38f64" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BuildProject.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../BuildProject.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BashScripts/Roistats.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BashScripts/Roistats.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PreAnalysis_tools/Copy_Input_Data.py" beforeDir="false" afterPath="$PROJECT_DIR$/PreAnalysis_tools/Copy_Input_Data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/BashCommand.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/BashCommand.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -30,12 +30,14 @@ sudo apt-get install git-lfs && \
 git lfs install" >> Dockerfile
 echo "RUN cd /home/ && \
 git lfs clone https://github.com/mitchem890/Atlases && \
-chmod 777 -R /home/Atlases" >> Dockerfile
+chmod -R 777 /home/Atlases" >> Dockerfile
 echo "ENV PATH=\"/opt/workbench/bin_linux64:\$PATH\"" >> Dockerfile
 echo "ENV PATH /opt/miniconda-latest/envs/neuro/bin:\$PATH" >> Dockerfile
 echo "ENTRYPOINT [\"python\",\"-u\",\"/home/analysis/run.py\"]" >> Dockerfile
 echo "ENV HOME=/home" >> Dockerfile
 echo "COPY .afnirc /home" >> Dockerfile
+echo "RUN mkdir /testing" >> Dockerfile
+echo "RUN mkdir /data" >> Dockerfile
 sed -i 's/apt-get/apt-get -y/g' Dockerfile
 sed -i 's/nlibxmu-headers/libxmu-headers/g' Dockerfile
 sed -i 's/nmesa-common-dev/mesa-common-dev/g' Dockerfile
