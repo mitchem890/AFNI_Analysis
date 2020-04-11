@@ -6,7 +6,7 @@ sys.path.append("..") # Adds higher directory to python modules path.
 from config import globals
 from pipeline import Run_Analysis_Pipeline
 from utils import Validate_User_Input
-
+from utils import setup
 parser = argparse.ArgumentParser()
 
 # Add valid arguments to take in
@@ -50,7 +50,7 @@ pipeline = args.pipeline
 ncpus = args.ncpus
 ###TODO Makesure overwite flag is working
 globals.set_overwrite(args.overwrite)
-
+setup.setup_environment()
 Validate_User_Input.validate_user_input(origin=origin, destination=destination, events=events, wave=wave,
                                         subjects=subjects, sessions=sessions, tasks=tasks, pipeline=pipeline,
                                         ncpus=ncpus)
