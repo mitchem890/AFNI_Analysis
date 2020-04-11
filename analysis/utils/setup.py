@@ -3,7 +3,7 @@ import os
 import sys
 from pathlib import Path
 sys.path.append("..")
-from shutil import move
+from shutil import move, copyfile
 from config import ConfigGLMs
 
 #Simulates Chmod -R
@@ -18,7 +18,7 @@ def change_permission_recursively(path, permission):
 def setup_environment():
     #move the afnirc to home location
     home = str(Path.home())
-    move(os.path.join('/home', '.afnirc'), os.path.join(home, '.afnirc'))
+    copyfile(os.path.join('/home', '.afnirc'), os.path.join(home, '.afnirc'))
 
     #chmod on atlases #saves time in upload. When you
-    change_permission_recursively(ConfigGLMs.Atlas_Dir, 0o777)
+    #change_permission_recursively(ConfigGLMs.Atlas_Dir, 0o777)
