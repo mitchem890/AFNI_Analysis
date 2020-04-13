@@ -20,7 +20,9 @@ cd /testing/analysis
 python
 #you should now be in a python shell
 from pipeline import Run_Analysis_Pipeline
-from config import globals 
+from config import globals
+from utils import setup
+setup.setup_environment()
 globals.set_overwrite(False)
 Run_Analysis_Pipeline.analysis_pipeline(origin='/mnt/LabWork/HCP_OUTPUT', destination='/mnt/LabWork/Afni_Analysis/', events='/mnt/LabWork/onsets', wave='wave1', subject='150423',session='baseline', task='Axcpt', pipeline='hcp', run_volume=True,run_surface=True, run_preanalysis=True, run_analysis=True)
 
