@@ -12,7 +12,7 @@ def run_shell_command(command_line, return_output=False):
     try:
         # This is container relative
         os.environ["PATH"] = '/opt/afni-latest' + os.pathsep \
-                             + '/usr/lib' + os.pathsep + '/opt/workbench/bin_linux64' + os.pathsep + os.environ["PATH"]
+                             + '/usr/lib' + os.pathsep + '/usr/bin' + os.pathsep + os.environ["PATH"]
 
         my_env = os.environ.copy()
         my_env['LD_LIBRARY_PATH'] = '/usr/lib'

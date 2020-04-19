@@ -5,8 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BuildProject.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BuildProject.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/classes/TaskGLMs.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/classes/TaskGLMs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../slim_DCM2BIDS/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../slim_DCM2BIDS/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/utils/RunShellFunc.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/utils/RunShellFunc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../slim_DCM2BIDS/DCM2BIDS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../slim_DCM2BIDS/DCM2BIDS/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,12 +27,11 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../slim_DCM2BIDS/DCM2BIDS" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="PyConsoleOptionsProvider">
