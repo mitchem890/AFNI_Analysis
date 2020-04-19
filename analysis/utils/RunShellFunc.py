@@ -1,4 +1,4 @@
-import logging
+import logger
 import subprocess
 import shlex
 import os
@@ -6,7 +6,7 @@ import os
 
 
 def run_shell_command(command_line, return_output=False):
-    logging.info('\nSubprocess: "' + command_line + '"')
+    logger.logger(f'\nSubprocess: "{command_line}"')
     command_line = command_line.replace('\n', '')
     command_line_args = shlex.split(command_line)
     try:
@@ -31,20 +31,20 @@ def run_shell_command(command_line, return_output=False):
         # process_output = StringIO(process_output)
         process_output = clean_output(str(process_output))
 
-        logging.info(process_output)
+        logger.logger(process_output, 'info', 'analysis_log')
         if command_line_process.returncode != 0:
-            logging.info('An Error Occured, Execption Code: ' + str(command_line_process.returncode))
-            logging.info('Subprocess failed')
+            logger.logger(f'An Error Occured, Execption Code: {str(command_line_process.returncode)}', 'error', 'analysis_log')
+            logger.logger('Subprocess failed', 'info', 'analysis_log')
             return False
 
     except (OSError, subprocess.CalledProcessError) as exception:
         print("There was an Issue")
-        logging.info('Exception occured: ' + str(exception))
-        logging.info('Subprocess failed')
+        logger.logger(f'Exception occured: {str(exception)}', 'error', 'analysis_log')
+        logger.logger('Subprocess failed', 'error', 'analysis_log')
         return False
 
     # no exception was raised
-    logging.info('Subprocess finished\n')
+    logger.logger('Subprocess finished\n', 'info', 'analysis_log')
 
     if return_output:
         output = ''.join(c for c in str(process_output) if c.isdigit())

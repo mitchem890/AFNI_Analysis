@@ -5,7 +5,7 @@ import sys
 sys.path.append("..") # Adds higher directory to python modules path.
 from PreAnalysis_tools import Confounds_Regressors_Interface as cri
 from classes import Images, BashCommand
-import logging
+from utils import logger
 
 # Check to make sure there are no blank evts for use with both fmriprep and hcp
 def check_evts(input, image):
@@ -19,13 +19,13 @@ def check_evts(input, image):
             for line in a_file:
                 if len(line.strip().strip('*')) == 0:
                     print('found empty line in file ' + str(file))
-                    logging.info(f'Found blank evt {str(file)}')
+                    logger.logger(f'Found blank evt {str(file)}', 'warning', 'analysis_log')
                     GoodFiles.append(False)
                 else:
                     GoodFiles.append(True)
                 if not any(GoodFiles):
                     print("All of the evts had issues")
-                    logging.info(f'ERROR: All evts were blank')
+                    logger.logger(f'ERROR: All evts were blank', 'error', 'analysis_log')
                     raise NameError(f'ERROR: All evts were blank for {image.subject} {image.session} {image.task}')
 
 def copy_input_data(images, destination, events):
@@ -149,6 +149,7 @@ def copy_input_data_fmriprep(image, destination, events):
     BashCommand.resample(infile=os.path.join(task_dest, hcp_volume_image),
                          outfile=os.path.join(task_dest, hcp_resampled_image)).run_command()
     print(f"Renaming the resampled image back to the original name")
-    logging.info(
-        f"moving {os.path.join(task_dest, hcp_resampled_image)} to {os.path.join(task_dest, hcp_volume_image)}")
+    logger.logger(
+        f"moving {os.path.join(task_dest, hcp_resampled_image)} to {os.path.join(task_dest, hcp_volume_image)}",
+        'info', 'analysis_log')
     move(os.path.join(task_dest, hcp_resampled_image), os.path.join(task_dest, hcp_volume_image))

@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c3c5ef9e-7a20-4e45-8f52-0a75b9b60b85" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/analysis/utils/logger.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/PreAnalysis_tools/Copy_Input_Data.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/PreAnalysis_tools/Copy_Input_Data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/pipeline/OutputVerifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/pipeline/OutputVerifier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/pipeline/Run_Analysis_Pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/pipeline/Run_Analysis_Pipeline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/utils/RunShellFunc.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/utils/RunShellFunc.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,61 +21,6 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>ON</find>
-      <find>working_dir</find>
-      <find>postfix</find>
-      <find>BLOCKS</find>
-      <find>print</find>
-      <find>name</find>
-      <find>object</find>
-      <find>def __str__(self):</find>
-      <find>&quot; +</find>
-      <find>input</find>
-      <find>copyfile</find>
-      <find>image.</find>
-      <find>calc</find>
-      <find>calculate_dvars</find>
-      <find>demean</find>
-      <find>blur</find>
-      <find>$PROJECT_DIR$/../../../</find>
-      <find>self.sub</find>
-      <find>reor</find>
-      <find>))</find>
-      <find>image.tmp_volume_files</find>
-      <find>encodings</find>
-      <find>get_afni_ready_surface_file</find>
-      <find>bash</find>
-      <find>fsaverage</find>
-      <find>origin</find>
-      <find>runNum</find>
-      <find>movement</find>
-      <find>hcp_movement_regressors</find>
-      <find>root_name</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>regressor_label</replace>
-      <replace>regressor</replace>
-      <replace>regressors_models_labels</replace>
-      <replace>idx</replace>
-      <replace>&quot;+self.buttonPress_model+&quot;</replace>
-      <replace>&quot;+self.idx+&quot;</replace>
-      <replace>glm_type</replace>
-      <replace>.extend</replace>
-      <replace>create_on_blocks_glms</replace>
-      <replace>create_on_mixed_glms</replace>
-      <replace>create_events_glms</replace>
-      <replace>events_glms</replace>
-      <replace>.append</replace>
-      <replace>bash_command</replace>
-      <replace>images.</replace>
-      <replace>)))</replace>
-      <replace>tmp_files</replace>
-      <replace>bash /home/BashScripts/</replace>
-      <replace>image.movement_regressor</replace>
-    </replaceStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
@@ -79,7 +28,6 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">

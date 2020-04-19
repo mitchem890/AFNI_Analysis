@@ -4,16 +4,15 @@ import sys
 sys.path.append("..") # Adds higher directory to python modules path.
 from pipeline import Analysis, PreAnalysis, OutputVerifier
 from classes import Images
+from utils import logger
+
 
 def create_logger(subject, wave, session, task, destination):
     logfilename = f'sub-{str(subject)}_{wave}_{session}_{task}_Analysis.log'  # Create a log file
     logfilename = os.path.join(destination, logfilename)  # place it in the output directory
-
-    logging.basicConfig(level=logging.DEBUG, filename=logfilename, filemode='w',
-                        format='%(message)s')  # Set the format of the log file name
+    logger.setup_logger('analysis_log', logfilename)
     print(logfilename)
-    logging.info(f'Running Subject {subject}_{wave}_{session}_{task}')
-
+    logger.logger(f'Running Subject {subject}_{wave}_{session}_{task}', 'info', 'analysis_log')
 
 def analysis_pipeline(origin, destination, events, wave, subject,
                       session, task, pipeline, run_volume,
