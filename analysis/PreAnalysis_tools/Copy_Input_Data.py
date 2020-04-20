@@ -9,13 +9,25 @@ import logging
 
 
 # Check to make sure there are no blank evts for use with both fmriprep and hcp
-def check_evts(input):
-    files = os.listdir(input)
-    for file in files:
-        for line in file:
-            if len(line.strip().strip('*')) == 0:
-                print('found empty line in file ' + str(file))
+def check_evts(input, image):
 
+    files = glob.glob(os.path.join(input, f"{image.subject}*{image.task}*{image.session}*STRICT*"))
+
+    GoodFiles=[]
+
+    for file in files:
+        with open(os.path.join(input, file), "r") as a_file:
+            for line in a_file:
+                if len(line.strip().strip('*')) == 0:
+                    print('found empty line in file ' + str(file))
+                    logging.info(f'Found blank evt {str(file)}')
+                    GoodFiles.append(False)
+                else:
+                    GoodFiles.append(True)
+                if not any(GoodFiles):
+                    print("All of the evts had issues")
+                    logging.info(f'ERROR: All evts were blank')
+                    raise NameError(f'ERROR: All evts were blank for {image.subject} {image.session} {image.task}')
 
 def copy_input_data(images, destination, events):
     for image in images:
@@ -43,7 +55,7 @@ def copy_input_data_hcp(image: Images.preprocessed_image, destination, events):
     hcp_cifti_image = f"tfMRI_{image.root_name}_Atlas.dtseries.nii"  # Cifti image name
     evt_dir = os.path.join(events, image.subject, 'evts')
 
-    check_evts(evt_dir)
+    check_evts(evt_dir, image)
     # Get the correct evts
     for file in glob.glob(os.path.join(evt_dir, '*' + image.task + '*' + image.session + '*')):
         copyfile(file, os.path.join(task_dest, os.path.basename(file)))
@@ -109,7 +121,7 @@ def copy_input_data_fmriprep(image, destination, events):
     evt_dir = os.path.join(events, image.subject, 'evts')
 
     print(f'Checking evts of: {image.subject} {image.wave} {image.session} {image.task}')
-    check_evts(evt_dir)
+    check_evts(evt_dir,image)
     for file in glob.glob(os.path.join(evt_dir, '*' + image.task + '*' + image.session + '*')):
         copyfile(file, os.path.join(task_dest, os.path.basename(file)))
 
@@ -141,3 +153,4 @@ def copy_input_data_fmriprep(image, destination, events):
     logging.info(
         f"moving {os.path.join(task_dest, hcp_resampled_image)} to {os.path.join(task_dest, hcp_volume_image)}")
     move(os.path.join(task_dest, hcp_resampled_image), os.path.join(task_dest, hcp_volume_image))
+

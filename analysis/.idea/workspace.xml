@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6d0ac0aa-3e10-42b9-9ad3-3f4140e19029" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/classes/TaskGLMs.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/TaskGLMs.py" afterDir="false" />
+    <list default="true" id="854c2d2a-f695-425e-9dd1-5d0240b38f64" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BuildProject.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../BuildProject.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BashScripts/Roistats.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BashScripts/Roistats.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PreAnalysis_tools/Copy_Input_Data.py" beforeDir="false" afterPath="$PROJECT_DIR$/PreAnalysis_tools/Copy_Input_Data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/BashCommand.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/BashCommand.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +23,6 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
