@@ -3,6 +3,7 @@ import sys
 sys.path.append("..") # Adds higher directory to python modules path.
 from config import globals
 from utils import RunShellFunc as rs
+from config import ConfigGLMs
 
 
 # This fill contains the structure for all the bash
@@ -447,7 +448,7 @@ class make_fd_mask(bash_command):
 class resample(bash_command):
     def __init__(self, **kwargs):
         prop_defaults = {
-            "atlas": "/home/analysis/atlases/gordon_2p4_resampled_wsubcort_LPI.nii.gz",
+            "atlas": os.path.join(ConfigGLMs.Atlas_Dir, "gordon_2p4_resampled_wsubcort_LPI.nii.gz"),
             "infile": None,
             "outfile": None
         }
