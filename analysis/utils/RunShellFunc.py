@@ -1,8 +1,9 @@
-import logger
 import subprocess
 import shlex
 import os
-
+import sys
+sys.path.append("..") # Adds higher directory to python modules path.
+from utils import logger
 
 
 def run_shell_command(command_line, return_output=False):

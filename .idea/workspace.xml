@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c3c5ef9e-7a20-4e45-8f52-0a75b9b60b85" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BuildProject.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BuildProject.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/utils/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/utils/logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/utils/RunShellFunc.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/utils/RunShellFunc.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,10 +131,10 @@
     </configuration>
     <list>
       <item itemvalue="Python.Run_Analysis" />
+      <item itemvalue="Python tests.Unittests for test_TaskGLMs.TestStroop_GLMs.test_congruency_event_deconvolve_volume" />
+      <item itemvalue="Python tests.Unittests for test_TaskGLMs.TestStroop_Roistats.test_on_blocks_roistats_volume" />
       <item itemvalue="Python tests.Unittests for tests.test_TaskGLMs.TestStroop_Roistats.test_on_blocks_roistats_volume" />
       <item itemvalue="Python tests.Unittests in test_TaskGLMs.py" />
-      <item itemvalue="Python tests.Unittests for test_TaskGLMs.TestStroop_Roistats.test_on_blocks_roistats_volume" />
-      <item itemvalue="Python tests.Unittests for test_TaskGLMs.TestStroop_GLMs.test_congruency_event_deconvolve_volume" />
     </list>
     <recent_temporary>
       <list>
