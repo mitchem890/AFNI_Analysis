@@ -14,7 +14,7 @@ docker run --rm kaczmarj/neurodocker:master generate docker \
 
 
 #install workbench
-echo "RUN mkdir /src && cd /src && wget https://www.humanconnectome.org/storage/app/media/workbench/workbench-linux64-v1.4.1.zip && cd /opt && unzip /src/workbench-linux64-v1.4.1.zip">>Dockerfile
+echo "RUN mkdir /src && cd /src && wget https://www.humanconnectome.org/storage/app/media/workbench/workbench-linux64-v1.4.2.zip && cd /opt && unzip /src/workbench-linux64-v1.4.2.zip">>Dockerfile
 echo "COPY analysis /home/analysis/" >> Dockerfile
 
 
