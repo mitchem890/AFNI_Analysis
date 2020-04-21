@@ -2,6 +2,7 @@ import os
 import sys
 sys.path.append("..") # Adds higher directory to python modules path.
 from classes import TaskGLMs
+from utils import logger
 
 #Run the volume 3ddeconvolve remlfit and roistats for each glm
 def run_volume_glms(GLM_set):
@@ -68,6 +69,8 @@ def analysis(destination, images, run_volume, run_surface):
             run_volume_glms(GLM_set)
         if run_surface:
             run_surface_glms(GLM_set)
-    except:
+    except Exception as e:
+        print(e)
         print("Error Running Analysis")
+        logger.logger(e, 'error')
     return GLM_set

@@ -59,4 +59,4 @@ def outputVerifier(images, GLM_set):
     if input_good and output_good:
         logger.logger(f"Both input and output look good", 'info')
     else:
-        logger.logger(f"There was an with either the input or the output")
+        logger.logger(f"There was an with either the input or the output", 'error')

@@ -7,7 +7,7 @@ from utils import logger
 
 
 def run_shell_command(command_line, return_output=False):
-    logger.logger(f'\nSubprocess: "{command_line}"')
+    logger.logger(f'\nSubprocess: "{command_line}"', 'info')
     command_line = command_line.replace('\n', '')
     command_line_args = shlex.split(command_line)
     try:

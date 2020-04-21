@@ -7,14 +7,9 @@ def setup_logger(log_file, level=logging.DEBUG):
         log.removeHandler(hdlr)
 
 
-    formatter = logging.Formatter('%(levelname)s: %(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
-    fileHandler = logging.FileHandler(log_file, mode='a')
-    fileHandler.setFormatter(formatter)
-    streamHandler = logging.StreamHandler()
-    streamHandler.setFormatter(formatter)
-    log.setLevel(level)
-    log.addHandler(fileHandler)
-    log.addHandler(streamHandler)
+    logging.basicConfig(level=level, filename=log_file, filemode='w',
+                        format='%(levelname)s: %(asctime)s %(message)s',
+                        datefmt='%m/%d/%Y %I:%M:%S %p')  # Set the format of the log file name
     logging.root = logging.getLogger()
 
 def logger(msg, level):

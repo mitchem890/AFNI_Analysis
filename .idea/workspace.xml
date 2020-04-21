@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c3c5ef9e-7a20-4e45-8f52-0a75b9b60b85" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/pipeline/Analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/pipeline/Analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/pipeline/OutputVerifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/pipeline/OutputVerifier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/pipeline/PreAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/pipeline/PreAnalysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/pipeline/Run_Analysis_Pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/pipeline/Run_Analysis_Pipeline.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/analysis/utils/RunShellFunc.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/utils/RunShellFunc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/utils/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/utils/logger.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
