@@ -31,20 +31,20 @@ def run_shell_command(command_line, return_output=False):
         # process_output = StringIO(process_output)
         process_output = clean_output(str(process_output))
 
-        logger.logger(process_output, 'info', 'analysis_log')
+        logger.logger(process_output, 'info')
         if command_line_process.returncode != 0:
-            logger.logger(f'An Error Occured, Execption Code: {str(command_line_process.returncode)}', 'error', 'analysis_log')
-            logger.logger('Subprocess failed', 'info', 'analysis_log')
+            logger.logger(f'An Error Occured, Execption Code: {str(command_line_process.returncode)}', 'error')
+            logger.logger('Subprocess failed', 'warning')
             return False
 
     except (OSError, subprocess.CalledProcessError) as exception:
         print("There was an Issue")
-        logger.logger(f'Exception occured: {str(exception)}', 'error', 'analysis_log')
-        logger.logger('Subprocess failed', 'error', 'analysis_log')
+        logger.logger(f'Exception occured: {str(exception)}', 'error')
+        logger.logger('Subprocess failed', 'error')
         return False
 
     # no exception was raised
-    logger.logger('Subprocess finished\n', 'info', 'analysis_log')
+    logger.logger('Subprocess finished\n', 'info')
 
     if return_output:
         output = ''.join(c for c in str(process_output) if c.isdigit())

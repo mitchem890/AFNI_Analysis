@@ -19,13 +19,13 @@ def check_evts(input, image):
             for line in a_file:
                 if len(line.strip().strip('*')) == 0:
                     print('found empty line in file ' + str(file))
-                    logger.logger(f'Found blank evt {str(file)}', 'warning', 'analysis_log')
+                    logger.logger(f'Found blank evt {str(file)}', 'warning')
                     GoodFiles.append(False)
                 else:
                     GoodFiles.append(True)
                 if not any(GoodFiles):
                     print("All of the evts had issues")
-                    logger.logger(f'ERROR: All evts were blank', 'error', 'analysis_log')
+                    logger.logger(f'ERROR: All evts were blank', 'error')
                     raise NameError(f'ERROR: All evts were blank for {image.subject} {image.session} {image.task}')
 
 def copy_input_data(images, destination, events):
@@ -151,5 +151,5 @@ def copy_input_data_fmriprep(image, destination, events):
     print(f"Renaming the resampled image back to the original name")
     logger.logger(
         f"moving {os.path.join(task_dest, hcp_resampled_image)} to {os.path.join(task_dest, hcp_volume_image)}",
-        'info', 'analysis_log')
+        'info')
     move(os.path.join(task_dest, hcp_resampled_image), os.path.join(task_dest, hcp_volume_image))

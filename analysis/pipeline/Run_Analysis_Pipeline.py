@@ -12,7 +12,7 @@ def create_logger(subject, wave, session, task, destination):
     logfilename = os.path.join(destination, logfilename)  # place it in the output directory
     logger.setup_logger('analysis_log', logfilename)
     print(logfilename)
-    logger.logger(f'Running Subject {subject}_{wave}_{session}_{task}', 'info', 'analysis_log')
+    logger.logger(f'Running Subject {subject}_{wave}_{session}_{task}', 'info')
 
 def analysis_pipeline(origin, destination, events, wave, subject,
                       session, task, pipeline, run_volume,

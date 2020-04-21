@@ -12,10 +12,10 @@ def checkroistats(roistats):
     all_good = True
     if os.path.exists(filename):
         if os.stat(filename).st_size == 0:
-            logger.logger(f"WARNING: {filename} is empty!", 'warning', 'analysis_log')
+            logger.logger(f"WARNING: {filename} is empty!", 'warning')
             all_good = False
     else:
-        logger.logger(f"WARNING: Could not find {filename}", 'warning', 'analysis_log')
+        logger.logger(f"WARNING: Could not find {filename}", 'warning')
         all_good = False
     return all_good
 
@@ -39,24 +39,24 @@ def checkoutput(GLM_set):
 def checkinput(images):
     all_good = True
     if not len(images) == 2:
-        logger.logger(f"WARNING: Found {len(images)} images expected 2", 'warning', 'analysis_log')
+        logger.logger(f"WARNING: Found {len(images)} images expected 2", 'warning')
         all_good = False
     for image in images:
-        logger.logger(f"Found Image {image.file}", 'warning', 'analysis_log')
+        logger.logger(f"Found Image {image.file}", 'warning')
     return all_good
 
 def outputVerifier(images, GLM_set):
     try:
-        logger.logger(f"Verifiying input", 'info', 'analysis_log')
+        logger.logger(f"Verifiying input", 'info')
         input_good = checkinput(images)
     except:
-        logger.logger(f"Error while checking input images make sure they exist", 'error', 'analysis_log')
+        logger.logger(f"Error while checking input images make sure they exist", 'error')
     try:
-        logger.logger(f"Verifiying output", 'info', 'analysis_log')
+        logger.logger(f"Verifiying output", 'info')
         output_good = checkoutput(GLM_set)
     except:
-        logger.logger(f"Error while checking output files make sure they exist", 'error', 'analysis_log')
+        logger.logger(f"Error while checking output files make sure they exist", 'error')
     if input_good and output_good:
-        logger.logger(f"Both input and output look good", 'info', 'analysis_log')
+        logger.logger(f"Both input and output look good", 'info')
     else:
         logger.logger(f"There was an with either the input or the output")
