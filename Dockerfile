@@ -6,9 +6,11 @@
 # or ways to improve this software, please submit an issue or
 # pull request on our GitHub repository:
 # 
-#     https://github.com/kaczmarj/neurodocker
+#     https://github.com/ReproNim/neurodocker
 
-FROM ubuntu:16.04
+FROM neurodebian:stretch
+
+USER root
 
 USER root
 
@@ -18,15 +20,15 @@ ENV LANG="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8" \
     ND_ENTRYPOINT="/neurodocker/startup.sh"
 RUN export ND_ENTRYPOINT="/neurodocker/startup.sh" \
-    && apt-get -y update -qq \
-    && apt-get -y install -y -q --no-install-recommends \
+    && apt-get update -qq \
+    && apt-get install -y -q --no-install-recommends \
            apt-utils \
            bzip2 \
            ca-certificates \
            curl \
            locales \
            unzip \
-    && apt-get -y clean \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
     && dpkg-reconfigure --frontend=noninteractive locales \
@@ -43,10 +45,16 @@ RUN export ND_ENTRYPOINT="/neurodocker/startup.sh" \
 
 ENTRYPOINT ["/neurodocker/startup.sh"]
 
+RUN apt-get update -qq \
+    && apt-get install -y -q --no-install-recommends \
+           connectome-workbench \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 ENV PATH="/opt/afni-latest:$PATH" \
     AFNI_PLUGINPATH="/opt/afni-latest"
-RUN apt-get -y update -qq \
-    && apt-get -y install -y -q --no-install-recommends \
+RUN apt-get update -qq \
+    && apt-get install -y -q --no-install-recommends \
            ed \
            gsl-bin \
            libglib2.0-0 \
@@ -59,7 +67,7 @@ RUN apt-get -y update -qq \
            tcsh \
            xfonts-base \
            xvfb \
-    && apt-get -y clean \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && curl -sSL --retry 5 -o /tmp/toinstall.deb http://mirrors.kernel.org/debian/pool/main/libx/libxp/libxp6_1.0.2-2_amd64.deb \
     && dpkg -i /tmp/toinstall.deb \
@@ -67,8 +75,8 @@ RUN apt-get -y update -qq \
     && curl -sSL --retry 5 -o /tmp/toinstall.deb http://snapshot.debian.org/archive/debian-security/20160113T213056Z/pool/updates/main/libp/libpng/libpng12-0_1.2.49-1%2Bdeb7u2_amd64.deb \
     && dpkg -i /tmp/toinstall.deb \
     && rm /tmp/toinstall.deb \
-    && apt-get -y install -f \
-    && apt-get -y clean \
+    && apt-get install -f \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && gsl2_path="$(find / -name 'libgsl.so.19' || printf '')" \
     && if [ -n "$gsl2_path" ]; then \
@@ -79,41 +87,6 @@ RUN apt-get -y update -qq \
     && mkdir -p /opt/afni-latest \
     && curl -fsSL --retry 5 https://afni.nimh.nih.gov/pub/dist/tgz/linux_openmp_64.tgz \
     | tar -xz -C /opt/afni-latest --strip-components 1
-
-ENV FSLDIR="/opt/fsl-5.0.10" \
-    PATH="/opt/fsl-5.0.10/bin:$PATH"
-RUN apt-get -y update -qq \
-    && apt-get -y install -y -q --no-install-recommends \
-           bc \
-           dc \
-           file \
-           libfontconfig1 \
-           libfreetype6 \
-           libgl1-mesa-dev \
-           libgl1-mesa-dri \
-           libglu1-mesa-dev \
-           libgomp1 \
-           libice6 \
-           libxcursor1 \
-           libxft2 \
-           libxinerama1 \
-           libxrandr2 \
-           libxrender1 \
-           libxt6 \
-           sudo \
-           wget \
-    && apt-get -y clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && echo "Downloading FSL ..." \
-    && mkdir -p /opt/fsl-5.0.10 \
-    && curl -fsSL --retry 5 https://fsl.fmrib.ox.ac.uk/fsldownloads/fsl-5.0.10-centos6_64.tar.gz \
-    | tar -xz -C /opt/fsl-5.0.10 --strip-components 1 \
-    && sed -i '$iecho Some packages in this Docker container are non-free' $ND_ENTRYPOINT \
-    && sed -i '$iecho If you are considering commercial use of this container, please consult the relevant license:' $ND_ENTRYPOINT \
-    && sed -i '$iecho https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Licence' $ND_ENTRYPOINT \
-    && sed -i '$isource $FSLDIR/etc/fslconf/fsl.sh' $ND_ENTRYPOINT \
-    && echo "Installing FSL conda environment ..." \
-    && bash /opt/fsl-5.0.10/etc/fslconf/fslpython_install.sh -f /opt/fsl-5.0.10
 
 ENV CONDA_DIR="/opt/miniconda-latest" \
     PATH="/opt/miniconda-latest/bin:$PATH"
@@ -127,43 +100,37 @@ RUN export PATH="/opt/miniconda-latest/bin:$PATH" \
     && conda config --system --prepend channels conda-forge \
     && conda config --system --set auto_update_conda false \
     && conda config --system --set show_channel_urls true \
-    && sync && conda clean --all && sync \
+    && sync && conda clean -y --all && sync \
     && conda create -y -q --name neuro \
     && conda install -y -q --name neuro \
            "python=3.6" \
            "numpy" \
            "pandas" \
            "traits" \
-    && sync && conda clean --all && sync \
-    && bash -c "source activate neuro \
-    &&   pip install --no-cache-dir  \
-             "nipype" \
-             "pydeface"" \
-    && rm -rf ~/.cache/pip/* \
-    && sync
+    && sync && conda clean -y --all && sync
 
 RUN conda install -y -q --name neuro \
            "jupyter" \
-    && sync && conda clean --all && sync
+    && sync && conda clean -y --all && sync
 
 RUN echo '{ \
     \n  "pkg_manager": "apt", \
     \n  "instructions": [ \
     \n    [ \
     \n      "base", \
-    \n      "ubuntu:16.04" \
+    \n      "neurodebian:stretch" \
+    \n    ], \
+    \n    [ \
+    \n      "install", \
+    \n      [ \
+    \n        "connectome-workbench" \
+    \n      ] \
     \n    ], \
     \n    [ \
     \n      "afni", \
     \n      { \
     \n        "version": "latest", \
     \n        "method": "binaries" \
-    \n      } \
-    \n    ], \
-    \n    [ \
-    \n      "fsl", \
-    \n      { \
-    \n        "version": "5.0.10" \
     \n      } \
     \n    ], \
     \n    [ \
@@ -175,10 +142,6 @@ RUN echo '{ \
     \n          "numpy", \
     \n          "pandas", \
     \n          "traits" \
-    \n        ], \
-    \n        "pip_install": [ \
-    \n          "nipype", \
-    \n          "pydeface" \
     \n        ] \
     \n      } \
     \n    ], \
@@ -193,11 +156,11 @@ RUN echo '{ \
     \n    ] \
     \n  ] \
     \n}' > /neurodocker/neurodocker_specs.json
-RUN mkdir /src && cd /src && wget https://www.humanconnectome.org/storage/app/media/workbench/workbench-linux64-v1.4.2.zip && cd /opt && unzip /src/workbench-linux64-v1.4.2.zip
+
 COPY analysis /home/analysis/
-RUN apt-get -y update && apt-get -y upgrade -y && apt-get -y install -y git && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash && sudo apt-get -y install git-lfs && git lfs install
-RUN cd /home/ && git lfs clone https://github.com/mitchem890/Atlases && chmod -R 777 /home/Atlases
-ENV PATH="/opt/workbench/bin_linux64:$PATH"
+RUN apt-get update && apt-get upgrade -y && apt-get install -y git && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && \ 
+apt-get install git-lfs && git lfs install
+RUN cd /home/ && git lfs clone https://github.com/mitchem890/Atlases && chmod 777 -R /home/Atlases
 ENV PATH /opt/miniconda-latest/envs/neuro/bin:$PATH
 ENTRYPOINT ["python","-u","/home/analysis/run.py"]
 ENV HOME=/home
