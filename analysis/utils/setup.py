@@ -1,7 +1,7 @@
 #This will setup the environmet for the analysis pipeline
 import os
 import sys
-from pathlib import Path
+import pathlib
 sys.path.append("..")
 from shutil import move, copyfile
 from config import ConfigGLMs
@@ -17,8 +17,9 @@ def change_permission_recursively(path, permission):
 #Setup env
 def setup_environment():
     #move the afnirc to home location
-    home = str(Path.home())
-    copyfile(os.path.join('/home', '.afnirc'), os.path.join(home, '.afnirc'))
+    home = str(pathlib.Path.home())
+    if not '/home' == home: #if the $HOME directory is something other than what we expected.
+        copyfile(os.path.join('/home', '.afnirc'), os.path.join(home, '.afnirc'))
 
     #chmod on atlases #saves time in upload. When you
     #change_permission_recursively(ConfigGLMs.Atlas_Dir, 0o777)
