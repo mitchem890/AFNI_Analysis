@@ -81,6 +81,7 @@ class TaskGLMs(object):
     # returns three glms in a tuple
     def build_glms(self, glm_type="", glm_label="", regressors_models_labels=[], contrasts_labels=[],
                    roistats_designs_postfixes=[], polort = 'A'):
+        #TODO if used with other dataset consider changing
         if self.mb is '4':
             force_tr = '1.2'
         elif self.mb is '8':

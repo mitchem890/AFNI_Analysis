@@ -4,14 +4,14 @@ from config import ConfigGLMs
 #This will retrun the correct set of atlases for a sitiuation
 def get_correct_atlases(mb, hemisphere, fsaverage):
     if hemisphere is None:
-        if mb is '4':
+        if mb == '4':
             atlases = ConfigGLMs.VolumeAtlasesMB4
-        elif mb is '8':
+        elif mb == '8':
             atlases = ConfigGLMs.VolumeAtlasesMB8
     else:
-        if mb is '4':
+        if mb == '4':
             atlases = ConfigGLMs.SurfaceAtlasesMB4
-        elif mb is '8':
+        elif mb == '8':
             atlases = ConfigGLMs.SurfaceAtlasesMB8
         if fsaverage:
             atlases = ConfigGLMs.SurfaceAtlasesFS5

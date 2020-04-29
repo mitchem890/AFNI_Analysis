@@ -133,6 +133,7 @@ class hcp_preprocessed_image(preprocessed_image):
         preprocessed_image.__init__(self, file, wave, subject, session, task, pipeline)
 
     def get_mb_factor(self):
+        ##TODO figure out a way to find the true MB factor
         return '4'
 
     def get_run_num(self):

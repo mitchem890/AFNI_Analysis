@@ -147,7 +147,8 @@ def copy_input_data_fmriprep(image, destination, events):
     cri.make_fd_mask(os.path.join(task_dest, hcp_fd), os.path.join(task_dest, hcp_fd_mask))
     print(f"Resampling: {image.subject} {image.wave} {image.session} {image.task}")
     BashCommand.resample(infile=os.path.join(task_dest, hcp_volume_image),
-                         outfile=os.path.join(task_dest, hcp_resampled_image)).run_command()
+                         outfile=os.path.join(task_dest, hcp_resampled_image),
+                         mb=image.mb_factor).run_command()
     print(f"Renaming the resampled image back to the original name")
     logger.logger(
         f"moving {os.path.join(task_dest, hcp_resampled_image)} to {os.path.join(task_dest, hcp_volume_image)}",
