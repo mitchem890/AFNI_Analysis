@@ -130,6 +130,8 @@ class remlfit(bash_command):
             "contrasts_labels": [],
             "Rvar": None,
             "Rbuck": None,
+            "rwherr": None,
+            "rerrts": None,
             "fout": True,
             "tout": True,
             "nobout": True,
@@ -145,15 +147,20 @@ class remlfit(bash_command):
 
     def generate_options(self):
         option_string = ""
+        if self.rwherr:
+            option_string = f"{option_string}-rwherr {self.rwherr} \\\n"
+        if self.rerrts:
+            option_string = f"{option_string}-rerrts {self.rerrts} \\\n"
         if self.fout:
-            option_string = option_string + "-fout \\\n"
+            option_string = f"{option_string}-fout \\\n"
         if self.tout:
-            option_string = option_string + "-tout \\\n"
+            option_string = f"{option_string}-tout \\\n"
         if self.nobout:
-            option_string = option_string + "-nobout \\\n"
+            option_string = f"{option_string}-nobout \\\n"
         if self.verb:
-            option_string = option_string + "-verb"
+            option_string = f"{option_string}-verb \\\n"
 
+        option_string = option_string.rstrip(" \\\n")
         return option_string
 
     def generate_contrasts(self):

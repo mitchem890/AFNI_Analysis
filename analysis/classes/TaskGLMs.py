@@ -80,7 +80,7 @@ class TaskGLMs(object):
     # builds the volumetric left and right hemisphere GLM given the glm type, label, regressor parameters and the contrast parameters
     # returns three glms in a tuple
     def build_glms(self, glm_type="", glm_label="", regressors_models_labels=[], contrasts_labels=[],
-                   roistats_designs_postfixes=[], polort = 'A'):
+                   roistats_designs_postfixes=[], polort = 'A', generate_residuals = False):
         if self.mb is '4':
             force_tr = '1.2'
         elif self.mb is '8':
@@ -92,6 +92,7 @@ class TaskGLMs(object):
                                     glm_label=glm_label,
                                     censor=self.censor,
                                     polort=polort,
+                                    generate_residuals=generate_residuals,
                                     regressors_models_labels=regressors_models_labels,
                                     contrasts_labels=contrasts_labels,
                                     ortvec=self.ortvec,
@@ -105,6 +106,7 @@ class TaskGLMs(object):
                                         force_tr=force_tr,
                                         censor=self.censor,
                                         polort=polort,
+                                        generate_residuals=generate_residuals,
                                         regressors_models_labels=regressors_models_labels,
                                         contrasts_labels=contrasts_labels,
                                         hemisphere='L',
@@ -118,6 +120,7 @@ class TaskGLMs(object):
                                         force_tr=force_tr,
                                         censor=self.censor,
                                         polort=polort,
+                                        generate_residuals=generate_residuals,
                                         regressors_models_labels=regressors_models_labels,
                                         contrasts_labels=contrasts_labels,
                                         hemisphere='R',
@@ -215,6 +218,37 @@ class AxcptGLMs(TaskGLMs):
                                contrasts_labels=contrasts_labels,
                                roistats_designs_postfixes=roistats_designs_postfixes)
 
+    def create_cues_events_glm_residuals(self, glm_type):
+        glm_label = "Cues"
+        regressors_models_labels = [("block", self.block_model, "block"),
+                                    ("blockONandOFF", self.blockONandOFF_model, "blockONandOFF"),
+                                    ("AX", self.event_model, "AX"),
+                                    ("AY", self.event_model, "AY"),
+                                    ("Ang", self.event_model, "Ang"),
+                                    ("BX", self.event_model, "BX"),
+                                    ("BY", self.event_model, "BY"),
+                                    ("Bng", self.event_model, "Bng")]
+
+        contrasts_labels = [(
+            f"+0.5*AX[[{self.idx}]] +0.5*AY[[{self.idx}]] -0.5*BX[[{self.idx}]] -0.5*BY[[{self.idx}]]",
+            "Acue_Bcue"),
+            (
+                f"+0.5*AY[[{self.idx}]] +0.5*BX[[{self.idx}]] -0.5*AX[[{self.idx}]] -0.5*BY[[{self.idx}]]",
+                "HI_LO_conf"),
+            (
+                f"+0.5*Ang[[{self.idx}]] +0.5*Bng[[{self.idx}]] -0.25*AX[[{self.idx}]] -0.25*AY[[{self.idx}]] -0.25*BX[[{self.idx}]] -0.25*BY[[{self.idx}]]",
+                "Nogo_Go")]
+
+        roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
+                                                                              contrasts_labels,
+                                                                              '_tents')
+
+        return self.build_glms(glm_type=glm_type,
+                               glm_label=glm_label,
+                               regressors_models_labels=regressors_models_labels,
+                               contrasts_labels=contrasts_labels,
+                               roistats_designs_postfixes=roistats_designs_postfixes,
+                               generate_residuals=True)
 
     def create_buttons_events_glm(self, glm_type):
         glm_label = "Buttons"
@@ -244,6 +278,7 @@ class AxcptGLMs(TaskGLMs):
         glm_type = "EVENTS"
         event_glms.append(self.create_buttons_events_glm(glm_type))
         event_glms.append(self.create_cues_events_glm(glm_type))
+        event_glms.append(self.create_cues_events_glm_residuals(glm_type))
         return event_glms
 
 

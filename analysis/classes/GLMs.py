@@ -104,6 +104,7 @@ class VolumeGLM(GLM):
             "glm_label": "",
             "force_tr": None,
             "hemisphere": None,
+            "generate_residuals": False,
             "polort": 'A',
             "censor": "/path/to/censorFile",
             "regressors_models_labels": [],
@@ -125,6 +126,13 @@ class VolumeGLM(GLM):
         self.input = self.generate_input()
         self.Rvar = f"stats_var_{self.images[0].subject}_REML.nii.gz"
         self.Rbuck = f"STATS_{self.images[0].subject}_REML.nii.gz"
+
+        if self.generate_residuals:
+            self.rwherr = f"wherr_{self.images[0].subject}_REML.nii.gz"
+            self.rerrts = f"errts_{self.images[0].subject}_REML.nii.gz"
+        else:
+            self.rwherr = None
+            self.rerrts = None
 
         GLM.__init__(self,
                      images=self.images,
@@ -165,6 +173,8 @@ class VolumeGLM(GLM):
             contrasts_labels=self.contrasts_labels,
             Rvar=self.Rvar,
             Rbuck=self.Rbuck,
+            rwherr=self.rwherr,
+            rerrts=self.rerrts,
             fout=True,
             tout=True,
             nobout=True,
@@ -201,6 +211,7 @@ class SurfaceGLM(GLM):
             "force_tr": '1.2',
             "polort": 'A',
             "hemisphere": None,
+            "generate_residuals": False,
             "censor": "/path/to/censorFile",
             "regressors_models_labels": [],
             "ortvec": "/path/to/MovementFile",
@@ -216,6 +227,13 @@ class SurfaceGLM(GLM):
         self.results_dir = "SURFACE_RESULTS"
         self.Rvar = f"stats_var_{self.images[0].subject}_REML_{self.hemisphere}.func.gii"
         self.Rbuck = f"STATS_{self.images[0].subject}_REML_{self.hemisphere}.func.gii"
+
+        if self.generate_residuals:
+            self.rwherr = f"wherr_{self.images[0].subject}_REML_{self.hemisphere}.func.gii"
+            self.rerrts = f"errts_{self.images[0].subject}_REML_{self.hemisphere}.func.gii"
+        else:
+            self.rwherr = None
+            self.rerrts = None
 
         GLM.__init__(self,
                      images=self.images,
@@ -255,6 +273,8 @@ class SurfaceGLM(GLM):
             contrasts_labels=self.contrasts_labels,
             Rvar=self.Rvar,
             Rbuck=self.Rbuck,
+            rwherr=self.rwherr,
+            rerrts=self.rerrts,
             fout=True,
             tout=True,
             nobout=True,
