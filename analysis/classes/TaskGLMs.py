@@ -79,14 +79,18 @@ class TaskGLMs(object):
 
     # builds the volumetric left and right hemisphere GLM given the glm type, label, regressor parameters and the contrast parameters
     # returns three glms in a tuple
-    def build_glms(self, glm_type="", glm_label="", regressors_models_labels=[], contrasts_labels=[],
-                   roistats_designs_postfixes=[], polort = 'A', generate_residuals = False):
+    def build_glms(self, images=None, glm_type="", glm_label="", regressors_models_labels=[], contrasts_labels=[],
+                   roistats_designs_postfixes=[], polort = 'A', generate_residuals=False):
+
+        if images is None:
+            images = self.images
+
         if self.mb is '4':
             force_tr = '1.2'
         elif self.mb is '8':
             force_tr = '0.8'
 
-        volume_glm = GLMs.VolumeGLM(images=self.images,
+        volume_glm = GLMs.VolumeGLM(images=images,
                                     working_dir=self.working_dir,
                                     glm_type=glm_type,
                                     glm_label=glm_label,
@@ -99,7 +103,7 @@ class TaskGLMs(object):
                                     mb=self.mb,
                                     roistats_designs_postfixes=roistats_designs_postfixes)
 
-        surface_L_glm = GLMs.SurfaceGLM(images=self.images,
+        surface_L_glm = GLMs.SurfaceGLM(images=images,
                                         working_dir=self.working_dir,
                                         glm_type=glm_type,
                                         glm_label=glm_label,
@@ -113,7 +117,7 @@ class TaskGLMs(object):
                                         ortvec=self.ortvec,
                                         roistats_designs_postfixes=roistats_designs_postfixes)
 
-        surface_R_glm = GLMs.SurfaceGLM(images=self.images,
+        surface_R_glm = GLMs.SurfaceGLM(images=images,
                                         working_dir=self.working_dir,
                                         glm_type=glm_type,
                                         glm_label=glm_label,

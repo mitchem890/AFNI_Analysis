@@ -183,20 +183,17 @@ class VolumeGLM(GLM):
         return
 
     def generate_input(self):
-        inputScan1 = os.path.join(self.working_dir,
-                                  self.images[0].subject,
-                                  'INPUT_DATA',
-                                  self.images[0].task,
-                                  self.images[0].session,
-                                  self.images[0].afni_ready_volume_file)
-        inputScan2 = os.path.join(self.working_dir,
-                                  self.images[1].subject,
-                                  'INPUT_DATA',
-                                  self.images[1].task,
-                                  self.images[1].session,
-                                  self.images[1].afni_ready_volume_file)
-
-        return f"{inputScan1} {inputScan2}"
+        input_arg = ""
+        for image in self.images:
+            scan = os.path.join(self.working_dir,
+                                image.subject,
+                                'INPUT_DATA',
+                                image.task,
+                                image.session,
+                                image.afni_ready_volume_file)
+            input_arg = f"{input_arg} {scan}"
+        # " scan scan2 scan3"
+        return input_arg.lstrip()
 
 
 class SurfaceGLM(GLM):
@@ -283,18 +280,15 @@ class SurfaceGLM(GLM):
         return
 
     def generate_input(self):
-        inputScan1 = os.path.join(self.working_dir,
-                                  self.images[0].subject,
-                                  'INPUT_DATA',
-                                  self.images[0].task,
-                                  self.images[0].session,
-                                  self.images[0].get_afni_ready_surface_file(self.hemisphere))
+        input_arg=""
+        for image in self.images:
+            scan = os.path.join(self.working_dir,
+                                     image.subject,
+                                     'INPUT_DATA',
+                                     image.task,
+                                     image.session,
+                                     image.get_afni_ready_surface_file(self.hemisphere))
+            input_arg=f"{input_arg} {scan}"
+        #" scan scan2 scan3"
+        return input_arg.lstrip()
 
-        inputScan2 = os.path.join(self.working_dir,
-                                  self.images[1].subject,
-                                  'INPUT_DATA',
-                                  self.images[1].task,
-                                  self.images[1].session,
-                                  self.images[1].get_afni_ready_surface_file(self.hemisphere))
-
-        return f"{inputScan1} {inputScan2}"
