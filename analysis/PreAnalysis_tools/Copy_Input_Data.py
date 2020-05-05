@@ -85,8 +85,9 @@ def copy_input_data_hcp(image: Images.preprocessed_image, destination, events):
 
     if not os.path.exists(task_dest):
         os.mkdir(task_dest)
-
-    copyfile(os.path.join(origin, hcp_volume_image), os.path.join(task_dest, hcp_volume_image))
+    #only copy the file over if it doesnt exist and the afni_ready image doesnt exist
+    if not (os.path.exists(image.afni_ready_volume_file) or os.path.exists(os.path.join(task_dest, hcp_volume_image))):
+        copyfile(os.path.join(origin, hcp_volume_image), os.path.join(task_dest, hcp_volume_image))
 
     origin_hcp_movement_regressors = "Movement_Regressors.txt"
 
@@ -126,13 +127,10 @@ def copy_input_data_fmriprep(image, destination, events):
 
     if not os.path.exists(task_dest):
         os.mkdir(task_dest)
-    copyfile(os.path.join(image.dirname, fmriprep_surface_image_L), os.path.join(task_dest, hcp_surface_image_L))
-    copyfile(os.path.join(image.dirname, fmriprep_surface_image_R), os.path.join(task_dest, hcp_surface_image_R))
 
     hcp_fd = f"{image.subject}_{hcp_root_name}_FD.txt"
     hcp_dvars = f"{image.subject}_{hcp_root_name}_DVARS.txt"
     hcp_fd_mask = f"{image.subject}_{hcp_root_name}_FD_mask.txt"
-    hcp_resampled_image = f"{hcp_root_name}_tmp.nii.gz"
 
     print(f"Making movement regressors of: {image.subject} {image.wave} {image.session} {image.task}")
     cri.get_movement_regressors(os.path.join(image.dirname, fmriprep_regressors),
@@ -144,8 +142,27 @@ def copy_input_data_fmriprep(image, destination, events):
     print(f"Making FD mask of: {image.subject} {image.wave} {image.session} {image.task}")
     cri.make_fd_mask(os.path.join(task_dest, hcp_fd), os.path.join(task_dest, hcp_fd_mask))
 
-    if not os.path.exists(image.afni_ready_volume_file) or os.path.exists(os.path.join(task_dest, hcp_volume_image)):
+    #afni_ready_volume = lpi_scale_blur*nii.gz, hcp_volume_image=tfMRI*.nii.gz
+    #Situation Fresh Run
+    #in the INPUT_DATA there will be nothing.
+    #hcp_volume_image does not exist and afni_ready_image does not exist
+    #Copy data
+
+    # Situation Interupted Run in preanalysis:
+    # in INPUT_DATA there will be hcp_volume image
+    # afni_ready_image does not exist
+    # do nothing
+    # Situation Interupted Run in analysis:
+    # in INPUT_DATA there will be afni_ready_image
+    # hcp volume image does not exist
+    # do nothing
+    if not (os.path.exists(image.afni_ready_volume_file) or os.path.exists(os.path.join(task_dest, hcp_volume_image))):
         print(f"Resampling: {image.subject} {image.wave} {image.session} {image.task}")
         BashCommand.resample(infile=os.path.join(image.dirname, fmriprep_volume_image),
                              outfile=os.path.join(task_dest, hcp_volume_image)).run_command()
-    if not os.path.exists(image.get_afni_ready_surface_files())
+
+    if not (os.path.exists(image.get_afni_ready_surface_files('L')) or os.path.exists(os.path.join(task_dest, hcp_surface_image_L))):
+        copyfile(os.path.join(image.dirname, fmriprep_surface_image_L), os.path.join(task_dest, hcp_surface_image_L))
+
+    if not (os.path.exists(image.get_afni_ready_surface_files('R')) or os.path.exists(os.path.join(task_dest, hcp_surface_image_R))):
+        copyfile(os.path.join(image.dirname, fmriprep_surface_image_R), os.path.join(task_dest, hcp_surface_image_R))
