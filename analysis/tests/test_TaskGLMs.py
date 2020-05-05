@@ -100,7 +100,9 @@ class TestStroop_GLMs(unittest.TestCase):
 -tout \\
 -nobout \\
 -verb"""
-        print(TaskGLMs.AxcptGLMs('/mnt/afni_container_output/', images=Axcpt_Images).glms[3][1].remlfit.command)
+        print(TaskGLMs.AxcptGLMs('/mnt/afni_container_output/', images=Axcpt_Images).glms[4][1].deconvolve.command)
+        print(TaskGLMs.AxcptGLMs('/mnt/afni_container_output/', images=Axcpt_Images).glms[4][1].remlfit.command)
+
         self.maxDiff = None
         self.assertEqual(output,
                          TaskGLMs.AxcptGLMs('/mnt/afni_container_output/', images=Axcpt_Images).glms[4][1].remlfit.command)

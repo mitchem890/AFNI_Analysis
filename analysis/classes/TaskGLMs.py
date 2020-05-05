@@ -222,16 +222,22 @@ class AxcptGLMs(TaskGLMs):
                                contrasts_labels=contrasts_labels,
                                roistats_designs_postfixes=roistats_designs_postfixes)
 
-    def create_cues_events_glm_residuals(self, glm_type):
+    def create_cues_events_glm_residuals_single_run(self, glm_type, image=None):
+        if image is None:
+            image=self.images
+
+        #TODO Make this Automatically pullout the run number for the image supplied to appened to the evts
+        #TODO Think about making Single run glms and multi run glms get handled by the same function
         glm_label = "Cues"
-        regressors_models_labels = [("block", self.block_model, "block"),
-                                    ("blockONandOFF", self.blockONandOFF_model, "blockONandOFF"),
-                                    ("AX", self.event_model, "AX"),
-                                    ("AY", self.event_model, "AY"),
-                                    ("Ang", self.event_model, "Ang"),
-                                    ("BX", self.event_model, "BX"),
-                                    ("BY", self.event_model, "BY"),
-                                    ("Bng", self.event_model, "Bng")]
+        regressors_models_labels = [(f"block_run{image.run_num}", self.block_model, f"block"),
+                                    (f"blockONandOFF_run{image.run_num}", self.blockONandOFF_model, f"blockONandOFF"),
+                                    (f"AX_run{image.run_num}", self.event_model, f"AX"),
+                                    (f"AY_run{image.run_num}", self.event_model, f"AY"),
+                                    (f"Ang_run{image.run_num}", self.event_model, f"Ang"),
+                                    (f"BX_run{image.run_num}", self.event_model, f"BX"),
+                                    (f"BY_run{image.run_num}", self.event_model, f"BY"),
+                                    (f"Bng_run{image.run_num}", self.event_model, f"Bng"),
+                                    (f"error_run{image.run_num}", self.event_model, f"error")]
 
         contrasts_labels = [(
             f"+0.5*AX[[{self.idx}]] +0.5*AY[[{self.idx}]] -0.5*BX[[{self.idx}]] -0.5*BY[[{self.idx}]]",
@@ -241,13 +247,23 @@ class AxcptGLMs(TaskGLMs):
                 "HI_LO_conf"),
             (
                 f"+0.5*Ang[[{self.idx}]] +0.5*Bng[[{self.idx}]] -0.25*AX[[{self.idx}]] -0.25*AY[[{self.idx}]] -0.25*BX[[{self.idx}]] -0.25*BY[[{self.idx}]]",
-                "Nogo_Go")]
+                "Nogo_Go"),
+            (
+                f"+error[[{self.idx}]] -0.25*AX[[{self.idx}]] -0.25*AY[[{self.idx}]] -0.25*BX[[{self.idx}]] -0.25*BY[[{self.idx}]]']",
+                "error_correct")
+        ]
+        if image is not None:
+            print()
+            #regresors_models_labels = self.append_run_number(regressors_models_labels)
+            #add in Error contrasts to contrast_labels
+            #where is this headed output location???
 
         roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
                                                                               contrasts_labels,
                                                                               '_tents')
 
-        return self.build_glms(glm_type=glm_type,
+        return self.build_glms(images=[image],
+                               glm_type=glm_type,
                                glm_label=glm_label,
                                regressors_models_labels=regressors_models_labels,
                                contrasts_labels=contrasts_labels,
@@ -282,7 +298,8 @@ class AxcptGLMs(TaskGLMs):
         glm_type = "EVENTS"
         event_glms.append(self.create_buttons_events_glm(glm_type))
         event_glms.append(self.create_cues_events_glm(glm_type))
-        event_glms.append(self.create_cues_events_glm_residuals(glm_type))
+        for image in self.images:
+            event_glms.append(self.create_cues_events_glm_residuals_single_run(glm_type, image))
         return event_glms
 
 
