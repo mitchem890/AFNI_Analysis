@@ -126,8 +126,6 @@ def copy_input_data_fmriprep(image, destination, events):
 
     if not os.path.exists(task_dest):
         os.mkdir(task_dest)
-
-    copyfile(os.path.join(image.dirname, fmriprep_volume_image), os.path.join(task_dest, hcp_volume_image))
     copyfile(os.path.join(image.dirname, fmriprep_surface_image_L), os.path.join(task_dest, hcp_surface_image_L))
     copyfile(os.path.join(image.dirname, fmriprep_surface_image_R), os.path.join(task_dest, hcp_surface_image_R))
 
@@ -145,11 +143,9 @@ def copy_input_data_fmriprep(image, destination, events):
     cri.get_dvars(os.path.join(image.dirname, fmriprep_regressors), os.path.join(task_dest, hcp_dvars))
     print(f"Making FD mask of: {image.subject} {image.wave} {image.session} {image.task}")
     cri.make_fd_mask(os.path.join(task_dest, hcp_fd), os.path.join(task_dest, hcp_fd_mask))
-    print(f"Resampling: {image.subject} {image.wave} {image.session} {image.task}")
-    BashCommand.resample(infile=os.path.join(task_dest, hcp_volume_image),
-                         outfile=os.path.join(task_dest, hcp_resampled_image)).run_command()
-    print(f"Renaming the resampled image back to the original name")
-    logger.logger(
-        f"moving {os.path.join(task_dest, hcp_resampled_image)} to {os.path.join(task_dest, hcp_volume_image)}",
-        'info')
-    move(os.path.join(task_dest, hcp_resampled_image), os.path.join(task_dest, hcp_volume_image))
+
+    if not os.path.exists(image.afni_ready_volume_file) or os.path.exists(os.path.join(task_dest, hcp_volume_image)):
+        print(f"Resampling: {image.subject} {image.wave} {image.session} {image.task}")
+        BashCommand.resample(infile=os.path.join(image.dirname, fmriprep_volume_image),
+                             outfile=os.path.join(task_dest, hcp_volume_image)).run_command()
+    if not os.path.exists(image.get_afni_ready_surface_files())
