@@ -47,7 +47,7 @@ from abc import abstractmethod
 
 image_list = List[Images.preprocessed_image]
 
-
+#
 class TaskGLMs(object):
     def __init__(self, working_dir, images: image_list):
         self.images = images
@@ -165,7 +165,8 @@ class TaskGLMs(object):
 
         return roistats_designs_postfixes
 
-#TODO Tent models will need to be changed based on MB
+#TODO Tent models will need to be changed based on MB Think about tr value, duration, mb8, and TR per knot
+
 class AxcptGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)
