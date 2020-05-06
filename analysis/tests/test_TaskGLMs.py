@@ -6,18 +6,18 @@ from ..classes import TaskGLMs
 
 image1 = Images.hcp_preprocessed_image(
     file='/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/tfMRI_StroopPro1_AP.nii.gz', wave='wave1',
-    subject='346945', session='proactive', task='Stroop', pipeline='hcp')
+    subject='346945', session='proactive', task='Stroop', pipeline='hcp', testMode=True)
 image2 = Images.hcp_preprocessed_image(
     file='/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/tfMRI_StroopPro2_PA.nii.gz', wave='wave1',
-    subject='346945', session='proactive', task='Stroop', pipeline='hcp')
+    subject='346945', session='proactive', task='Stroop', pipeline='hcp', testMode=True)
 Stroop_Images = [image1, image2]
 
 image1= Images.hcp_preprocessed_image(
     file='/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/tfMRI_AxcptBas1_AP.nii.gz', wave='wave1',
-    subject='346945', session='baseline', task='Axcpt', pipeline='hcp')
+    subject='346945', session='baseline', task='Axcpt', pipeline='hcp',testMode=True)
 image2 = Images.hcp_preprocessed_image(
     file='/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/tfMRI_AxcptBas2_PA.nii.gz', wave='wave1',
-    subject='346945', session='baseline', task='Axcpt', pipeline='hcp')
+    subject='346945', session='baseline', task='Axcpt', pipeline='hcp',testMode=True)
 Axcpt_Images = [image1, image2]
 
 

@@ -350,6 +350,60 @@ class get_tr_count(bash_command):
         command = f"""3dinfo -nv {self.infile}"""
         return command
 
+class get_tr(bash_command):
+    def __init__(self, **kwargs):
+        prop_defaults = {
+            "infile": None
+        }
+        for (prop, default) in prop_defaults.items():
+            setattr(self, prop, kwargs.get(prop, default))
+
+        self.command = self.build_command()
+        bash_command.__init__(self, command=self.command, return_output=True)
+
+    def __str__(self):
+        return f"Getting TR"
+
+    def build_command(self):
+        command = f"""3dinfo -tr {self.infile}"""
+        return command
+
+class get_voxel_dimensions(bash_command):
+    def __init__(self, **kwargs):
+        prop_defaults = {
+            "infile": None
+        }
+        for (prop, default) in prop_defaults.items():
+            setattr(self, prop, kwargs.get(prop, default))
+
+        self.command = self.build_command()
+        bash_command.__init__(self, command=self.command, return_output=True)
+
+    def __str__(self):
+        return f"Getting Voxel dimensions"
+
+    def build_command(self):
+        command = f"""3dinfo -di -dj -dk {self.infile}"""
+        return command
+
+class get_image_dimensions(bash_command):
+    def __init__(self, **kwargs):
+        prop_defaults = {
+            "infile": None
+        }
+        for (prop, default) in prop_defaults.items():
+            setattr(self, prop, kwargs.get(prop, default))
+
+        self.command = self.build_command()
+        bash_command.__init__(self, command=self.command, return_output=True)
+
+    def __str__(self):
+        return f"Getting image dimensions"
+
+    def build_command(self):
+        command = f"""3dinfo -ni -nj -nk {self.infile}"""
+        return command
+
 
 # Used to split Ciftis into left and right hemisphere Giftis
 class cifti_split(bash_command):
@@ -448,7 +502,7 @@ class make_fd_mask(bash_command):
 class resample(bash_command):
     def __init__(self, **kwargs):
         prop_defaults = {
-            "mb": "4",
+            "image_dim": None,
             "infile": None,
             "outfile": None
         }
@@ -457,9 +511,9 @@ class resample(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
         #Set the correct atlas for the MB of the image MB4 is 2p4 MB8 is 2.0
         #TODO Think about other project MB4 may not = 2.4 voxel size
-        if self.mb == "4":
+        if self.image_dim == "75x90x75":
             self.atlas = os.path.join(ConfigGLMs.Atlas_Dir, "gordon_2p4_resampled_wsubcort_LPI.nii.gz"),
-        elif self.mb == "8":
+        elif self.image_dim == "91x109x91":
             self.atlas = os.path.join(ConfigGLMs.Atlas_Dir, "gordon_222_resampled_wsubcort_LPI.nii.gz"),
 
         self.command = self.build_command()

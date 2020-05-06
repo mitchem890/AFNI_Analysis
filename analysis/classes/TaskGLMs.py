@@ -55,7 +55,6 @@ class TaskGLMs(object):
         self.session = images[0].session
         self.task = images[0].task
         self.working_dir = working_dir
-        self.mb = images[0].mb_factor
         self.buttonPress_model = "'TENTzero(0,16.8,15)'"
         self.button_idx = "0..12"
         self.blockONandOFF_model = "'TENTzero(0,16.8,15)'"
@@ -81,11 +80,6 @@ class TaskGLMs(object):
     # returns three glms in a tuple
     def build_glms(self, glm_type="", glm_label="", regressors_models_labels=[], contrasts_labels=[],
                    roistats_designs_postfixes=[], polort = 'A'):
-        #TODO if used with other dataset consider changing
-        if self.mb is '4':
-            force_tr = '1.2'
-        elif self.mb is '8':
-            force_tr = '0.8'
 
         volume_glm = GLMs.VolumeGLM(images=self.images,
                                     working_dir=self.working_dir,
@@ -96,14 +90,13 @@ class TaskGLMs(object):
                                     regressors_models_labels=regressors_models_labels,
                                     contrasts_labels=contrasts_labels,
                                     ortvec=self.ortvec,
-                                    mb=self.mb,
                                     roistats_designs_postfixes=roistats_designs_postfixes)
 
         surface_L_glm = GLMs.SurfaceGLM(images=self.images,
                                         working_dir=self.working_dir,
                                         glm_type=glm_type,
                                         glm_label=glm_label,
-                                        force_tr=force_tr,
+                                        force_tr=self.images[0].tr,
                                         censor=self.censor,
                                         polort=polort,
                                         regressors_models_labels=regressors_models_labels,
@@ -116,7 +109,7 @@ class TaskGLMs(object):
                                         working_dir=self.working_dir,
                                         glm_type=glm_type,
                                         glm_label=glm_label,
-                                        force_tr=force_tr,
+                                        force_tr=self.images[0].tr,
                                         censor=self.censor,
                                         polort=polort,
                                         regressors_models_labels=regressors_models_labels,
@@ -172,7 +165,7 @@ class TaskGLMs(object):
 
         return roistats_designs_postfixes
 
-
+#TODO Tent models will need to be changed based on MB
 class AxcptGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)

@@ -1,21 +1,23 @@
 import sys
 sys.path.append("..") # Adds higher directory to python modules path.
 from config import ConfigGLMs
+
+
 #This will retrun the correct set of atlases for a sitiuation
-def get_correct_atlases(mb, hemisphere, fsaverage):
+def get_correct_atlases(image_dim, hemisphere, fsaverage):
     if hemisphere is None:
-        if mb == '4':
-            atlases = ConfigGLMs.VolumeAtlasesMB4
-        elif mb == '8':
-            atlases = ConfigGLMs.VolumeAtlasesMB8
+        if image_dim == '75x90x75':
+            atlases = ConfigGLMs.VolumeAtlases2p4
+        elif image_dim == '91x109x91':
+            atlases = ConfigGLMs.VolumeAtlases222
     else:
-        if mb == '4':
-            atlases = ConfigGLMs.SurfaceAtlasesMB4
-        elif mb == '8':
-            atlases = ConfigGLMs.SurfaceAtlasesMB8
+        if image_dim == '75x90x75':
+            atlases = ConfigGLMs.SurfaceAtlases2p4
+        elif image_dim == '91x109x91':
+            atlases = ConfigGLMs.SurfaceAtlases222
         if fsaverage:
             atlases = ConfigGLMs.SurfaceAtlasesFS5
-
+    print(image_dim)
     return atlases
 
 #This will return the correct extension to tack onto the atlases. This is used becuase the gordon has a different extension tha the rest of the atlases

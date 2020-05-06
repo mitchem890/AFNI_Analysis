@@ -37,7 +37,7 @@ class GLM(object):
         self.subject = self.images[0].subject
         self.session = self.images[0].session
         self.task = self.images[0].task
-        self.mb = self.images[0].mb_factor
+        self.image_dim = self.images[0].image_dimensions
         self.fsaverage = self.images[0].fsaverage
         self.input = self.generate_input()
         self.output_dir = self.generate_output_dir()
@@ -78,7 +78,7 @@ class GLM(object):
                                                     working_dir=self.output_dir,
                                                     session=self.session,
                                                     subject=self.subject,
-                                                    mb=self.mb,
+                                                    image_dim=self.image_dim,
                                                     hemisphere=self.hemisphere,
                                                     postfix=item[1],
                                                     fsaverage=self.fsaverage))
