@@ -21,6 +21,7 @@ SubCorticalAtlasesMB8 = ["gordon_222_resampled_wsubcort_LPI"]
 SurfaceAtlasesFS5 = ["Schaefer2018_400Parcels_7Networks_order_10K"]
 
 # Forced TR values for AFNI. When using Giftis or text files afni isnot able to determine the TR value for them
+mb4:
 ForceTRVolumeMB4 = "FALSE"
 ForceTRSurfaceMB4 = 1.2
 ForceTRVolumePreParcellatedMB4 = 1.2
