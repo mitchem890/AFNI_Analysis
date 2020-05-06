@@ -156,13 +156,13 @@ def copy_input_data_fmriprep(image, destination, events):
     # in INPUT_DATA there will be afni_ready_image
     # hcp volume image does not exist
     # do nothing
-    if not (os.path.exists(os.path.join(task_dest,image.afni_ready_volume_file)) or os.path.exists(os.path.join(task_dest, hcp_volume_image))):
+    if not (os.path.exists(os.path.join(task_dest, image.afni_ready_volume_file)) or os.path.exists(os.path.join(task_dest, hcp_volume_image))):
         print(f"Resampling: {image.subject} {image.wave} {image.session} {image.task}")
         BashCommand.resample(infile=os.path.join(image.dirname, fmriprep_volume_image),
                              outfile=os.path.join(task_dest, hcp_volume_image)).run_command()
 
-    if not (os.path.exists(os.path.join(task_dest,image.get_afni_ready_surface_files('L'))) or os.path.exists(os.path.join(task_dest, hcp_surface_image_L))):
+    if not (os.path.exists(os.path.join(task_dest,image.get_afni_ready_surface_file('L'))) or os.path.exists(os.path.join(task_dest, hcp_surface_image_L))):
         copyfile(os.path.join(image.dirname, fmriprep_surface_image_L), os.path.join(task_dest, hcp_surface_image_L))
 
-    if not (os.path.exists(os.path.join(task_dest,image.get_afni_ready_surface_files('R'))) or os.path.exists(os.path.join(task_dest, hcp_surface_image_R))):
+    if not (os.path.exists(os.path.join(task_dest,image.get_afni_ready_surface_file('R'))) or os.path.exists(os.path.join(task_dest, hcp_surface_image_R))):
         copyfile(os.path.join(image.dirname, fmriprep_surface_image_R), os.path.join(task_dest, hcp_surface_image_R))
