@@ -6,6 +6,7 @@ docker run --rm repronim/neurodocker:0.7.0 \
 	--pkg-manager apt \
 	--install connectome-workbench \
 	--afni version=latest method=binaries \
+	--fsl version=5.0.10 \
 	--miniconda create_env=neuro \
 	conda_install='python=3.6 numpy pandas traits' \
 	--miniconda use_env=neuro \
