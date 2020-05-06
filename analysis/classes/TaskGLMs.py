@@ -56,9 +56,9 @@ class TaskGLMs(object):
         self.task = images[0].task
         self.working_dir = working_dir
         self.mb = images[0].mb_factor
-        self.buttonPress_model = "'TENTzero(0,16.8,15)'"
-        self.button_idx = "0..12"
-        self.blockONandOFF_model = "'TENTzero(0,16.8,15)'"
+        self.buttonPress_model = "'TENTzero(0,16.8,8)'"
+        self.button_idx = "0..5"
+        self.blockONandOFF_model = "'TENTzero(0,16.8,8)'"
         self.block_model = "'dmBLOCK(1)'"
         self.hrf_model = "'BLOCK(2,1)'"
         self.hrf_idx = "0..0"
@@ -182,8 +182,8 @@ class TaskGLMs(object):
 class AxcptGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)
-        self.event_model = "'TENTzero(0,21.6,19)'"
-        self.idx = "0..16"
+        self.event_model = "'TENTzero(0,21.6,10)'"
+        self.idx = "0..7"
         self.glms = []
         self.glms.append(self.create_on_blocks_glms())
         self.glms.append(self.create_on_mixed_glms())
@@ -289,8 +289,8 @@ class AxcptGLMs(TaskGLMs):
 class CuedtsGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)
-        self.event_model = "'TENTzero(0,24,21)'"
-        self.idx = "0..18"
+        self.event_model = "'TENTzero(0,24,11)'"
+        self.idx = "0..8"
         self.glms = []
         self.glms.append(self.create_on_blocks_glms())
         self.glms.append(self.create_on_mixed_glms())
@@ -395,8 +395,8 @@ class CuedtsGLMs(TaskGLMs):
 class SternGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)
-        self.event_model = "'TENTzero(0,26.4,23)'"
-        self.idx = "0..20"
+        self.event_model = "'TENTzero(0,26.4,12)'"
+        self.idx = "0..9"
         self.glms = []
         self.glms.append(self.create_on_blocks_glms())
         self.glms.append(self.create_on_mixed_glms())
@@ -466,9 +466,8 @@ class SternGLMs(TaskGLMs):
 class StroopGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)
-        self.event_model = "'TENTzero(0,16.8,15)'"
-        self.idx = "0..12"
-
+        self.event_model = "'TENTzero(0,16.8,8)'"
+        self.idx = "0..5"
         self.glms = []
         self.glms.append(self.create_on_blocks_glms())
         self.glms.append(self.create_on_mixed_glms())
