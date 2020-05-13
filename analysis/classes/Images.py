@@ -63,11 +63,12 @@ class preprocessed_image(object):
         self.movement_regressor = self.get_movement_regessors_file()
         ##These three make it difficult to run a unit test on machine without an image Mybe think about setting fake value defaults
         if not testMode:
-            self.tr = self.get_tr()
+            self.tr = round(float(self.get_tr()),2)
             self.set_voxel_dimensions()
             self.set_image_dimensions()
         else:
-            self.tr = '1.200000'
+            self.tr = round(float('1.2'), 2)
+            #self.tr = round(float('1.200000'), 2)
             self.voxel_dimensions = '2.4000x2.400000x2.400000'
             self.image_dimensions = '75x90x75'
 

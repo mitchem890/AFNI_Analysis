@@ -54,10 +54,12 @@ class TaskGLMs(object):
         self.subject = images[0].subject
         self.session = images[0].session
         self.task = images[0].task
+        self.tr = images[0].tr
+        self.TRpKnot = self.set_tr_per_knot()
+
         self.working_dir = working_dir
-        self.buttonPress_model = "'TENTzero(0,16.8,15)'"
-        self.button_idx = "0..12"
-        self.blockONandOFF_model = "'TENTzero(0,16.8,15)'"
+        self.buttonPress_model, self.button_idx = self.create_Tent_models(16.8)
+        self.blockONandOFF_model, self.button_idx = self.create_Tent_models(16.8)
         self.block_model = "'dmBLOCK(1)'"
         self.hrf_model = "'BLOCK(2,1)'"
         self.hrf_idx = "0..0"
@@ -65,6 +67,15 @@ class TaskGLMs(object):
         self.censor = self.generate_censor()
 
         return
+
+    #Set The TR per knot for each of the TRs
+    def set_tr_per_knot(self):
+        if self.tr == 1.2:
+            TRpKnot = 2
+        elif self.tr == 0.8:
+            TRpKnot = 3
+
+        return TRpKnot
 
     # Every GLM that we are running is a censored glm all glms must have a censor file.
     def generate_censor(self):
@@ -96,7 +107,7 @@ class TaskGLMs(object):
                                         working_dir=self.working_dir,
                                         glm_type=glm_type,
                                         glm_label=glm_label,
-                                        force_tr=self.images[0].tr,
+                                        force_tr=self.tr,
                                         censor=self.censor,
                                         polort=polort,
                                         regressors_models_labels=regressors_models_labels,
@@ -109,7 +120,7 @@ class TaskGLMs(object):
                                         working_dir=self.working_dir,
                                         glm_type=glm_type,
                                         glm_label=glm_label,
-                                        force_tr=self.images[0].tr,
+                                        force_tr=self.tr,
                                         censor=self.censor,
                                         polort=polort,
                                         regressors_models_labels=regressors_models_labels,
@@ -154,6 +165,16 @@ class TaskGLMs(object):
         '''To Override'''
         pass
 
+    def create_Tent_models(self, duration):
+        while not round(duration/self.tr, 2) % self.TRpKnot == 0:
+            duration = duration + self.tr
+        nonzero_knots = round(duration / (self.TRpKnot * float(self.tr)), 2)
+        total_knots = nonzero_knots + 1
+        model = f"'TENTzero(0,{round(duration, 2)},{int(total_knots)})'"
+        final_index = total_knots - 3
+        idx = f"0..{int(final_index)}"
+        return model, idx
+
     # This will take a list of contrasts and regressors
     # and turn them into a list of tuples containing the model and the contrast or the single regressors
     def generate_roistats_designs_postfixes(self, contrasts, regressors, model):
@@ -170,8 +191,8 @@ class TaskGLMs(object):
 class AxcptGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)
-        self.event_model = "'TENTzero(0,21.6,19)'"
-        self.idx = "0..16"
+        self.tent_duration=21.6
+        self.event_model, self.idx = self.create_Tent_models(duration=self.tent_duration)
         self.glms = []
         self.glms.append(self.create_on_blocks_glms())
         self.glms.append(self.create_on_mixed_glms())
@@ -245,8 +266,7 @@ class AxcptGLMs(TaskGLMs):
 class CuedtsGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)
-        self.event_model = "'TENTzero(0,24,21)'"
-        self.idx = "0..18"
+        self.event_model, self.idx = self.create_Tent_models(duration=24)
         self.glms = []
         self.glms.append(self.create_on_blocks_glms())
         self.glms.append(self.create_on_mixed_glms())
@@ -351,8 +371,7 @@ class CuedtsGLMs(TaskGLMs):
 class SternGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)
-        self.event_model = "'TENTzero(0,26.4,23)'"
-        self.idx = "0..20"
+        self.event_model, self.idx = self.create_Tent_models(duration=26.4)
         self.glms = []
         self.glms.append(self.create_on_blocks_glms())
         self.glms.append(self.create_on_mixed_glms())
@@ -422,9 +441,7 @@ class SternGLMs(TaskGLMs):
 class StroopGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)
-        self.event_model = "'TENTzero(0,16.8,15)'"
-        self.idx = "0..12"
-
+        self.event_model, self.idx = self.create_Tent_models(duration=16.8)
         self.glms = []
         self.glms.append(self.create_on_blocks_glms())
         self.glms.append(self.create_on_mixed_glms())

@@ -14,10 +14,10 @@ Stroop_Images = [image1, image2]
 
 image1= Images.hcp_preprocessed_image(
     file='/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/tfMRI_AxcptBas1_AP.nii.gz', wave='wave1',
-    subject='346945', session='baseline', task='Axcpt', pipeline='hcp',testMode=True)
+    subject='346945', session='baseline', task='Axcpt', pipeline='hcp', testMode=True)
 image2 = Images.hcp_preprocessed_image(
     file='/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/tfMRI_AxcptBas2_PA.nii.gz', wave='wave1',
-    subject='346945', session='baseline', task='Axcpt', pipeline='hcp',testMode=True)
+    subject='346945', session='baseline', task='Axcpt', pipeline='hcp', testMode=True)
 Axcpt_Images = [image1, image2]
 
 
@@ -138,11 +138,11 @@ unittest.TextTestRunner(verbosity=2).run(suite)
 
 class TestStroop_Roistats(unittest.TestCase):
     def test_on_blocks_roistats_volume(self):
-        output = f'''bash /home/BashScripts/Roistats.sh \\
+        output = f'''bash /home/analysis/BashScripts/Roistats.sh \\
 -i /mnt/afni_container_output/346945/RESULTS/Stroop/proactive_ON_BLOCKS_censored/STATS_346945_REML.nii.gz \\
 -n ON_BLOCKS \\
 -w /mnt/afni_container_output/346945/RESULTS/Stroop/proactive_ON_BLOCKS_censored \\
--a /home/atlases/gordon_2p4_resampled_wsubcort_LPI \\
+-a /home/Atlases/gordon_2p4_resampled_wsubcort_LPI \\
 -r ".nii.gz" \\
 -b Coef \\
 -f 346945_timecourses_proactive_ON_BLOCKS_Coef_blocks_gordon_2p4_resampled_wsubcort_LPI.txt'''

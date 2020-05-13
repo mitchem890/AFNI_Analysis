@@ -26,15 +26,6 @@ SurfaceAtlasesFS5 = ["Schaefer2018_400Parcels_7Networks_order_10K"]
 
 # Forced TR values for AFNI. When using Giftis or text files afni isnot able to determine the TR value for them
 #TODO if the data set is not DMCC MB4 data may not be 1.2 TR
-ForceTRVolumeMB4 = "FALSE"
-ForceTRSurfaceMB4 = 1.2
-ForceTRVolumePreParcellatedMB4 = 1.2
-ForceTRSurfacePreParcellatedMB4 = 1.2
-
-ForceTRVolumeMB8 = "FALSE"
-ForceTRSurfaceMB8 = 0.8
-ForceTRVolumePreParcellatedMB8 = 0.8
-ForceTRSurfacePreParcellatedMB8 = 0.8
 
 # Output Directory For each of the analysis Types
 VolumeResultsDir = "RESULTS"
