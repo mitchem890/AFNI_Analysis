@@ -502,7 +502,7 @@ class make_fd_mask(bash_command):
 class resample(bash_command):
     def __init__(self, **kwargs):
         prop_defaults = {
-            "image_dim": None,
+            "voxel_dim": None,
             "infile": None,
             "outfile": None
         }
@@ -511,9 +511,9 @@ class resample(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
         #Set the correct atlas for the MB of the image MB4 is 2p4 MB8 is 2.0
         #TODO Think about other project MB4 may not = 2.4 voxel size
-        if self.image_dim == "75x90x75":
+        if self.voxel_dim == '2.4000x2.400000x2.400000':
             self.atlas = os.path.join(ConfigGLMs.Atlas_Dir, "gordon_2p4_resampled_wsubcort_LPI.nii.gz"),
-        elif self.image_dim == "91x109x91":
+        elif self.voxel_dim == '2.0000x2.000000x2.000000':
             self.atlas = os.path.join(ConfigGLMs.Atlas_Dir, "gordon_222_resampled_wsubcort_LPI.nii.gz"),
 
         self.command = self.build_command()

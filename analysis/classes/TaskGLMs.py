@@ -166,6 +166,7 @@ class TaskGLMs(object):
         pass
 
     def create_Tent_models(self, duration):
+        #is The duration evenly divisible by the TRpKnot * tr
         while not round(duration/self.tr, 2) % self.TRpKnot == 0:
             duration = duration + self.tr
         nonzero_knots = round(duration / (self.TRpKnot * float(self.tr)), 2)
@@ -191,7 +192,7 @@ class TaskGLMs(object):
 class AxcptGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)
-        self.tent_duration=21.6
+        self.tent_duration = 21.6
         self.event_model, self.idx = self.create_Tent_models(duration=self.tent_duration)
         self.glms = []
         self.glms.append(self.create_on_blocks_glms())

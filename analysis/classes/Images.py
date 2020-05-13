@@ -63,14 +63,14 @@ class preprocessed_image(object):
         self.movement_regressor = self.get_movement_regessors_file()
         ##These three make it difficult to run a unit test on machine without an image Mybe think about setting fake value defaults
         if not testMode:
-            self.tr = round(float(self.get_tr()),2)
-            self.set_voxel_dimensions()
-            self.set_image_dimensions()
+            self.tr = round(float(self.get_tr()), 2)
+            self.set_voxel_dim()
+            self.set_image_dim()
         else:
             self.tr = round(float('1.2'), 2)
             #self.tr = round(float('1.200000'), 2)
-            self.voxel_dimensions = '2.4000x2.400000x2.400000'
-            self.image_dimensions = '75x90x75'
+            self.voxel_dim = '2.4000x2.400000x2.400000'
+            self.image_dim = '75x90x75'
 
     def __str__(self):
         return f"{self.subject} {self.session} {self.task} {self.encoding}"
@@ -120,10 +120,10 @@ class preprocessed_image(object):
         return dimensions
 
     def set_image_dimensions(self):
-        self.image_dimensions = self.get_image_dimensions()
+        self.image_dim = self.get_image_dimensions()
 
     def set_voxel_dimensions(self):
-        self.voxel_dimensions = self.get_voxel_dimensions()
+        self.voxel_dim = self.get_voxel_dimensions()
 
 
 class fmriprep_preprocessed_image(preprocessed_image):
