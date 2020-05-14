@@ -102,8 +102,7 @@ class TestStroop_GLMs(unittest.TestCase):
 -verb"""
         self.maxDiff = None
         self.assertEqual(output,
-                         TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Images).glms[0][
-                             1].remlfit.command)
+                         TaskGLMs.AxcptGLMs('/mnt/afni_container_output/', images=Stroop_Images).glms[1][1].remlfit.command)
 
     def test_congruency_hrf_event_deconvolve_volume(self):
         output = f"""3dDeconvolve \\

@@ -89,40 +89,46 @@ class TaskGLMs(object):
 
     # builds the volumetric left and right hemisphere GLM given the glm type, label, regressor parameters and the contrast parameters
     # returns three glms in a tuple
-    def build_glms(self, glm_type="", glm_label="", regressors_models_labels=[], contrasts_labels=[],
-                   roistats_designs_postfixes=[], polort = 'A'):
+    def build_glms(self, images=None, glm_type="", glm_label="", regressors_models_labels=[], contrasts_labels=[],
+                   roistats_designs_postfixes=[], polort = 'A', generate_residuals=False):
 
-        volume_glm = GLMs.VolumeGLM(images=self.images,
+        if images is None:
+            images = self.images
+
+        volume_glm = GLMs.VolumeGLM(images=images,
                                     working_dir=self.working_dir,
                                     glm_type=glm_type,
                                     glm_label=glm_label,
                                     censor=self.censor,
                                     polort=polort,
+                                    generate_residuals=generate_residuals,
                                     regressors_models_labels=regressors_models_labels,
                                     contrasts_labels=contrasts_labels,
                                     ortvec=self.ortvec,
                                     roistats_designs_postfixes=roistats_designs_postfixes)
 
-        surface_L_glm = GLMs.SurfaceGLM(images=self.images,
+        surface_L_glm = GLMs.SurfaceGLM(images=images,
                                         working_dir=self.working_dir,
                                         glm_type=glm_type,
                                         glm_label=glm_label,
                                         force_tr=self.tr,
                                         censor=self.censor,
                                         polort=polort,
+                                        generate_residuals=generate_residuals,
                                         regressors_models_labels=regressors_models_labels,
                                         contrasts_labels=contrasts_labels,
                                         hemisphere='L',
                                         ortvec=self.ortvec,
                                         roistats_designs_postfixes=roistats_designs_postfixes)
 
-        surface_R_glm = GLMs.SurfaceGLM(images=self.images,
+        surface_R_glm = GLMs.SurfaceGLM(images=images,
                                         working_dir=self.working_dir,
                                         glm_type=glm_type,
                                         glm_label=glm_label,
                                         force_tr=self.tr,
                                         censor=self.censor,
                                         polort=polort,
+                                        generate_residuals=generate_residuals,
                                         regressors_models_labels=regressors_models_labels,
                                         contrasts_labels=contrasts_labels,
                                         hemisphere='R',
@@ -267,7 +273,8 @@ class AxcptGLMs(TaskGLMs):
 class CuedtsGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)
-        self.event_model, self.idx = self.create_Tent_models(duration=24)
+        self.tent_duration = 24
+        self.event_model, self.idx = self.create_Tent_models(duration=self.tent_duration)
         self.glms = []
         self.glms.append(self.create_on_blocks_glms())
         self.glms.append(self.create_on_mixed_glms())
@@ -372,7 +379,8 @@ class CuedtsGLMs(TaskGLMs):
 class SternGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)
-        self.event_model, self.idx = self.create_Tent_models(duration=26.4)
+        self.tent_duration = 26.4
+        self.event_model, self.idx = self.create_Tent_models(duration=self.tent_duration)
         self.glms = []
         self.glms.append(self.create_on_blocks_glms())
         self.glms.append(self.create_on_mixed_glms())
@@ -442,7 +450,8 @@ class SternGLMs(TaskGLMs):
 class StroopGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)
-        self.event_model, self.idx = self.create_Tent_models(duration=16.8)
+        self.tent_duration = 16.8
+        self.event_model, self.idx = self.create_Tent_models(duration=self.tent_duration)
         self.glms = []
         self.glms.append(self.create_on_blocks_glms())
         self.glms.append(self.create_on_mixed_glms())
