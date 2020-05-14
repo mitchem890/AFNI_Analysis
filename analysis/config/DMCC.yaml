@@ -1,0 +1,70 @@
+# This File will load in the relevent models for all of the glms as well as other information such as force TR and Results directories
+project: DMCC
+atlas_dir: "/home/Atlases"
+atlases:
+  volume_atlases:
+    image_dim:
+      - 75x90x75:
+          - "gordon_2p4_resampled_wsubcort_LPI.nii.gz"
+          - "communities_2p4_resampled_LPI.nii.gz"
+          - "HCP-MMP1_on_MNI152_ICBM2009a_nlin_2p4.nii.gz"
+          - "HCP-MMP1_L_on_MNI152_ICBM2009a_nlin_2p4.nii.gz"
+          - "HCP-MMP1_R_on_MNI152_ICBM2009a_nlin_2p4.nii.gz"
+          - "Schaefer2018_400Parcels_7Networks_order_FSLMNI152_2p4.nii.gz"
+      - 91x109x91:
+          - "gordon_222_resampled_wsubcort_LPI.nii.gz"
+          - "communities_222_resampled_LPI.nii.gz"
+          - "HCP-MMP1_on_MNI152_ICBM2009a_nlin_222.nii.gz"
+          - "HCP-MMP1_L_on_MNI152_ICBM2009a_nlin_222.nii.gz"
+          - "HCP-MMP1_R_on_MNI152_ICBM2009a_nlin_222.nii.gz"
+          - "Schaefer2018_400Parcels_7Networks_order_FSLMNI152_222.nii.gz"
+  surface_atlases:
+    image_dim:
+      - 10242x1x1:
+          - Left_Hemisphere:
+              - "Schaefer2018_400Parcels_7Networks_order_10K_L.label.gii"
+          - Right_Hemisphere:
+              - "Schaefer2018_400Parcels_7Networks_order_10K_R.label.gii"
+      - 32492x1x1:
+          - Left_Hemisphere:
+              - "gordon_333_L.func.gii"
+              - "HCP-MMP_RelatedParcellation210.CorticalAreas_dil_Colors.32k_fs_LR_L.label.gii"
+              - "Schaefer2018_400Parcels_7Networks_order_L.label.gii"
+          - Right_Hemisphere:
+              - "gordon_333_R.func.gii"
+              - "HCP-MMP_RelatedParcellation210.CorticalAreas_dil_Colors.32k_fs_LR_R.label.gii"
+              - "Schaefer2018_400Parcels_7Networks_order_R.label.gii"
+
+  subcortical_atlases:
+
+##TODO Think about this as a module to swap out between data sets
+#New dataset == new atlases new force TR
+##TODO if The data set is different we cant assume that MB4 atlases will be 2.4 isotropic
+  image_dime_key='75x90x75'
+  VolumeAtlases2p4 = ["gordon_2p4_resampled_wsubcort_LPI", "communities_2p4_resampled_LPI",
+  "HCP-MMP1_on_MNI152_ICBM2009a_nlin_2p4", "HCP-MMP1_L_on_MNI152_ICBM2009a_nlin_2p4",
+  "HCP-MMP1_R_on_MNI152_ICBM2009a_nlin_2p4", "Schaefer2018_400Parcels_7Networks_order_FSLMNI152_2p4"]
+  SurfaceAtlases2p4 = ["gordon_333", "HCP-MMP_RelatedParcellation210.CorticalAreas_dil_Colors.32k_fs_LR",
+  "Schaefer2018_400Parcels_7Networks_order"]
+  SubCorticalAtlases2p4 = ["gordon_222_resampled_wsubcort_LPI", "Schaefer2018_400Parcels_7Networks_order_FSLMNI152_222"]
+  SubCorticalAtlasesMatthew = ["Schaefer2018_400Parcels_7Networks_order_FSLMNI152_222"]
+
+  VolumeAtlases222 = ["gordon_222_resampled_wsubcort_LPI", "communities_222_resampled_LPI",
+  "HCP-MMP1_on_MNI152_ICBM2009a_nlin_222", "HCP-MMP1_L_on_MNI152_ICBM2009a_nlin_222",
+  "HCP-MMP1_R_on_MNI152_ICBM2009a_nlin_222", "Schaefer2018_400Parcels_7Networks_order_FSLMNI152_222"]
+  SurfaceAtlases222 = ["gordon_333", "HCP-MMP_RelatedParcellation210.CorticalAreas_dil_Colors.32k_fs_LR",
+  "Schaefer2018_400Parcels_7Networks_order"]
+  SubCorticalAtlases222 = ["gordon_222_resampled_wsubcort_LPI"]
+
+  # Atlases for the Fmriprep subjects with fsaverage5 templates
+  SurfaceAtlasesFS5 = ["Schaefer2018_400Parcels_7Networks_order_10K"]
+
+  # Forced TR values for AFNI. When using Giftis or text files afni isnot able to determine the TR value for them
+  #TODO if the data set is not DMCC MB4 data may not be 1.2 TR
+
+  # Output Directory For each of the analysis Types
+  VolumeResultsDir = "RESULTS"
+  SurfaceResultsDir = "SURFACE_RESULTS"
+  VolumePreParcellatedResultsDir = "PREPARCELLATED_RESULTS"
+  SurfacePreParcellatedResultsDir = "PREPARCELLATED_SURFACE_RESULTS"
+  SubCorticalPreParcellatedResultsDir = "PREPARCELLATED_CIFTI_SUBCORTICAL"

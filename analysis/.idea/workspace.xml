@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d0ac0aa-3e10-42b9-9ad3-3f4140e19029" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../../Jo/GLMtestHelpers.R" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Jo/GLMtestHelpers.R" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/DMCC.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PreAnalysis_tools/Copy_Input_Data.py" beforeDir="false" afterPath="$PROJECT_DIR$/PreAnalysis_tools/Copy_Input_Data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/BashCommand.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/BashCommand.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/GLMs.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/GLMs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/TaskGLMs.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/TaskGLMs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_TaskGLMs.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_TaskGLMs.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,9 +123,9 @@
       <screen x="79" y="27" width="1841" height="1053" />
     </state>
     <state x="767" y="472" width="454" height="160" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/79.27.1841.1053@79.27.1841.1053" timestamp="1585589001866" />
-    <state x="2613" y="162" width="618" height="783" key="find.popup" timestamp="1589476843487">
+    <state x="2613" y="162" width="618" height="783" key="find.popup" timestamp="1589488020808">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2613" y="162" width="618" height="783" key="find.popup/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1589476843487" />
+    <state x="2613" y="162" width="618" height="783" key="find.popup/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1589488020808" />
   </component>
 </project>
