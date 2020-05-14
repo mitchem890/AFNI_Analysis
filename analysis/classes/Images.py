@@ -68,7 +68,6 @@ class preprocessed_image(object):
             self.set_image_dim()
         else:
             self.tr = round(float('1.2'), 2)
-            #self.tr = round(float('1.200000'), 2)
             self.voxel_dim = '2.4000x2.400000x2.400000'
             self.image_dim = '75x90x75'
 
@@ -109,21 +108,25 @@ class preprocessed_image(object):
     def get_tr(self):
         return BashCommand.get_tr(infile=self.file).run_command()
 
-    def get_voxel_dimensions(self):
-        dimensions = BashCommand.get_voxel_dimensions(infile=self.file).run_command()
-        dimensions.replace('\t', 'x').replace('-', '')
+    def get_voxel_dim(self):
+        dimensions_i = BashCommand.get_voxel_dimensions(infile=self.file, dimension='i').run_command()
+        dimensions_j = BashCommand.get_voxel_dimensions(infile=self.file, dimension='j').run_command()
+        dimensions_k = BashCommand.get_voxel_dimensions(infile=self.file, dimension='k').run_command()
+        dimensions = f"{dimensions_i}x{dimensions_j}x{dimensions_k}".replace('-', '')
         return dimensions
 
-    def get_image_dimensions(self):
-        dimensions = BashCommand.get_image_dimensions(infile=self.file).run_command()
-        dimensions.replace('\t', 'x').replace('-', '')
+    def get_image_dim(self):
+        dimensions_i = BashCommand.get_image_dimensions(infile=self.file, dimension='i').run_command()
+        dimensions_j = BashCommand.get_image_dimensions(infile=self.file, dimension='j').run_command()
+        dimensions_k = BashCommand.get_image_dimensions(infile=self.file, dimension='k').run_command()
+        dimensions = f"{dimensions_i}x{dimensions_j}x{dimensions_k}".replace('-', '')
         return dimensions
 
-    def set_image_dimensions(self):
-        self.image_dim = self.get_image_dimensions()
+    def set_image_dim(self):
+        self.image_dim = self.get_image_dim()
 
-    def set_voxel_dimensions(self):
-        self.voxel_dim = self.get_voxel_dimensions()
+    def set_voxel_dim(self):
+        self.voxel_dim = self.get_voxel_dim()
 
 
 class fmriprep_preprocessed_image(preprocessed_image):

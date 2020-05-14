@@ -6,8 +6,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PreAnalysis_tools/Copy_Input_Data.py" beforeDir="false" afterPath="$PROJECT_DIR$/PreAnalysis_tools/Copy_Input_Data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/BashCommand.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/BashCommand.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/GLMs.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/GLMs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/Images.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/Images.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/TaskGLMs.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/TaskGLMs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/RunShellFunc.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/RunShellFunc.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +27,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="run.code.analysis.last.selected.profile" value="aDefault" />
   </component>
   <component name="RunManager" selected="Python tests.Unittests in test_TaskGLMs.py">
     <configuration name="Unittests for tests.test_TaskGLMs.TestStroop_GLMs.test_congruency_event_deconvolve_volume" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
@@ -89,26 +91,34 @@
     <option name="LAST_COMMIT_MESSAGE" value="Changed all tent functions and idx parameters to reflect one knot per TR stipulation" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="2658" y="406" width="518" height="292" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1589476679070">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2658" y="406" width="518" height="292" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1589476679070" />
     <state x="606" y="126" width="777" height="852" key="CommitChangelistDialog2" timestamp="1585588981179">
       <screen x="79" y="27" width="1841" height="1053" />
     </state>
     <state x="606" y="126" width="777" height="852" key="CommitChangelistDialog2/79.27.1841.1053@79.27.1841.1053" timestamp="1585588981179" />
-    <state width="1813" height="278" key="GridCell.Tab.0.bottom" timestamp="1589387021866">
+    <state x="2705" y="311" width="424" height="482" key="FileChooserDialogImpl" timestamp="1589416155300">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1813" height="278" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1589387021866" />
-    <state width="1813" height="278" key="GridCell.Tab.0.center" timestamp="1589387021866">
+    <state x="2705" y="311" width="424" height="482" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1589416155300" />
+    <state width="1813" height="278" key="GridCell.Tab.0.bottom" timestamp="1589415911851">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1813" height="278" key="GridCell.Tab.0.center/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1589387021866" />
-    <state width="1813" height="278" key="GridCell.Tab.0.left" timestamp="1589387021865">
+    <state width="1813" height="278" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1589415911851" />
+    <state width="1813" height="278" key="GridCell.Tab.0.center" timestamp="1589415911851">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1813" height="278" key="GridCell.Tab.0.left/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1589387021865" />
-    <state width="1813" height="278" key="GridCell.Tab.0.right" timestamp="1589387021866">
+    <state width="1813" height="278" key="GridCell.Tab.0.center/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1589415911851" />
+    <state width="1813" height="278" key="GridCell.Tab.0.left" timestamp="1589415911851">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1813" height="278" key="GridCell.Tab.0.right/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1589387021866" />
+    <state width="1813" height="278" key="GridCell.Tab.0.left/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1589415911851" />
+    <state width="1813" height="278" key="GridCell.Tab.0.right" timestamp="1589415911851">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1813" height="278" key="GridCell.Tab.0.right/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1589415911851" />
     <state x="655" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1585662797347">
       <screen x="79" y="27" width="1841" height="1053" />
     </state>
@@ -117,5 +127,9 @@
       <screen x="79" y="27" width="1841" height="1053" />
     </state>
     <state x="767" y="472" width="454" height="160" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/79.27.1841.1053@79.27.1841.1053" timestamp="1585589001866" />
+    <state x="2613" y="162" width="618" height="783" key="find.popup" timestamp="1589476843487">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2613" y="162" width="618" height="783" key="find.popup/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1589476843487" />
   </component>
 </project>

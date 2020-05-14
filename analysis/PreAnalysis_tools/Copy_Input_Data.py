@@ -149,6 +149,7 @@ def copy_input_data_fmriprep(image, destination, events):
     BashCommand.resample(infile=os.path.join(task_dest, hcp_volume_image),
                          outfile=os.path.join(task_dest, hcp_resampled_image),
                          voxel_dim=image.voxel_dim).run_command()
+    image.set_voxel_dim()
     print(f"Renaming the resampled image back to the original name")
     logger.logger(
         f"moving {os.path.join(task_dest, hcp_resampled_image)} to {os.path.join(task_dest, hcp_volume_image)}",

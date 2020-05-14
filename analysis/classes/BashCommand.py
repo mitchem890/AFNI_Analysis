@@ -371,7 +371,8 @@ class get_tr(bash_command):
 class get_voxel_dimensions(bash_command):
     def __init__(self, **kwargs):
         prop_defaults = {
-            "infile": None
+            "infile": None,
+            "dimension": 'i'
         }
         for (prop, default) in prop_defaults.items():
             setattr(self, prop, kwargs.get(prop, default))
@@ -383,13 +384,14 @@ class get_voxel_dimensions(bash_command):
         return f"Getting Voxel dimensions"
 
     def build_command(self):
-        command = f"""3dinfo -di -dj -dk {self.infile}"""
+        command = f"""3dinfo -d{self.dimension} {self.infile}"""
         return command
 
 class get_image_dimensions(bash_command):
     def __init__(self, **kwargs):
         prop_defaults = {
-            "infile": None
+            "infile": None,
+            "dimension": 'i'
         }
         for (prop, default) in prop_defaults.items():
             setattr(self, prop, kwargs.get(prop, default))
@@ -401,7 +403,7 @@ class get_image_dimensions(bash_command):
         return f"Getting image dimensions"
 
     def build_command(self):
-        command = f"""3dinfo -ni -nj -nk {self.infile}"""
+        command = f"""3dinfo -n{self.dimension} {self.infile}"""
         return command
 
 
@@ -509,13 +511,14 @@ class resample(bash_command):
 
         for (prop, default) in prop_defaults.items():
             setattr(self, prop, kwargs.get(prop, default))
-        #Set the correct atlas for the MB of the image MB4 is 2p4 MB8 is 2.0
-        #TODO Think about other project MB4 may not = 2.4 voxel size
-        if self.voxel_dim == '2.4000x2.400000x2.400000':
-            self.atlas = os.path.join(ConfigGLMs.Atlas_Dir, "gordon_2p4_resampled_wsubcort_LPI.nii.gz"),
-        elif self.voxel_dim == '2.0000x2.000000x2.000000':
-            self.atlas = os.path.join(ConfigGLMs.Atlas_Dir, "gordon_222_resampled_wsubcort_LPI.nii.gz"),
 
+        #Set the correct atlas for the MB of the image MB4 is 2p4 MB8 is 2.0
+        if self.voxel_dim == '2.400000x2.400000x2.400000':
+            self.atlas = os.path.join(ConfigGLMs.Atlas_Dir, "gordon_2p4_resampled_wsubcort_LPI.nii.gz")
+        elif self.voxel_dim == '2.000000x2.000000x2.000000':
+            self.atlas = os.path.join(ConfigGLMs.Atlas_Dir, "gordon_222_resampled_wsubcort_LPI.nii.gz")
+        else:
+            Exception("Could not get atlas for voxel dimensions")
         self.command = self.build_command()
         bash_command.__init__(self, command=self.command, return_output=False)
 

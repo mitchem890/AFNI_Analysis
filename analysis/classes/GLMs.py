@@ -37,7 +37,7 @@ class GLM(object):
         self.subject = self.images[0].subject
         self.session = self.images[0].session
         self.task = self.images[0].task
-        self.image_dim = self.images[0].image_dimensions
+        self.image_dim = self.images[0].image_dim
         self.fsaverage = self.images[0].fsaverage
         self.input = self.generate_input()
         self.output_dir = self.generate_output_dir()
