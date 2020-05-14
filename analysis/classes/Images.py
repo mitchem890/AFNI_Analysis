@@ -108,25 +108,29 @@ class preprocessed_image(object):
     def get_tr(self):
         return BashCommand.get_tr(infile=self.file).run_command()
 
-    def get_voxel_dim(self):
-        dimensions_i = BashCommand.get_voxel_dimensions(infile=self.file, dimension='i').run_command()
-        dimensions_j = BashCommand.get_voxel_dimensions(infile=self.file, dimension='j').run_command()
-        dimensions_k = BashCommand.get_voxel_dimensions(infile=self.file, dimension='k').run_command()
+    def get_voxel_dim(self, image):
+        dimensions_i = BashCommand.get_voxel_dimensions(infile=image, dimension='i').run_command()
+        dimensions_j = BashCommand.get_voxel_dimensions(infile=image, dimension='j').run_command()
+        dimensions_k = BashCommand.get_voxel_dimensions(infile=image, dimension='k').run_command()
         dimensions = f"{dimensions_i}x{dimensions_j}x{dimensions_k}".replace('-', '')
         return dimensions
 
-    def get_image_dim(self):
-        dimensions_i = BashCommand.get_image_dimensions(infile=self.file, dimension='i').run_command()
-        dimensions_j = BashCommand.get_image_dimensions(infile=self.file, dimension='j').run_command()
-        dimensions_k = BashCommand.get_image_dimensions(infile=self.file, dimension='k').run_command()
+    def get_image_dim(self, image):
+        dimensions_i = BashCommand.get_image_dimensions(infile=image, dimension='i').run_command()
+        dimensions_j = BashCommand.get_image_dimensions(infile=image, dimension='j').run_command()
+        dimensions_k = BashCommand.get_image_dimensions(infile=image, dimension='k').run_command()
         dimensions = f"{dimensions_i}x{dimensions_j}x{dimensions_k}".replace('-', '')
         return dimensions
 
-    def set_image_dim(self):
-        self.image_dim = self.get_image_dim()
+    def set_image_dim(self, image=None):
+        if image == None:
+            image = self.file
+        self.image_dim = self.get_image_dim(image)
 
-    def set_voxel_dim(self):
-        self.voxel_dim = self.get_voxel_dim()
+    def set_voxel_dim(self, image):
+        if image == None:
+            image = self.file
+        self.voxel_dim = self.get_voxel_dim(image)
 
 
 class fmriprep_preprocessed_image(preprocessed_image):
