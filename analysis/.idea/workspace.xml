@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d0ac0aa-3e10-42b9-9ad3-3f4140e19029" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/config/DMCC.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PreAnalysis_tools/Copy_Input_Data.py" beforeDir="false" afterPath="$PROJECT_DIR$/PreAnalysis_tools/Copy_Input_Data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PreAnalysis_tools/Demean_Images.py" beforeDir="false" afterPath="$PROJECT_DIR$/PreAnalysis_tools/Demean_Images.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/Images.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/Images.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/DMCC.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/DMCC.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
