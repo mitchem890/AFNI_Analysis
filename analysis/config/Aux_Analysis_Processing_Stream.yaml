@@ -1,0 +1,37 @@
+threads:
+  - thread_name: "Axcpt_baseline"
+    logFile: "Axcpt_baseline.log"
+    script_order:
+      - "3dDeconvolve.sh"
+      - "3dREMLFit.sh"
+      - "roistats.sh"
+  - thread_name: "Axcpt_reactive"
+    logFile: "Axcpt_reactive.log"
+    script_order:
+      - "3dDeconvolve.sh"
+      - "3dREMLFit.sh"
+      - "roistats.sh"
+  - thread_name: "Axcpt_baseline"
+    logFile: "Axcpt_baseline.log"
+    script_order:
+      - "3dDeconvolve.sh"
+      - "3dREMLFit.sh"
+      - "roistats.sh"
+  - thread_name: "Axcpt_reactive"
+    logFile: "Axcpt_reactive.log"
+    script_order:
+      - "3dDeconvolve.sh"
+      - "3dREMLFit.sh"
+      - "roistats.sh"
+  - thread_name: "Axcpt_baseline"
+    logFile: "Axcpt_baseline.log"
+    script_order:
+      - "3dDeconvolve.sh"
+      - "3dREMLFit.sh"
+      - "roistats.sh"
+  - thread_name: "Axcpt_reactive"
+    logFile: "Axcpt_reactive.log"
+    script_order:
+      - "3dDeconvolve.sh"
+      - "3dREMLFit.sh"
+      - "roistats.sh"

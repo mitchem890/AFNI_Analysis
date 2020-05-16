@@ -7,6 +7,7 @@ from config import globals
 from pipeline import Run_Analysis_Pipeline
 from utils import Validate_User_Input
 from utils import setup
+import yaml
 parser = argparse.ArgumentParser()
 
 # Add valid arguments to take in
@@ -30,6 +31,7 @@ parser.add_argument('--events', '-e', help='The event/onset files to be used in 
 parser.add_argument('--pipeline', '-p', help='The pipeline used to process the input images', required=True)
 parser.add_argument('--ncpus', help='The Number of CPUs to use when processing the data', required=True)
 parser.add_argument('--overwrite', help='if previous file was found overwrite the output', action='store_true')
+parser.add_argument('--aux_analysis', help='if you use this parameter point shell scripts to run extra analysis')
 
 ##TODO Type in in argparse
 args = parser.parse_args()
@@ -48,6 +50,8 @@ run_preanalysis = args.preanalysis
 run_analysis = args.analysis
 pipeline = args.pipeline
 ncpus = args.ncpus
+aux_analysis = args.aux_analysis
+
 ###TODO Makesure overwite flag is working
 globals.set_overwrite(args.overwrite)
 setup.setup_environment()
@@ -68,6 +72,7 @@ for subject in subjects:
             pool.apply_async(Run_Analysis_Pipeline.analysis_pipeline, args=(origin, destination, events, wave, subject,
                                                                             session, task, pipeline, run_volume,
                                                                             run_surface, run_preanalysis, run_analysis))
-
+    if aux_analysis:
+        Aux_Analysis.aux_analysis(destination, aux_analysis)
 pool.close()
 pool.join()
