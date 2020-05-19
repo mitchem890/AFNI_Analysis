@@ -4,9 +4,10 @@ import os
 import sys
 sys.path.append("..") # Adds higher directory to python modules path.
 from config import globals
-from pipeline import Run_Analysis_Pipeline
+from pipeline import Run_Analysis_Pipeline, Aux_Analysis
 from utils import Validate_User_Input
 from utils import setup
+from classes import aux_code_thread
 import yaml
 parser = argparse.ArgumentParser()
 
@@ -72,7 +73,14 @@ for subject in subjects:
             pool.apply_async(Run_Analysis_Pipeline.analysis_pipeline, args=(origin, destination, events, wave, subject,
                                                                             session, task, pipeline, run_volume,
                                                                             run_surface, run_preanalysis, run_analysis))
-    if aux_analysis:
-        Aux_Analysis.aux_analysis(destination, aux_analysis)
+
+pool.close()
+pool.join()
+
+if aux_analysis:
+    Threads = aux_code_thread.build_threads_from_yaml(aux_analysis)
+    for Thread in Threads:
+        pool.apply_async(Aux_Analysis.aux_analysis, args=(Thread))
+
 pool.close()
 pool.join()
