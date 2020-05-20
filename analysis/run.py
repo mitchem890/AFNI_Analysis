@@ -7,9 +7,14 @@ from config import globals
 from pipeline import Run_Analysis_Pipeline
 from utils import Validate_User_Input
 from utils import setup
+from utils import Download_Dataset
+
 parser = argparse.ArgumentParser()
 
 # Add valid arguments to take in
+parser.add_argument('--download', '-dl', action='store_true',
+                    help='This will Download the given subjects, session, tasks to the \'origin\' location.'
+                         ' Note this will only work with the DMCC13 subject set')
 parser.add_argument('--origin', '-o', help='set the origin of your data, your fmriprep output', required=True)
 parser.add_argument('--subject', '-s', nargs='+', help='set the subject id to be processed', required=True)
 parser.add_argument('--wave', '-w',
@@ -35,6 +40,7 @@ parser.add_argument('--overwrite', help='if previous file was found overwrite th
 args = parser.parse_args()
 
 # Parse the Arguments Given
+download = args.download
 origin = args.origin
 subjects = args.subject
 wave = args.wave
@@ -48,19 +54,22 @@ run_preanalysis = args.preanalysis
 run_analysis = args.analysis
 pipeline = args.pipeline
 ncpus = args.ncpus
+
 ###TODO Makesure overwite flag is working
 globals.set_overwrite(args.overwrite)
 setup.setup_environment()
 Validate_User_Input.validate_user_input(origin=origin, destination=destination, events=events, wave=wave,
                                         subjects=subjects, sessions=sessions, tasks=tasks, pipeline=pipeline,
                                         ncpus=ncpus)
+if download:
+    for subject in subjects:
+        Download_Dataset.download_subject(subject, origin)
 
 pool = mp.Pool(int(ncpus))
 
 for subject in subjects:
     # Create the output Folder
-    if not os.path.exists(
-            os.path.join(destination, subject)):  # If there is no subject folder in the destination create it
+    if not os.path.exists(os.path.join(destination, subject)):  # If there is no subject folder in the destination create it
         os.mkdir(os.path.join(destination, subject))
     for session in sessions:
         for task in tasks:
