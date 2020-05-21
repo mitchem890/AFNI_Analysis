@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d0ac0aa-3e10-42b9-9ad3-3f4140e19029" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pipeline/Aux_Analysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/aux_code_thread.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/aux_code_thread.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/Aux_Analysis_Processing_Stream.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/Aux_Analysis_Processing_Stream.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/Validate_User_Input.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/Validate_User_Input.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

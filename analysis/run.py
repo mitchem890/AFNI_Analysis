@@ -58,7 +58,7 @@ globals.set_overwrite(args.overwrite)
 setup.setup_environment()
 Validate_User_Input.validate_user_input(origin=origin, destination=destination, events=events, wave=wave,
                                         subjects=subjects, sessions=sessions, tasks=tasks, pipeline=pipeline,
-                                        ncpus=ncpus)
+                                        ncpus=ncpus, aux_analysis=aux_analysis)
 
 pool = mp.Pool(int(ncpus))
 
