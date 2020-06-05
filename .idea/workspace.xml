@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="31130fac-9123-41c1-8ccd-9146cf6dd1bb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/analysis/classes/TaskGLMs.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/classes/TaskGLMs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/BashScripts/Roistats.sh" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/BashScripts/Roistats.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
