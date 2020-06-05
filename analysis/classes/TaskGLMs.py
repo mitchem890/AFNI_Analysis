@@ -71,7 +71,7 @@ class TaskGLMs(object):
     #Set The TR per knot for each of the TRs
     def set_tr_per_knot(self):
         if self.tr == 1.2:
-            TRpKnot = 2
+            TRpKnot = 1
         elif self.tr == 0.8:
             TRpKnot = 3
 
