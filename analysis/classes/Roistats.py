@@ -55,13 +55,13 @@ def build_roistats(input_file='',
                    working_dir='',
                    session='',
                    subject='',
-                   mb='',
+                   image_dim='',
                    hemisphere=None,
                    postfix=None,
                    fsaverage=True):
     roistats_list = []
     atlases_dir = ConfigGLMs.Atlas_Dir
-    atlases = atlas_utils.get_correct_atlases(mb=mb, hemisphere=hemisphere, fsaverage=fsaverage)
+    atlases = atlas_utils.get_correct_atlases(image_dim=image_dim, hemisphere=hemisphere, fsaverage=fsaverage)
     for atlas in atlases:
 
         extension = atlas_utils.get_extension(atlas, hemisphere)

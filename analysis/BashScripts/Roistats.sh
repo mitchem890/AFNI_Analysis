@@ -23,10 +23,11 @@ if [ ! -f "${input_file}" ]; then
 fi
 
 
+
 TFILE=$(mktemp)
 
 # Get the index of the subbricks
-3dinfo -verb ${input_file} | grep "${subbrick}" | grep "'${name}#" > $TFILE
+3dinfo -subbrick_info ${input_file} | grep "${subbrick}" | grep "'${name}#" > $TFILE
 idx=$(echo $(awk '{print $4}' $TFILE))
 echo "${idx[@]//#}" > "${work_dir}/idx_${name}_${subbrick}.1D"
 

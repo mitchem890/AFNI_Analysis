@@ -1,18 +1,19 @@
-import logging
 import subprocess
 import shlex
 import os
-
+import sys
+sys.path.append("..") # Adds higher directory to python modules path.
+from utils import logger
 
 
 def run_shell_command(command_line, return_output=False):
-    logging.info('\nSubprocess: "' + command_line + '"')
+    logger.logger(f'\nSubprocess: "{command_line}"', 'info')
     command_line = command_line.replace('\n', '')
     command_line_args = shlex.split(command_line)
     try:
         # This is container relative
         os.environ["PATH"] = '/opt/afni-latest' + os.pathsep \
-                             + '/usr/lib' + os.pathsep + '/opt/workbench/bin_linux64' + os.pathsep + os.environ["PATH"]
+                             + '/usr/lib' + os.pathsep + '/usr/bin' + os.pathsep + os.environ["PATH"]
 
         my_env = os.environ.copy()
         my_env['LD_LIBRARY_PATH'] = '/usr/lib'
@@ -31,23 +32,24 @@ def run_shell_command(command_line, return_output=False):
         # process_output = StringIO(process_output)
         process_output = clean_output(str(process_output))
 
-        logging.info(process_output)
+        logger.logger(process_output, 'info')
         if command_line_process.returncode != 0:
-            logging.info('An Error Occured, Execption Code: ' + str(command_line_process.returncode))
-            logging.info('Subprocess failed')
+            logger.logger(f'An Error Occured, Execption Code: {str(command_line_process.returncode)}', 'error')
+            logger.logger('Subprocess failed', 'warning')
             return False
 
     except (OSError, subprocess.CalledProcessError) as exception:
         print("There was an Issue")
-        logging.info('Exception occured: ' + str(exception))
-        logging.info('Subprocess failed')
+        logger.logger(f'Exception occured: {str(exception)}', 'error')
+        logger.logger('Subprocess failed', 'error')
         return False
 
     # no exception was raised
-    logging.info('Subprocess finished\n')
-
+    logger.logger('Subprocess finished\n', 'info')
+    #TODO issue here will not return float
     if return_output:
-        output = ''.join(c for c in str(process_output) if c.isdigit())
+        #Only return digits and decimals
+        output = ''.join(c for c in str(process_output) if (c.isdigit() or c == '.'))
         return output
 
     return True

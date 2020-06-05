@@ -2,7 +2,7 @@ import os
 import sys
 sys.path.append("..") # Adds higher directory to python modules path.
 from PreAnalysis_tools import Copy_Input_Data, Format_Motion_Regressors, Demean_Images, Demean_Motion
-
+from utils import logger
 hemispheres = ['L', 'R']
 
 
@@ -30,5 +30,7 @@ def preAnalysis(destination, events, images, run_volume, run_surface):
         if run_surface:
             for hemisphere in hemispheres:
                 Demean_Images.surface_demean_images(destination, hemisphere, images)  # Demean the surface images
-    except:
+    except Exception as e:
+        print(e)
         print(f"Error Running Preanalysis")
+        logger.logger(e, 'error')

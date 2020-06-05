@@ -1,6 +1,8 @@
 import os
 import glob
-
+import sys
+sys.path.append("..") # Adds higher directory to python modules path.
+from classes import BashCommand
 
 # This File defines the image class, which stores data about found images
 
@@ -44,7 +46,7 @@ def get_images(origin, wave, subject, session, task, pipeline):
 
 
 class preprocessed_image(object):
-    def __init__(self, file, wave, subject, session, task, pipeline):
+    def __init__(self, file, wave, subject, session, task, pipeline, testMode = False):
         self.file = file
         self.wave = wave
         self.subject = subject
@@ -53,13 +55,21 @@ class preprocessed_image(object):
         self.pipeline = pipeline
         self.run_num = self.get_run_num()
         self.encoding = self.get_encoding()
-        self.mb_factor = self.get_mb_factor()
         self.extension = self.get_extension()
         self.basename = self.get_basename()
         self.dirname = self.get_dirname()
         self.root_name = self.get_root_name()
         self.afni_ready_volume_file = self.get_afni_ready_volume_file()
         self.movement_regressor = self.get_movement_regessors_file()
+        ##These three make it difficult to run a unit test on machine without an image Mybe think about setting fake value defaults
+        if not testMode:
+            self.tr = round(float(self.get_tr()), 2)
+            self.set_voxel_dim(self.file)
+            self.set_image_dim(self.file)
+        else:
+            self.tr = round(float('1.2'), 2)
+            self.voxel_dim = '2.4000x2.400000x2.400000'
+            self.image_dim = '75x90x75'
 
     def __str__(self):
         return f"{self.subject} {self.session} {self.task} {self.encoding}"
@@ -95,10 +105,34 @@ class preprocessed_image(object):
         self.hcp_dvars = f"{self.subject}_tfMRI_{self.root_name}_DVARS.txt"
         self.hcp_fd_mask = f"{self.subject}_tfMRI_{self.root_name}_FD_mask.txt"
 
+    def get_tr(self):
+        return BashCommand.get_tr(infile=self.file).run_command()
+
+    def get_voxel_dim(self, file):
+        dimensions_i = BashCommand.get_voxel_dimensions(infile=file, dimension='i').run_command()
+        dimensions_j = BashCommand.get_voxel_dimensions(infile=file, dimension='j').run_command()
+        dimensions_k = BashCommand.get_voxel_dimensions(infile=file, dimension='k').run_command()
+        dimensions = f"{dimensions_i}x{dimensions_j}x{dimensions_k}".replace('-', '')
+        return dimensions
+
+    def get_image_dim(self, file):
+        dimensions_i = BashCommand.get_image_dimensions(infile=file, dimension='i').run_command()
+        dimensions_j = BashCommand.get_image_dimensions(infile=file, dimension='j').run_command()
+        dimensions_k = BashCommand.get_image_dimensions(infile=file, dimension='k').run_command()
+        dimensions = f"{dimensions_i}x{dimensions_j}x{dimensions_k}".replace('-', '')
+        return dimensions
+
+    def set_image_dim(self, file):
+        self.image_dim = self.get_image_dim(file)
+
+    def set_voxel_dim(self, file):
+        self.voxel_dim = self.get_voxel_dim(file)
+
+
 class fmriprep_preprocessed_image(preprocessed_image):
-    def __init__(self, file, wave, subject, session, task, pipeline):
+    def __init__(self, file, wave, subject, session, task, pipeline, testMode = False):
         self.fsaverage = True
-        preprocessed_image.__init__(self, file, wave, subject, session, task, pipeline)
+        preprocessed_image.__init__(self, file, wave, subject, session, task, pipeline, testMode=testMode)
         self.fmriprep_root_name = f"sub-{str(self.subject)}_ses-{str(self.wave)}{str(self.session).lower()[0:3]}_task-{str(self.task)}_acq-mb4{str(self.encoding)}_run-{str(self.run_num)}"
         self.fmriprep_regressors = f"{self.fmriprep_root_name}_desc-confounds_regressors.tsv"
 
@@ -107,9 +141,6 @@ class fmriprep_preprocessed_image(preprocessed_image):
                 f"{self.fmriprep_root_name}_space-fsaverage5_hemi-L.func.gii": f"tfMRI_{self.root_name}_L.func.gii",
                 f"{self.fmriprep_root_name}_space-fsaverage5_hemi-R.func.gii": f"tfMRI_{self.root_name}_R.func.gii"}
 
-
-    def get_mb_factor(self):
-        return os.path.basename(self.file).split('mb')[1][0]
 
     def get_run_num(self):
         return os.path.basename(self.file).split('run-')[1][0]
@@ -128,12 +159,9 @@ class fmriprep_preprocessed_image(preprocessed_image):
 
 
 class hcp_preprocessed_image(preprocessed_image):
-    def __init__(self, file, wave, subject, session, task, pipeline):
+    def __init__(self, file, wave, subject, session, task, pipeline, testMode = False):
         self.fsaverage = False
-        preprocessed_image.__init__(self, file, wave, subject, session, task, pipeline)
-
-    def get_mb_factor(self):
-        return '4'
+        preprocessed_image.__init__(self, file, wave, subject, session, task, pipeline, testMode = testMode)
 
     def get_run_num(self):
         return os.path.basename(self.file).split('.', 1)[0][-4]
