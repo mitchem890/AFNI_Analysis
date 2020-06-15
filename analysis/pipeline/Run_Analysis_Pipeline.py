@@ -6,6 +6,12 @@ from pipeline import Analysis, PreAnalysis, OutputVerifier
 from classes import Images
 from utils import logger
 
+def update_image_properties(image, destination):
+    afni_ready_image = os.path.join(destination, image.subject, 'INPUT_DATA', image.task, image.session,
+                                    image.afni_ready_volume_file)
+    image.set_voxel_dim(afni_ready_image)
+    image.set_image_dim(afni_ready_image)
+
 
 def create_logger(subject, wave, session, task, destination):
     logfilename = f'sub-{str(subject)}_{wave}_{session}_{task}_Analysis.log'  # Create a log file
@@ -23,6 +29,9 @@ def analysis_pipeline(origin, destination, events, wave, subject,
 
     if run_preanalysis:
         PreAnalysis.preAnalysis(destination, events, images, run_volume, run_surface)
+    for image in images:
+        update_image_properties(image, destination)
+        
     if run_analysis:
         GLM_set = Analysis.analysis(destination, images, run_volume, run_surface)
 
