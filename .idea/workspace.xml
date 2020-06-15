@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="c3c5ef9e-7a20-4e45-8f52-0a75b9b60b85" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BuildProject.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BuildProject.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/analysis/classes/BashCommand.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/classes/BashCommand.py" afterDir="false" />
+=======
+    <list default="true" id="eae24755-f429-4958-8e9f-e6a50c032ed1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/analysis/pipeline/Run_Analysis_Pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/pipeline/Run_Analysis_Pipeline.py" afterDir="false" />
+>>>>>>> master
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -149,10 +155,17 @@
       </list>
     </recent_temporary>
   </component>
+=======
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+>>>>>>> master
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
+<<<<<<< HEAD
     <task active="true" id="Default" summary="Default task">
       <changelist id="c3c5ef9e-7a20-4e45-8f52-0a75b9b60b85" name="Default" comment="" />
       <created>1557516259719</created>
@@ -205,4 +218,8 @@
     <state x="2521" y="362" key="com.intellij.ide.util.TipDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1585452252162" />
     <state x="655" y="380" key="com.intellij.ide.util.TipDialog/79.27.1841.1053@79.27.1841.1053" timestamp="1585328322816" />
   </component>
+=======
+    <servers />
+  </component>
+>>>>>>> master
 </project>
