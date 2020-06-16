@@ -14,11 +14,6 @@ docker run --rm repronim/neurodocker:0.7.0 \
 
 
 
-<<<<<<< HEAD
-#install workbench
-echo "RUN mkdir /src && cd /src && wget https://www.humanconnectome.org/storage/app/media/workbench/workbench-linux64-v1.4.2.zip && cd /opt && unzip /src/workbench-linux64-v1.4.2.zip">>Dockerfile
-=======
->>>>>>> master
 echo "COPY analysis /home/analysis/" >> Dockerfile
 
 
@@ -44,19 +39,9 @@ echo "ENV PATH /opt/miniconda-latest/envs/neuro/bin:\$PATH" >> Dockerfile
 echo "ENTRYPOINT [\"python\",\"-u\",\"/home/analysis/run.py\"]" >> Dockerfile
 #Add $HOME variable
 echo "ENV HOME=/home" >> Dockerfile
-<<<<<<< HEAD
-echo "COPY .afnirc /home" >> Dockerfile
-echo "RUN mkdir /testing" >> Dockerfile
-echo "RUN mkdir /data" >> Dockerfile
-sed -i 's/apt-get/apt-get -y/g' Dockerfile
-sed -i 's/nlibxmu-headers/libxmu-headers/g' Dockerfile
-sed -i 's/nmesa-common-dev/mesa-common-dev/g' Dockerfile
-sed -i '/libmng1/d' Dockerfile
-=======
 echo "RUN mkdir /testing" >> Dockerfile
 echo "RUN mkdir /data" >> Dockerfile
 #Copy the afnirc to a findable location
 echo "COPY .afnirc /home" >> Dockerfile
->>>>>>> master
 
 docker build --tag afni_analysis .
