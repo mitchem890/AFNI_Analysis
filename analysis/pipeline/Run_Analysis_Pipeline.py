@@ -7,6 +7,7 @@ from classes import Images
 from utils import logger
 
 def update_image_properties(image, destination):
+    logger.logger(f'Updating Image Dimensions', 'info')
     afni_ready_image = os.path.join(destination, image.subject, 'INPUT_DATA', image.task, image.session,
                                     image.afni_ready_volume_file)
     image.set_voxel_dim(afni_ready_image)
