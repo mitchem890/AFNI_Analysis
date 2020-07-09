@@ -106,12 +106,24 @@ def copy_input_data_hcp(image: Images.preprocessed_image, destination, events):
 # Make the DVARS
 # make the fd masks
 # Resample the volume image to fit hcp format
+
+#Find the multiband factor according to fmriprep
+def find_multiband_factor(image):
+    fmriprep_root_name = f"sub-{str(image.subject)}_ses-{str(image.wave)}{str(image.session).lower()[0:3]}_task-{str(image.task)}_acq-mb?{str(image.encoding)}_run-{str(image.run_num)}"
+    fmriprep_volume_image = f"{fmriprep_root_name}_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz"
+
+    multiband_factor=glob.glob(os.path.join(image.dirname, fmriprep_volume_image))[0].split('mb')[-1][0]
+
+    return multiband_factor
+
+
 def copy_input_data_fmriprep(image, destination, events):
     print(f"Copying Data for {image.subject} {image.session} {image.task} run: {image.run_num}")
     task_dest = os.path.join(destination, image.subject, 'INPUT_DATA', image.task, image.session)
-
-    fmriprep_root_name = f"sub-{str(image.subject)}_ses-{str(image.wave)}{str(image.session).lower()[0:3]}_task-{str(image.task)}_acq-mb4{str(image.encoding)}_run-{str(image.run_num)}"
+    multiband_factor = find_multiband_factor(image)
+    fmriprep_root_name = f"sub-{str(image.subject)}_ses-{str(image.wave)}{str(image.session).lower()[0:3]}_task-{str(image.task)}_acq-mb{str(multiband_factor)}{str(image.encoding)}_run-{str(image.run_num)}"
     fmriprep_volume_image = f"{fmriprep_root_name}_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz"
+
     fmriprep_regressors = f"{fmriprep_root_name}_desc-confounds_regressors.tsv"
     fmriprep_surface_image_L = f"{fmriprep_root_name}_space-fsaverage5_hemi-L.func.gii"
     fmriprep_surface_image_R = f"{fmriprep_root_name}_space-fsaverage5_hemi-R.func.gii"

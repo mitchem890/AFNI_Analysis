@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eae24755-f429-4958-8e9f-e6a50c032ed1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/analysis/pipeline/Run_Analysis_Pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/pipeline/Run_Analysis_Pipeline.py" afterDir="false" />
+    <list default="true" id="f764d416-a7be-4502-8d86-c38410034294" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/PreAnalysis_tools/Copy_Input_Data.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/PreAnalysis_tools/Copy_Input_Data.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,7 +14,16 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
+  <component name="ProjectId" id="1eSiLWUaKoPcjLqeGf384t1cRp2" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
