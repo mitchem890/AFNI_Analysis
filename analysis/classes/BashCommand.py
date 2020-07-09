@@ -299,7 +299,7 @@ class compute_motion_parameter_derivatives(bash_command):
 -set_run_lengths {self.tr_count1} {self.tr_count2} \\
 -derivative \\
 -demean \\
--write {self.derivpath}\\
+-write {self.derivpath} \\
 -overwrite"""
         return command
 
