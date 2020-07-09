@@ -15,7 +15,7 @@ def update_image_properties(image, destination):
 
 
 def create_logger(subject, wave, session, task, destination):
-    logfilename = f'sub-{str(subject)}_{wave}_{session}_{task}_Analysis.log'  # Create a log file
+    logfilename = f'1TRpK_sub-{str(subject)}_{wave}_{session}_{task}_Analysis.log'  # Create a log file
     logfilename = os.path.join(destination, logfilename)  # place it in the output directory
     logger.setup_logger(logfilename)
     print(logfilename)

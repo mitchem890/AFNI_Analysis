@@ -120,7 +120,7 @@ class VolumeGLM(GLM):
 
 
         self.style = "Volume"
-        self.results_dir = "RESULTS"
+        self.results_dir = "1TRpK_RESULTS"
 
 
         self.input = self.generate_input()
@@ -221,7 +221,7 @@ class SurfaceGLM(GLM):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.style = f"""Surface {self.hemisphere}"""
-        self.results_dir = "SURFACE_RESULTS"
+        self.results_dir = "1TRpK_SURFACE_RESULTS"
         self.Rvar = f"stats_var_{self.images[0].subject}_REML_{self.hemisphere}.func.gii"
         self.Rbuck = f"STATS_{self.images[0].subject}_REML_{self.hemisphere}.func.gii"
 
