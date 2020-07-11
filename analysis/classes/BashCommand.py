@@ -299,7 +299,7 @@ class compute_motion_parameter_derivatives(bash_command):
 -set_run_lengths {self.tr_count1} {self.tr_count2} \\
 -derivative \\
 -demean \\
--write {self.derivpath}\\
+-write {self.derivpath} \\
 -overwrite"""
         return command
 
@@ -355,6 +355,62 @@ class get_tr_count(bash_command):
 
     def build_command(self):
         command = f"""3dinfo -nv {self.infile}"""
+        return command
+
+class get_tr(bash_command):
+    def __init__(self, **kwargs):
+        prop_defaults = {
+            "infile": None
+        }
+        for (prop, default) in prop_defaults.items():
+            setattr(self, prop, kwargs.get(prop, default))
+
+        self.command = self.build_command()
+        bash_command.__init__(self, command=self.command, return_output=True)
+
+    def __str__(self):
+        return f"Getting TR"
+
+    def build_command(self):
+        command = f"""3dinfo -tr {self.infile}"""
+        return command
+
+class get_voxel_dimensions(bash_command):
+    def __init__(self, **kwargs):
+        prop_defaults = {
+            "infile": None,
+            "dimension": 'i'
+        }
+        for (prop, default) in prop_defaults.items():
+            setattr(self, prop, kwargs.get(prop, default))
+
+        self.command = self.build_command()
+        bash_command.__init__(self, command=self.command, return_output=True)
+
+    def __str__(self):
+        return f"Getting Voxel dimensions"
+
+    def build_command(self):
+        command = f"""3dinfo -d{self.dimension} {self.infile}"""
+        return command
+
+class get_image_dimensions(bash_command):
+    def __init__(self, **kwargs):
+        prop_defaults = {
+            "infile": None,
+            "dimension": 'i'
+        }
+        for (prop, default) in prop_defaults.items():
+            setattr(self, prop, kwargs.get(prop, default))
+
+        self.command = self.build_command()
+        bash_command.__init__(self, command=self.command, return_output=True)
+
+    def __str__(self):
+        return f"Getting image dimensions"
+
+    def build_command(self):
+        command = f"""3dinfo -n{self.dimension} {self.infile}"""
         return command
 
 
@@ -455,13 +511,21 @@ class make_fd_mask(bash_command):
 class resample(bash_command):
     def __init__(self, **kwargs):
         prop_defaults = {
-            "atlas": os.path.join(ConfigGLMs.Atlas_Dir, "gordon_2p4_resampled_wsubcort_LPI.nii.gz"),
+            "voxel_dim": None,
             "infile": None,
             "outfile": None
         }
+
         for (prop, default) in prop_defaults.items():
             setattr(self, prop, kwargs.get(prop, default))
 
+        #Set the correct atlas for the MB of the image MB4 is 2p4 MB8 is 2.0
+        if self.voxel_dim == '2.400000x2.400000x2.400000':
+            self.atlas = os.path.join(ConfigGLMs.Atlas_Dir, "gordon_2p4_resampled_wsubcort_LPI.nii.gz")
+        elif self.voxel_dim == '2.000000x2.000000x2.000000':
+            self.atlas = os.path.join(ConfigGLMs.Atlas_Dir, "gordon_222_resampled_wsubcort_LPI.nii.gz")
+        else:
+            Exception("Could not get atlas for voxel dimensions")
         self.command = self.build_command()
         bash_command.__init__(self, command=self.command, return_output=False)
 
