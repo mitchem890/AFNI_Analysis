@@ -11,7 +11,7 @@ from utils import logger
 
 # Check to make sure there are no blank evts for use with both fmriprep and hcp
 def check_evts(input, image):
-    files = glob.glob(os.path.join(input, f"{image.subject}*{image.task}*{image.session}*STRICT*"))
+    files = glob.glob(os.path.join(input, f"{image.subject}_{image.task}_{image.session}*txt"))
 
     GoodFiles = []
 

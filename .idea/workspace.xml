@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f764d416-a7be-4502-8d86-c38410034294" name="Default Changelist" comment="" />
+    <list default="true" id="f764d416-a7be-4502-8d86-c38410034294" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/PreAnalysis_tools/Copy_Input_Data.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/PreAnalysis_tools/Copy_Input_Data.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,6 +28,19 @@
     <configuration />
   </component>
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f764d416-a7be-4502-8d86-c38410034294" name="Default Changelist" comment="" />
+      <created>1594484158757</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1594484158757</updated>
+    </task>
     <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="693" y="292" width="618" height="522" key="find.popup" timestamp="1594327438364">
+      <screen x="84" y="27" width="1836" height="1053" />
+    </state>
+    <state x="693" y="292" width="618" height="522" key="find.popup/84.27.1836.1053@84.27.1836.1053" timestamp="1594327438364" />
   </component>
 </project>
