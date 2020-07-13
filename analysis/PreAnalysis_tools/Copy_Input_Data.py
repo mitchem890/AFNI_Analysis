@@ -12,10 +12,12 @@ from utils import logger
 # Check to make sure there are no blank evts for use with both fmriprep and hcp
 def check_evts(input, image):
     files = glob.glob(os.path.join(input, f"{image.subject}_{image.task}_{image.session}*txt"))
+    logger.logger("Moving evts", "info")
 
     GoodFiles = []
 
     for file in files:
+        logger.logger(f"Checking evt: {file}", "info")
         with open(os.path.join(input, file), "r") as a_file:
             for line in a_file:
                 if len(line.strip().strip('*')) == 0:
