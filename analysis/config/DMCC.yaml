@@ -1,0 +1,101 @@
+# This File will load in the relevent models for all of the glms as well as other information such as force TR and Results directories
+project:
+  project_name: "DMCC"
+  - wave: 1
+    - session: "baseline"
+      tasks:
+        - name: "Axcpt"
+          number_or_runs: 2
+        - name: "Cuedts"
+            number_or_runs: 2
+        - name: "Stern"
+            number_or_runs: 2
+        - name: "Stroop"
+            number_or_runs: 2
+    - session: "proactive"
+      tasks:
+        - name: "Axcpt"
+          number_or_runs: 2
+        - name: "Cuedts"
+            number_or_runs: 2
+        - name: "Stern"
+            number_or_runs: 2
+        - name: "Stroop"
+            number_or_runs: 2
+    - session: "reactive"
+      tasks:
+        - name: "Axcpt"
+          number_or_runs: 2
+        - name: "Cuedts"
+            number_or_runs: 2
+        - name: "Stern"
+            number_or_runs: 2
+        - name: "Stroop"
+            number_or_runs: 2
+  - wave: 2
+    - session: "baseline"
+      tasks:
+        - name: "Axcpt"
+          number_or_runs: 2
+        - name: "Cuedts"
+            number_or_runs: 2
+        - name: "Stern"
+            number_or_runs: 2
+        - name: "Stroop"
+            number_or_runs: 2
+    - session: "proactive"
+      tasks:
+        - name: "Axcpt"
+          number_or_runs: 2
+        - name: "Cuedts"
+            number_or_runs: 2
+        - name: "Stern"
+            number_or_runs: 2
+        - name: "Stroop"
+            number_or_runs: 2
+    - session: "reactive"
+      tasks:
+        - name: "Axcpt"
+          number_or_runs: 2
+        - name: "Cuedts"
+            number_or_runs: 2
+        - name: "Stern"
+            number_or_runs: 2
+        - name: "Stroop"
+            number_or_runs: 2
+
+
+atlas_dir: "/home/Atlases"
+atlases:
+  volume_atlases:
+    image_dim:
+      75x90x75:
+        - "gordon_2p4_resampled_wsubcort_LPI.nii.gz"
+        - "communities_2p4_resampled_LPI.nii.gz"
+        - "HCP-MMP1_on_MNI152_ICBM2009a_nlin_2p4.nii.gz"
+        - "HCP-MMP1_L_on_MNI152_ICBM2009a_nlin_2p4.nii.gz"
+        - "HCP-MMP1_R_on_MNI152_ICBM2009a_nlin_2p4.nii.gz"
+        - "Schaefer2018_400Parcels_7Networks_order_FSLMNI152_2p4.nii.gz"
+      91x109x91:
+        - "gordon_222_resampled_wsubcort_LPI.nii.gz"
+        - "communities_222_resampled_LPI.nii.gz"
+        - "HCP-MMP1_on_MNI152_ICBM2009a_nlin_222.nii.gz"
+        - "HCP-MMP1_L_on_MNI152_ICBM2009a_nlin_222.nii.gz"
+        - "HCP-MMP1_R_on_MNI152_ICBM2009a_nlin_222.nii.gz"
+        - "Schaefer2018_400Parcels_7Networks_order_FSLMNI152_222.nii.gz"
+  surface_atlases:
+    image_dim:
+      - 10242x1x1:
+          - Hemisphere: "L"
+            - "Schaefer2018_400Parcels_7Networks_order_10K_L.label.gii"
+          - Hemisphere: "R"
+            - "Schaefer2018_400Parcels_7Networks_order_10K_R.label.gii"
+      - 32492x1x1:
+          - Hemisphere: "L"
+              - "gordon_333_L.func.gii"
+              - "HCP-MMP_RelatedParcellation210.CorticalAreas_dil_Colors.32k_fs_LR_L.label.gii"
+              - "Schaefer2018_400Parcels_7Networks_order_L.label.gii"
+          - Hemisphere: "R"
+            - "gordon_333_R.func.gii"
+            - "HCP-MMP_RelatedParcellation210.CorticalAreas_dil_Colors.32k_fs_LR_R.label.gii"
+            - "Schaefer2018_400Parcels_7Networks_order_R.label.gii"

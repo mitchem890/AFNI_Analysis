@@ -47,18 +47,19 @@ from abc import abstractmethod
 
 image_list = List[Images.preprocessed_image]
 
-
+#
 class TaskGLMs(object):
     def __init__(self, working_dir, images: image_list):
         self.images = images
         self.subject = images[0].subject
         self.session = images[0].session
         self.task = images[0].task
+        self.tr = images[0].tr
+        self.TRpKnot = self.set_tr_per_knot()
+
         self.working_dir = working_dir
-        self.mb = images[0].mb_factor
-        self.buttonPress_model = "'TENTzero(0,16.8,8)'"
-        self.button_idx = "0..5"
-        self.blockONandOFF_model = "'TENTzero(0,16.8,8)'"
+        self.buttonPress_model, self.button_idx = self.create_Tent_models(16.8)
+        self.blockONandOFF_model, self.button_idx = self.create_Tent_models(16.8)
         self.block_model = "'dmBLOCK(1)'"
         self.hrf_model = "'BLOCK(2,1)'"
         self.hrf_idx = "0..0"
@@ -66,6 +67,15 @@ class TaskGLMs(object):
         self.censor = self.generate_censor()
 
         return
+
+    #Set The TR per knot for each of the TRs
+    def set_tr_per_knot(self):
+        if self.tr == 1.2:
+            TRpKnot = 2
+        elif self.tr == 0.8:
+            TRpKnot = 3
+
+        return TRpKnot
 
     # Every GLM that we are running is a censored glm all glms must have a censor file.
     def generate_censor(self):
@@ -85,11 +95,6 @@ class TaskGLMs(object):
         if images is None:
             images = self.images
 
-        if self.mb is '4':
-            force_tr = '1.2'
-        elif self.mb is '8':
-            force_tr = '0.8'
-
         volume_glm = GLMs.VolumeGLM(images=images,
                                     working_dir=self.working_dir,
                                     glm_type=glm_type,
@@ -100,14 +105,13 @@ class TaskGLMs(object):
                                     regressors_models_labels=regressors_models_labels,
                                     contrasts_labels=contrasts_labels,
                                     ortvec=self.ortvec,
-                                    mb=self.mb,
                                     roistats_designs_postfixes=roistats_designs_postfixes)
 
         surface_L_glm = GLMs.SurfaceGLM(images=images,
                                         working_dir=self.working_dir,
                                         glm_type=glm_type,
                                         glm_label=glm_label,
-                                        force_tr=force_tr,
+                                        force_tr=self.tr,
                                         censor=self.censor,
                                         polort=polort,
                                         generate_residuals=generate_residuals,
@@ -121,7 +125,7 @@ class TaskGLMs(object):
                                         working_dir=self.working_dir,
                                         glm_type=glm_type,
                                         glm_label=glm_label,
-                                        force_tr=force_tr,
+                                        force_tr=self.tr,
                                         censor=self.censor,
                                         polort=polort,
                                         generate_residuals=generate_residuals,
@@ -167,6 +171,17 @@ class TaskGLMs(object):
         '''To Override'''
         pass
 
+    def create_Tent_models(self, duration):
+        #is The duration evenly divisible by the TRpKnot * tr
+        while not round(duration/self.tr, 2) % self.TRpKnot == 0:
+            duration = duration + self.tr
+        nonzero_knots = round(duration / (self.TRpKnot * float(self.tr)), 2)
+        total_knots = nonzero_knots + 1
+        model = f"'TENTzero(0,{round(duration, 2)},{int(total_knots)})'"
+        final_index = total_knots - 3
+        idx = f"0..{int(final_index)}"
+        return model, idx
+
     # This will take a list of contrasts and regressors
     # and turn them into a list of tuples containing the model and the contrast or the single regressors
     def generate_roistats_designs_postfixes(self, contrasts, regressors, model):
@@ -178,12 +193,13 @@ class TaskGLMs(object):
 
         return roistats_designs_postfixes
 
+#TODO Tent models will need to be changed based on MB Think about tr value, duration, mb8, and TR per knot
 
 class AxcptGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)
-        self.event_model = "'TENTzero(0,21.6,10)'"
-        self.idx = "0..7"
+        self.tent_duration = 21.6
+        self.event_model, self.idx = self.create_Tent_models(duration=self.tent_duration)
         self.glms = []
         self.glms.append(self.create_on_blocks_glms())
         self.glms.append(self.create_on_mixed_glms())
@@ -222,37 +238,6 @@ class AxcptGLMs(TaskGLMs):
                                contrasts_labels=contrasts_labels,
                                roistats_designs_postfixes=roistats_designs_postfixes)
 
-    def create_cues_events_glm_residuals(self, glm_type):
-        glm_label = "Cues"
-        regressors_models_labels = [("block", self.block_model, "block"),
-                                    ("blockONandOFF", self.blockONandOFF_model, "blockONandOFF"),
-                                    ("AX", self.event_model, "AX"),
-                                    ("AY", self.event_model, "AY"),
-                                    ("Ang", self.event_model, "Ang"),
-                                    ("BX", self.event_model, "BX"),
-                                    ("BY", self.event_model, "BY"),
-                                    ("Bng", self.event_model, "Bng")]
-
-        contrasts_labels = [(
-            f"+0.5*AX[[{self.idx}]] +0.5*AY[[{self.idx}]] -0.5*BX[[{self.idx}]] -0.5*BY[[{self.idx}]]",
-            "Acue_Bcue"),
-            (
-                f"+0.5*AY[[{self.idx}]] +0.5*BX[[{self.idx}]] -0.5*AX[[{self.idx}]] -0.5*BY[[{self.idx}]]",
-                "HI_LO_conf"),
-            (
-                f"+0.5*Ang[[{self.idx}]] +0.5*Bng[[{self.idx}]] -0.25*AX[[{self.idx}]] -0.25*AY[[{self.idx}]] -0.25*BX[[{self.idx}]] -0.25*BY[[{self.idx}]]",
-                "Nogo_Go")]
-
-        roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
-                                                                              contrasts_labels,
-                                                                              '_tents')
-
-        return self.build_glms(glm_type=glm_type,
-                               glm_label=glm_label,
-                               regressors_models_labels=regressors_models_labels,
-                               contrasts_labels=contrasts_labels,
-                               roistats_designs_postfixes=roistats_designs_postfixes,
-                               generate_residuals=True)
 
     def create_buttons_events_glm(self, glm_type):
         glm_label = "Buttons"
@@ -282,15 +267,14 @@ class AxcptGLMs(TaskGLMs):
         glm_type = "EVENTS"
         event_glms.append(self.create_buttons_events_glm(glm_type))
         event_glms.append(self.create_cues_events_glm(glm_type))
-        event_glms.append(self.create_cues_events_glm_residuals(glm_type))
         return event_glms
 
 
 class CuedtsGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)
-        self.event_model = "'TENTzero(0,24,11)'"
-        self.idx = "0..8"
+        self.tent_duration = 24
+        self.event_model, self.idx = self.create_Tent_models(duration=self.tent_duration)
         self.glms = []
         self.glms.append(self.create_on_blocks_glms())
         self.glms.append(self.create_on_mixed_glms())
@@ -395,8 +379,8 @@ class CuedtsGLMs(TaskGLMs):
 class SternGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)
-        self.event_model = "'TENTzero(0,26.4,12)'"
-        self.idx = "0..9"
+        self.tent_duration = 26.4
+        self.event_model, self.idx = self.create_Tent_models(duration=self.tent_duration)
         self.glms = []
         self.glms.append(self.create_on_blocks_glms())
         self.glms.append(self.create_on_mixed_glms())
@@ -466,8 +450,8 @@ class SternGLMs(TaskGLMs):
 class StroopGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)
-        self.event_model = "'TENTzero(0,16.8,8)'"
-        self.idx = "0..5"
+        self.tent_duration = 16.8
+        self.event_model, self.idx = self.create_Tent_models(duration=self.tent_duration)
         self.glms = []
         self.glms.append(self.create_on_blocks_glms())
         self.glms.append(self.create_on_mixed_glms())
