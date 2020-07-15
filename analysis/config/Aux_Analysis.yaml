@@ -1,0 +1,46 @@
+#This is an example file to reference whatht  end users file should look like
+#all paths in the shell scripts should be using relatives paths to the container
+#For example
+# /data/nil-bluearc/Results/xmat.1D
+# should look something more like
+# /mnt/xmat.1D
+
+#All log files will be written out to the working directory
+#Scripts will run in the order that they are listed
+#Threads will run in parallel
+
+#This yaml file should live in a directory with all the Scripts that will be ran throughout the analysis
+#./MyScripts
+#   |-Aux_Analysis.yaml
+#   |-Script1A.sh
+#   |-Script2A.sh
+#   |-Script3A.sh
+#   |-Script1B.sh
+#   |-Script2B.sh
+#   |-Script1C.sh
+
+threads:
+  - thread_name: "Axcpt_baseline"
+    log_file: "Axcpt_baseline.log"
+    scripts:
+      - "3dDeconvolve1.sh"
+      - "3dREMLFit1.sh"
+      - "roistats1.sh"
+  - thread_name: "Axcpt_reactive"
+    log_file: "Axcpt_reactive.log"
+    scripts:
+      - "3dDeconvolve2.sh"
+      - "3dREMLFit2.sh"
+      - "roistats2.sh"
+  - thread_name: "Axcpt_baseline"
+    log_file: "Axcpt_baseline.log"
+    scripts:
+      - "3dDeconvolve3.sh"
+      - "3dREMLFit3.sh"
+      - "roistats3.sh"
+  - thread_name: "Axcpt_reactive"
+    log_file: "Axcpt_reactive.log"
+    scripts:
+      - "3dDeconvolve4.sh"
+      - "3dREMLFit4.sh"
+      - "roistats4.sh"

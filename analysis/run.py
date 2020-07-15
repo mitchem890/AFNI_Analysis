@@ -4,11 +4,11 @@ import os
 import sys
 sys.path.append("..") # Adds higher directory to python modules path.
 from config import globals
-from pipeline import Run_Analysis_Pipeline, Aux_Analysis
+from pipeline import Run_Analysis_Pipeline, AuxAnalysis
 from utils import Validate_User_Input
 from utils import setup
 from classes import aux_code_thread
-import yaml
+
 parser = argparse.ArgumentParser()
 
 # Add valid arguments to take in
@@ -51,7 +51,11 @@ run_preanalysis = args.preanalysis
 run_analysis = args.analysis
 pipeline = args.pipeline
 ncpus = args.ncpus
-aux_analysis = args.aux_analysis
+aux_analysis = args.aux_analysis #Directory
+#directory structure:
+#Scripts/
+#   *.yaml
+#   *.sh
 
 ###TODO Makesure overwite flag is working
 globals.set_overwrite(args.overwrite)
@@ -76,11 +80,13 @@ for subject in subjects:
 
 pool.close()
 pool.join()
-
+pool = mp.Pool(int(ncpus))
+YamlFileName = "Aux_Analysis.yaml"
 if aux_analysis:
-    Threads = aux_code_thread.build_threads_from_yaml(aux_analysis)
+    Threads = aux_code_thread.build_threads_from_yaml(os.path.join(aux_analysis, YamlFileName))
     for Thread in Threads:
-        pool.apply_async(Aux_Analysis.aux_analysis, args=(Thread))
+        print(f"Running Thread: {Thread.thread_name}")
+        pool.apply_async(AuxAnalysis.aux_analysis, args=(Thread, aux_analysis))
 
 pool.close()
 pool.join()

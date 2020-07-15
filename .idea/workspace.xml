@@ -2,14 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f764d416-a7be-4502-8d86-c38410034294" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/analysis/config/Aux_Analysis.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/analysis/pipeline/AuxAnalysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BuildProject.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BuildProject.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/PreAnalysis_tools/Copy_Input_Data.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/PreAnalysis_tools/Copy_Input_Data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/config/Aux_Analysis_Processing_Stream.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/pipeline/Aux_Analysis.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/run.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
@@ -38,6 +50,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="735" y="302" width="524" height="500" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1594751851953">
+      <screen x="84" y="27" width="1836" height="1053" />
+    </state>
+    <state x="735" y="302" width="524" height="500" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/84.27.1836.1053@84.27.1836.1053" timestamp="1594751851953" />
     <state x="693" y="292" width="618" height="522" key="find.popup" timestamp="1594327438364">
       <screen x="84" y="27" width="1836" height="1053" />
     </state>
