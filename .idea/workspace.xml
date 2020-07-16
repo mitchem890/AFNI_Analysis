@@ -1,20 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="31130fac-9123-41c1-8ccd-9146cf6dd1bb" name="Default Changelist" comment="">
+    <list default="true" id="f764d416-a7be-4502-8d86-c38410034294" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/analysis/config/Aux_Analysis.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/analysis/pipeline/AuxAnalysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/analysis/classes/TaskGLMs.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/classes/TaskGLMs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/analysis/tests/test_TaskGLMs.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/tests/test_TaskGLMs.py" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/BuildProject.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BuildProject.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/config/Aux_Analysis_Processing_Stream.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/pipeline/Aux_Analysis.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/run.py" afterDir="false" />
+>>>>>>> master
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
-  <component name="ProjectId" id="1bBL28yP4XNlcTXmu3ceaRv96uj" />
+  <component name="ProjectId" id="1eSiLWUaKoPcjLqeGf384t1cRp2" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -23,86 +41,21 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in test_TaskGLMs.py">
-    <configuration name="Unittests for tests.test_TaskGLMs.TestAxcpt_REML (1)" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="AfniAnalysis" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.test_TaskGLMs.TestAxcpt_REML&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unittests for tests.test_TaskGLMs.TestAxcpt_REML" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="AfniAnalysis" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.test_TaskGLMs.TestAxcpt_REML&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unittests for tests.test_TaskGLMs.TestStroop_GLMs.test_congruency_event_remlfit_surface_L" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="AfniAnalysis" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.test_TaskGLMs.TestStroop_GLMs.test_congruency_event_remlfit_surface_L&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unittests in test_TaskGLMs.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="AfniAnalysis" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/analysis/tests/test_TaskGLMs.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python tests.Unittests in test_TaskGLMs.py" />
-        <item itemvalue="Python tests.Unittests for tests.test_TaskGLMs.TestStroop_GLMs.test_congruency_event_remlfit_surface_L" />
-        <item itemvalue="Python tests.Unittests for tests.test_TaskGLMs.TestAxcpt_REML (1)" />
-        <item itemvalue="Python tests.Unittests for tests.test_TaskGLMs.TestAxcpt_REML" />
-      </list>
-    </recent_temporary>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="31130fac-9123-41c1-8ccd-9146cf6dd1bb" name="Default Changelist" comment="" />
-      <created>1588100331167</created>
+      <changelist id="f764d416-a7be-4502-8d86-c38410034294" name="Default Changelist" comment="" />
+      <created>1594484158757</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1588100331167</updated>
+      <updated>1594484158757</updated>
     </task>
     <servers />
   </component>
   <component name="WindowStateProjectService">
+<<<<<<< HEAD
     <state width="1815" height="278" key="GridCell.Tab.0.bottom" timestamp="1588709168807">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -123,5 +76,15 @@
     </state>
     <state width="1815" height="278" key="GridCell.Tab.0.right/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1588709168806" />
     <state width="1815" height="278" key="GridCell.Tab.0.right/82.27.1838.1053@82.27.1838.1053" timestamp="1588274153989" />
+=======
+    <state x="735" y="302" width="524" height="500" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1594751851953">
+      <screen x="84" y="27" width="1836" height="1053" />
+    </state>
+    <state x="735" y="302" width="524" height="500" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/84.27.1836.1053@84.27.1836.1053" timestamp="1594751851953" />
+    <state x="693" y="292" width="618" height="522" key="find.popup" timestamp="1594327438364">
+      <screen x="84" y="27" width="1836" height="1053" />
+    </state>
+    <state x="693" y="292" width="618" height="522" key="find.popup/84.27.1836.1053@84.27.1836.1053" timestamp="1594327438364" />
+>>>>>>> master
   </component>
 </project>

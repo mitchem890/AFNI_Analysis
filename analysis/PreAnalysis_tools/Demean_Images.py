@@ -59,6 +59,7 @@ def volume_demean_images(destination, images):
                 print(f"There was an issue making lpi_scale_blur4 for {image} please Check")
         else:
             print(f"Previous version of lpi_scale_blur4 for {image} found, skipping")
+        image.set_image_dim(os.path.join(fullpath, image.afni_ready_volume_file))
 
 
 def surface_demean_images(destination, hemisphere, images):

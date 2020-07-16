@@ -46,9 +46,10 @@ def run_shell_command(command_line, return_output=False):
 
     # no exception was raised
     logger.logger('Subprocess finished\n', 'info')
-
+    #TODO issue here will not return float
     if return_output:
-        output = ''.join(c for c in str(process_output) if c.isdigit())
+        #Only return digits and decimals
+        output = ''.join(c for c in str(process_output) if (c.isdigit() or c == '.'))
         return output
 
     return True

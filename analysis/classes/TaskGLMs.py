@@ -47,18 +47,19 @@ from abc import abstractmethod
 
 image_list = List[Images.preprocessed_image]
 
-
+#
 class TaskGLMs(object):
     def __init__(self, working_dir, images: image_list):
         self.images = images
         self.subject = images[0].subject
         self.session = images[0].session
         self.task = images[0].task
+        self.tr = images[0].tr
+        self.TRpKnot = self.set_tr_per_knot()
+
         self.working_dir = working_dir
-        self.mb = images[0].mb_factor
-        self.buttonPress_model = "'TENTzero(0,16.8,15)'"
-        self.button_idx = "0..12"
-        self.blockONandOFF_model = "'TENTzero(0,16.8,15)'"
+        self.buttonPress_model, self.button_idx = self.create_Tent_models(16.8)
+        self.blockONandOFF_model, self.button_idx = self.create_Tent_models(16.8)
         self.block_model = "'dmBLOCK(1)'"
         self.hrf_model = "'BLOCK(2,1)'"
         self.hrf_idx = "0..0"
@@ -66,6 +67,15 @@ class TaskGLMs(object):
         self.censor = self.generate_censor()
 
         return
+
+    #Set The TR per knot for each of the TRs
+    def set_tr_per_knot(self):
+        if self.tr == 1.2:
+            TRpKnot = 2
+        elif self.tr == 0.8:
+            TRpKnot = 3
+
+        return TRpKnot
 
     # Every GLM that we are running is a censored glm all glms must have a censor file.
     def generate_censor(self):
@@ -85,11 +95,6 @@ class TaskGLMs(object):
         if images is None:
             images = self.images
 
-        if self.mb is '4':
-            force_tr = '1.2'
-        elif self.mb is '8':
-            force_tr = '0.8'
-
         volume_glm = GLMs.VolumeGLM(images=images,
                                     working_dir=self.working_dir,
                                     glm_type=glm_type,
@@ -100,14 +105,13 @@ class TaskGLMs(object):
                                     regressors_models_labels=regressors_models_labels,
                                     contrasts_labels=contrasts_labels,
                                     ortvec=self.ortvec,
-                                    mb=self.mb,
                                     roistats_designs_postfixes=roistats_designs_postfixes)
 
         surface_L_glm = GLMs.SurfaceGLM(images=images,
                                         working_dir=self.working_dir,
                                         glm_type=glm_type,
                                         glm_label=glm_label,
-                                        force_tr=force_tr,
+                                        force_tr=self.tr,
                                         censor=self.censor,
                                         polort=polort,
                                         generate_residuals=generate_residuals,
@@ -121,7 +125,7 @@ class TaskGLMs(object):
                                         working_dir=self.working_dir,
                                         glm_type=glm_type,
                                         glm_label=glm_label,
-                                        force_tr=force_tr,
+                                        force_tr=self.tr,
                                         censor=self.censor,
                                         polort=polort,
                                         generate_residuals=generate_residuals,
@@ -167,6 +171,17 @@ class TaskGLMs(object):
         '''To Override'''
         pass
 
+    def create_Tent_models(self, duration):
+        #is The duration evenly divisible by the TRpKnot * tr
+        while not round(duration/self.tr, 2) % self.TRpKnot == 0:
+            duration = duration + self.tr
+        nonzero_knots = round(duration / (self.TRpKnot * float(self.tr)), 2)
+        total_knots = nonzero_knots + 1
+        model = f"'TENTzero(0,{round(duration, 2)},{int(total_knots)})'"
+        final_index = total_knots - 3
+        idx = f"0..{int(final_index)}"
+        return model, idx
+
     # This will take a list of contrasts and regressors
     # and turn them into a list of tuples containing the model and the contrast or the single regressors
     def generate_roistats_designs_postfixes(self, contrasts, regressors, model):
@@ -178,12 +193,13 @@ class TaskGLMs(object):
 
         return roistats_designs_postfixes
 
+#TODO Tent models will need to be changed based on MB Think about tr value, duration, mb8, and TR per knot
 
 class AxcptGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)
-        self.event_model = "'TENTzero(0,21.6,19)'"
-        self.idx = "0..16"
+        self.tent_duration = 21.6
+        self.event_model, self.idx = self.create_Tent_models(duration=self.tent_duration)
         self.glms = []
         self.glms.append(self.create_on_blocks_glms())
         self.glms.append(self.create_on_mixed_glms())
@@ -192,15 +208,18 @@ class AxcptGLMs(TaskGLMs):
         return
 
     def create_cues_events_glm(self, glm_type):
-        glm_label = "Cues"
-        regressors_models_labels = [("block", self.block_model, "block"),
-                                    ("blockONandOFF", self.blockONandOFF_model, "blockONandOFF"),
-                                    ("AX", self.event_model, "AX"),
-                                    ("AY", self.event_model, "AY"),
-                                    ("Ang", self.event_model, "Ang"),
-                                    ("BX", self.event_model, "BX"),
-                                    ("BY", self.event_model, "BY"),
-                                    ("Bng", self.event_model, "Bng")]
+        # This is for the the traditional glms
+
+        generate_residuals = False
+        glm_label = f"Cues"
+        regressors_models_labels = [(f"block", self.block_model, f"block"),
+                                    (f"blockONandOFF", self.blockONandOFF_model, f"blockONandOFF"),
+                                    (f"AX", self.event_model, f"AX"),
+                                    (f"AY", self.event_model, f"AY"),
+                                    (f"Ang", self.event_model, f"Ang"),
+                                    (f"BX", self.event_model, f"BX"),
+                                    (f"BY", self.event_model, f"BY"),
+                                    (f"Bng", self.event_model, f"Bng")]
 
         contrasts_labels = [(
             f"+0.5*AX[[{self.idx}]] +0.5*AY[[{self.idx}]] -0.5*BX[[{self.idx}]] -0.5*BY[[{self.idx}]]",
@@ -210,7 +229,8 @@ class AxcptGLMs(TaskGLMs):
                 "HI_LO_conf"),
             (
                 f"+0.5*Ang[[{self.idx}]] +0.5*Bng[[{self.idx}]] -0.25*AX[[{self.idx}]] -0.25*AY[[{self.idx}]] -0.25*BX[[{self.idx}]] -0.25*BY[[{self.idx}]]",
-                "Nogo_Go")]
+                "Nogo_Go")
+        ]
 
         roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
                                                                               contrasts_labels,
@@ -220,24 +240,25 @@ class AxcptGLMs(TaskGLMs):
                                glm_label=glm_label,
                                regressors_models_labels=regressors_models_labels,
                                contrasts_labels=contrasts_labels,
-                               roistats_designs_postfixes=roistats_designs_postfixes)
+                               roistats_designs_postfixes=roistats_designs_postfixes,
+                               generate_residuals=generate_residuals)
 
-    def create_cues_events_glm_residuals_single_run(self, glm_type, image=None):
-        if image is None:
-            image=self.images
 
-        #TODO Make this Automatically pullout the run number for the image supplied to appened to the evts
-        #TODO Think about making Single run glms and multi run glms get handled by the same function
-        glm_label = "Cues"
-        regressors_models_labels = [(f"block_run{image.run_num}", self.block_model, f"block"),
-                                    (f"blockONandOFF_run{image.run_num}", self.blockONandOFF_model, f"blockONandOFF"),
-                                    (f"AX_run{image.run_num}", self.event_model, f"AX"),
-                                    (f"AY_run{image.run_num}", self.event_model, f"AY"),
-                                    (f"Ang_run{image.run_num}", self.event_model, f"Ang"),
-                                    (f"BX_run{image.run_num}", self.event_model, f"BX"),
-                                    (f"BY_run{image.run_num}", self.event_model, f"BY"),
-                                    (f"Bng_run{image.run_num}", self.event_model, f"Bng"),
-                                    (f"error_run{image.run_num}", self.event_model, f"error")]
+    def create_cues_events_glm_single_run(self, glm_type, image=None):
+
+        evt_appendix=f"_run{image.run_num}"
+        generate_residuals = True
+        glm_label = f"Cues{evt_appendix}"
+
+        regressors_models_labels = [(f"block{evt_appendix}", self.block_model, f"block"),
+                                    (f"blockONandOFF{evt_appendix}", self.blockONandOFF_model, f"blockONandOFF"),
+                                    (f"AX{evt_appendix}", self.event_model, f"AX"),
+                                    (f"AY{evt_appendix}", self.event_model, f"AY"),
+                                    (f"Ang{evt_appendix}", self.event_model, f"Ang"),
+                                    (f"BX{evt_appendix}", self.event_model, f"BX"),
+                                    (f"BY{evt_appendix}", self.event_model, f"BY"),
+                                    (f"Bng{evt_appendix}", self.event_model, f"Bng"),
+                                    (f"error{evt_appendix}", self.event_model, f"error")]
 
         contrasts_labels = [(
             f"+0.5*AX[[{self.idx}]] +0.5*AY[[{self.idx}]] -0.5*BX[[{self.idx}]] -0.5*BY[[{self.idx}]]",
@@ -249,14 +270,9 @@ class AxcptGLMs(TaskGLMs):
                 f"+0.5*Ang[[{self.idx}]] +0.5*Bng[[{self.idx}]] -0.25*AX[[{self.idx}]] -0.25*AY[[{self.idx}]] -0.25*BX[[{self.idx}]] -0.25*BY[[{self.idx}]]",
                 "Nogo_Go"),
             (
-                f"+error[[{self.idx}]] -0.25*AX[[{self.idx}]] -0.25*AY[[{self.idx}]] -0.25*BX[[{self.idx}]] -0.25*BY[[{self.idx}]]']",
+                f"+error[[{self.idx}]] -0.25*AX[[{self.idx}]] -0.25*AY[[{self.idx}]] -0.25*BX[[{self.idx}]] -0.25*BY[[{self.idx}]]",
                 "error_correct")
         ]
-        if image is not None:
-            print()
-            #regresors_models_labels = self.append_run_number(regressors_models_labels)
-            #add in Error contrasts to contrast_labels
-            #where is this headed output location???
 
         roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
                                                                               contrasts_labels,
@@ -268,14 +284,16 @@ class AxcptGLMs(TaskGLMs):
                                regressors_models_labels=regressors_models_labels,
                                contrasts_labels=contrasts_labels,
                                roistats_designs_postfixes=roistats_designs_postfixes,
-                               generate_residuals=True)
+                               generate_residuals=generate_residuals)
 
     def create_buttons_events_glm(self, glm_type):
-        glm_label = "Buttons"
-        regressors_models_labels = [("block", self.block_model, "block"),
-                                    ("blockONandOFF", self.blockONandOFF_model, "blockONandOFF"),
-                                    ("button1", self.buttonPress_model, "button1"),
-                                    ("button2", self.buttonPress_model, "button2")]
+        generate_residuals = False
+
+        glm_label = f"Buttons"
+        regressors_models_labels = [(f"block", self.block_model, "block"),
+                                    (f"blockONandOFF", self.blockONandOFF_model, "blockONandOFF"),
+                                    (f"button1", self.buttonPress_model, "button1"),
+                                    (f"button2", self.buttonPress_model, "button2")]
 
         contrasts_labels = [("+button1[[" + self.button_idx + "]] -button2[[" + self.button_idx + "]]", "B1_B2")]
 
@@ -289,6 +307,34 @@ class AxcptGLMs(TaskGLMs):
                                contrasts_labels=contrasts_labels,
                                roistats_designs_postfixes=roistats_designs_postfixes)
 
+    def create_buttons_events_glm_single_run(self, glm_type, image=None):
+
+        evt_appendix=f"_run{image.run_num}"
+        glm_label = f"Buttons{evt_appendix}"
+
+
+        regressors_models_labels = [(f"block{evt_appendix}", self.block_model, "block"),
+                                    (f"blockONandOFF{evt_appendix}", self.blockONandOFF_model, "blockONandOFF"),
+                                    (f"button1{evt_appendix}", self.buttonPress_model, "button1"),
+                                    (f"button2{evt_appendix}", self.buttonPress_model, "button2"),
+                                    (f"error{evt_appendix}", self.event_model, f"error")]
+
+        contrasts_labels = [(f"+button1[[{self.button_idx}]] -button2[[{self.button_idx}]]", "B1_B2"),
+                            (f"+error[[{self.idx}]] -0.5*button1[[{self.idx}]] -0.5*button2[[{self.idx}]]", "error_correct")
+                            ]
+
+        roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
+                                                                              contrasts_labels,
+                                                                              '_tents')
+
+        return self.build_glms(images=[image],
+                               glm_type=glm_type,
+                               glm_label=glm_label,
+                               regressors_models_labels=regressors_models_labels,
+                               contrasts_labels=contrasts_labels,
+                               roistats_designs_postfixes=roistats_designs_postfixes,
+                               generate_residuals=True)
+
     # This will create the event glms and return a list of tuples
     # so glms may look like this
     # event_glms=[(volume_event_glm1,surface_L_event_glm1,surface_R_event_glm1),
@@ -299,15 +345,16 @@ class AxcptGLMs(TaskGLMs):
         event_glms.append(self.create_buttons_events_glm(glm_type))
         event_glms.append(self.create_cues_events_glm(glm_type))
         for image in self.images:
-            event_glms.append(self.create_cues_events_glm_residuals_single_run(glm_type, image))
+            event_glms.append(self.create_cues_events_glm_single_run(glm_type, image))
+            event_glms.append(self.create_buttons_events_glm_single_run(glm_type, image))
         return event_glms
 
 
 class CuedtsGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)
-        self.event_model = "'TENTzero(0,24,21)'"
-        self.idx = "0..18"
+        self.tent_duration = 24
+        self.event_model, self.idx = self.create_Tent_models(duration=self.tent_duration)
         self.glms = []
         self.glms.append(self.create_on_blocks_glms())
         self.glms.append(self.create_on_mixed_glms())
@@ -396,6 +443,118 @@ class CuedtsGLMs(TaskGLMs):
                                contrasts_labels=contrasts_labels,
                                roistats_designs_postfixes=roistats_designs_postfixes)
 
+    def create_incentive_event_glm_single_run(self, glm_type, image=None):
+        evt_appendix = f"_run{image.run_num}"
+        glm_label = f"Incentive{evt_appendix}"
+
+        regressors_models_labels = [(f"block{evt_appendix}", self.block_model, "block"),
+                                    (f"blockONandOFF{evt_appendix}", self.blockONandOFF_model, "blockONandOFF"),
+                                    (f"Inc{evt_appendix}", self.event_model, "Inc"),
+                                    (f"NoInc{evt_appendix}", self.event_model, "NoInc"),
+                                    (f"error{evt_appendix}", self.event_model, f"error")]
+
+        contrasts_labels = [(f"+Inc[[{self.idx}]] -NoInc[[{self.idx}]]", "Inc_NoInc"),
+                            (f"+error[[{self.idx}]] -0.5*Inc[[{self.idx}]] -0.5*NoInc[[{self.idx}]]", "error_correct")
+                            ]
+
+        roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
+                                                                              contrasts_labels,
+                                                                              '_tents')
+
+        return self.build_glms(images=[image],
+                               glm_type=glm_type,
+                               glm_label=glm_label,
+                               regressors_models_labels=regressors_models_labels,
+                               contrasts_labels=contrasts_labels,
+                               roistats_designs_postfixes=roistats_designs_postfixes,
+                               generate_residuals=True)
+
+    def create_congruency_incentive_event_glm_single_run(self, glm_type, image=None):
+        evt_appendix = f"_run{image.run_num}"
+        glm_label = f"CongruencyIncentive{evt_appendix}"
+
+        regressors_models_labels = [(f"block{evt_appendix}", self.block_model, "block"),
+                                    (f"blockONandOFF{evt_appendix}", self.blockONandOFF_model, "blockONandOFF"),
+                                    (f"ConInc{evt_appendix}", self.event_model, "ConInc"),
+                                    (f"ConNoInc{evt_appendix}", self.event_model, "ConNoInc"),
+                                    (f"InConInc{evt_appendix}", self.event_model, "InConInc"),
+                                    (f"InConNoInc{evt_appendix}", self.event_model, "InConNoInc"),
+                                    (f"error{evt_appendix}", self.event_model, f"error")]
+        contrasts_labels = [(
+            f"+0.5*ConInc[[{self.idx}]] +0.5*InConInc[[{self.idx}]] -0.5*ConNoInc[[{self.idx}]] -0.5*InConNoInc[[{self.idx}]]",
+            "Inc_NoInc"),
+            (
+                f"+0.5*InConInc[[{self.idx}]] +0.5*InConNoInc[[{self.idx}]] -0.5*ConInc[[{self.idx}]] -0.5*ConNoInc[[{self.idx}]]",
+                "InCon_Con"),
+            (
+                f"+error[[{self.idx}]] -0.25*ConInc[[{self.idx}]] -0.25*ConNoInc[[{self.idx}]] -0.25*InConInc[[{self.idx}]] -0.25*InConNoInc[[{self.idx}]]",
+                "error_correct")
+        ]
+
+        roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
+                                                                              contrasts_labels,
+                                                                              '_tents')
+
+        return self.build_glms(images=[image],
+                               glm_type=glm_type,
+                               glm_label=glm_label,
+                               regressors_models_labels=regressors_models_labels,
+                               contrasts_labels=contrasts_labels,
+                               roistats_designs_postfixes=roistats_designs_postfixes,
+                               generate_residuals=True)
+
+    def create_letter_number_event_glm_single_run(self, glm_type, image=None):
+        evt_appendix = f"_run{image.run_num}"
+        glm_label = f"LetterNumber{evt_appendix}"
+
+        regressors_models_labels = [(f"block{evt_appendix}", self.block_model, "block"),
+                                    (f"blockONandOFF{evt_appendix}", self.blockONandOFF_model, "blockONandOFF"),
+                                    (f"letter{evt_appendix}", self.event_model, "letter"),
+                                    (f"number{evt_appendix}", self.event_model, "number"),
+                                    (f"error{evt_appendix}", self.event_model, f"error")
+                                    ]
+        contrasts_labels = [(f"+letter[[{self.idx}]] -number[[{self.idx}]]", "Let_Num"),
+                            (f"+error[[{self.idx}]] -0.5*letter[[{self.idx}]] -0.5*number[[{self.idx}]]", "error_correct")]
+
+        roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
+                                                                              contrasts_labels,
+                                                                              '_tents')
+
+        return self.build_glms(images=[image],
+                               glm_type=glm_type,
+                               glm_label=glm_label,
+                               regressors_models_labels=regressors_models_labels,
+                               contrasts_labels=contrasts_labels,
+                               roistats_designs_postfixes=roistats_designs_postfixes,
+                               generate_residuals=True)
+
+    def create_buttons_event_glm_single_run(self, glm_type, image):
+
+        evt_appendix=f"_run{image.run_num}"
+        glm_label = f"Buttons{evt_appendix}"
+
+        regressors_models_labels = [(f"block{evt_appendix}", self.block_model, "block"),
+                                    (f"blockONandOFF{evt_appendix}", self.blockONandOFF_model, "blockONandOFF"),
+                                    (f"button1{evt_appendix}", self.buttonPress_model, "button1"),
+                                    (f"button2{evt_appendix}", self.buttonPress_model, "button2"),
+                                    (f"error{evt_appendix}", self.event_model, f"error")
+                                    ]
+        contrasts_labels = [("+button1[[" + self.button_idx + "]] -button2[[" + self.button_idx + "]]", "B1_B2"),
+                            (f"+error[[{self.idx}]] -0.5*button1[[{self.idx}]] -0.5*button2[[{self.idx}]]", "error_correct")]
+
+        roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
+                                                                              contrasts_labels,
+                                                                              '_tents')
+
+        return self.build_glms(images=[image],
+                               glm_type=glm_type,
+                               glm_label=glm_label,
+                               regressors_models_labels=regressors_models_labels,
+                               contrasts_labels=contrasts_labels,
+                               roistats_designs_postfixes=roistats_designs_postfixes,
+                               generate_residuals=True)
+
+
     def create_events_glms(self):
         event_glms = []
 
@@ -405,6 +564,11 @@ class CuedtsGLMs(TaskGLMs):
         event_glms.append(self.create_buttons_event_glm(glm_type))
         event_glms.append(self.create_incentive_event_glm(glm_type))
         event_glms.append(self.create_congruency_incentive_event_glm(glm_type))
+        for image in self.images:
+            event_glms.append(self.create_letter_number_event_glm_single_run(glm_type, image))
+            event_glms.append(self.create_buttons_events_glm_single_run(glm_type, image))
+            event_glms.append(self.create_incentive_event_glm_single_run(glm_type, image))
+            event_glms.append(self.create_congruency_incentive_event_glm_single_run(glm_type, image))
 
         return event_glms
 
@@ -412,8 +576,8 @@ class CuedtsGLMs(TaskGLMs):
 class SternGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)
-        self.event_model = "'TENTzero(0,26.4,23)'"
-        self.idx = "0..20"
+        self.tent_duration = 26.4
+        self.event_model, self.idx = self.create_Tent_models(duration=self.tent_duration)
         self.glms = []
         self.glms.append(self.create_on_blocks_glms())
         self.glms.append(self.create_on_mixed_glms())
@@ -421,7 +585,6 @@ class SternGLMs(TaskGLMs):
 
     def create_list_length_events_glms(self, glm_type):
         glm_label = "ListLength"
-        event_glms = []
         regressors_models_labels = [("block", self.block_model, "block"),
                                     ("blockONandOFF", self.blockONandOFF_model, "blockONandOFF"),
                                     ("LL5NP", self.event_model, "LL5NP"),
@@ -471,21 +634,85 @@ class SternGLMs(TaskGLMs):
                                contrasts_labels=contrasts_labels,
                                roistats_designs_postfixes=roistats_designs_postfixes)
 
+
+    def create_list_length_events_glms_single_run(self, glm_type, image):
+        evt_appendix=f"_run{image.run_num}"
+        glm_label = f"ListLength{evt_appendix}"
+
+        regressors_models_labels = [(f"block{evt_appendix}", self.block_model, "block"),
+                                    (f"blockONandOFF{evt_appendix}", self.blockONandOFF_model, "blockONandOFF"),
+                                    (f"LL5NP{evt_appendix}", self.event_model, "LL5NP"),
+                                    (f"LL5NN{evt_appendix}", self.event_model, "LL5NN"),
+                                    (f"LL5RN{evt_appendix}", self.event_model, "LL5RN"),
+                                    (f"not5NP{evt_appendix}", self.event_model, "not5NP"),
+                                    (f"not5NN{evt_appendix}", self.event_model, "not5NN"),
+                                    (f"not5RN{evt_appendix}", self.event_model, "not5RN"),
+                                    (f"error{evt_appendix}", self.event_model, "error")]
+        contrasts_labels = [(
+            f"+0.5*LL5RN[[{self.idx}]] +0.5*not5RN[[{self.idx}]] -0.5*LL5NN[[{self.idx}]] -0.5*not5NN[[{self.idx}]]",
+            "RN_NN_all"),
+            (f"+LL5RN[[{self.idx}]] -LL5NN[[{self.idx}]]", "RN_NN_LL5"),
+            (f"+not5RN[[{self.idx}]] -not5NN[[{self.idx}]]", "RN_NN_not5"),
+            (
+            f"+0.33*not5NP[[{self.idx}]] +0.33*not5NN[[{self.idx}]] +0.33*not5RN[[{self.idx}]] -0.33*LL5NP[[{self.idx}]] -0.33*LL5NN[[{self.idx}]] -0.33*LL5RN[[{self.idx}]]",
+            "not5_LL5"),
+            (f"+error[[{self.idx}]] -0.167*LL5NP[[{self.idx}]] -0.167*LL5NN[[{self.idx}]] -0.167*LL5RN[[{self.idx}]] -0.167*not5NP[[{self.idx}]] -0.167*not5NN[[{self.idx}]] -0.167*not5RN[[{self.idx}]]", "error_correct")
+        ]
+
+        roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
+                                                                              contrasts_labels,
+                                                                              '_tents')
+
+        return self.build_glms(images=[image],
+                               glm_type=glm_type,
+                               glm_label=glm_label,
+                               regressors_models_labels=regressors_models_labels,
+                               contrasts_labels=contrasts_labels,
+                               roistats_designs_postfixes=roistats_designs_postfixes,
+                               generate_residuals=True)
+
+    # subtype of Event_GLMs that need to be created
+    def create_buttons_events_glms_single_run_glm(self, glm_type, image):
+        evt_appendix = f"_run{image.run_num}"
+        glm_label = f"Buttons{evt_appendix}"
+        regressors_models_labels = [(f"block{evt_appendix}", self.block_model, "block"),
+                                    (f"blockONandOFF{evt_appendix}", self.blockONandOFF_model, "blockONandOFF"),
+                                    (f"button1{evt_appendix}", self.buttonPress_model, "button1"),
+                                    (f"button2{evt_appendix}", self.buttonPress_model, "button2")]
+
+        contrasts_labels = [
+            (f"+button1[[{self.button_idx}]] -button2[[{self.button_idx}]]", "B1_B2"),
+            (f"+error[[{self.idx}]] -0.5*button1[[{self.idx}]] -0.5*button2[[{self.idx}]]", "error_correct")]
+
+        roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
+                                                                              contrasts_labels,
+                                                                              '_tents')
+
+        return self.build_glms(images=[image],
+                               glm_type=glm_type,
+                               glm_label=glm_label,
+                               regressors_models_labels=regressors_models_labels,
+                               contrasts_labels=contrasts_labels,
+                               roistats_designs_postfixes=roistats_designs_postfixes,
+                               generate_residuals=True)
+
+
     def create_events_glms(self):
         glm_type = "EVENTS"
         event_glms = []
         event_glms.append(self.create_buttons_events_glms(glm_type))
         event_glms.append(self.create_list_length_events_glms(glm_type))
-
+        for image in self.images:
+            event_glms.append(self.create_buttons_events_glms_single_run_glm(glm_type, image))
+            event_glms.append(self.create_list_length_events_glms_single_run(glm_type, image))
         return event_glms
 
 
 class StroopGLMs(TaskGLMs):
     def __init__(self, working_dir, images: image_list):
         TaskGLMs.__init__(self, working_dir, images)
-        self.event_model = "'TENTzero(0,16.8,15)'"
-        self.idx = "0..12"
-
+        self.tent_duration = 16.8
+        self.event_model, self.idx = self.create_Tent_models(duration=self.tent_duration)
         self.glms = []
         self.glms.append(self.create_on_blocks_glms())
         self.glms.append(self.create_on_mixed_glms())
@@ -526,6 +753,46 @@ class StroopGLMs(TaskGLMs):
                                contrasts_labels=contrasts_labels,
                                roistats_designs_postfixes=roistats_designs_postfixes)
 
+    def create_congruency_events_glms_single_run(self, type, idx, model, image):
+        evt_appendix=f"_run{image.run_num}"
+        glm_label = f"Congruency{evt_appendix}"
+
+        regressors_models_labels = [(f"block{evt_appendix}", self.block_model, "block"),
+                                    (f"blockONandOFF{evt_appendix}", self.blockONandOFF_model, "blockONandOFF"),
+                                    (f"PC50Con{evt_appendix}", model, "PC50Con"),
+                                    (f"PC50InCon{evt_appendix}", model, "PC50InCon"),
+                                    (f"biasCon{evt_appendix}", model, "biasCon"),
+                                    (f"biasInCon{evt_appendix}", model, "biasInCon")]
+
+
+        contrasts_labels = [(f"+biasInCon[[{idx}]] -biasCon[[{idx}]]", "InCon_Con_bias"),
+                            (f"+PC50InCon[[{idx}]] -PC50Con[[{idx}]]", "InCon_Con_PC50"),
+                            (f"+0.5*biasInCon[[{idx}]] +0.5*PC50InCon[[{idx}]] -0.5*biasCon[[{idx}]] -0.5*PC50Con[[{idx}]]",
+                             "InCon_Con_PC50bias")]
+
+        if self.images[0].session == 'reactive':
+            regressors_models_labels.append((f"buffCon{evt_appendix}", model, "buffCon"))
+            contrasts_labels.append((f"+error[[{self.idx}]] -0.2*PC50Con[[{self.idx}]] -0.2*PC50InCon[[{self.idx}]] -0.2*biasCon[[{self.idx}]] -0.2*biasInCon[[{self.idx}]] -0.2*buffCon[[{self.idx}]]", "error_correct"))
+        else:
+            contrasts_labels.append((
+                                    f"+error[[{self.idx}]] -0.25*PC50Con[[{self.idx}]] -0.25*PC50InCon[[{self.idx}]] -0.25*biasCon[[{self.idx}]] -0.25*biasInCon[[{self.idx}]]",
+                                    "error_correct"))
+        if type == "HRF_EVENTS":
+            model = '_HRF'
+        else:
+            model = '_tents'
+        roistats_designs_postfixes = self.generate_roistats_designs_postfixes(regressors_models_labels,
+                                                                              contrasts_labels,
+                                                                              model)
+
+        return self.build_glms(images=[image],
+                               glm_type=type,
+                               glm_label=glm_label,
+                               regressors_models_labels=regressors_models_labels,
+                               contrasts_labels=contrasts_labels,
+                               roistats_designs_postfixes=roistats_designs_postfixes,
+                               generate_residuals=True)
+
     def create_events_glms(self, HRF_EVENTS=False):
 
         if HRF_EVENTS:
@@ -543,5 +810,6 @@ class StroopGLMs(TaskGLMs):
         event_glms = []
 
         event_glms.append(self.create_congruency_events_glms(type, idx, model))
-
+        for image in self.images:
+            event_glms.append(self.create_congruency_events_glms_single_run(type, idx, model, image))
         return event_glms

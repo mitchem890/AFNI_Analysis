@@ -106,8 +106,10 @@ def validate_ncpus(ncpus):
     except IOError:
         print("Invalid ncpus input. ncpus must be an integer type")
 
+def validate_aux_analysis(aux_analysis):
+    pass
 
-def validate_user_input(origin, destination, events, pipeline, wave, subjects, tasks, sessions, ncpus):
+def validate_user_input(origin, destination, events, pipeline, wave, subjects, tasks, sessions, ncpus, aux_analysis):
     validate_origin(origin)
     validate_destination(destination)
     validate_event_files(events)
@@ -117,4 +119,5 @@ def validate_user_input(origin, destination, events, pipeline, wave, subjects, t
     validate_sessions(sessions)
     validate_tasks(tasks)
     validate_ncpus(ncpus)
+    validate_aux_analysis(aux_analysis)
     ##TODO Raise single error at the end, return a tuple from each
