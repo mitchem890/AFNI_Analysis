@@ -21,7 +21,41 @@ image2 = Images.hcp_preprocessed_image(
 Axcpt_Images = [image1, image2]
 
 
+image1 = Images.hcp_preprocessed_image(
+    file='/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/tfMRI_StroopPro1_AP.nii.gz', wave='wave1',
+    subject='346945', session='proactive', task='Stern', pipeline='hcp', testMode=True)
+image2 = Images.hcp_preprocessed_image(
+    file='/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/tfMRI_StroopPro2_PA.nii.gz', wave='wave1',
+    subject='346945', session='proactive', task='Stern', pipeline='hcp', testMode=True)
+Stern_Images = [image1, image2]
+
+image1= Images.hcp_preprocessed_image(
+    file='/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/tfMRI_AxcptBas1_AP.nii.gz', wave='wave1',
+    subject='346945', session='baseline', task='Cuedts', pipeline='hcp', testMode=True)
+image2 = Images.hcp_preprocessed_image(
+    file='/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/tfMRI_AxcptBas2_PA.nii.gz', wave='wave1',
+    subject='346945', session='baseline', task='Cuedts', pipeline='hcp', testMode=True)
+Cuedts_Images = [image1, image2]
+
+
+def print_all_glms():
+    StroopGLMs = TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Images)
+    SternGLMs = TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stern_Images)
+    CuedtsGLMs = TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Cuedts_Images)
+    AxcptGLMs = TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Axcpt_Images)
+    Tasks=[StroopGLMs, SternGLMs, CuedtsGLMs, AxcptGLMs]
+    for task in Tasks:
+        for type in task.glms:
+            for glm in type:
+                print(glm.deconvolve.command)
+                print(glm.remlfit.command)
+                print()
+
+print_all_glms()
+
 class TestStroop_GLMs(unittest.TestCase):
+
+
     def test_congruency_event_deconvolve_volume(self):
         output = f"""3dDeconvolve \\
 -local_times \\
@@ -100,8 +134,8 @@ class TestStroop_GLMs(unittest.TestCase):
 -tout \\
 -nobout \\
 -verb"""
-        print(TaskGLMs.AxcptGLMs('/mnt/afni_container_output/', images=Axcpt_Images).glms[4][1].deconvolve.command)
-        print(TaskGLMs.AxcptGLMs('/mnt/afni_container_output/', images=Axcpt_Images).glms[4][1].remlfit.command)
+        #print(TaskGLMs.AxcptGLMs('/mnt/afni_container_output/', images=Axcpt_Images).glms[4][1].deconvolve.command)
+        #print(TaskGLMs.AxcptGLMs('/mnt/afni_container_output/', images=Axcpt_Images).glms[4][1].remlfit.command)
 
         self.maxDiff = None
         self.assertEqual(output,
@@ -130,7 +164,7 @@ class TestStroop_GLMs(unittest.TestCase):
 
         self.maxDiff = None
         self.assertEqual(output,
-                         TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Images).glms[3][
+                         TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Images).glms[5][
                              0].deconvolve.command)
 
 
