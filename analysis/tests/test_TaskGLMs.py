@@ -1,5 +1,6 @@
 import unittest
 import sys
+import os
 sys.path.append("..") # Adds higher directory to python modules path.
 from ..classes import Images
 from ..classes import TaskGLMs
@@ -10,7 +11,15 @@ image1 = Images.hcp_preprocessed_image(
 image2 = Images.hcp_preprocessed_image(
     file='/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/tfMRI_StroopPro2_PA.nii.gz', wave='wave1',
     subject='346945', session='proactive', task='Stroop', pipeline='hcp', testMode=True)
-Stroop_Images = [image1, image2]
+Stroop_BasPro_Images = [image1, image2]
+
+image1 = Images.hcp_preprocessed_image(
+    file='/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/tfMRI_StroopPro1_AP.nii.gz', wave='wave1',
+    subject='346945', session='proactive', task='Stroop', pipeline='hcp', testMode=True)
+image2 = Images.hcp_preprocessed_image(
+    file='/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/tfMRI_StroopPro2_PA.nii.gz', wave='wave1',
+    subject='346945', session='reactive', task='Stroop', pipeline='hcp', testMode=True)
+Stroop_Rea_Images = [image1, image2]
 
 image1= Images.hcp_preprocessed_image(
     file='/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/tfMRI_AxcptBas1_AP.nii.gz', wave='wave1',
@@ -22,34 +31,35 @@ Axcpt_Images = [image1, image2]
 
 
 image1 = Images.hcp_preprocessed_image(
-    file='/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/tfMRI_StroopPro1_AP.nii.gz', wave='wave1',
+    file='/mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/tfMRI_SternPro1_AP.nii.gz', wave='wave1',
     subject='346945', session='proactive', task='Stern', pipeline='hcp', testMode=True)
 image2 = Images.hcp_preprocessed_image(
-    file='/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/tfMRI_StroopPro2_PA.nii.gz', wave='wave1',
+    file='/mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/tfMRI_SternPro2_PA.nii.gz', wave='wave1',
     subject='346945', session='proactive', task='Stern', pipeline='hcp', testMode=True)
 Stern_Images = [image1, image2]
 
 image1= Images.hcp_preprocessed_image(
-    file='/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/tfMRI_AxcptBas1_AP.nii.gz', wave='wave1',
+    file='/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/tfMRI_CuedtsBas1_AP.nii.gz', wave='wave1',
     subject='346945', session='baseline', task='Cuedts', pipeline='hcp', testMode=True)
 image2 = Images.hcp_preprocessed_image(
-    file='/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/tfMRI_AxcptBas2_PA.nii.gz', wave='wave1',
+    file='/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/tfMRI_CuedtsBas2_PA.nii.gz', wave='wave1',
     subject='346945', session='baseline', task='Cuedts', pipeline='hcp', testMode=True)
 Cuedts_Images = [image1, image2]
 
 
 def print_all_glms():
-    StroopGLMs = TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Images)
+    StroopBasProGLMs = TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_BasPro_Images)
+    StroopReaGLMs= TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Rea_Images)
     SternGLMs = TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stern_Images)
     CuedtsGLMs = TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Cuedts_Images)
     AxcptGLMs = TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Axcpt_Images)
-    Tasks=[StroopGLMs, SternGLMs, CuedtsGLMs, AxcptGLMs]
+    Tasks=[AxcptGLMs,CuedtsGLMs, SternGLMs, StroopBasProGLMs, StroopReaGLMs]
+    f = open(os.path.join(sys.path[0],"All_GLMs.txt"), 'w')
     for task in Tasks:
         for type in task.glms:
             for glm in type:
-                print(glm.deconvolve.command)
-                print(glm.remlfit.command)
-                print()
+                f.write(f"{glm.deconvolve.command}\n{glm.remlfit.command}\n\n")
+    f.close()
 
 print_all_glms()
 
@@ -78,7 +88,7 @@ class TestStroop_GLMs(unittest.TestCase):
 -nobucket"""
 
         self.maxDiff = None
-        self.assertEqual(output, TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Images)
+        self.assertEqual(output, TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_BasPro_Images)
                          .glms[2][0].deconvolve.command)
 
     def test_congruency_event_remlfit_volume(self):
@@ -94,7 +104,7 @@ class TestStroop_GLMs(unittest.TestCase):
 -verb"""
         self.maxDiff = None
         self.assertEqual(output,
-                         TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Images).glms[0][
+                         TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_BasPro_Images).glms[0][
                              0].remlfit.command)
 
     def test_congruency_event_deconvolve_surface_L(self):
@@ -120,7 +130,7 @@ class TestStroop_GLMs(unittest.TestCase):
 -nobucket"""
 
         self.maxDiff = None
-        self.assertEqual(output, TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Images)
+        self.assertEqual(output, TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_BasPro_Images)
                          .glms[2][1].deconvolve.command)
 
     def test_congruency_event_remlfit_surface_L(self):
@@ -139,7 +149,7 @@ class TestStroop_GLMs(unittest.TestCase):
 
         self.maxDiff = None
         self.assertEqual(output,
-                         TaskGLMs.AxcptGLMs('/mnt/afni_container_output/', images=Stroop_Images).glms[1][1].remlfit.command)
+                         TaskGLMs.AxcptGLMs('/mnt/afni_container_output/', images=Stroop_BasPro_Images).glms[1][1].remlfit.command)
 
     def test_congruency_hrf_event_deconvolve_volume(self):
         output = f"""3dDeconvolve \\
@@ -164,7 +174,7 @@ class TestStroop_GLMs(unittest.TestCase):
 
         self.maxDiff = None
         self.assertEqual(output,
-                         TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Images).glms[5][
+                         TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_BasPro_Images).glms[5][
                              0].deconvolve.command)
 
 
@@ -184,7 +194,7 @@ class TestStroop_Roistats(unittest.TestCase):
 -f 346945_timecourses_proactive_ON_BLOCKS_Coef_blocks_gordon_2p4_resampled_wsubcort_LPI.txt'''
 
         self.maxDiff = None
-        self.assertEqual(output, TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Images)
+        self.assertEqual(output, TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_BasPro_Images)
                          .glms[0][0].roistats[0].roistats.command)
 
 
