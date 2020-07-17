@@ -1093,9 +1093,9 @@
 -stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
 -stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF -iresp 2 PATH_iresp_blockONandOFF \
 -stim_times 3 PATH_ConInc_1.txt 'TENTzero(0,24,21)' -stim_label 3 ConInc -iresp 3 PATH_iresp_ConInc_1 \
--stim_times 4 PATH_ConNoInc_1.txt 'TENTzero(0,24,21)' -stim_label 4 ConNoInc -iresp 4 PATH_iresp_ConInc_1 \
--stim_times 5 PATH_InConInc_1.txt 'TENTzero(0,24,21)' -stim_label 5 InConInc -iresp 5 PATH_iresp_ConInc_1 \
--stim_times 6 PATH_InConNoInc_1.txt 'TENTzero(0,24,21)' -stim_label 6 InConNoInc -iresp 6 PATH_iresp_ConInc_1 \
+-stim_times 4 PATH_ConNoInc_1.txt 'TENTzero(0,24,21)' -stim_label 4 ConNoInc -iresp 4 PATH_iresp_ConNoInc_1 \
+-stim_times 5 PATH_InConInc_1.txt 'TENTzero(0,24,21)' -stim_label 5 InConInc -iresp 5 PATH_iresp_InConInc_1 \
+-stim_times 6 PATH_InConNoInc_1.txt 'TENTzero(0,24,21)' -stim_label 6 InConNoInc -iresp 6 PATH_iresp_InConNoInc_1 \
 -ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline_1.1D movregs \
 -x1D X_1.xmat.1D \
 -xjpeg X_1.jpg \
