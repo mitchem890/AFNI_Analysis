@@ -7,22 +7,10 @@ from utils import logger
 from config import globals
 
 
-def load_user_parameters(env):
-    env['origin'] = globals.origin
-    env['subjects'] = globals.subjects
-    env['wave'] = globals.wave
-    env['tasks'] = globals.tasks
-    env['sessions'] = globals.sessions
-    env['destination'] = globals.destination
-    env['events'] = globals.events
-    env['run_volume'] = globals.run_volume
-    env['run_surface'] = globals.run_surface
-    env['run_analysis'] = globals.run_analysis
-    env['run_preanalysis'] = globals.run_preanalysis
-    env['pipeline'] = globals.pipeline
-    env['ncpus'] = globals.ncpus
-    env['aux_analysis'] = globals.aux_analysis
-    return env
+def clean_list_for_shell(str):
+    return str.replace('[','').replace(']','').replace('\'', '').replace(',', '')
+
+
 def run_shell_command(command_line, return_output=False):
     logger.logger(f'\nSubprocess: "{command_line}"', 'info')
     command_line = command_line.replace('\n', '')
@@ -34,7 +22,21 @@ def run_shell_command(command_line, return_output=False):
 
         my_env = os.environ.copy()
         my_env['LD_LIBRARY_PATH'] = '/usr/lib'
-        my_env = load_user_parameters(my_env)
+        my_env['origin'] = str(globals.origin)
+        my_env['subjects'] = clean_list_for_shell(str(globals.subjects))
+        my_env['wave'] = str(globals.wave)
+        my_env['tasks'] = clean_list_for_shell(str(globals.tasks))
+        my_env['sessions'] = clean_list_for_shell(str(globals.sessions))
+        my_env['destination'] = str(globals.destination)
+        my_env['events'] = str(globals.events)
+        my_env['run_volume'] = str(globals.run_volume)
+        my_env['run_surface'] = str(globals.run_surface)
+        my_env['run_analysis'] = str(globals.run_analysis)
+        my_env['run_preanalysis'] = str(globals.run_preanalysis)
+        my_env['pipeline'] = str(globals.pipeline)
+        my_env['ncpus'] = str(globals.ncpus)
+        my_env['aux_analysis'] = str(globals.aux_analysis)
+
         command_line_process = subprocess.Popen(
             command_line_args,
             stdout=subprocess.PIPE,
