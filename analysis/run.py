@@ -51,7 +51,22 @@ run_preanalysis = args.preanalysis
 run_analysis = args.analysis
 pipeline = args.pipeline
 ncpus = args.ncpus
-aux_analysis = args.aux_analysis #Directory
+aux_analysis = args.aux_analysis
+
+globals.origin = origin
+globals.subjects = subjects
+globals.wave = wave
+globals.tasks = tasks
+globals.sessions = sessions
+globals.destination = destination
+globals.events = events
+globals.run_volume = run_volume
+globals.run_surface = run_surface
+globals.run_analysis = run_analysis
+globals.run_preanalysis = run_preanalysis
+globals.pipeline = pipeline
+globals.ncpus = ncpus
+globals.aux_analysis = aux_analysis
 #directory structure:
 #Scripts/
 #   *.yaml
