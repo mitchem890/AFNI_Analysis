@@ -24,3 +24,4 @@ run_analysis = None
 pipeline = None
 ncpus = None
 aux_analysis = None
+overwrite = False

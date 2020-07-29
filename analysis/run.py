@@ -32,7 +32,7 @@ parser.add_argument('--events', '-e', help='The event/onset files to be used in 
 parser.add_argument('--pipeline', '-p', help='The pipeline used to process the input images', required=True)
 parser.add_argument('--ncpus', help='The Number of CPUs to use when processing the data', required=True)
 parser.add_argument('--overwrite', help='if previous file was found overwrite the output', action='store_true')
-parser.add_argument('--aux_analysis', help='if you use this parameter point shell scripts to run extra analysis')
+parser.add_argument('--aux_analysis', help='A path that points to auxillerary analysis that will be ran after preanalysis and analysis')
 
 ##TODO Type in in argparse
 args = parser.parse_args()
@@ -52,6 +52,8 @@ run_analysis = args.analysis
 pipeline = args.pipeline
 ncpus = args.ncpus
 aux_analysis = args.aux_analysis
+overwrite = args.overwrite
+
 
 globals.origin = origin
 globals.subjects = subjects
@@ -67,13 +69,8 @@ globals.run_preanalysis = run_preanalysis
 globals.pipeline = pipeline
 globals.ncpus = ncpus
 globals.aux_analysis = aux_analysis
-#directory structure:
-#Scripts/
-#   *.yaml
-#   *.sh
+globals.overwrite = overwrite
 
-###TODO Makesure overwite flag is working
-globals.set_overwrite(args.overwrite)
 setup.setup_environment()
 Validate_User_Input.validate_user_input(origin=origin, destination=destination, events=events, wave=wave,
                                         subjects=subjects, sessions=sessions, tasks=tasks, pipeline=pipeline,
