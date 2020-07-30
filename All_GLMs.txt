@@ -259,14 +259,326 @@
 -nobout \
 -verb
 
+3dDeconvolve \
+-local_times \
+-x1D_stop \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_blur4_tfMRI_AxcptBas1_AP.nii.gz' \
+-polort A \
+-float \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask_1.txt \
+-num_stimts 6 \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline_1.1D movregs \
+-x1D X.xmat.1D \
+-xjpeg X.jpg \
+-nobucket
+3dREMLfit \
+-matrix X.xmat.1D \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_blur4_tfMRI_AxcptBas1_AP.nii.gz' \
+-gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
+-gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
+-gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
+-gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
+-Rvar stats_var_346945_REML.nii.gz \
+-Rbuck STATS_346945_REML.nii.gz \
+-rwherr wherr_346945_REML.nii.gz \
+-rerrts errts_346945_REML.nii.gz \
+-fout \
+-tout \
+-nobout \
+-verb
 
+3dDeconvolve \
+-local_times \
+-x1D_stop \
+-GOFORIT 5 \
+-force_TR 1.2 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas1_AP_L.func.gii' \
+-polort A \
+-float \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask_1.txt \
+-num_stimts 6 \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline_1.1D movregs \
+-x1D X.xmat_L.1D \
+-xjpeg X_L.jpg \
+-nobucket
+3dREMLfit \
+-matrix X.xmat_L.1D \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas1_AP_L.func.gii' \
+-gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
+-gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
+-gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
+-gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
+-Rvar stats_var_346945_REML_L.func.gii \
+-Rbuck STATS_346945_REML_L.func.gii \
+-rwherr wherr_346945_REML_L.func.gii \
+-rerrts errts_346945_REML_L.func.gii \
+-fout \
+-tout \
+-nobout \
+-verb
 
+3dDeconvolve \
+-local_times \
+-x1D_stop \
+-GOFORIT 5 \
+-force_TR 1.2 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas1_AP_R.func.gii' \
+-polort A \
+-float \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask_1.txt \
+-num_stimts 6 \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline_1.1D movregs \
+-x1D X.xmat_R.1D \
+-xjpeg X_R.jpg \
+-nobucket
+3dREMLfit \
+-matrix X.xmat_R.1D \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas1_AP_R.func.gii' \
+-gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
+-gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
+-gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
+-gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
+-Rvar stats_var_346945_REML_R.func.gii \
+-Rbuck STATS_346945_REML_R.func.gii \
+-rwherr wherr_346945_REML_R.func.gii \
+-rerrts errts_346945_REML_R.func.gii \
+-fout \
+-tout \
+-nobout \
+-verb
 
+3dDeconvolve \
+-local_times \
+-x1D_stop \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_blur4_tfMRI_AxcptBas2_PA.nii.gz' \
+-polort A \
+-float \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask_2.txt \
+-num_stimts 6 \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline_2.1D movregs \
+-x1D X.xmat.1D \
+-xjpeg X.jpg \
+-nobucket
+3dREMLfit \
+-matrix X.xmat.1D \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_blur4_tfMRI_AxcptBas2_PA.nii.gz' \
+-gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
+-gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
+-gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
+-gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
+-Rvar stats_var_346945_REML.nii.gz \
+-Rbuck STATS_346945_REML.nii.gz \
+-rwherr wherr_346945_REML.nii.gz \
+-rerrts errts_346945_REML.nii.gz \
+-fout \
+-tout \
+-nobout \
+-verb
 
+3dDeconvolve \
+-local_times \
+-x1D_stop \
+-GOFORIT 5 \
+-force_TR 1.2 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas2_PA_L.func.gii' \
+-polort A \
+-float \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask_2.txt \
+-num_stimts 6 \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline_2.1D movregs \
+-x1D X.xmat_L.1D \
+-xjpeg X_L.jpg \
+-nobucket
+3dREMLfit \
+-matrix X.xmat_L.1D \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas2_PA_L.func.gii' \
+-gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
+-gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
+-gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
+-gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
+-Rvar stats_var_346945_REML_L.func.gii \
+-Rbuck STATS_346945_REML_L.func.gii \
+-rwherr wherr_346945_REML_L.func.gii \
+-rerrts errts_346945_REML_L.func.gii \
+-fout \
+-tout \
+-nobout \
+-verb
 
+3dDeconvolve \
+-local_times \
+-x1D_stop \
+-GOFORIT 5 \
+-force_TR 1.2 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas2_PA_R.func.gii' \
+-polort A \
+-float \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask_2.txt \
+-num_stimts 6 \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline_2.1D movregs \
+-x1D X.xmat_R.1D \
+-xjpeg X_R.jpg \
+-nobucket
+3dREMLfit \
+-matrix X.xmat_R.1D \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas2_PA_R.func.gii' \
+-gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
+-gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
+-gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
+-gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
+-Rvar stats_var_346945_REML_R.func.gii \
+-Rbuck STATS_346945_REML_R.func.gii \
+-rwherr wherr_346945_REML_R.func.gii \
+-rerrts errts_346945_REML_R.func.gii \
+-fout \
+-tout \
+-nobout \
+-verb
 
-### AXCPT RUNWISE
-## all run-wise glms should be changed according to changes to these commands:
+3dDeconvolve \
+-local_times \
+-x1D_stop \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_blur4_tfMRI_AxcptBas1_AP.nii.gz /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_blur4_tfMRI_AxcptBas2_PA.nii.gz' \
+-polort A \
+-float \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask.txt \
+-num_stimts 6 \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline.1D movregs \
+-x1D X.xmat.1D \
+-xjpeg X.jpg \
+-nobucket
+3dREMLfit \
+-matrix X.xmat.1D \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_blur4_tfMRI_AxcptBas1_AP.nii.gz /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_blur4_tfMRI_AxcptBas2_PA.nii.gz' \
+-gltsym 'SYM: +biasInCon[[0..0]] -biasCon[[0..0]]' InCon_Con_bias \
+-gltsym 'SYM: +PC50InCon[[0..0]] -PC50Con[[0..0]]' InCon_Con_PC50 \
+-gltsym 'SYM: +0.5*biasInCon[[0..0]] +0.5*PC50InCon[[0..0]] -0.5*biasCon[[0..0]] -0.5*PC50Con[[0..0]]' InCon_Con_PC50bias \
+-Rvar stats_var_346945_REML.nii.gz \
+-Rbuck STATS_346945_REML.nii.gz \
+-fout \
+-tout \
+-nobout \
+-verb
+
+3dDeconvolve \
+-local_times \
+-x1D_stop \
+-GOFORIT 5 \
+-force_TR 1.2 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas1_AP_L.func.gii /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas2_PA_L.func.gii' \
+-polort A \
+-float \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask.txt \
+-num_stimts 6 \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline.1D movregs \
+-x1D X.xmat_L.1D \
+-xjpeg X_L.jpg \
+-nobucket
+3dREMLfit \
+-matrix X.xmat_L.1D \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas1_AP_L.func.gii /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas2_PA_L.func.gii' \
+-gltsym 'SYM: +biasInCon[[0..0]] -biasCon[[0..0]]' InCon_Con_bias \
+-gltsym 'SYM: +PC50InCon[[0..0]] -PC50Con[[0..0]]' InCon_Con_PC50 \
+-gltsym 'SYM: +0.5*biasInCon[[0..0]] +0.5*PC50InCon[[0..0]] -0.5*biasCon[[0..0]] -0.5*PC50Con[[0..0]]' InCon_Con_PC50bias \
+-Rvar stats_var_346945_REML_L.func.gii \
+-Rbuck STATS_346945_REML_L.func.gii \
+-fout \
+-tout \
+-nobout \
+-verb
+
+3dDeconvolve \
+-local_times \
+-x1D_stop \
+-GOFORIT 5 \
+-force_TR 1.2 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas1_AP_R.func.gii /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas2_PA_R.func.gii' \
+-polort A \
+-float \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask.txt \
+-num_stimts 6 \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline.1D movregs \
+-x1D X.xmat_R.1D \
+-xjpeg X_R.jpg \
+-nobucket
+3dREMLfit \
+-matrix X.xmat_R.1D \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas1_AP_R.func.gii /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas2_PA_R.func.gii' \
+-gltsym 'SYM: +biasInCon[[0..0]] -biasCon[[0..0]]' InCon_Con_bias \
+-gltsym 'SYM: +PC50InCon[[0..0]] -PC50Con[[0..0]]' InCon_Con_PC50 \
+-gltsym 'SYM: +0.5*biasInCon[[0..0]] +0.5*PC50InCon[[0..0]] -0.5*biasCon[[0..0]] -0.5*PC50Con[[0..0]]' InCon_Con_PC50bias \
+-Rvar stats_var_346945_REML_R.func.gii \
+-Rbuck STATS_346945_REML_R.func.gii \
+-fout \
+-tout \
+-nobout \
+-verb
 
 3dDeconvolve \
 -local_times \
@@ -276,336 +588,14 @@
 -polort A \
 -float \
 -censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask_1.txt \
--num_stimts 8 \
+-num_stimts 6 \
 -stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF -iresp 2 PATH_iresp_blockONandOFF \
--stim_times 3 PATH_AX_1.txt 'TENTzero(0,21.6,19)' -stim_label 3 AX -iresp 3 PATH_iresp_AX \
--stim_times 4 PATH_AY_1.txt 'TENTzero(0,21.6,19)' -stim_label 4 AY -iresp 4 PATH_iresp_AY \
--stim_times 5 PATH_Ang_1.txt 'TENTzero(0,21.6,19)' -stim_label 5 Ang -iresp 5 PATH_iresp_Ang \
--stim_times 6 PATH_BX_1.txt 'TENTzero(0,21.6,19)' -stim_label 6 BX -iresp 6 PATH_iresp_BX \
--stim_times 7 PATH_BY_1.txt 'TENTzero(0,21.6,19)' -stim_label 7 BY -iresp 7 PATH_iresp_BY \
--stim_times 8 PATH_Bng_1.txt'TENTzero(0,21.6,19)' -stim_label 8 Bng -iresp 8 PATH_iresp_Bng \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
 -ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline_1.1D movregs \
--x1D X_1.xmat.1D \
--xjpeg X_1.jpg \
--nobucket
-
-3dREMLfit \
--matrix X_1.xmat.1D \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_blur4_tfMRI_AxcptBas1_AP.nii.gz' \
--Rvar stats_var_346945_1_REML.nii.gz \
--Rbuck STATS_346945_1_REML.nii.gz \
--rwherr wherr_346945_1_REML.nii.gz \
--rerrts errts_346945_1_REML.nii.gz \
--fout \
--tout \
--nobout \
--verb
-
-
-
-3dDeconvolve \
--local_times \
--x1D_stop \
--GOFORIT 5 \
--force_TR 1.2 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas1_AP_L.func.gii' \
--polort A \
--float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask.txt \
--num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_run1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline.1D movregs \
--x1D X.xmat_L.1D \
--xjpeg X_L.jpg \
--nobucket
-3dREMLfit \
--matrix X.xmat_L.1D \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas1_AP_L.func.gii' \
--gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
--gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
--gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
--gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
--Rvar stats_var_346945_REML_L.func.gii \
--Rbuck STATS_346945_REML_L.func.gii \
--rwherr wherr_346945_REML_L.func.gii \
--rerrts errts_346945_REML_L.func.gii \
--fout \
--tout \
--nobout \
--verb
-
-3dDeconvolve \
--local_times \
--x1D_stop \
--GOFORIT 5 \
--force_TR 1.2 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas1_AP_R.func.gii' \
--polort A \
--float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask.txt \
--num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_run1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline.1D movregs \
--x1D X.xmat_R.1D \
--xjpeg X_R.jpg \
--nobucket
-3dREMLfit \
--matrix X.xmat_R.1D \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas1_AP_R.func.gii' \
--gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
--gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
--gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
--gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
--Rvar stats_var_346945_REML_R.func.gii \
--Rbuck STATS_346945_REML_R.func.gii \
--rwherr wherr_346945_REML_R.func.gii \
--rerrts errts_346945_REML_R.func.gii \
--fout \
--tout \
--nobout \
--verb
-
-3dDeconvolve \
--local_times \
--x1D_stop \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_blur4_tfMRI_AxcptBas2_PA.nii.gz' \
--polort A \
--float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask.txt \
--num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_run2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline.1D movregs \
--x1D X.xmat.1D \
--xjpeg X.jpg \
--nobucket
-3dREMLfit \
--matrix X.xmat.1D \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_blur4_tfMRI_AxcptBas2_PA.nii.gz' \
--gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
--gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
--gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
--gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
--Rvar stats_var_346945_REML.nii.gz \
--Rbuck STATS_346945_REML.nii.gz \
--rwherr wherr_346945_REML.nii.gz \
--rerrts errts_346945_REML.nii.gz \
--fout \
--tout \
--nobout \
--verb
-
-3dDeconvolve \
--local_times \
--x1D_stop \
--GOFORIT 5 \
--force_TR 1.2 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas2_PA_L.func.gii' \
--polort A \
--float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask.txt \
--num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_run2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline.1D movregs \
--x1D X.xmat_L.1D \
--xjpeg X_L.jpg \
--nobucket
-3dREMLfit \
--matrix X.xmat_L.1D \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas2_PA_L.func.gii' \
--gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
--gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
--gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
--gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
--Rvar stats_var_346945_REML_L.func.gii \
--Rbuck STATS_346945_REML_L.func.gii \
--rwherr wherr_346945_REML_L.func.gii \
--rerrts errts_346945_REML_L.func.gii \
--fout \
--tout \
--nobout \
--verb
-
-3dDeconvolve \
--local_times \
--x1D_stop \
--GOFORIT 5 \
--force_TR 1.2 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas2_PA_R.func.gii' \
--polort A \
--float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask.txt \
--num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_run2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline.1D movregs \
--x1D X.xmat_R.1D \
--xjpeg X_R.jpg \
--nobucket
-3dREMLfit \
--matrix X.xmat_R.1D \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas2_PA_R.func.gii' \
--gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
--gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
--gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
--gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
--Rvar stats_var_346945_REML_R.func.gii \
--Rbuck STATS_346945_REML_R.func.gii \
--rwherr wherr_346945_REML_R.func.gii \
--rerrts errts_346945_REML_R.func.gii \
--fout \
--tout \
--nobout \
--verb
-
-3dDeconvolve \
--local_times \
--x1D_stop \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_blur4_tfMRI_AxcptBas1_AP.nii.gz /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_blur4_tfMRI_AxcptBas2_PA.nii.gz' \
--polort A \
--float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask.txt \
--num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline.1D movregs \
--x1D X.xmat.1D \
--xjpeg X.jpg \
--nobucket
-3dREMLfit \
--matrix X.xmat.1D \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_blur4_tfMRI_AxcptBas1_AP.nii.gz /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_blur4_tfMRI_AxcptBas2_PA.nii.gz' \
--gltsym 'SYM: +biasInCon[[0..0]] -biasCon[[0..0]]' InCon_Con_bias \
--gltsym 'SYM: +PC50InCon[[0..0]] -PC50Con[[0..0]]' InCon_Con_PC50 \
--gltsym 'SYM: +0.5*biasInCon[[0..0]] +0.5*PC50InCon[[0..0]] -0.5*biasCon[[0..0]] -0.5*PC50Con[[0..0]]' InCon_Con_PC50bias \
--Rvar stats_var_346945_REML.nii.gz \
--Rbuck STATS_346945_REML.nii.gz \
--fout \
--tout \
--nobout \
--verb
-
-3dDeconvolve \
--local_times \
--x1D_stop \
--GOFORIT 5 \
--force_TR 1.2 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas1_AP_L.func.gii /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas2_PA_L.func.gii' \
--polort A \
--float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask.txt \
--num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline.1D movregs \
--x1D X.xmat_L.1D \
--xjpeg X_L.jpg \
--nobucket
-3dREMLfit \
--matrix X.xmat_L.1D \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas1_AP_L.func.gii /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas2_PA_L.func.gii' \
--gltsym 'SYM: +biasInCon[[0..0]] -biasCon[[0..0]]' InCon_Con_bias \
--gltsym 'SYM: +PC50InCon[[0..0]] -PC50Con[[0..0]]' InCon_Con_PC50 \
--gltsym 'SYM: +0.5*biasInCon[[0..0]] +0.5*PC50InCon[[0..0]] -0.5*biasCon[[0..0]] -0.5*PC50Con[[0..0]]' InCon_Con_PC50bias \
--Rvar stats_var_346945_REML_L.func.gii \
--Rbuck STATS_346945_REML_L.func.gii \
--fout \
--tout \
--nobout \
--verb
-
-3dDeconvolve \
--local_times \
--x1D_stop \
--GOFORIT 5 \
--force_TR 1.2 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas1_AP_R.func.gii /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas2_PA_R.func.gii' \
--polort A \
--float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask.txt \
--num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline.1D movregs \
--x1D X.xmat_R.1D \
--xjpeg X_R.jpg \
--nobucket
-3dREMLfit \
--matrix X.xmat_R.1D \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas1_AP_R.func.gii /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas2_PA_R.func.gii' \
--gltsym 'SYM: +biasInCon[[0..0]] -biasCon[[0..0]]' InCon_Con_bias \
--gltsym 'SYM: +PC50InCon[[0..0]] -PC50Con[[0..0]]' InCon_Con_PC50 \
--gltsym 'SYM: +0.5*biasInCon[[0..0]] +0.5*PC50InCon[[0..0]] -0.5*biasCon[[0..0]] -0.5*PC50Con[[0..0]]' InCon_Con_PC50bias \
--Rvar stats_var_346945_REML_R.func.gii \
--Rbuck STATS_346945_REML_R.func.gii \
--fout \
--tout \
--nobout \
--verb
-
-3dDeconvolve \
--local_times \
--x1D_stop \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_blur4_tfMRI_AxcptBas1_AP.nii.gz' \
--polort A \
--float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask.txt \
--num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_run1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_run1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_run1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_run1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline.1D movregs \
 -x1D X.xmat.1D \
 -xjpeg X.jpg \
 -nobucket
@@ -634,15 +624,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas1_AP_L.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask_1.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_run1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_run1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_run1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_run1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline_1.1D movregs \
 -x1D X.xmat_L.1D \
 -xjpeg X_L.jpg \
 -nobucket
@@ -671,15 +661,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas1_AP_R.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask_1.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_run1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_run1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_run1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_run1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline_1.1D movregs \
 -x1D X.xmat_R.1D \
 -xjpeg X_R.jpg \
 -nobucket
@@ -707,15 +697,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_blur4_tfMRI_AxcptBas2_PA.nii.gz' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_run2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_run2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_run2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_run2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline_2.1D movregs \
 -x1D X.xmat.1D \
 -xjpeg X.jpg \
 -nobucket
@@ -744,15 +734,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas2_PA_L.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_run2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_run2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_run2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_run2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline_2.1D movregs \
 -x1D X.xmat_L.1D \
 -xjpeg X_L.jpg \
 -nobucket
@@ -781,15 +771,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/lpi_scale_tfMRI_AxcptBas2_PA_R.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_run2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_run2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_run2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_run2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50Con_2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_PC50InCon_2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasCon_2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/346945_Axcpt_baseline_biasInCon_2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Axcpt/baseline/motion_demean_baseline_2.1D movregs \
 -x1D X.xmat_R.1D \
 -xjpeg X_R.jpg \
 -nobucket
@@ -1070,16 +1060,6 @@
 -tout \
 -nobout \
 -verb
-
-
-
-
-
-
-### CUEDTS RUNWISE
-## all run-wise glms should be changed according to changes to these commands:
-
-## CongruencyIncentive
 
 3dDeconvolve \
 -local_times \
@@ -1091,33 +1071,316 @@
 -censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask_1.txt \
 -num_stimts 6 \
 -stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF -iresp 2 PATH_iresp_blockONandOFF \
--stim_times 3 PATH_ConInc_1.txt 'TENTzero(0,24,21)' -stim_label 3 ConInc -iresp 3 PATH_iresp_ConInc_1 \
--stim_times 4 PATH_ConNoInc_1.txt 'TENTzero(0,24,21)' -stim_label 4 ConNoInc -iresp 4 PATH_iresp_ConNoInc_1 \
--stim_times 5 PATH_InConInc_1.txt 'TENTzero(0,24,21)' -stim_label 5 InConInc -iresp 5 PATH_iresp_InConInc_1 \
--stim_times 6 PATH_InConNoInc_1.txt 'TENTzero(0,24,21)' -stim_label 6 InConNoInc -iresp 6 PATH_iresp_InConNoInc_1 \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
 -ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline_1.1D movregs \
--x1D X_1.xmat.1D \
--xjpeg X_1.jpg \
+-x1D X.xmat.1D \
+-xjpeg X.jpg \
 -nobucket
-
-
-
 3dREMLfit \
--matrix X_1.xmat.1D \
+-matrix X.xmat.1D \
 -GOFORIT 5 \
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_blur4_tfMRI_CuedtsBas1_AP.nii.gz' \
--Rvar stats_var_346945_1_REML.nii.gz \
--Rbuck STATS_346945_1_REML.nii.gz \
--rwherr wherr_346945_1_REML.nii.gz \
--rerrts errts_346945_1_REML.nii.gz \
+-gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
+-gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
+-gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
+-gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
+-Rvar stats_var_346945_REML.nii.gz \
+-Rbuck STATS_346945_REML.nii.gz \
+-rwherr wherr_346945_REML.nii.gz \
+-rerrts errts_346945_REML.nii.gz \
 -fout \
 -tout \
 -nobout \
 -verb
 
-## LetterNumber
+3dDeconvolve \
+-local_times \
+-x1D_stop \
+-GOFORIT 5 \
+-force_TR 1.2 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas1_AP_L.func.gii' \
+-polort A \
+-float \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask_1.txt \
+-num_stimts 6 \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline_1.1D movregs \
+-x1D X.xmat_L.1D \
+-xjpeg X_L.jpg \
+-nobucket
+3dREMLfit \
+-matrix X.xmat_L.1D \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas1_AP_L.func.gii' \
+-gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
+-gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
+-gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
+-gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
+-Rvar stats_var_346945_REML_L.func.gii \
+-Rbuck STATS_346945_REML_L.func.gii \
+-rwherr wherr_346945_REML_L.func.gii \
+-rerrts errts_346945_REML_L.func.gii \
+-fout \
+-tout \
+-nobout \
+-verb
 
+3dDeconvolve \
+-local_times \
+-x1D_stop \
+-GOFORIT 5 \
+-force_TR 1.2 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas1_AP_R.func.gii' \
+-polort A \
+-float \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask_1.txt \
+-num_stimts 6 \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline_1.1D movregs \
+-x1D X.xmat_R.1D \
+-xjpeg X_R.jpg \
+-nobucket
+3dREMLfit \
+-matrix X.xmat_R.1D \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas1_AP_R.func.gii' \
+-gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
+-gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
+-gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
+-gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
+-Rvar stats_var_346945_REML_R.func.gii \
+-Rbuck STATS_346945_REML_R.func.gii \
+-rwherr wherr_346945_REML_R.func.gii \
+-rerrts errts_346945_REML_R.func.gii \
+-fout \
+-tout \
+-nobout \
+-verb
+
+3dDeconvolve \
+-local_times \
+-x1D_stop \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_blur4_tfMRI_CuedtsBas2_PA.nii.gz' \
+-polort A \
+-float \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask_2.txt \
+-num_stimts 6 \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline_2.1D movregs \
+-x1D X.xmat.1D \
+-xjpeg X.jpg \
+-nobucket
+3dREMLfit \
+-matrix X.xmat.1D \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_blur4_tfMRI_CuedtsBas2_PA.nii.gz' \
+-gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
+-gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
+-gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
+-gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
+-Rvar stats_var_346945_REML.nii.gz \
+-Rbuck STATS_346945_REML.nii.gz \
+-rwherr wherr_346945_REML.nii.gz \
+-rerrts errts_346945_REML.nii.gz \
+-fout \
+-tout \
+-nobout \
+-verb
+
+3dDeconvolve \
+-local_times \
+-x1D_stop \
+-GOFORIT 5 \
+-force_TR 1.2 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas2_PA_L.func.gii' \
+-polort A \
+-float \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask_2.txt \
+-num_stimts 6 \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline_2.1D movregs \
+-x1D X.xmat_L.1D \
+-xjpeg X_L.jpg \
+-nobucket
+3dREMLfit \
+-matrix X.xmat_L.1D \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas2_PA_L.func.gii' \
+-gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
+-gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
+-gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
+-gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
+-Rvar stats_var_346945_REML_L.func.gii \
+-Rbuck STATS_346945_REML_L.func.gii \
+-rwherr wherr_346945_REML_L.func.gii \
+-rerrts errts_346945_REML_L.func.gii \
+-fout \
+-tout \
+-nobout \
+-verb
+
+3dDeconvolve \
+-local_times \
+-x1D_stop \
+-GOFORIT 5 \
+-force_TR 1.2 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas2_PA_R.func.gii' \
+-polort A \
+-float \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask_2.txt \
+-num_stimts 6 \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline_2.1D movregs \
+-x1D X.xmat_R.1D \
+-xjpeg X_R.jpg \
+-nobucket
+3dREMLfit \
+-matrix X.xmat_R.1D \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas2_PA_R.func.gii' \
+-gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
+-gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
+-gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
+-gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
+-Rvar stats_var_346945_REML_R.func.gii \
+-Rbuck STATS_346945_REML_R.func.gii \
+-rwherr wherr_346945_REML_R.func.gii \
+-rerrts errts_346945_REML_R.func.gii \
+-fout \
+-tout \
+-nobout \
+-verb
+
+3dDeconvolve \
+-local_times \
+-x1D_stop \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_blur4_tfMRI_CuedtsBas1_AP.nii.gz /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_blur4_tfMRI_CuedtsBas2_PA.nii.gz' \
+-polort A \
+-float \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask.txt \
+-num_stimts 6 \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline.1D movregs \
+-x1D X.xmat.1D \
+-xjpeg X.jpg \
+-nobucket
+3dREMLfit \
+-matrix X.xmat.1D \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_blur4_tfMRI_CuedtsBas1_AP.nii.gz /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_blur4_tfMRI_CuedtsBas2_PA.nii.gz' \
+-gltsym 'SYM: +biasInCon[[0..0]] -biasCon[[0..0]]' InCon_Con_bias \
+-gltsym 'SYM: +PC50InCon[[0..0]] -PC50Con[[0..0]]' InCon_Con_PC50 \
+-gltsym 'SYM: +0.5*biasInCon[[0..0]] +0.5*PC50InCon[[0..0]] -0.5*biasCon[[0..0]] -0.5*PC50Con[[0..0]]' InCon_Con_PC50bias \
+-Rvar stats_var_346945_REML.nii.gz \
+-Rbuck STATS_346945_REML.nii.gz \
+-fout \
+-tout \
+-nobout \
+-verb
+
+3dDeconvolve \
+-local_times \
+-x1D_stop \
+-GOFORIT 5 \
+-force_TR 1.2 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas1_AP_L.func.gii /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas2_PA_L.func.gii' \
+-polort A \
+-float \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask.txt \
+-num_stimts 6 \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline.1D movregs \
+-x1D X.xmat_L.1D \
+-xjpeg X_L.jpg \
+-nobucket
+3dREMLfit \
+-matrix X.xmat_L.1D \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas1_AP_L.func.gii /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas2_PA_L.func.gii' \
+-gltsym 'SYM: +biasInCon[[0..0]] -biasCon[[0..0]]' InCon_Con_bias \
+-gltsym 'SYM: +PC50InCon[[0..0]] -PC50Con[[0..0]]' InCon_Con_PC50 \
+-gltsym 'SYM: +0.5*biasInCon[[0..0]] +0.5*PC50InCon[[0..0]] -0.5*biasCon[[0..0]] -0.5*PC50Con[[0..0]]' InCon_Con_PC50bias \
+-Rvar stats_var_346945_REML_L.func.gii \
+-Rbuck STATS_346945_REML_L.func.gii \
+-fout \
+-tout \
+-nobout \
+-verb
+
+3dDeconvolve \
+-local_times \
+-x1D_stop \
+-GOFORIT 5 \
+-force_TR 1.2 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas1_AP_R.func.gii /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas2_PA_R.func.gii' \
+-polort A \
+-float \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask.txt \
+-num_stimts 6 \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline.1D movregs \
+-x1D X.xmat_R.1D \
+-xjpeg X_R.jpg \
+-nobucket
+3dREMLfit \
+-matrix X.xmat_R.1D \
+-GOFORIT 5 \
+-input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas1_AP_R.func.gii /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas2_PA_R.func.gii' \
+-gltsym 'SYM: +biasInCon[[0..0]] -biasCon[[0..0]]' InCon_Con_bias \
+-gltsym 'SYM: +PC50InCon[[0..0]] -PC50Con[[0..0]]' InCon_Con_PC50 \
+-gltsym 'SYM: +0.5*biasInCon[[0..0]] +0.5*PC50InCon[[0..0]] -0.5*biasCon[[0..0]] -0.5*PC50Con[[0..0]]' InCon_Con_PC50bias \
+-Rvar stats_var_346945_REML_R.func.gii \
+-Rbuck STATS_346945_REML_R.func.gii \
+-fout \
+-tout \
+-nobout \
+-verb
 
 3dDeconvolve \
 -local_times \
@@ -1129,333 +1392,12 @@
 -censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask_1.txt \
 -num_stimts 6 \
 -stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF -iresp 2 PATH_iresp_blockONandOFF \
--stim_times 3 PATH_letter_1.txt 'TENTzero(0,24,21)' -stim_label 3 letter -iresp 3 PATH_iresp_letter_1 \
--stim_times 4 PATH_number_1.txt 'TENTzero(0,24,21)' -stim_label 4 number -iresp 4 PATH_iresp_number_1 \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
 -ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline_1.1D movregs \
--x1D X_1.xmat.1D \
--xjpeg X_1.jpg \
--nobucket
-
-
-3dREMLfit \
--matrix X_1.xmat.1D \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_blur4_tfMRI_CuedtsBas1_AP.nii.gz' \
--Rvar stats_var_346945_1_REML.nii.gz \
--Rbuck STATS_346945_1_REML.nii.gz \
--rwherr wherr_346945_1_REML.nii.gz \
--rerrts errts_346945_1_REML.nii.gz \
--fout \
--tout \
--nobout \
--verb
-
-
-
-
-
-3dDeconvolve \
--local_times \
--x1D_stop \
--GOFORIT 5 \
--force_TR 1.2 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas1_AP_L.func.gii' \
--polort A \
--float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask.txt \
--num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_run1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline.1D movregs \
--x1D X.xmat_L.1D \
--xjpeg X_L.jpg \
--nobucket
-3dREMLfit \
--matrix X.xmat_L.1D \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas1_AP_L.func.gii' \
--gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
--gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
--gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
--gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
--Rvar stats_var_346945_REML_L.func.gii \
--Rbuck STATS_346945_REML_L.func.gii \
--rwherr wherr_346945_REML_L.func.gii \
--rerrts errts_346945_REML_L.func.gii \
--fout \
--tout \
--nobout \
--verb
-
-3dDeconvolve \
--local_times \
--x1D_stop \
--GOFORIT 5 \
--force_TR 1.2 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas1_AP_R.func.gii' \
--polort A \
--float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask.txt \
--num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_run1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline.1D movregs \
--x1D X.xmat_R.1D \
--xjpeg X_R.jpg \
--nobucket
-3dREMLfit \
--matrix X.xmat_R.1D \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas1_AP_R.func.gii' \
--gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
--gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
--gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
--gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
--Rvar stats_var_346945_REML_R.func.gii \
--Rbuck STATS_346945_REML_R.func.gii \
--rwherr wherr_346945_REML_R.func.gii \
--rerrts errts_346945_REML_R.func.gii \
--fout \
--tout \
--nobout \
--verb
-
-3dDeconvolve \
--local_times \
--x1D_stop \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_blur4_tfMRI_CuedtsBas2_PA.nii.gz' \
--polort A \
--float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask.txt \
--num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_run2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline.1D movregs \
--x1D X.xmat.1D \
--xjpeg X.jpg \
--nobucket
-3dREMLfit \
--matrix X.xmat.1D \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_blur4_tfMRI_CuedtsBas2_PA.nii.gz' \
--gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
--gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
--gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
--gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
--Rvar stats_var_346945_REML.nii.gz \
--Rbuck STATS_346945_REML.nii.gz \
--rwherr wherr_346945_REML.nii.gz \
--rerrts errts_346945_REML.nii.gz \
--fout \
--tout \
--nobout \
--verb
-
-3dDeconvolve \
--local_times \
--x1D_stop \
--GOFORIT 5 \
--force_TR 1.2 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas2_PA_L.func.gii' \
--polort A \
--float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask.txt \
--num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_run2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline.1D movregs \
--x1D X.xmat_L.1D \
--xjpeg X_L.jpg \
--nobucket
-3dREMLfit \
--matrix X.xmat_L.1D \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas2_PA_L.func.gii' \
--gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
--gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
--gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
--gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
--Rvar stats_var_346945_REML_L.func.gii \
--Rbuck STATS_346945_REML_L.func.gii \
--rwherr wherr_346945_REML_L.func.gii \
--rerrts errts_346945_REML_L.func.gii \
--fout \
--tout \
--nobout \
--verb
-
-3dDeconvolve \
--local_times \
--x1D_stop \
--GOFORIT 5 \
--force_TR 1.2 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas2_PA_R.func.gii' \
--polort A \
--float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask.txt \
--num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_run2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline.1D movregs \
--x1D X.xmat_R.1D \
--xjpeg X_R.jpg \
--nobucket
-3dREMLfit \
--matrix X.xmat_R.1D \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas2_PA_R.func.gii' \
--gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
--gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
--gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
--gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
--Rvar stats_var_346945_REML_R.func.gii \
--Rbuck STATS_346945_REML_R.func.gii \
--rwherr wherr_346945_REML_R.func.gii \
--rerrts errts_346945_REML_R.func.gii \
--fout \
--tout \
--nobout \
--verb
-
-3dDeconvolve \
--local_times \
--x1D_stop \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_blur4_tfMRI_CuedtsBas1_AP.nii.gz /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_blur4_tfMRI_CuedtsBas2_PA.nii.gz' \
--polort A \
--float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask.txt \
--num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline.1D movregs \
--x1D X.xmat.1D \
--xjpeg X.jpg \
--nobucket
-3dREMLfit \
--matrix X.xmat.1D \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_blur4_tfMRI_CuedtsBas1_AP.nii.gz /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_blur4_tfMRI_CuedtsBas2_PA.nii.gz' \
--gltsym 'SYM: +biasInCon[[0..0]] -biasCon[[0..0]]' InCon_Con_bias \
--gltsym 'SYM: +PC50InCon[[0..0]] -PC50Con[[0..0]]' InCon_Con_PC50 \
--gltsym 'SYM: +0.5*biasInCon[[0..0]] +0.5*PC50InCon[[0..0]] -0.5*biasCon[[0..0]] -0.5*PC50Con[[0..0]]' InCon_Con_PC50bias \
--Rvar stats_var_346945_REML.nii.gz \
--Rbuck STATS_346945_REML.nii.gz \
--fout \
--tout \
--nobout \
--verb
-
-3dDeconvolve \
--local_times \
--x1D_stop \
--GOFORIT 5 \
--force_TR 1.2 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas1_AP_L.func.gii /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas2_PA_L.func.gii' \
--polort A \
--float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask.txt \
--num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline.1D movregs \
--x1D X.xmat_L.1D \
--xjpeg X_L.jpg \
--nobucket
-3dREMLfit \
--matrix X.xmat_L.1D \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas1_AP_L.func.gii /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas2_PA_L.func.gii' \
--gltsym 'SYM: +biasInCon[[0..0]] -biasCon[[0..0]]' InCon_Con_bias \
--gltsym 'SYM: +PC50InCon[[0..0]] -PC50Con[[0..0]]' InCon_Con_PC50 \
--gltsym 'SYM: +0.5*biasInCon[[0..0]] +0.5*PC50InCon[[0..0]] -0.5*biasCon[[0..0]] -0.5*PC50Con[[0..0]]' InCon_Con_PC50bias \
--Rvar stats_var_346945_REML_L.func.gii \
--Rbuck STATS_346945_REML_L.func.gii \
--fout \
--tout \
--nobout \
--verb
-
-3dDeconvolve \
--local_times \
--x1D_stop \
--GOFORIT 5 \
--force_TR 1.2 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas1_AP_R.func.gii /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas2_PA_R.func.gii' \
--polort A \
--float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask.txt \
--num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline.1D movregs \
--x1D X.xmat_R.1D \
--xjpeg X_R.jpg \
--nobucket
-3dREMLfit \
--matrix X.xmat_R.1D \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas1_AP_R.func.gii /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas2_PA_R.func.gii' \
--gltsym 'SYM: +biasInCon[[0..0]] -biasCon[[0..0]]' InCon_Con_bias \
--gltsym 'SYM: +PC50InCon[[0..0]] -PC50Con[[0..0]]' InCon_Con_PC50 \
--gltsym 'SYM: +0.5*biasInCon[[0..0]] +0.5*PC50InCon[[0..0]] -0.5*biasCon[[0..0]] -0.5*PC50Con[[0..0]]' InCon_Con_PC50bias \
--Rvar stats_var_346945_REML_R.func.gii \
--Rbuck STATS_346945_REML_R.func.gii \
--fout \
--tout \
--nobout \
--verb
-
-3dDeconvolve \
--local_times \
--x1D_stop \
--GOFORIT 5 \
--input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_blur4_tfMRI_CuedtsBas1_AP.nii.gz' \
--polort A \
--float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask.txt \
--num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_run1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_run1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_run1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_run1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline.1D movregs \
 -x1D X.xmat.1D \
 -xjpeg X.jpg \
 -nobucket
@@ -1484,15 +1426,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas1_AP_L.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask_1.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_run1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_run1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_run1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_run1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline_1.1D movregs \
 -x1D X.xmat_L.1D \
 -xjpeg X_L.jpg \
 -nobucket
@@ -1521,15 +1463,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas1_AP_R.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask_1.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_run1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_run1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_run1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_run1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline_1.1D movregs \
 -x1D X.xmat_R.1D \
 -xjpeg X_R.jpg \
 -nobucket
@@ -1557,15 +1499,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_blur4_tfMRI_CuedtsBas2_PA.nii.gz' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_run2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_run2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_run2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_run2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline_2.1D movregs \
 -x1D X.xmat.1D \
 -xjpeg X.jpg \
 -nobucket
@@ -1594,15 +1536,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas2_PA_L.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_run2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_run2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_run2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_run2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline_2.1D movregs \
 -x1D X.xmat_L.1D \
 -xjpeg X_L.jpg \
 -nobucket
@@ -1631,15 +1573,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/lpi_scale_tfMRI_CuedtsBas2_PA_R.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_run2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_run2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_run2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_run2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50Con_2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_PC50InCon_2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasCon_2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/346945_Cuedts_baseline_biasInCon_2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Cuedts/baseline/motion_demean_baseline_2.1D movregs \
 -x1D X.xmat_R.1D \
 -xjpeg X_R.jpg \
 -nobucket
@@ -1920,14 +1862,6 @@
 -tout \
 -nobout \
 -verb
-
-
-
-
-
-
-### STERN RUNWISE
-## see changes:
 
 3dDeconvolve \
 -local_times \
@@ -1939,32 +1873,31 @@
 -censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask_1.txt \
 -num_stimts 6 \
 -stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF -iresp 2 PATH_iresp_blockONandOFF \
--stim_times 3 PATH_LL5NP_1.txt 'TENTzero(0,26.4,23)' -stim_label 3 LL5NP -iresp 3 PATH_iresp_LL5NP_1 \
--stim_times 4 PATH_LL5NN_1.txt 'TENTzero(0,26.4,23)' -stim_label 4 LL5NN -iresp 4 PATH_iresp_LL5NN_1 \
--stim_times 5 PATH_LL5RN_1.txt 'TENTzero(0,26.4,23)' -stim_label 5 LL5RN -iresp 5 PATH_iresp_LL5RN_1 \
--stim_times 6 PATH_not5NP_1.txt 'TENTzero(0,26.4,23)' -stim_label 6 not5NP -iresp 6 PATH_iresp_not5NP_1 \
--stim_times 7 PATH_not5NN_1.txt 'TENTzero(0,26.4,23)' -stim_label 7 not5NN -iresp 7 PATH_iresp_not5NN_1 \
--stim_times 8 PATH_not5RN_1.txt 'TENTzero(0,26.4,23)' -stim_label 8 not5RN -iresp 8 PATH_iresp_not5RN_1 \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
 -ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive_1.1D movregs \
--x1D X_1.xmat.1D \
--xjpeg X_1.jpg \
+-x1D X.xmat.1D \
+-xjpeg X.jpg \
 -nobucket
-
 3dREMLfit \
--matrix X_1.xmat.1D \
+-matrix X.xmat.1D \
 -GOFORIT 5 \
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/lpi_scale_blur4_tfMRI_SternPro1_AP.nii.gz' \
--Rvar stats_var_346945_1_REML.nii.gz \
--Rbuck STATS_346945_1_REML.nii.gz \
--rwherr wherr_346945_1_REML.nii.gz \
--rerrts errts_346945_1_REML.nii.gz \
+-gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
+-gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
+-gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
+-gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
+-Rvar stats_var_346945_REML.nii.gz \
+-Rbuck STATS_346945_REML.nii.gz \
+-rwherr wherr_346945_REML.nii.gz \
+-rerrts errts_346945_REML.nii.gz \
 -fout \
 -tout \
 -nobout \
 -verb
-
-
 
 3dDeconvolve \
 -local_times \
@@ -1974,15 +1907,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/lpi_scale_tfMRI_SternPro1_AP_L.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask_1.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_run1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive_1.1D movregs \
 -x1D X.xmat_L.1D \
 -xjpeg X_L.jpg \
 -nobucket
@@ -2011,15 +1944,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/lpi_scale_tfMRI_SternPro1_AP_R.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask_1.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_run1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive_1.1D movregs \
 -x1D X.xmat_R.1D \
 -xjpeg X_R.jpg \
 -nobucket
@@ -2047,15 +1980,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/lpi_scale_blur4_tfMRI_SternPro2_PA.nii.gz' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_run2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive_2.1D movregs \
 -x1D X.xmat.1D \
 -xjpeg X.jpg \
 -nobucket
@@ -2084,15 +2017,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/lpi_scale_tfMRI_SternPro2_PA_L.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_run2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive_2.1D movregs \
 -x1D X.xmat_L.1D \
 -xjpeg X_L.jpg \
 -nobucket
@@ -2121,15 +2054,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/lpi_scale_tfMRI_SternPro2_PA_R.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_run2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive_2.1D movregs \
 -x1D X.xmat_R.1D \
 -xjpeg X_R.jpg \
 -nobucket
@@ -2258,15 +2191,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/lpi_scale_blur4_tfMRI_SternPro1_AP.nii.gz' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask_1.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_run1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_run1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_run1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_run1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive_1.1D movregs \
 -x1D X.xmat.1D \
 -xjpeg X.jpg \
 -nobucket
@@ -2295,15 +2228,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/lpi_scale_tfMRI_SternPro1_AP_L.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask_1.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_run1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_run1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_run1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_run1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive_1.1D movregs \
 -x1D X.xmat_L.1D \
 -xjpeg X_L.jpg \
 -nobucket
@@ -2332,15 +2265,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/lpi_scale_tfMRI_SternPro1_AP_R.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask_1.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_run1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_run1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_run1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_run1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive_1.1D movregs \
 -x1D X.xmat_R.1D \
 -xjpeg X_R.jpg \
 -nobucket
@@ -2368,15 +2301,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/lpi_scale_blur4_tfMRI_SternPro2_PA.nii.gz' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_run2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_run2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_run2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_run2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive_2.1D movregs \
 -x1D X.xmat.1D \
 -xjpeg X.jpg \
 -nobucket
@@ -2405,15 +2338,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/lpi_scale_tfMRI_SternPro2_PA_L.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_run2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_run2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_run2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_run2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive_2.1D movregs \
 -x1D X.xmat_L.1D \
 -xjpeg X_L.jpg \
 -nobucket
@@ -2442,15 +2375,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/lpi_scale_tfMRI_SternPro2_PA_R.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_run2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_run2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_run2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_run2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50Con_2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_PC50InCon_2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasCon_2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/346945_Stern_proactive_biasInCon_2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/motion_demean_proactive_2.1D movregs \
 -x1D X.xmat_R.1D \
 -xjpeg X_R.jpg \
 -nobucket
@@ -2731,14 +2664,6 @@
 -tout \
 -nobout \
 -verb
-
-
-
-
-
-## RUNWISE STROOP
-## see changes:
-## would also need to change reactive GLM accordingly
 
 3dDeconvolve \
 -local_times \
@@ -2750,33 +2675,31 @@
 -censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_1.txt \
 -num_stimts 6 \
 -stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF -iresp 2 PATH_iresp_blockONandOFF \
--stim_times 3 PATH_PC50Con_1.txt 'TENTzero(0,16.8,15)' -stim_label 3 PC50Con -iresp 3 PATH_iresp_PC50Con_1 \
--stim_times 4 PATH_PC50InCon_1.txt 'TENTzero(0,16.8,15)' -stim_label 4 PC50InCon -iresp 4 PATH_iresp_PC50InCon_1 \
--stim_times 5 PATH_biasCon_1.txt 'TENTzero(0,16.8,15)' -stim_label 5 biasCon -iresp 5 PATH_iresp_biasCon_1 \
--stim_times 6 PATH_biasInCon_1.txt 'TENTzero(0,16.8,15)' -stim_label 6 biasInCon -iresp 6 PATH_iresp_biasInCon_1 \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
 -ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_1.1D movregs \
--x1D X_1.xmat.1D \
--xjpeg X_1.jpg \
+-x1D X.xmat.1D \
+-xjpeg X.jpg \
 -nobucket
-
-
 3dREMLfit \
 -matrix X.xmat.1D \
 -GOFORIT 5 \
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_blur4_tfMRI_StroopPro1_AP.nii.gz' \
--Rvar stats_var_346945_1_REML.nii.gz \
--Rbuck STATS_346945_1_REML.nii.gz \
--rwherr wherr_346945_1_REML.nii.gz \
--rerrts errts_346945_1_REML.nii.gz \
+-gltsym 'SYM: +biasInCon[[0..5]] -biasCon[[0..5]]' InCon_Con_bias \
+-gltsym 'SYM: +PC50InCon[[0..5]] -PC50Con[[0..5]]' InCon_Con_PC50 \
+-gltsym 'SYM: +0.5*biasInCon[[0..5]] +0.5*PC50InCon[[0..5]] -0.5*biasCon[[0..5]] -0.5*PC50Con[[0..5]]' InCon_Con_PC50bias \
+-gltsym 'SYM: +error[[0..5]] -0.25*PC50Con[[0..5]] -0.25*PC50InCon[[0..5]] -0.25*biasCon[[0..5]] -0.25*biasInCon[[0..5]]' error_correct \
+-Rvar stats_var_346945_REML.nii.gz \
+-Rbuck STATS_346945_REML.nii.gz \
+-rwherr wherr_346945_REML.nii.gz \
+-rerrts errts_346945_REML.nii.gz \
 -fout \
 -tout \
 -nobout \
 -verb
-
-
-
-
 
 3dDeconvolve \
 -local_times \
@@ -2786,15 +2709,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_tfMRI_StroopPro1_AP_L.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_1.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_run1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_1.1D movregs \
 -x1D X.xmat_L.1D \
 -xjpeg X_L.jpg \
 -nobucket
@@ -2823,15 +2746,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_tfMRI_StroopPro1_AP_R.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_1.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_run1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_1.1D movregs \
 -x1D X.xmat_R.1D \
 -xjpeg X_R.jpg \
 -nobucket
@@ -2859,15 +2782,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_blur4_tfMRI_StroopPro2_PA.nii.gz' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_run2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_2.1D movregs \
 -x1D X.xmat.1D \
 -xjpeg X.jpg \
 -nobucket
@@ -2896,15 +2819,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_tfMRI_StroopPro2_PA_L.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_run2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_2.1D movregs \
 -x1D X.xmat_L.1D \
 -xjpeg X_L.jpg \
 -nobucket
@@ -2933,15 +2856,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_tfMRI_StroopPro2_PA_R.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_run2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_2.1D movregs \
 -x1D X.xmat_R.1D \
 -xjpeg X_R.jpg \
 -nobucket
@@ -3070,15 +2993,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_blur4_tfMRI_StroopPro1_AP.nii.gz' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_1.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_run1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_run1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_run1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_run1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_1.1D movregs \
 -x1D X.xmat.1D \
 -xjpeg X.jpg \
 -nobucket
@@ -3107,15 +3030,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_tfMRI_StroopPro1_AP_L.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_1.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_run1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_run1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_run1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_run1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_1.1D movregs \
 -x1D X.xmat_L.1D \
 -xjpeg X_L.jpg \
 -nobucket
@@ -3144,15 +3067,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_tfMRI_StroopPro1_AP_R.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_1.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_run1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_run1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_run1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_run1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_1.1D movregs \
 -x1D X.xmat_R.1D \
 -xjpeg X_R.jpg \
 -nobucket
@@ -3180,15 +3103,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_blur4_tfMRI_StroopPro2_PA.nii.gz' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_run2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_run2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_run2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_run2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_2.1D movregs \
 -x1D X.xmat.1D \
 -xjpeg X.jpg \
 -nobucket
@@ -3217,15 +3140,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_tfMRI_StroopPro2_PA_L.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_run2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_run2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_run2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_run2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_2.1D movregs \
 -x1D X.xmat_L.1D \
 -xjpeg X_L.jpg \
 -nobucket
@@ -3254,15 +3177,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_tfMRI_StroopPro2_PA_R.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_run2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_run2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_run2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_run2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_2.1D movregs \
 -x1D X.xmat_R.1D \
 -xjpeg X_R.jpg \
 -nobucket
@@ -3551,15 +3474,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_blur4_tfMRI_StroopPro1_AP.nii.gz' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_1.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_run1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_1.1D movregs \
 -x1D X.xmat.1D \
 -xjpeg X.jpg \
 -nobucket
@@ -3588,15 +3511,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_tfMRI_StroopPro1_AP_L.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_1.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_run1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_1.1D movregs \
 -x1D X.xmat_L.1D \
 -xjpeg X_L.jpg \
 -nobucket
@@ -3625,15 +3548,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_tfMRI_StroopPro1_AP_R.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_1.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_run1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_run1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_1.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_1.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_1.1D movregs \
 -x1D X.xmat_R.1D \
 -xjpeg X_R.jpg \
 -nobucket
@@ -3661,15 +3584,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/lpi_scale_blur4_tfMRI_StroopRea2_PA.nii.gz' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50Con_run2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50InCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasInCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50Con_2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50InCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasInCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_2.1D movregs \
 -x1D X.xmat.1D \
 -xjpeg X.jpg \
 -nobucket
@@ -3698,15 +3621,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/lpi_scale_tfMRI_StroopRea2_PA_L.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50Con_run2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50InCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasInCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50Con_2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50InCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasInCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_2.1D movregs \
 -x1D X.xmat_L.1D \
 -xjpeg X_L.jpg \
 -nobucket
@@ -3735,15 +3658,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/lpi_scale_tfMRI_StroopRea2_PA_R.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50Con_run2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50InCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasInCon_run2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50Con_2.txt 'TENTzero(0,16.8,8)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50InCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasInCon_2.txt 'TENTzero(0,16.8,8)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_2.1D movregs \
 -x1D X.xmat_R.1D \
 -xjpeg X_R.jpg \
 -nobucket
@@ -3872,15 +3795,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_blur4_tfMRI_StroopPro1_AP.nii.gz' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_1.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_run1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_run1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_run1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_run1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_1.1D movregs \
 -x1D X.xmat.1D \
 -xjpeg X.jpg \
 -nobucket
@@ -3909,15 +3832,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_tfMRI_StroopPro1_AP_L.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_1.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_run1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_run1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_run1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_run1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_1.1D movregs \
 -x1D X.xmat_L.1D \
 -xjpeg X_L.jpg \
 -nobucket
@@ -3946,15 +3869,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_tfMRI_StroopPro1_AP_R.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_1.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_run1.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_run1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_run1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_run1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_run1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_run1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_block_1.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_blockONandOFF_1.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50Con_1.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_PC50InCon_1.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasCon_1.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/346945_Stroop_proactive_biasInCon_1.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_1.1D movregs \
 -x1D X.xmat_R.1D \
 -xjpeg X_R.jpg \
 -nobucket
@@ -3982,15 +3905,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/lpi_scale_blur4_tfMRI_StroopRea2_PA.nii.gz' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50Con_run2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50InCon_run2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasCon_run2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasInCon_run2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50Con_2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50InCon_2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasCon_2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasInCon_2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_2.1D movregs \
 -x1D X.xmat.1D \
 -xjpeg X.jpg \
 -nobucket
@@ -4019,15 +3942,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/lpi_scale_tfMRI_StroopRea2_PA_L.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50Con_run2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50InCon_run2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasCon_run2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasInCon_run2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50Con_2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50InCon_2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasCon_2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasInCon_2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_2.1D movregs \
 -x1D X.xmat_L.1D \
 -xjpeg X_L.jpg \
 -nobucket
@@ -4056,15 +3979,15 @@
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/lpi_scale_tfMRI_StroopRea2_PA_R.func.gii' \
 -polort A \
 -float \
--censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask.txt \
+-censor /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/movregs_FD_mask_2.txt \
 -num_stimts 6 \
--stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_block_run2.txt 'dmBLOCK(1)' -stim_label 1 block \
--stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_blockONandOFF_run2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
--stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50Con_run2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
--stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50InCon_run2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
--stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasCon_run2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
--stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasInCon_run2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
--ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive.1D movregs \
+-stim_times_AM1 1 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_block_2.txt 'dmBLOCK(1)' -stim_label 1 block \
+-stim_times 2 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_blockONandOFF_2.txt 'TENTzero(0,16.8,8)' -stim_label 2 blockONandOFF \
+-stim_times 3 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50Con_2.txt 'BLOCK(2,1)' -stim_label 3 PC50Con \
+-stim_times 4 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_PC50InCon_2.txt 'BLOCK(2,1)' -stim_label 4 PC50InCon \
+-stim_times 5 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasCon_2.txt 'BLOCK(2,1)' -stim_label 5 biasCon \
+-stim_times 6 /mnt/afni_container_output/346945/INPUT_DATA/Stroop/reactive/346945_Stroop_reactive_biasInCon_2.txt 'BLOCK(2,1)' -stim_label 6 biasInCon \
+-ortvec /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/motion_demean_proactive_2.1D movregs \
 -x1D X.xmat_R.1D \
 -xjpeg X_R.jpg \
 -nobucket

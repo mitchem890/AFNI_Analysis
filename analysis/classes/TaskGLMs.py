@@ -78,14 +78,23 @@ class TaskGLMs(object):
         return TRpKnot
 
     # Every GLM that we are running is a censored glm all glms must have a censor file.
-    def generate_censor(self):
-        return os.path.join(self.working_dir, self.subject, 'INPUT_DATA', self.task, self.session,
-                            'movregs_FD_mask.txt')
+    def generate_censor(self, run_num=None):
+        if not run_num:
+            return os.path.join(self.working_dir, self.subject, 'INPUT_DATA', self.task, self.session,
+                                'movregs_FD_mask.txt')
+        else:
+            return os.path.join(self.working_dir, self.subject, 'INPUT_DATA', self.task, self.session,
+                                f'movregs_FD_mask_{run_num}.txt')
 
     # Every GLM that we are running must have an orthogan vector of the movement regressors.
-    def generate_ortvec(self):
-        return os.path.join(self.working_dir, self.subject, 'INPUT_DATA', self.task, self.session,
-                            "motion_demean_" + self.session + ".1D")
+    def generate_ortvec(self, run_num=None):
+        if not run_num:
+            return os.path.join(self.working_dir, self.subject, 'INPUT_DATA', self.task, self.session,
+                                "motion_demean_" + self.session + ".1D")
+        else:
+            return os.path.join(self.working_dir, self.subject, 'INPUT_DATA', self.task, self.session,
+                                f"motion_demean_{self.session}_{run_num}.1D")
+
 
     # builds the volumetric left and right hemisphere GLM given the glm type, label, regressor parameters and the contrast parameters
     # returns three glms in a tuple
@@ -246,7 +255,7 @@ class AxcptGLMs(TaskGLMs):
 
     def create_cues_events_glm_single_run(self, glm_type, image=None):
 
-        evt_appendix=f"_run{image.run_num}"
+        evt_appendix=f"_{image.run_num}"
         generate_residuals = True
         glm_label = f"Cues{evt_appendix}"
 
@@ -309,7 +318,7 @@ class AxcptGLMs(TaskGLMs):
 
     def create_buttons_events_glm_single_run(self, glm_type, image=None):
 
-        evt_appendix=f"_run{image.run_num}"
+        evt_appendix=f"_{image.run_num}"
         glm_label = f"Buttons{evt_appendix}"
 
 
@@ -345,6 +354,8 @@ class AxcptGLMs(TaskGLMs):
         event_glms.append(self.create_buttons_events_glm(glm_type))
         event_glms.append(self.create_cues_events_glm(glm_type))
         for image in self.images:
+            self.ortvec = self.generate_ortvec(run_num=image.run_num)
+            self.censor = self.generate_censor(run_num=image.run_num)
             event_glms.append(self.create_cues_events_glm_single_run(glm_type, image))
             event_glms.append(self.create_buttons_events_glm_single_run(glm_type, image))
         return event_glms
@@ -444,7 +455,7 @@ class CuedtsGLMs(TaskGLMs):
                                roistats_designs_postfixes=roistats_designs_postfixes)
 
     def create_incentive_event_glm_single_run(self, glm_type, image=None):
-        evt_appendix = f"_run{image.run_num}"
+        evt_appendix = f"_{image.run_num}"
         glm_label = f"Incentive{evt_appendix}"
 
         regressors_models_labels = [(f"block{evt_appendix}", self.block_model, "block"),
@@ -470,7 +481,7 @@ class CuedtsGLMs(TaskGLMs):
                                generate_residuals=True)
 
     def create_congruency_incentive_event_glm_single_run(self, glm_type, image=None):
-        evt_appendix = f"_run{image.run_num}"
+        evt_appendix = f"_{image.run_num}"
         glm_label = f"CongruencyIncentive{evt_appendix}"
 
         regressors_models_labels = [(f"block{evt_appendix}", self.block_model, "block"),
@@ -504,7 +515,7 @@ class CuedtsGLMs(TaskGLMs):
                                generate_residuals=True)
 
     def create_letter_number_event_glm_single_run(self, glm_type, image=None):
-        evt_appendix = f"_run{image.run_num}"
+        evt_appendix = f"_{image.run_num}"
         glm_label = f"LetterNumber{evt_appendix}"
 
         regressors_models_labels = [(f"block{evt_appendix}", self.block_model, "block"),
@@ -530,7 +541,7 @@ class CuedtsGLMs(TaskGLMs):
 
     def create_buttons_event_glm_single_run(self, glm_type, image):
 
-        evt_appendix=f"_run{image.run_num}"
+        evt_appendix=f"_{image.run_num}"
         glm_label = f"Buttons{evt_appendix}"
 
         regressors_models_labels = [(f"block{evt_appendix}", self.block_model, "block"),
@@ -565,6 +576,8 @@ class CuedtsGLMs(TaskGLMs):
         event_glms.append(self.create_incentive_event_glm(glm_type))
         event_glms.append(self.create_congruency_incentive_event_glm(glm_type))
         for image in self.images:
+            self.generate_ortvec(run_num=image.run_num)
+            self.generate_censor(run_num=image.run_num)
             event_glms.append(self.create_letter_number_event_glm_single_run(glm_type, image))
             event_glms.append(self.create_buttons_events_glm_single_run(glm_type, image))
             event_glms.append(self.create_incentive_event_glm_single_run(glm_type, image))
@@ -636,7 +649,7 @@ class SternGLMs(TaskGLMs):
 
 
     def create_list_length_events_glms_single_run(self, glm_type, image):
-        evt_appendix=f"_run{image.run_num}"
+        evt_appendix=f"_{image.run_num}"
         glm_label = f"ListLength{evt_appendix}"
 
         regressors_models_labels = [(f"block{evt_appendix}", self.block_model, "block"),
@@ -673,7 +686,7 @@ class SternGLMs(TaskGLMs):
 
     # subtype of Event_GLMs that need to be created
     def create_buttons_events_glms_single_run_glm(self, glm_type, image):
-        evt_appendix = f"_run{image.run_num}"
+        evt_appendix = f"_{image.run_num}"
         glm_label = f"Buttons{evt_appendix}"
         regressors_models_labels = [(f"block{evt_appendix}", self.block_model, "block"),
                                     (f"blockONandOFF{evt_appendix}", self.blockONandOFF_model, "blockONandOFF"),
@@ -703,6 +716,8 @@ class SternGLMs(TaskGLMs):
         event_glms.append(self.create_buttons_events_glms(glm_type))
         event_glms.append(self.create_list_length_events_glms(glm_type))
         for image in self.images:
+            self.ortvec = self.generate_ortvec(run_num=image.run_num)
+            self.censor = self.generate_censor(run_num=image.run_num)
             event_glms.append(self.create_buttons_events_glms_single_run_glm(glm_type, image))
             event_glms.append(self.create_list_length_events_glms_single_run(glm_type, image))
         return event_glms
@@ -754,7 +769,7 @@ class StroopGLMs(TaskGLMs):
                                roistats_designs_postfixes=roistats_designs_postfixes)
 
     def create_congruency_events_glms_single_run(self, type, idx, model, image):
-        evt_appendix=f"_run{image.run_num}"
+        evt_appendix=f"_{image.run_num}"
         glm_label = f"Congruency{evt_appendix}"
 
         regressors_models_labels = [(f"block{evt_appendix}", self.block_model, "block"),
@@ -811,5 +826,9 @@ class StroopGLMs(TaskGLMs):
 
         event_glms.append(self.create_congruency_events_glms(type, idx, model))
         for image in self.images:
+            self.ortvec = self.generate_ortvec(run_num=image.run_num)
+            self.censor = self.generate_censor(run_num=image.run_num)
             event_glms.append(self.create_congruency_events_glms_single_run(type, idx, model, image))
+            self.ortvec = self.generate_ortvec()
+            self.censor = self.generate_censor()
         return event_glms

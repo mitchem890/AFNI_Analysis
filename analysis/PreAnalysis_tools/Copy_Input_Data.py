@@ -7,7 +7,7 @@ sys.path.append("..")  # Adds higher directory to python modules path.
 from PreAnalysis_tools import Confounds_Regressors_Interface as cri
 from classes import Images, BashCommand
 from utils import logger
-
+from PreAnalysis_tools import Run_Splitter
 
 # Check to make sure there are no blank evts for use with both fmriprep and hcp
 def check_evts(input, image):
