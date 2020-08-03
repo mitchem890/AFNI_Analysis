@@ -579,7 +579,7 @@ class CuedtsGLMs(TaskGLMs):
             self.generate_ortvec(run_num=image.run_num)
             self.generate_censor(run_num=image.run_num)
             event_glms.append(self.create_letter_number_event_glm_single_run(glm_type, image))
-            event_glms.append(self.create_buttons_events_glm_single_run(glm_type, image))
+            event_glms.append(self.create_buttons_event_glm_single_run(glm_type, image))
             event_glms.append(self.create_incentive_event_glm_single_run(glm_type, image))
             event_glms.append(self.create_congruency_incentive_event_glm_single_run(glm_type, image))
 

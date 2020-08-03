@@ -27,7 +27,7 @@ def split_tr_lengthed_files(filename, outfile, run_length, line_start):
 
 def find_and_split_evts(dir, images):
     print("Running EVT splitter")
-    for file in glob.glob(os.path.join(dir, f"{images[0].subject}_{images[0].task}_{images[0].session}_*.txt")):
+    for file in glob.glob(os.path.join(dir, f"{images[0].subject}_{images[0].task}_{images[0].session}_*[!_0-9].txt")):
         for image in images:
             outfile = f"{file.rsplit('.txt')[0]}_{image.run_num}.txt"
             split_evt(file, outfile, int(image.run_num)-1)
@@ -41,9 +41,9 @@ def find_and_split_movement(dir, images):
         filename = os.path.join(dir, f"movregs_FD_mask.txt")
         outfile = os.path.join(dir, f"movregs_FD_mask_{image.run_num}.txt")
         split_tr_lengthed_files(filename=filename, outfile=outfile,
-                                run_length=image.run_length, line_start=int(first_tr_of_run))
+                                run_length=image.run_length, line_start=first_tr_of_run)
         filename = os.path.join(dir, f"motion_demean_{image.session}.1D")
         outfile = os.path.join(dir, f"motion_demean_{image.session}_{image.run_num}.1D")
         split_tr_lengthed_files(filename=filename, outfile=outfile,
-                                run_length=int(image.run_length), line_start=int(first_tr_of_run))
+                                run_length=int(image.run_length), line_start=first_tr_of_run)
         first_tr_of_run = image.run_length + first_tr_of_run
