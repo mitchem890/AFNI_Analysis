@@ -16,9 +16,6 @@ def split_tr_lengthed_files(filename, outfile, run_length, line_start):
     all_lines = f.readlines()
     line_end_idx = run_length + line_start
 
-    print(f"line_end {line_end_idx}")
-    print(f"all_lines {len(all_lines)}")
-    print(f"line_end {line_end_idx}\nline_start {line_start}")
     lines = all_lines[line_start:line_end_idx]
     for line in lines:
         w.write(line)
