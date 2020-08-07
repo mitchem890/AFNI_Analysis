@@ -84,7 +84,7 @@ class TaskGLMs(object):
                                 'movregs_FD_mask.txt')
         else:
             return os.path.join(self.working_dir, self.subject, 'INPUT_DATA', self.task, self.session,
-                                f'movregs_FD_mask_{run_num}.txt')
+                                f'movregs_FD_mask_run{run_num}.txt')
 
     # Every GLM that we are running must have an orthogan vector of the movement regressors.
     def generate_ortvec(self, run_num=None):
@@ -93,7 +93,7 @@ class TaskGLMs(object):
                                 "motion_demean_" + self.session + ".1D")
         else:
             return os.path.join(self.working_dir, self.subject, 'INPUT_DATA', self.task, self.session,
-                                f"motion_demean_{self.session}_{run_num}.1D")
+                                f"motion_demean_{self.session}_run{run_num}.1D")
 
 
     # builds the volumetric left and right hemisphere GLM given the glm type, label, regressor parameters and the contrast parameters
@@ -147,7 +147,7 @@ class TaskGLMs(object):
         return (volume_glm, surface_L_glm, surface_R_glm)
 
     # all the task use the on blocks glms with the same parameters in each one
-    def create_on_blocks_glms(self):
+    def create_on_blocks_glms_dual_run(self):
 
         regressors_models_labels = [('block', self.block_model, 'ON_BLOCKS')]
         type = 'ON_BLOCKS'
@@ -160,7 +160,7 @@ class TaskGLMs(object):
     # all task have on mixed glms.
     # These glms have the same structure across tasks
     # but the event model changes across tasks
-    def create_on_mixed_glms(self):
+    def create_on_mixed_glms_dual_run(self):
         type = 'ON_MIXED'
         regressors_models_labels = [("block", self.block_model, 'ON_BLOCKS'),
                                     ("blockONandOFF", self.blockONandOFF_model, "ON_blockONandOFF"),
@@ -172,6 +172,66 @@ class TaskGLMs(object):
         return self.build_glms(glm_type=type,
                                regressors_models_labels=regressors_models_labels,
                                roistats_designs_postfixes=roistats_designs_postfixes)
+
+    # all the task use the on blocks glms with the same parameters in each one
+    def create_on_blocks_glms_single_run(self, image):
+        evt_appendix=f"_run{image.run_num}"
+        generate_residuals = True
+
+        regressors_models_labels = [(f'block{evt_appendix}', self.block_model, f'ON_BLOCKS{evt_appendix}')]
+        type = f"ON_BLOCKS{evt_appendix}"
+        roistats_designs_postfixes = [(f'ON_BLOCKS{evt_appendix}', '_blocks')]
+
+        return self.build_glms(glm_type=type,
+                               regressors_models_labels=regressors_models_labels,
+                               roistats_designs_postfixes=roistats_designs_postfixes,
+                               generate_residuals=generate_residuals)
+
+    # all task have on mixed glms.
+    # These glms have the same structure across tasks
+    # but the event model changes across tasks
+    def create_on_mixed_glms_single_run(self, image):
+        evt_appendix=f"_run{image.run_num}"
+        generate_residuals = True
+
+        type = f'ON_MIXED{evt_appendix}'
+        regressors_models_labels = [(f"block{evt_appendix}", self.block_model, f'ON_BLOCKS{evt_appendix}'),
+                                    (f"blockONandOFF{evt_appendix}", self.blockONandOFF_model, f"ON_blockONandOFF{evt_appendix}"),
+                                    (f"allTrials{evt_appendix}", self.event_model, f"ON_TRIALS{evt_appendix}")]
+        roistats_designs_postfixes = [(f'ON_BLOCKS{evt_appendix}', '_blocks'),
+                                      (f'ON_blockONandOFF{evt_appendix}', '_tents'),
+                                      (f'ON_TRIALS{evt_appendix}', '_tents')]
+
+        return self.build_glms(glm_type=type,
+                               regressors_models_labels=regressors_models_labels,
+                               roistats_designs_postfixes=roistats_designs_postfixes,
+                               generate_residuals=generate_residuals)
+
+
+
+    def create_on_mixed_glms(self):
+        on_mixed_glms = []
+        on_mixed_glms.append(self.create_on_mixed_glms_dual_run())
+        for image in self.images:
+            self.ortvec = self.generate_ortvec(run_num=image.run_num)
+            self.censor = self.generate_censor(run_num=image.run_num)
+            on_mixed_glms.append(self.create_on_mixed_glms_single_run(image))
+            self.ortvec = self.generate_ortvec()
+            self.censor = self.generate_censor()
+
+        return on_mixed_glms
+
+    def create_on_blocks_glms(self):
+        on_blocks_glms = []
+        on_blocks_glms.append(self.create_on_blocks_glms_dual_run())
+        for image in self.images:
+            self.ortvec = self.generate_ortvec(run_num=image.run_num)
+            self.censor = self.generate_censor(run_num=image.run_num)
+            on_blocks_glms.append(self.create_on_blocks_glms_single_run(image))
+            self.ortvec = self.generate_ortvec()
+            self.censor = self.generate_censor()
+
+        return on_blocks_glms
 
     # Each taskGLMs collection will override this function to provide its own event GLMs
     # The event GLMs change the most across the subjects
@@ -210,8 +270,8 @@ class AxcptGLMs(TaskGLMs):
         self.tent_duration = 21.6
         self.event_model, self.idx = self.create_Tent_models(duration=self.tent_duration)
         self.glms = []
-        self.glms.append(self.create_on_blocks_glms())
-        self.glms.append(self.create_on_mixed_glms())
+        self.glms.extend(self.create_on_blocks_glms())
+        self.glms.extend(self.create_on_mixed_glms())
         self.glms.extend(self.create_events_glms())
 
         return
@@ -255,7 +315,7 @@ class AxcptGLMs(TaskGLMs):
 
     def create_cues_events_glm_single_run(self, glm_type, image=None):
 
-        evt_appendix=f"_{image.run_num}"
+        evt_appendix=f"_run{image.run_num}"
         generate_residuals = True
         glm_label = f"Cues{evt_appendix}"
 
@@ -318,7 +378,7 @@ class AxcptGLMs(TaskGLMs):
 
     def create_buttons_events_glm_single_run(self, glm_type, image=None):
 
-        evt_appendix=f"_{image.run_num}"
+        evt_appendix=f"_run{image.run_num}"
         glm_label = f"Buttons{evt_appendix}"
 
 
@@ -367,8 +427,8 @@ class CuedtsGLMs(TaskGLMs):
         self.tent_duration = 24
         self.event_model, self.idx = self.create_Tent_models(duration=self.tent_duration)
         self.glms = []
-        self.glms.append(self.create_on_blocks_glms())
-        self.glms.append(self.create_on_mixed_glms())
+        self.glms.extend(self.create_on_blocks_glms())
+        self.glms.extend(self.create_on_mixed_glms())
         self.glms.extend(self.create_events_glms())
 
         return
@@ -541,7 +601,7 @@ class CuedtsGLMs(TaskGLMs):
 
     def create_buttons_event_glm_single_run(self, glm_type, image):
 
-        evt_appendix=f"_{image.run_num}"
+        evt_appendix=f"_run{image.run_num}"
         glm_label = f"Buttons{evt_appendix}"
 
         regressors_models_labels = [(f"block{evt_appendix}", self.block_model, "block"),
@@ -592,8 +652,8 @@ class SternGLMs(TaskGLMs):
         self.tent_duration = 26.4
         self.event_model, self.idx = self.create_Tent_models(duration=self.tent_duration)
         self.glms = []
-        self.glms.append(self.create_on_blocks_glms())
-        self.glms.append(self.create_on_mixed_glms())
+        self.glms.extend(self.create_on_blocks_glms())
+        self.glms.extend(self.create_on_mixed_glms())
         self.glms.extend(self.create_events_glms())
 
     def create_list_length_events_glms(self, glm_type):
@@ -649,7 +709,7 @@ class SternGLMs(TaskGLMs):
 
 
     def create_list_length_events_glms_single_run(self, glm_type, image):
-        evt_appendix=f"_{image.run_num}"
+        evt_appendix=f"_run{image.run_num}"
         glm_label = f"ListLength{evt_appendix}"
 
         regressors_models_labels = [(f"block{evt_appendix}", self.block_model, "block"),
@@ -729,8 +789,8 @@ class StroopGLMs(TaskGLMs):
         self.tent_duration = 16.8
         self.event_model, self.idx = self.create_Tent_models(duration=self.tent_duration)
         self.glms = []
-        self.glms.append(self.create_on_blocks_glms())
-        self.glms.append(self.create_on_mixed_glms())
+        self.glms.extend(self.create_on_blocks_glms())
+        self.glms.extend(self.create_on_mixed_glms())
         self.glms.extend(self.create_events_glms())
         self.glms.extend(self.create_events_glms(HRF_EVENTS=True))
 
@@ -769,7 +829,7 @@ class StroopGLMs(TaskGLMs):
                                roistats_designs_postfixes=roistats_designs_postfixes)
 
     def create_congruency_events_glms_single_run(self, type, idx, model, image):
-        evt_appendix=f"_{image.run_num}"
+        evt_appendix=f"_run{image.run_num}"
         glm_label = f"Congruency{evt_appendix}"
 
         regressors_models_labels = [(f"block{evt_appendix}", self.block_model, "block"),
