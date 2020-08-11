@@ -336,7 +336,6 @@ class create_censor_list(bash_command):
 -verb 0 \\
 -overwrite"""
         return command
-        bash_command.__init__(self, command=self.command, return_output=False)
 
 
 class get_tr_count(bash_command):
@@ -525,7 +524,7 @@ class resample(bash_command):
         elif self.voxel_dim == '2.000000x2.000000x2.000000':
             self.atlas = os.path.join(ConfigGLMs.Atlas_Dir, "gordon_222_resampled_wsubcort_LPI.nii.gz")
         else:
-            Exception("Could not get atlas for voxel dimensions")
+            raise Exception("Could not get atlas for voxel dimensions")
         self.command = self.build_command()
         bash_command.__init__(self, command=self.command, return_output=False)
 
