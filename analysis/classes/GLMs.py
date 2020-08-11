@@ -151,7 +151,7 @@ class VolumeGLM(GLM):
                      extension=self.extension)
 
 
-        self.deconvolve = BashCommand.deconvolve(
+        self.deconvolve = BashCommand.Deconvolve(
             local_times=True,
             x1D_stop=True,
             GOFORIT=5,
@@ -166,7 +166,7 @@ class VolumeGLM(GLM):
             xjpeg="X.jpg",
             nobucket=True)
 
-        self.remlfit = BashCommand.remlfit(
+        self.remlfit = BashCommand.Remlfit(
             matrix="X.xmat.1D",
             GOFORIT=5,
             input=self.input,
@@ -248,7 +248,7 @@ class SurfaceGLM(GLM):
                      roistats_designs_postfixes=self.roistats_designs_postfixes,
                      extension=self.extension)
 
-        self.deconvolve = BashCommand.deconvolve(
+        self.deconvolve = BashCommand.Deconvolve(
             local_times=True,
             x1D_stop=True,
             GOFORIT=5,
@@ -263,7 +263,7 @@ class SurfaceGLM(GLM):
             xjpeg=f"X_{self.hemisphere}.jpg",
             nobucket=True)
 
-        self.remlfit = BashCommand.remlfit(
+        self.remlfit = BashCommand.Remlfit(
             matrix=f"X.xmat_{self.hemisphere}.1D",
             GOFORIT=5,
             input=self.input,

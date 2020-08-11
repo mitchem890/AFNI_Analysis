@@ -11,9 +11,9 @@ from config import ConfigGLMs
 # Each bash command should a build_command function and a run_command function
 
 #This is the General bash Command class. All bash commands will be Built off of this.
-#If you use the parameter outfile in a subclass. The bash_command class will check to see if the file already exists.
+#If you use the parameter outfile in a subclass. The BashCommand class will check to see if the file already exists.
 # If it does it will skip that processing step
-class bash_command(object):
+class BashCommand(object):
     def __init__(self, command: str, return_output: bool):
         self.command = command
         self.return_output = return_output
@@ -57,7 +57,7 @@ class bash_command(object):
 # -nobucket"
 #
 # Where the First stim time will alway be an AM1 Block stim time you may want to alter this in the future
-class deconvolve(bash_command):
+class Deconvolve(BashCommand):
     def __init__(self, **kwargs):
         prop_defaults = {
             "local_times": True,
@@ -80,7 +80,7 @@ class deconvolve(bash_command):
 
         self.command = self.build_command()
         self.outfile = self.x1D
-        bash_command.__init__(self, command=self.command, return_output=False)
+        BashCommand.__init__(self, command=self.command, return_output=False)
 
     def generate_force_tr(self):
         force_tr_parameter = ""
@@ -121,7 +121,7 @@ class deconvolve(bash_command):
 
 
 # This will build the 3dRemlfit command used in glms
-class remlfit(bash_command):
+class Remlfit(BashCommand):
     def __init__(self, **kwargs):
         prop_defaults = {
             "matrix": "X.xmat.1D",
@@ -143,7 +143,7 @@ class remlfit(bash_command):
 
         self.command = self.build_command()
         self.outfile = self.Rbuck
-        bash_command.__init__(self, command=self.command, return_output=False)
+        BashCommand.__init__(self, command=self.command, return_output=False)
 
     def generate_options(self):
         option_string = ""
@@ -184,7 +184,7 @@ class remlfit(bash_command):
         return command
 
 
-class roistats(bash_command):
+class Roistats(BashCommand):
     def __init__(self, **kwargs):
         prop_defaults = {
             "input": None,
@@ -200,7 +200,7 @@ class roistats(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.command = self.build_command()
-        bash_command.__init__(self, command=self.command, return_output=False)
+        BashCommand.__init__(self, command=self.command, return_output=False)
 
     def build_command(self):
         command = f"""bash /home/analysis/BashScripts/Roistats.sh \\
@@ -216,7 +216,7 @@ class roistats(bash_command):
 
 # This will take a movement regressors file in
 # and write out a ecludian normalized text file out in the out file path
-class compute_enorms(bash_command):
+class ComputeEnorms(BashCommand):
     def __init__(self, **kwargs):
         prop_defaults = {
             "infile": None,
@@ -229,7 +229,7 @@ class compute_enorms(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.command = self.build_command()
-        bash_command.__init__(self, command=self.command, return_output=False)
+        BashCommand.__init__(self, command=self.command, return_output=False)
 
     def __str__(self):
         return f"Computing Enorms"
@@ -247,7 +247,7 @@ class compute_enorms(bash_command):
 
 
 # This will demean the motion parameters in the output file
-class demean_motion_parameters(bash_command):
+class DemeanMotionParameters(BashCommand):
     def __init__(self, **kwargs):
         prop_defaults = {
             "infile": None,
@@ -260,7 +260,7 @@ class demean_motion_parameters(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.command = self.build_command()
-        bash_command.__init__(self, command=self.command, return_output=False)
+        BashCommand.__init__(self, command=self.command, return_output=False)
 
     def __str__(self):
         return f"Demeaning Motion Parameters"
@@ -275,7 +275,7 @@ class demean_motion_parameters(bash_command):
         return command
 
 
-class compute_motion_parameter_derivatives(bash_command):
+class ComputeMotionParameterDerivatives(BashCommand):
     def __init__(self, **kwargs):
         prop_defaults = {
             "infile": None,
@@ -288,7 +288,7 @@ class compute_motion_parameter_derivatives(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.command = self.build_command()
-        bash_command.__init__(self, command=self.command, return_output=False)
+        BashCommand.__init__(self, command=self.command, return_output=False)
 
     def __str__(self):
         return "Computing Motion Parameter Derivatives"
@@ -304,7 +304,7 @@ class compute_motion_parameter_derivatives(bash_command):
         return command
 
 
-class create_censor_list(bash_command):
+class CreateCensorList(BashCommand):
     def __init__(self, **kwargs):
         prop_defaults = {
             "infile": None,
@@ -318,7 +318,7 @@ class create_censor_list(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.command = self.build_command()
-        bash_command.__init__(self, command=self.command, return_output=False)
+        BashCommand.__init__(self, command=self.command, return_output=False)
 
     def __str__(self):
         return f"Creating Censor List"
@@ -338,7 +338,7 @@ class create_censor_list(bash_command):
         return command
 
 
-class get_tr_count(bash_command):
+class GetTRCount(BashCommand):
     def __init__(self, **kwargs):
         prop_defaults = {
             "infile": None
@@ -347,7 +347,7 @@ class get_tr_count(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.command = self.build_command()
-        bash_command.__init__(self, command=self.command, return_output=True)
+        BashCommand.__init__(self, command=self.command, return_output=True)
 
     def __str__(self):
         return f"Getting TR Count"
@@ -356,7 +356,7 @@ class get_tr_count(bash_command):
         command = f"""3dinfo -nv {self.infile}"""
         return command
 
-class get_tr(bash_command):
+class GetTR(BashCommand):
     def __init__(self, **kwargs):
         prop_defaults = {
             "infile": None
@@ -365,7 +365,7 @@ class get_tr(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.command = self.build_command()
-        bash_command.__init__(self, command=self.command, return_output=True)
+        BashCommand.__init__(self, command=self.command, return_output=True)
 
     def __str__(self):
         return f"Getting TR"
@@ -374,7 +374,7 @@ class get_tr(bash_command):
         command = f"""3dinfo -tr {self.infile}"""
         return command
 
-class get_voxel_dimensions(bash_command):
+class GetVoxelDimensions(BashCommand):
     def __init__(self, **kwargs):
         prop_defaults = {
             "infile": None,
@@ -384,7 +384,7 @@ class get_voxel_dimensions(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.command = self.build_command()
-        bash_command.__init__(self, command=self.command, return_output=True)
+        BashCommand.__init__(self, command=self.command, return_output=True)
 
     def __str__(self):
         return f"Getting Voxel dimensions"
@@ -393,7 +393,7 @@ class get_voxel_dimensions(bash_command):
         command = f"""3dinfo -d{self.dimension} {self.infile}"""
         return command
 
-class get_image_dimensions(bash_command):
+class GetImageDimensions(BashCommand):
     def __init__(self, **kwargs):
         prop_defaults = {
             "infile": None,
@@ -403,7 +403,7 @@ class get_image_dimensions(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.command = self.build_command()
-        bash_command.__init__(self, command=self.command, return_output=True)
+        BashCommand.__init__(self, command=self.command, return_output=True)
 
     def __str__(self):
         return f"Getting image dimensions"
@@ -414,7 +414,7 @@ class get_image_dimensions(bash_command):
 
 
 # Used to split Ciftis into left and right hemisphere Giftis
-class cifti_split(bash_command):
+class CiftiSplit(BashCommand):
     def __init__(self, **kwargs):
         prop_defaults = {
             "infile": None,
@@ -426,7 +426,7 @@ class cifti_split(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.command = self.build_command()
-        bash_command.__init__(self, command=self.command, return_output=False)
+        BashCommand.__init__(self, command=self.command, return_output=False)
 
     def __str__(self):
         return f"Splitting Cifti Image: {self.metric}"
@@ -437,7 +437,7 @@ class cifti_split(bash_command):
         return command
 
 
-class calculate_fds(bash_command):
+class CalculateFD(BashCommand):
     def __init__(self, **kwargs):
         prop_defaults = {
             "infile": None,
@@ -447,7 +447,7 @@ class calculate_fds(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.command = self.build_command()
-        bash_command.__init__(self, command=self.command, return_output=False)
+        BashCommand.__init__(self, command=self.command, return_output=False)
 
     def __str__(self):
         return "Calculating FD's"
@@ -461,7 +461,7 @@ class calculate_fds(bash_command):
 
 # This will run nicholases DVar calculating script on the input nifti image.
 # it will create a text file in the outfile location
-class calculate_dvars(bash_command):
+class CalculateDVars(BashCommand):
     def __init__(self, **kwargs):
         prop_defaults = {
             "infile": None,
@@ -471,7 +471,7 @@ class calculate_dvars(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.command = self.build_command()
-        bash_command.__init__(self, command=self.command, return_output=False)
+        BashCommand.__init__(self, command=self.command, return_output=False)
 
     def __str__(self):
         return f"Calculating Dvars"
@@ -483,7 +483,7 @@ class calculate_dvars(bash_command):
 
 # This will return a string of filter out frames for input images.
 # with 1 for included frames and 0 for excluded frames
-class make_fd_mask(bash_command):
+class MakeFDMask(BashCommand):
     def __init__(self, **kwargs):
         prop_defaults = {
             "infile": None,
@@ -493,7 +493,7 @@ class make_fd_mask(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.command = self.build_command()
-        bash_command.__init__(self, command=self.command, return_output=True)
+        BashCommand.__init__(self, command=self.command, return_output=True)
 
     def __str__(self):
         return f"Making Functional Displacement Mask"
@@ -507,7 +507,7 @@ class make_fd_mask(bash_command):
 
 # use 3dResample to resize volumetric images.
 # you would normally use this to make an image fit to an atlas
-class resample(bash_command):
+class Resample(BashCommand):
     def __init__(self, **kwargs):
         prop_defaults = {
             "voxel_dim": None,
@@ -526,7 +526,7 @@ class resample(bash_command):
         else:
             raise Exception("Could not get atlas for voxel dimensions")
         self.command = self.build_command()
-        bash_command.__init__(self, command=self.command, return_output=False)
+        BashCommand.__init__(self, command=self.command, return_output=False)
 
     def __str__(self):
         return "Running 3dResample"
@@ -539,7 +539,7 @@ class resample(bash_command):
         return command
 
 
-class AutoMask(bash_command):
+class AutoMask(BashCommand):
     def __init__(self, **kwargs):
         prop_defaults = {
             "dilate": "1",
@@ -550,7 +550,7 @@ class AutoMask(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.command = self.build_command()
-        bash_command.__init__(self, command=self.command, return_output=False)
+        BashCommand.__init__(self, command=self.command, return_output=False)
 
     def __str__(self):
         return "Running AutoMask"
@@ -563,7 +563,7 @@ class AutoMask(bash_command):
         return command
 
 
-class BlurToFWHM(bash_command):
+class BlurToFWHM(BashCommand):
     def __init__(self, **kwargs):
         prop_defaults = {
             "FWMH": "4",
@@ -574,7 +574,7 @@ class BlurToFWHM(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.command = self.build_command()
-        bash_command.__init__(self, command=self.command, return_output=False)
+        BashCommand.__init__(self, command=self.command, return_output=False)
 
     def __str__(self):
         return "Running BlurToFWHM"
@@ -587,7 +587,7 @@ class BlurToFWHM(bash_command):
         return command
 
 
-class Tstat(bash_command):
+class Tstat(BashCommand):
     def __init__(self, **kwargs):
         prop_defaults = {
             "infile": None,
@@ -597,7 +597,7 @@ class Tstat(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.command = self.build_command()
-        bash_command.__init__(self, command=self.command, return_output=False)
+        BashCommand.__init__(self, command=self.command, return_output=False)
 
     def __str__(self):
         return "Running Tstat"
@@ -609,7 +609,7 @@ class Tstat(bash_command):
 
 
 #Runs calculation on the two input images
-class Calc(bash_command):
+class Calc(BashCommand):
     def __init__(self, **kwargs):
         prop_defaults = {
             "infile_a": None,
@@ -621,7 +621,7 @@ class Calc(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.command = self.build_command()
-        bash_command.__init__(self, command=self.command, return_output=False)
+        BashCommand.__init__(self, command=self.command, return_output=False)
 
     def __str__(self):
         return "Running 3dCalc"
@@ -636,7 +636,7 @@ class Calc(bash_command):
 
 
 #Reorients The image to given orientation Default is LPI
-class Reorient(bash_command):
+class Reorient(BashCommand):
     def __init__(self, **kwargs):
         prop_defaults = {
             "orient": 'LPI',
@@ -648,7 +648,7 @@ class Reorient(bash_command):
             setattr(self, prop, kwargs.get(prop, default))
 
         self.command = self.build_command()
-        bash_command.__init__(self, command=self.command, return_output=False)
+        BashCommand.__init__(self, command=self.command, return_output=False)
 
     def __str__(self):
         return "Running 3dReorient"
