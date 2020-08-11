@@ -20,6 +20,7 @@ image2 = Images.hcp_preprocessed_image(
     subject='346945', session='baseline', task='Axcpt', pipeline='hcp', testMode=True)
 Axcpt_Images = [image1, image2]
 
+fake_analysis_output='/mnt/afni_container_output/'
 
 def test_congruency_event_deconvolve_volume():
     output = f"""3dDeconvolve \\
@@ -42,7 +43,7 @@ def test_congruency_event_deconvolve_volume():
 -xjpeg X.jpg \\
 -nobucket"""
 
-    assert output == TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Images).glms[2][0].deconvolve.command
+    assert output == TaskGLMs.StroopGLMs(fake_analysis_output, images=Stroop_Images).glms[2][0].deconvolve.command
 
 def test_congruency_event_remlfit_volume():
     output = """3dREMLfit \\
@@ -55,7 +56,7 @@ def test_congruency_event_remlfit_volume():
 -tout \\
 -nobout \\
 -verb"""
-    assert output == TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Images).glms[0][0].remlfit.command
+    assert output == TaskGLMs.StroopGLMs(fake_analysis_output, images=Stroop_Images).glms[0][0].remlfit.command
 
 def test_congruency_event_deconvolve_surface_L():
     output = f"""3dDeconvolve \\
@@ -79,7 +80,7 @@ def test_congruency_event_deconvolve_surface_L():
 -xjpeg X_L.jpg \\
 -nobucket"""
 
-    assert output == TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Images).glms[2][1].deconvolve.command
+    assert output == TaskGLMs.StroopGLMs(fake_analysis_output, images=Stroop_Images).glms[2][1].deconvolve.command
 
 def test_congruency_event_remlfit_surface_L():
     output = """3dREMLfit \\
@@ -92,7 +93,7 @@ def test_congruency_event_remlfit_surface_L():
 -tout \\
 -nobout \\
 -verb"""
-    assert output == TaskGLMs.AxcptGLMs('/mnt/afni_container_output/', images=Stroop_Images).glms[1][1].remlfit.command
+    assert output == TaskGLMs.AxcptGLMs(fake_analysis_output, images=Stroop_Images).glms[1][1].remlfit.command
 
 def test_congruency_hrf_event_deconvolve_volume():
     output = f"""3dDeconvolve \\
@@ -115,7 +116,7 @@ def test_congruency_hrf_event_deconvolve_volume():
 -xjpeg X.jpg \\
 -nobucket"""
 
-    assert output == TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Images).glms[3][0].deconvolve.command
+    assert output == TaskGLMs.StroopGLMs(fake_analysis_output, images=Stroop_Images).glms[3][0].deconvolve.command
 
 
 
@@ -130,4 +131,4 @@ def test_on_blocks_roistats_volume():
 -b Coef \\
 -f 346945_timecourses_proactive_ON_BLOCKS_Coef_blocks_gordon_2p4_resampled_wsubcort_LPI.txt'''
 
-    assert output==TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_Images).glms[0][0].roistats[0].roistats.command
+    assert output==TaskGLMs.StroopGLMs(fake_analysis_output, images=Stroop_Images).glms[0][0].roistats[0].roistats.command

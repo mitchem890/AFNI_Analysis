@@ -14,11 +14,11 @@ import re
 # run_preanalysis = args.preanalysis
 # run_analysis = args.analysis
 # pipeline = args.pipeline
-
+re_temp='(?:% s)' % '|'
 
 def validate_pipeline(pipeline):
     valid_pipeline_format = ["hcp", "fmriprep"]
-    temp = '(?:% s)' % '|'.join(valid_pipeline_format)
+    temp = re_temp.join(valid_pipeline_format)
     try:
         if not re.match(temp, pipeline):
             raise IOError
@@ -54,7 +54,7 @@ def validate_event_files(events):
 
 def validate_subjects(subjects):
     valid_subject_format = ["[0-9][0-9][0-9][0-9][0-9][0-9]", "DMCC[0-9][0-9][0-9][0-9][0-9][0-9]"]
-    temp = '(?:% s)' % '|'.join(valid_subject_format)
+    temp = re_temp.join(valid_subject_format)
     try:
         for subject in subjects:
             if not re.match(temp, subject):
@@ -66,7 +66,7 @@ def validate_subjects(subjects):
 
 def validate_wave(wave):
     valid_wave_format = ["wave[1-9]"]
-    temp = '(?:% s)' % '|'.join(valid_wave_format)
+    temp = re_temp.join(valid_wave_format)
     try:
         if not re.match(temp, wave):
             raise IOError
@@ -77,7 +77,7 @@ def validate_wave(wave):
 
 def validate_tasks(tasks):
     valid_tasks_format = ["Axcpt", "Cuedts", "Stern", "Stroop"]
-    temp = '(?:% s)' % '|'.join(valid_tasks_format)
+    temp = re_temp.join(valid_tasks_format)
     try:
         for task in tasks:
             if not re.match(temp, task):
@@ -89,7 +89,7 @@ def validate_tasks(tasks):
 
 def validate_sessions(sessions):
     valid_sessions_format = ["baseline", "proactive", "reactive"]
-    temp = '(?:% s)' % '|'.join(valid_sessions_format)
+    temp = re_temp.join(valid_sessions_format)
     try:
         for session in sessions:
             if not re.match(temp, session):
@@ -106,7 +106,14 @@ def validate_ncpus(ncpus):
     except IOError:
         print("Invalid ncpus input. ncpus must be an integer type")
 
+
 def validate_aux_analysis(aux_analysis):
+    try:
+        if not os.path.exists(aux_analysis):
+            raise IOError
+    except IOError:
+        print("aux_analysis path: " + aux_analysis + " Does not exist")
+
     pass
 
 def validate_user_input(origin, destination, events, pipeline, wave, subjects, tasks, sessions, ncpus, aux_analysis):
