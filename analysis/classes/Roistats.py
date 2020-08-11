@@ -37,7 +37,7 @@ class roistats(object):
         return f"{self.subject}_timecourses_{self.session}_{self.design}_{self.subbrick}{self.postfix}_{atlas_file}.txt"
 
     def generate_command(self):
-        command = BashCommand.roistats(input=self.input_file,
+        command = BashCommand.Roistats(input=self.input_file,
                                        name=self.design,
                                        working_dir=self.working_dir,
                                        atlas=self.atlas,
@@ -48,8 +48,8 @@ class roistats(object):
 
 
 # This will add the take the standard inputs
-# to the roistats minus the atlas and extension
-# it will return a list of roistats objects, one for each atlas available
+# to the Roistats minus the atlas and extension
+# it will return a list of Roistats objects, one for each atlas available
 def build_roistats(input_file='',
                    design='',
                    working_dir='',

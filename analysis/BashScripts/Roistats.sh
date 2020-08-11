@@ -33,7 +33,7 @@ echo "${idx[@]//#}" > "${work_dir}/idx_${name}_${subbrick}.1D"
 
 
 atlas_file=$(basename ${atlas})
-# roistats
+# Roistats
 3dROIstats -overwrite -mask "${atlas}${extension}" "${input_file}[1dcat ${work_dir}/idx_${name}_${subbrick}.1D]"  > "${work_dir}/${outfile}"
 
 rm $TFILE

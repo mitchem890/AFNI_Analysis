@@ -6,7 +6,7 @@ from classes import Roistats, BashCommand
 
 
 # This is the generalized GLM class
-# Each GLM contains multiple roistats
+# Each GLM contains multiple Roistats
 # running the glm command through print will print info about that glm
 # If you want to add glms I would not add them here.
 # I would add them at the taskGLMs section for each task instead
@@ -69,7 +69,7 @@ class GLM(object):
         return os.path.join(self.working_dir, self.subject, self.results_dir, self.task,
                             f'{self.session}{temp_glm_label}_{self.glm_type}_censored')
 
-    # This will return a list of all the roistats for this glm
+    # This will return a list of all the Roistats for this glm
     def generate_roistats(self):
         roistats = []
         for item in self.roistats_designs_postfixes:
@@ -151,7 +151,7 @@ class VolumeGLM(GLM):
                      extension=self.extension)
 
 
-        self.deconvolve = BashCommand.deconvolve(
+        self.deconvolve = BashCommand.Deconvolve(
             local_times=True,
             x1D_stop=True,
             GOFORIT=5,
@@ -166,7 +166,7 @@ class VolumeGLM(GLM):
             xjpeg="X.jpg",
             nobucket=True)
 
-        self.remlfit = BashCommand.remlfit(
+        self.remlfit = BashCommand.Remlfit(
             matrix="X.xmat.1D",
             GOFORIT=5,
             input=self.input,
@@ -248,7 +248,7 @@ class SurfaceGLM(GLM):
                      roistats_designs_postfixes=self.roistats_designs_postfixes,
                      extension=self.extension)
 
-        self.deconvolve = BashCommand.deconvolve(
+        self.deconvolve = BashCommand.Deconvolve(
             local_times=True,
             x1D_stop=True,
             GOFORIT=5,
@@ -263,7 +263,7 @@ class SurfaceGLM(GLM):
             xjpeg=f"X_{self.hemisphere}.jpg",
             nobucket=True)
 
-        self.remlfit = BashCommand.remlfit(
+        self.remlfit = BashCommand.Remlfit(
             matrix=f"X.xmat_{self.hemisphere}.1D",
             GOFORIT=5,
             input=self.input,
