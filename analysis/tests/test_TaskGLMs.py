@@ -1,8 +1,8 @@
 import unittest
 import sys
 sys.path.append("..") # Adds higher directory to python modules path.
-from ..classes import Images
-from ..classes import TaskGLMs
+from classes import Images
+from classes import TaskGLMs
 
 image1 = Images.hcp_preprocessed_image(
     file='/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/tfMRI_StroopPro1_AP.nii.gz', wave='wave1',
