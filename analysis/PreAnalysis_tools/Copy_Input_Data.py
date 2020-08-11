@@ -65,24 +65,24 @@ def copy_input_data_hcp(image: Images.preprocessed_image, destination, events):
     # create a name template
     name = f"{image.subject}_tfMRI_{image.root_name}"
 
-    command = BashCommand.CalculateFD(infile=origin, outfile=os.path.join(task_dest, name))
+    command = BashCommand.calculate_fds(infile=origin, outfile=os.path.join(task_dest, name))
     print(f"{command} of {image}")
     command.run_command()
 
-    command = BashCommand.CalculateDVars(infile=os.path.join(origin, hcp_volume_image),
-                                         outfile=os.path.join(task_dest, f"{name}_DVARS.txt"))
+    command = BashCommand.calculate_dvars(infile=os.path.join(origin, hcp_volume_image),
+                                          outfile=os.path.join(task_dest, f"{name}_DVARS.txt"))
     print(f"{command} of {image}")
     command.run_command()
 
-    command = BashCommand.CiftiSplit(infile=os.path.join(origin, hcp_cifti_image),
-                                     outfile=os.path.join(task_dest, f"tfMRI_{image.root_name}_L.func.gii"),
-                                     metric="CORTEX_LEFT")
+    command = BashCommand.cifti_split(infile=os.path.join(origin, hcp_cifti_image),
+                                      outfile=os.path.join(task_dest, f"tfMRI_{image.root_name}_L.func.gii"),
+                                      metric="CORTEX_LEFT")
     print(f"{command} of {image}")
     command.run_command()
 
-    command = BashCommand.CiftiSplit(infile=os.path.join(origin, hcp_cifti_image),
-                                     outfile=os.path.join(task_dest, f"tfMRI_{image.root_name}_R.func.gii"),
-                                     metric="CORTEX_RIGHT")
+    command = BashCommand.cifti_split(infile=os.path.join(origin, hcp_cifti_image),
+                                      outfile=os.path.join(task_dest, f"tfMRI_{image.root_name}_R.func.gii"),
+                                      metric="CORTEX_RIGHT")
     print(f"{command} of {image}")
     command.run_command()
 
@@ -174,7 +174,7 @@ def copy_input_data_fmriprep(image, destination, events):
     if not (os.path.exists(os.path.join(task_dest, image.afni_ready_volume_file)) or os.path.exists(
             os.path.join(task_dest, hcp_volume_image))):
         print(f"Resampling: {image.subject} {image.wave} {image.session} {image.task}")
-        BashCommand.Resample(infile=os.path.join(image.dirname, fmriprep_volume_image),
+        BashCommand.resample(infile=os.path.join(image.dirname, fmriprep_volume_image),
                              outfile=os.path.join(task_dest, hcp_volume_image),
                              voxel_dim=image.voxel_dim).run_command()
 

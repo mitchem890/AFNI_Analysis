@@ -24,13 +24,13 @@ def checkoutput(GLM_set):
     for glm in GLM_set.glms:
 
         #Check Volume
-        for roistats in glm[0].Roistats:
+        for roistats in glm[0].roistats:
             volume_good = checkroistats(roistats)
         #Check Left Hem
-        for roistats in glm[1].Roistats:
+        for roistats in glm[1].roistats:
             left_good = checkroistats(roistats)
         #Check right Hem
-        for roistats in glm[2].Roistats:
+        for roistats in glm[2].roistats:
             right_good = checkroistats(roistats)
     all_good = volume_good and left_good and right_good
     return all_good
