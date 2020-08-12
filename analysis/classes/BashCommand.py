@@ -17,7 +17,6 @@ class BashCommand(object):
     def __init__(self, command: str, return_output: bool):
         self.command = command
         self.return_output = return_output
-        return
 
     def run_command(self):
         if (not self.outfile_exist()) or (globals.overwrite):

@@ -44,7 +44,6 @@ class GLM(object):
         self.regressors_models_labels = self.add_path_regressors_models_labels()
         self.roistats = self.generate_roistats()
 
-        return
 
     # This will build a list of tuples of equal size
     # adding a path to each of the regressors along the way
@@ -180,7 +179,6 @@ class VolumeGLM(GLM):
             nobout=True,
             verb=True)
 
-        return
 
     def generate_input(self):
         input_arg = ""
@@ -277,7 +275,6 @@ class SurfaceGLM(GLM):
             nobout=True,
             verb=True)
 
-        return
 
     def generate_input(self):
         input_arg=""

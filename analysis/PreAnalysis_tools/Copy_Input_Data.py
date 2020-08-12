@@ -13,7 +13,7 @@ from utils import logger
 def check_evts(input, image):
     files = glob.glob(os.path.join(input, f"{image.subject}_{image.task}_{image.session}*txt"))
 
-    GoodFiles = []
+    good_files = []
 
     for file in files:
         with open(os.path.join(input, file), "r") as a_file:
@@ -21,10 +21,10 @@ def check_evts(input, image):
                 if len(line.strip().strip('*')) == 0:
                     print('found empty line in file ' + str(file))
                     logger.logger(f'Found blank evt {str(file)}', 'warning')
-                    GoodFiles.append(False)
+                    good_files.append(False)
                 else:
-                    GoodFiles.append(True)
-                if not any(GoodFiles):
+                    good_files.append(True)
+                if not any(good_files):
                     print("All of the evts had issues")
                     logger.logger(f'ERROR: All evts were blank', 'error')
                     raise NameError(f'ERROR: All evts were blank for {image.subject} {image.session} {image.task}')
@@ -125,13 +125,13 @@ def copy_input_data_fmriprep(image, destination, events):
     fmriprep_volume_image = f"{fmriprep_root_name}_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz"
 
     fmriprep_regressors = f"{fmriprep_root_name}_desc-confounds_regressors.tsv"
-    fmriprep_surface_image_L = f"{fmriprep_root_name}_space-fsaverage5_hemi-L.func.gii"
-    fmriprep_surface_image_R = f"{fmriprep_root_name}_space-fsaverage5_hemi-R.func.gii"
+    fmriprep_surface_image_l = f"{fmriprep_root_name}_space-fsaverage5_hemi-L.func.gii"
+    fmriprep_surface_image_r = f"{fmriprep_root_name}_space-fsaverage5_hemi-R.func.gii"
 
     hcp_root_name = f"tfMRI_{image.task}{image.session[0:3].title()}{image.run_num}_{image.encoding}"
     hcp_volume_image = f"{hcp_root_name}.nii.gz"
-    hcp_surface_image_L = f"{hcp_root_name}_L.func.gii"
-    hcp_surface_image_R = f"{hcp_root_name}_R.func.gii"
+    hcp_surface_image_l = f"{hcp_root_name}_L.func.gii"
+    hcp_surface_image_r = f"{hcp_root_name}_R.func.gii"
 
     evt_dir = os.path.join(events, image.subject, 'evts')
 
@@ -179,9 +179,9 @@ def copy_input_data_fmriprep(image, destination, events):
                              voxel_dim=image.voxel_dim).run_command()
 
     if not (os.path.exists(os.path.join(task_dest, image.get_afni_ready_surface_file('L'))) or os.path.exists(
-            os.path.join(task_dest, hcp_surface_image_L))):
-        copyfile(os.path.join(image.dirname, fmriprep_surface_image_L), os.path.join(task_dest, hcp_surface_image_L))
+            os.path.join(task_dest, hcp_surface_image_l))):
+        copyfile(os.path.join(image.dirname, fmriprep_surface_image_l), os.path.join(task_dest, hcp_surface_image_l))
 
     if not (os.path.exists(os.path.join(task_dest, image.get_afni_ready_surface_file('R'))) or os.path.exists(
-            os.path.join(task_dest, hcp_surface_image_R))):
-        copyfile(os.path.join(image.dirname, fmriprep_surface_image_R), os.path.join(task_dest, hcp_surface_image_R))
+            os.path.join(task_dest, hcp_surface_image_r))):
+        copyfile(os.path.join(image.dirname, fmriprep_surface_image_r), os.path.join(task_dest, hcp_surface_image_r))
