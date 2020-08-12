@@ -9,7 +9,8 @@ import pytest
 @pytest.mark.parametrize("pipeline",[("hcp"),("fmriprep")])
 def test_validate_pipeline(pipeline):
 
-    assert Validate_User_Input.validate_pipeline(pipeline) is None
+    assert Validate_User_Input.validate_pipeline(pipeline) is True
+
 
 def test_validate_pipeline_error():
     with pytest.raises(IOError):

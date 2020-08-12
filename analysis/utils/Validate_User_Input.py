@@ -1,6 +1,6 @@
 import os
 import re
-
+import sys
 
 # origin = args.origin
 # subjects = args.subject
@@ -19,37 +19,37 @@ re_temp='(?:% s)' % '|'
 def validate_pipeline(pipeline):
     valid_pipeline_format = ["hcp", "fmriprep"]
     temp = re_temp.join(valid_pipeline_format)
-    try:
-        if not re.match(temp, pipeline):
-            raise IOError
-
-    except IOError:
+    if not re.match(temp, pipeline):
         print("Invalid pipeline input. Expecting either: fmriprep or hcp")
+        raise IOError
+    else:
+        return True
 
 
 def validate_origin(origin):
-    try:
-        if not os.path.exists(origin):
-            raise IOError
-    except IOError:
+    if not os.path.exists(origin):
         print("origin: " + origin + " Does not exist")
+        raise IOError
+    else:
+        return True
 
 
 def validate_destination(destination):
     try:
         if not os.path.exists(destination):
             os.mkdir(destination)
-    except IOError:
+    except:
+        print("Unexpected error:", sys.exc_info()[0])
         print("Could not create destination")
+        raise IOError
 
 
 def validate_event_files(events):
-    try:
-        if not os.path.exists(events):
-            raise IOError
-    except IOError:
+    if not os.path.exists(events):
         print("events path: " + events + " Does not exist")
-        ##TODO sys.exit(error#) Check argparse for validation Function
+        raise IOError
+    else:
+        return True
 
 
 def validate_subjects(subjects):
@@ -59,9 +59,11 @@ def validate_subjects(subjects):
         for subject in subjects:
             if not re.match(temp, subject):
                 raise IOError
-
     except IOError:
         print("One or more subjects have an invalid format. Expecting format: ###### or DMCC######")
+        raise IOError
+
+    return True
 
 
 def validate_wave(wave):
@@ -73,6 +75,9 @@ def validate_wave(wave):
 
     except IOError:
         print("Wave parameter does not match expected format: wave#")
+        raise IOError
+
+    return True
 
 
 def validate_tasks(tasks):
@@ -85,6 +90,9 @@ def validate_tasks(tasks):
 
     except IOError:
         print("Unknown task in task list expected: Axcpt Cuedts Stern or Stroop")
+        raise IOError
+
+    return True
 
 
 def validate_sessions(sessions):
@@ -97,6 +105,9 @@ def validate_sessions(sessions):
 
     except IOError:
         print("Unknown task in task list expected: baseline proactive reactive")
+        raise IOError
+
+    return True
 
 
 def validate_ncpus(ncpus):
@@ -105,6 +116,9 @@ def validate_ncpus(ncpus):
 
     except IOError:
         print("Invalid ncpus input. ncpus must be an integer type")
+        raise IOError
+
+    return True
 
 
 def validate_aux_analysis(aux_analysis):
@@ -113,8 +127,10 @@ def validate_aux_analysis(aux_analysis):
             raise IOError
     except IOError:
         print("aux_analysis path: " + aux_analysis + " Does not exist")
+        raise IOError
 
-    pass
+    return True
+
 
 def validate_user_input(origin, destination, events, pipeline, wave, subjects, tasks, sessions, ncpus, aux_analysis):
     validate_origin(origin)
