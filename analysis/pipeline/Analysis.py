@@ -4,7 +4,7 @@ sys.path.append("..") # Adds higher directory to python modules path.
 from classes import TaskGLMs
 from utils import logger
 
-#Run the volume 3ddeconvolve remlfit and roistats for each glm
+#Run the volume 3ddeconvolve Remlfit and roistats for each glm
 def run_volume_glms(GLM_set):
     for glm in GLM_set.glms:
 
@@ -19,7 +19,7 @@ def run_volume_glms(GLM_set):
         for roistats in glm[0].roistats:
             roistats.roistats.run_command()
 
-#Run the volume 3ddeconvolve remlfit and roistats for each glm
+#Run the volume 3ddeconvolve Remlfit and roistats for each glm
 def run_surface_glms(GLM_set):
     for glm in GLM_set.glms:
         print(f"Running {glm[1]}")
