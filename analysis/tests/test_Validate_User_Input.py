@@ -13,4 +13,4 @@ def test_validate_pipeline(pipeline):
 
 def test_validate_pipeline_error():
     with pytest.raises(IOError):
-        assert Validate_User_Input.validate_pipeline("badInput")
+        Validate_User_Input.validate_pipeline("badInput")
