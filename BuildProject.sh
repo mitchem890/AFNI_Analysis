@@ -7,10 +7,10 @@ docker run --rm repronim/neurodocker:0.7.0 \
 	--install connectome-workbench \
 	--afni version=latest method=binaries \
 	--miniconda create_env=neuro \
-	conda_install='python=3.6 numpy pandas traits' \
+	conda_install='python=3.6 numpy pandas traits yaml' \
 	--miniconda use_env=neuro \
-	conda_install='jupyter' > Dockerfile
-
+	conda_install='jupyter' \
+	pip_install='pyyaml' > Dockerfile
 
 
 

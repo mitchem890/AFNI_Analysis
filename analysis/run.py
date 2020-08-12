@@ -4,10 +4,12 @@ import os
 import sys
 sys.path.append("..") # Adds higher directory to python modules path.
 from config import globals
-from pipeline import Run_Analysis_Pipeline
+from pipeline import Run_Analysis_Pipeline, AuxAnalysis
 from utils import Validate_User_Input
 from utils import setup
 from utils import Download_Dataset
+from classes import aux_code_thread
+
 
 parser = argparse.ArgumentParser()
 
@@ -35,6 +37,7 @@ parser.add_argument('--events', '-e', help='The event/onset files to be used in 
 parser.add_argument('--pipeline', '-p', help='The pipeline used to process the input images', required=True)
 parser.add_argument('--ncpus', help='The Number of CPUs to use when processing the data', required=True)
 parser.add_argument('--overwrite', help='if previous file was found overwrite the output', action='store_true')
+parser.add_argument('--aux_analysis', help='A path that points to auxillerary analysis that will be ran after preanalysis and analysis')
 
 ##TODO Type in in argparse
 args = parser.parse_args()
@@ -55,15 +58,34 @@ run_analysis = args.analysis
 pipeline = args.pipeline
 ncpus = args.ncpus
 
-###TODO Makesure overwite flag is working
-globals.set_overwrite(args.overwrite)
-setup.setup_environment()
-Validate_User_Input.validate_user_input(origin=origin, destination=destination, events=events, wave=wave,
-                                        subjects=subjects, sessions=sessions, tasks=tasks, pipeline=pipeline,
-                                        ncpus=ncpus)
+aux_analysis = args.aux_analysis
+overwrite = args.overwrite
+
+globals.origin = origin
+globals.subjects = subjects
+globals.wave = wave
+globals.tasks = tasks
+globals.sessions = sessions
+globals.destination = destination
+globals.events = events
+globals.run_volume = run_volume
+globals.run_surface = run_surface
+globals.run_analysis = run_analysis
+globals.run_preanalysis = run_preanalysis
+globals.pipeline = pipeline
+globals.ncpus = ncpus
+globals.aux_analysis = aux_analysis
+globals.overwrite = overwrite
+
+#Download Subjects from openneuro
 if download:
     for subject in subjects:
         Download_Dataset.download_subject(subject, origin)
+
+setup.setup_environment()
+Validate_User_Input.validate_user_input(origin=origin, destination=destination, events=events, wave=wave,
+                                        subjects=subjects, sessions=sessions, tasks=tasks, pipeline=pipeline,
+                                        ncpus=ncpus, aux_analysis=aux_analysis)
 
 pool = mp.Pool(int(ncpus))
 
@@ -77,6 +99,16 @@ for subject in subjects:
             pool.apply_async(Run_Analysis_Pipeline.analysis_pipeline, args=(origin, destination, events, wave, subject,
                                                                             session, task, pipeline, run_volume,
                                                                             run_surface, run_preanalysis, run_analysis))
+
+pool.close()
+pool.join()
+pool = mp.Pool(int(ncpus))
+YamlFileName = "Aux_Analysis.yaml"
+if aux_analysis:
+    Threads = aux_code_thread.build_threads_from_yaml(os.path.join(aux_analysis, YamlFileName))
+    for Thread in Threads:
+        print(f"Running Thread: {Thread.thread_name}")
+        pool.apply_async(AuxAnalysis.aux_analysis, args=(Thread, aux_analysis))
 
 pool.close()
 pool.join()

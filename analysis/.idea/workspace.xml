@@ -106,10 +106,17 @@
     <option name="LAST_COMMIT_MESSAGE" value="Changed all tent functions and idx parameters to reflect one knot per TR stipulation" />
   </component>
   <component name="WindowStateProjectService">
+<<<<<<< HEAD
+    <state x="418" y="198" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589852033101">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="418" y="198" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1589852033101" />
+=======
     <state x="2658" y="406" width="508" height="292" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1589481084558">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2658" y="406" width="508" height="292" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1589481084558" />
+>>>>>>> master
     <state x="606" y="126" width="777" height="852" key="CommitChangelistDialog2" timestamp="1585588981179">
       <screen x="79" y="27" width="1841" height="1053" />
     </state>
@@ -142,9 +149,16 @@
       <screen x="79" y="27" width="1841" height="1053" />
     </state>
     <state x="767" y="472" width="454" height="160" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/79.27.1841.1053@79.27.1841.1053" timestamp="1585589001866" />
+<<<<<<< HEAD
+    <state x="623" y="239" width="672" height="678" key="search.everywhere.popup" timestamp="1589851134278">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="623" y="239" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1589851134278" />
+=======
     <state x="2613" y="162" width="618" height="783" key="find.popup" timestamp="1589488020808">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2613" y="162" width="618" height="783" key="find.popup/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1589488020808" />
+>>>>>>> master
   </component>
 </project>

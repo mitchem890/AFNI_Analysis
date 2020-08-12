@@ -20,7 +20,7 @@ class bash_command(object):
         return
 
     def run_command(self):
-        if (not self.outfile_exist()) or (globals.get_overwrite()):
+        if (not self.outfile_exist()) or (globals.overwrite):
             return rs.run_shell_command(self.command, return_output=self.return_output)
         else:
             print(f"Found previous {self.outfile} skipping")
