@@ -114,9 +114,9 @@ def validate_ncpus(ncpus):
     try:
         int(ncpus)
 
-    except OSError:
+    except ValueError:
         print("Invalid ncpus input. ncpus must be an integer type")
-        raise OSError
+        raise ValueError
 
     return True
 
