@@ -1,3 +1,4 @@
+#added Download Command to download from openneuro
 #added requirements.txt to implement pytest
 #Docker hub has been setup to automatically build any new commits to github
 #Testing new chunks of python code with containers:
