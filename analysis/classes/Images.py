@@ -10,7 +10,7 @@ from classes import BashCommand
 def get_fmriprep_images(origin, wave, subject, session, task, pipeline):
     images = []
     origin = os.path.join(origin, f"sub-{str(subject)}", f"ses-{wave}{session[0:3].lower()}", "func")
-
+    print(origin)
     files = glob.glob(os.path.join(origin,
                                    f'sub-{subject}_ses-{wave}{session[0:3].lower()}_task-{task.title()}_acq-mb???_run-?_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz'))
 
@@ -32,6 +32,7 @@ def get_hcp_images(origin, wave, subject, session, task, pipeline):
 
 
 def get_images(origin, wave, subject, session, task, pipeline):
+    print(f"Finding Images: {subject} {session} {task}")
     images = []
 
     if pipeline == 'fmriprep':
@@ -41,7 +42,7 @@ def get_images(origin, wave, subject, session, task, pipeline):
 
     # resort the images by run number
     images.sort(key=lambda x: int(x.run_num), reverse=False)
-
+    print(f"{images}")
     return images
 
 

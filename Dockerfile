@@ -167,6 +167,7 @@ RUN echo '{ \
 COPY analysis /home/analysis/
 RUN apt-get update && apt-get upgrade -y && apt-get install -y git && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && \ 
 apt-get install git-lfs && git lfs install
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && unzip awscliv2.zip && ./aws/install
 RUN cd /home/ && git lfs clone https://github.com/mitchem890/Atlases && chmod 777 -R /home/Atlases
 ENV PATH /opt/miniconda-latest/envs/neuro/bin:$PATH
 ENTRYPOINT ["python","-u","/home/analysis/run.py"]
