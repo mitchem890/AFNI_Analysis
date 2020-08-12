@@ -62,5 +62,5 @@ def tests_validate_ncpus(ncpus):
 
 
 def test_validate_ncpus_error():
-    with pytest.raises(OSError):
+    with pytest.raises(ValueError):
         Validate_User_Input.validate_ncpus("badInput")
