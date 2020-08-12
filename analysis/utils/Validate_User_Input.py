@@ -18,10 +18,10 @@ re_temp='(?:% s)' % '|'
 
 def validate_pipeline(pipeline):
     valid_pipeline_format = ["hcp", "fmriprep"]
-    temp = re_temp.join(valid_pipeline_format)
+    temp = '(?:% s)' % '|'.join(valid_pipeline_format)
     if not re.match(temp, pipeline):
         print("Invalid pipeline input. Expecting either: fmriprep or hcp")
-        raise IOError
+        raise OSError
     else:
         return True
 
@@ -29,7 +29,7 @@ def validate_pipeline(pipeline):
 def validate_origin(origin):
     if not os.path.exists(origin):
         print("origin: " + origin + " Does not exist")
-        raise IOError
+        raise OSError
     else:
         return True
 
@@ -41,71 +41,71 @@ def validate_destination(destination):
     except:
         print("Unexpected error:", sys.exc_info()[0])
         print("Could not create destination")
-        raise IOError
+        raise OSError
 
 
 def validate_event_files(events):
     if not os.path.exists(events):
         print("events path: " + events + " Does not exist")
-        raise IOError
+        raise OSError
     else:
         return True
 
 
 def validate_subjects(subjects):
     valid_subject_format = ["[0-9][0-9][0-9][0-9][0-9][0-9]", "DMCC[0-9][0-9][0-9][0-9][0-9][0-9]"]
-    temp = re_temp.join(valid_subject_format)
+    temp = '(?:% s)' % '|'.join(valid_subject_format)
     try:
         for subject in subjects:
             if not re.match(temp, subject):
-                raise IOError
-    except IOError:
+                raise OSError
+    except OSError:
         print("One or more subjects have an invalid format. Expecting format: ###### or DMCC######")
-        raise IOError
+        raise OSError
 
     return True
 
 
 def validate_wave(wave):
     valid_wave_format = ["wave[1-9]"]
-    temp = re_temp.join(valid_wave_format)
+    temp = '(?:% s)' % '|'.join(valid_wave_format)
     try:
         if not re.match(temp, wave):
-            raise IOError
+            raise OSError
 
-    except IOError:
+    except OSError:
         print("Wave parameter does not match expected format: wave#")
-        raise IOError
+        raise OSError
 
     return True
 
 
 def validate_tasks(tasks):
     valid_tasks_format = ["Axcpt", "Cuedts", "Stern", "Stroop"]
-    temp = re_temp.join(valid_tasks_format)
+    temp = '(?:% s)' % '|'.join(valid_tasks_format)
     try:
         for task in tasks:
             if not re.match(temp, task):
-                raise IOError
+                raise OSError
 
-    except IOError:
+    except OSError:
         print("Unknown task in task list expected: Axcpt Cuedts Stern or Stroop")
-        raise IOError
+        raise OSError
 
     return True
 
 
 def validate_sessions(sessions):
     valid_sessions_format = ["baseline", "proactive", "reactive"]
-    temp = re_temp.join(valid_sessions_format)
+    temp = '(?:% s)' % '|'.join(valid_sessions_format)
     try:
         for session in sessions:
             if not re.match(temp, session):
-                raise IOError
+                raise OSError
 
-    except IOError:
+    except OSError:
         print("Unknown task in task list expected: baseline proactive reactive")
-        raise IOError
+        raise OSError
 
     return True
 
@@ -114,9 +114,9 @@ def validate_ncpus(ncpus):
     try:
         int(ncpus)
 
-    except IOError:
+    except OSError:
         print("Invalid ncpus input. ncpus must be an integer type")
-        raise IOError
+        raise OSError
 
     return True
 
@@ -124,10 +124,10 @@ def validate_ncpus(ncpus):
 def validate_aux_analysis(aux_analysis):
     try:
         if not os.path.exists(aux_analysis):
-            raise IOError
-    except IOError:
+            raise OSError
+    except OSError:
         print("aux_analysis path: " + aux_analysis + " Does not exist")
-        raise IOError
+        raise OSError
 
     return True
 
