@@ -1,6 +1,6 @@
 import os
 import re
-
+import sys
 
 # origin = args.origin
 # subjects = args.subject
@@ -14,42 +14,42 @@ import re
 # run_preanalysis = args.preanalysis
 # run_analysis = args.analysis
 # pipeline = args.pipeline
-
+re_temp='(?:% s)' % '|'
 
 def validate_pipeline(pipeline):
     valid_pipeline_format = ["hcp", "fmriprep"]
     temp = '(?:% s)' % '|'.join(valid_pipeline_format)
-    try:
-        if not re.match(temp, pipeline):
-            raise IOError
-
-    except IOError:
+    if not re.match(temp, pipeline):
         print("Invalid pipeline input. Expecting either: fmriprep or hcp")
+        raise OSError
+    else:
+        return True
 
 
 def validate_origin(origin):
-    try:
-        if not os.path.exists(origin):
-            raise IOError
-    except IOError:
+    if not os.path.exists(origin):
         print("origin: " + origin + " Does not exist")
+        raise OSError
+    else:
+        return True
 
 
 def validate_destination(destination):
     try:
         if not os.path.exists(destination):
             os.mkdir(destination)
-    except IOError:
+    except:
+        print("Unexpected error:", sys.exc_info()[0])
         print("Could not create destination")
+        raise OSError
 
 
 def validate_event_files(events):
-    try:
-        if not os.path.exists(events):
-            raise IOError
-    except IOError:
+    if not os.path.exists(events):
         print("events path: " + events + " Does not exist")
-        ##TODO sys.exit(error#) Check argparse for validation Function
+        raise OSError
+    else:
+        return True
 
 
 def validate_subjects(subjects):
@@ -58,10 +58,12 @@ def validate_subjects(subjects):
     try:
         for subject in subjects:
             if not re.match(temp, subject):
-                raise IOError
-
-    except IOError:
+                raise OSError
+    except OSError:
         print("One or more subjects have an invalid format. Expecting format: ###### or DMCC######")
+        raise OSError
+
+    return True
 
 
 def validate_wave(wave):
@@ -69,10 +71,13 @@ def validate_wave(wave):
     temp = '(?:% s)' % '|'.join(valid_wave_format)
     try:
         if not re.match(temp, wave):
-            raise IOError
+            raise OSError
 
-    except IOError:
+    except OSError:
         print("Wave parameter does not match expected format: wave#")
+        raise OSError
+
+    return True
 
 
 def validate_tasks(tasks):
@@ -81,10 +86,13 @@ def validate_tasks(tasks):
     try:
         for task in tasks:
             if not re.match(temp, task):
-                raise IOError
+                raise OSError
 
-    except IOError:
+    except OSError:
         print("Unknown task in task list expected: Axcpt Cuedts Stern or Stroop")
+        raise OSError
+
+    return True
 
 
 def validate_sessions(sessions):
@@ -93,21 +101,36 @@ def validate_sessions(sessions):
     try:
         for session in sessions:
             if not re.match(temp, session):
-                raise IOError
+                raise OSError
 
-    except IOError:
+    except OSError:
         print("Unknown task in task list expected: baseline proactive reactive")
+        raise OSError
+
+    return True
 
 
 def validate_ncpus(ncpus):
     try:
         int(ncpus)
 
-    except IOError:
+    except ValueError:
         print("Invalid ncpus input. ncpus must be an integer type")
+        raise ValueError
+
+    return True
+
 
 def validate_aux_analysis(aux_analysis):
-    pass
+    try:
+        if not os.path.exists(aux_analysis):
+            raise OSError
+    except OSError:
+        print("aux_analysis path: " + aux_analysis + " Does not exist")
+        raise OSError
+
+    return True
+
 
 def validate_user_input(origin, destination, events, pipeline, wave, subjects, tasks, sessions, ncpus, aux_analysis):
     validate_origin(origin)
