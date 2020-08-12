@@ -6,7 +6,7 @@ from utils import Validate_User_Input
 import pytest
 
 
-@pytest.mark.parameterize("pipeline",[("hcp"),("fmriprep")])
+@pytest.mark.parametrize("pipeline",[("hcp"),("fmriprep")])
 def test_validate_pipeline(pipeline):
 
     assert Validate_User_Input.validate_pipeline(pipeline) is None
