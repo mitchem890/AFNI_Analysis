@@ -23,22 +23,3 @@ SubCorticalAtlases222 = ["gordon_222_resampled_wsubcort_LPI"]
 
 # Atlases for the Fmriprep subjects with fsaverage5 templates
 SurfaceAtlasesFS5 = ["Schaefer2018_400Parcels_7Networks_order_10K"]
-
-# Forced TR values for AFNI. When using Giftis or text files afni isnot able to determine the TR value for them
-ForceTRVolumeMB4 = "FALSE"
-ForceTRSurfaceMB4 = 1.2
-ForceTRVolumePreParcellatedMB4 = 1.2
-ForceTRSurfacePreParcellatedMB4 = 1.2
-
-ForceTRVolumeMB8 = "FALSE"
-ForceTRSurfaceMB8 = 0.8
-ForceTRVolumePreParcellatedMB8 = 0.8
-ForceTRSurfacePreParcellatedMB8 = 0.8
->>>>>>> Afni_analysis_fsl
-
-# Output Directory For each of the analysis Types
-VolumeResultsDir = "RESULTS"
-SurfaceResultsDir = "SURFACE_RESULTS"
-VolumePreParcellatedResultsDir = "PREPARCELLATED_RESULTS"
-SurfacePreParcellatedResultsDir = "PREPARCELLATED_SURFACE_RESULTS"
-SubCorticalPreParcellatedResultsDir = "PREPARCELLATED_CIFTI_SUBCORTICAL"
