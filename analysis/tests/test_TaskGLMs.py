@@ -2,8 +2,8 @@ import unittest
 import sys
 import os
 sys.path.append("..") # Adds higher directory to python modules path.
-from ..classes import Images
-from ..classes import TaskGLMs
+from classes import Images
+from classes import TaskGLMs
 
 image1 = Images.hcp_preprocessed_image(
     file='/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/tfMRI_StroopPro1_AP.nii.gz', wave='wave1',
@@ -29,6 +29,7 @@ image2 = Images.hcp_preprocessed_image(
     subject='346945', session='baseline', task='Axcpt', pipeline='hcp', testMode=True)
 Axcpt_Images = [image1, image2]
 
+fake_analysis_output='/mnt/afni_container_output/'
 
 image1 = Images.hcp_preprocessed_image(
     file='/mnt/afni_container_output/346945/INPUT_DATA/Stern/proactive/tfMRI_SternPro1_AP.nii.gz', wave='wave1',
@@ -63,11 +64,8 @@ def print_all_glms():
 
 print_all_glms()
 
-class TestStroop_GLMs(unittest.TestCase):
-
-
-    def test_congruency_event_deconvolve_volume(self):
-        output = f"""3dDeconvolve \\
+def test_congruency_event_deconvolve_volume():
+    output = f"""3dDeconvolve \\
 -local_times \\
 -x1D_stop \\
 -GOFORIT 5 \\
@@ -86,13 +84,10 @@ class TestStroop_GLMs(unittest.TestCase):
 -x1D X.xmat.1D \\
 -xjpeg X.jpg \\
 -nobucket"""
+    assert output == TaskGLMs.StroopGLMs(fake_analysis_output, images=Stroop_Images).glms[2][0].deconvolve.command
 
-        self.maxDiff = None
-        self.assertEqual(output, TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_BasPro_Images)
-                         .glms[2][0].deconvolve.command)
-
-    def test_congruency_event_remlfit_volume(self):
-        output = """3dREMLfit \\
+def test_congruency_event_remlfit_volume():
+    output = """3dREMLfit \\
 -matrix X.xmat.1D \\
 -GOFORIT 5 \\
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_blur4_tfMRI_StroopPro1_AP.nii.gz /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_blur4_tfMRI_StroopPro2_PA.nii.gz' \\
@@ -102,13 +97,10 @@ class TestStroop_GLMs(unittest.TestCase):
 -tout \\
 -nobout \\
 -verb"""
-        self.maxDiff = None
-        self.assertEqual(output,
-                         TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_BasPro_Images).glms[0][
-                             0].remlfit.command)
+    assert output == TaskGLMs.StroopGLMs(fake_analysis_output, images=Stroop_Images).glms[0][0].remlfit.command
 
-    def test_congruency_event_deconvolve_surface_L(self):
-        output = f"""3dDeconvolve \\
+def test_congruency_event_deconvolve_surface_L():
+    output = f"""3dDeconvolve \\
 -local_times \\
 -x1D_stop \\
 -GOFORIT 5 \\
@@ -129,12 +121,10 @@ class TestStroop_GLMs(unittest.TestCase):
 -xjpeg X_L.jpg \\
 -nobucket"""
 
-        self.maxDiff = None
-        self.assertEqual(output, TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_BasPro_Images)
-                         .glms[2][1].deconvolve.command)
+    assert output == TaskGLMs.StroopGLMs(fake_analysis_output, images=Stroop_Images).glms[2][1].deconvolve.command
 
-    def test_congruency_event_remlfit_surface_L(self):
-        output = """3dREMLfit \\
+def test_congruency_event_remlfit_surface_L():
+    output = """3dREMLfit \\
 -matrix X.xmat_L.1D \\
 -GOFORIT 5 \\
 -input '/mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_tfMRI_StroopPro1_AP_L.func.gii /mnt/afni_container_output/346945/INPUT_DATA/Stroop/proactive/lpi_scale_tfMRI_StroopPro2_PA_L.func.gii' \\
@@ -144,15 +134,10 @@ class TestStroop_GLMs(unittest.TestCase):
 -tout \\
 -nobout \\
 -verb"""
-        #print(TaskGLMs.AxcptGLMs('/mnt/afni_container_output/', images=Axcpt_Images).glms[4][1].deconvolve.command)
-        #print(TaskGLMs.AxcptGLMs('/mnt/afni_container_output/', images=Axcpt_Images).glms[4][1].remlfit.command)
+    assert output == TaskGLMs.AxcptGLMs(fake_analysis_output, images=Stroop_Images).glms[1][1].remlfit.command
 
-        self.maxDiff = None
-        self.assertEqual(output,
-                         TaskGLMs.AxcptGLMs('/mnt/afni_container_output/', images=Stroop_BasPro_Images).glms[1][1].remlfit.command)
-
-    def test_congruency_hrf_event_deconvolve_volume(self):
-        output = f"""3dDeconvolve \\
+def test_congruency_hrf_event_deconvolve_volume():
+    output = f"""3dDeconvolve \\
 -local_times \\
 -x1D_stop \\
 -GOFORIT 5 \\
@@ -172,19 +157,13 @@ class TestStroop_GLMs(unittest.TestCase):
 -xjpeg X.jpg \\
 -nobucket"""
 
-        self.maxDiff = None
-        self.assertEqual(output,
-                         TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_BasPro_Images).glms[5][
-                             0].deconvolve.command)
+    assert output == TaskGLMs.StroopGLMs(fake_analysis_output, images=Stroop_Images).glms[3][0].deconvolve.command
 
 
-suite = unittest.TestLoader().loadTestsFromTestCase(TestStroop_GLMs)
-unittest.TextTestRunner(verbosity=2).run(suite)
 
 
-class TestStroop_Roistats(unittest.TestCase):
-    def test_on_blocks_roistats_volume(self):
-        output = f'''bash /home/analysis/BashScripts/Roistats.sh \\
+def test_on_blocks_roistats_volume():
+    output = f'''bash /home/analysis/BashScripts/Roistats.sh \\
 -i /mnt/afni_container_output/346945/RESULTS/Stroop/proactive_ON_BLOCKS_censored/STATS_346945_REML.nii.gz \\
 -n ON_BLOCKS \\
 -w /mnt/afni_container_output/346945/RESULTS/Stroop/proactive_ON_BLOCKS_censored \\
@@ -193,10 +172,5 @@ class TestStroop_Roistats(unittest.TestCase):
 -b Coef \\
 -f 346945_timecourses_proactive_ON_BLOCKS_Coef_blocks_gordon_2p4_resampled_wsubcort_LPI.txt'''
 
-        self.maxDiff = None
-        self.assertEqual(output, TaskGLMs.StroopGLMs('/mnt/afni_container_output/', images=Stroop_BasPro_Images)
-                         .glms[0][0].roistats[0].roistats.command)
+    assert output==TaskGLMs.StroopGLMs(fake_analysis_output, images=Stroop_Images).glms[0][0].roistats[0].roistats.command
 
-
-suite = unittest.TestLoader().loadTestsFromTestCase(TestStroop_Roistats)
-unittest.TextTestRunner(verbosity=2).run(suite)

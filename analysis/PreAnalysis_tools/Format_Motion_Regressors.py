@@ -28,7 +28,6 @@ def format_motion_regressors(path, images: Images.preprocessed_image):
     print(f"Formatting Motion regressors: {images[0]} and {images[1].encoding}")
     fullpath = os.path.join(path, images[0].subject, 'INPUT_DATA', images[0].task, images[0].session)
     # List of motion regressors
-    root_names = []
 
     move_regs = [os.path.join(fullpath, f"Movement_Regressors_{images[0].root_name}.txt"),
                  os.path.join(fullpath, f"Movement_Regressors_{images[1].root_name}.txt")]
@@ -39,20 +38,20 @@ def format_motion_regressors(path, images: Images.preprocessed_image):
     append(move_regs, mov_regs_out)
 
     # List of framewise Displacement files
-    mov_regs_FD = [os.path.join(fullpath, f"{images[0].subject}_tfMRI_{images[0].root_name}_FD.txt"),
+    mov_regs_fd = [os.path.join(fullpath, f"{images[0].subject}_tfMRI_{images[0].root_name}_FD.txt"),
                    os.path.join(fullpath, f"{images[1].subject}_tfMRI_{images[1].root_name}_FD.txt")]
     # the Framewise Displacement outfile
-    mov_regs_FD_out = os.path.join(fullpath, 'movregs_FD.txt')
+    mov_regs_fd_out = os.path.join(fullpath, 'movregs_FD.txt')
     # append the outfiles together
-    append(mov_regs_FD, mov_regs_FD_out)
+    append(mov_regs_fd, mov_regs_fd_out)
 
     # A list of the Framewise Displacement Mask
-    mov_regs_FD_masks = [os.path.join(fullpath, f"{images[0].subject}_tfMRI_{images[0].root_name}_FD_mask.txt"),
+    mov_regs_fd_masks = [os.path.join(fullpath, f"{images[0].subject}_tfMRI_{images[0].root_name}_FD_mask.txt"),
                          os.path.join(fullpath, f"{images[1].subject}_tfMRI_{images[1].root_name}_FD_mask.txt")]
     # The outfile for the Framewise displacement mask
-    mov_regs_FD_masks_out = os.path.join(fullpath, "movregs_FD_mask.txt")
+    mov_regs_fd_masks_out = os.path.join(fullpath, "movregs_FD_mask.txt")
     # append the files together
-    append(mov_regs_FD_masks, mov_regs_FD_masks_out)
+    append(mov_regs_fd_masks, mov_regs_fd_masks_out)
 
     # We just want the first 6 movement regressors not their derivatives
     mov_regs_six_out = os.path.join(fullpath, "movregs6.txt")

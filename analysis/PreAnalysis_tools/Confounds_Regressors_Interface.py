@@ -38,7 +38,7 @@ def get_dvars(input, output):
 
 # Create the FD mask with a threshold of .9 for use with the fmriprep output
 def make_fd_mask(input, output):
-    data = BashCommand.make_fd_mask(infile=input).run_command()
+    data = BashCommand.MakeFDMask(infile=input).run_command()
     with open(output, 'w') as f:
         for i in data:
             f.write(i + '\n')

@@ -10,7 +10,7 @@ from classes import BashCommand
 def get_fmriprep_images(origin, wave, subject, session, task, pipeline):
     images = []
     origin = os.path.join(origin, f"sub-{str(subject)}", f"ses-{wave}{session[0:3].lower()}", "func")
-
+    print(origin)
     files = glob.glob(os.path.join(origin,
                                    f'sub-{subject}_ses-{wave}{session[0:3].lower()}_task-{task.title()}_acq-mb???_run-?_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz'))
 
@@ -32,6 +32,7 @@ def get_hcp_images(origin, wave, subject, session, task, pipeline):
 
 
 def get_images(origin, wave, subject, session, task, pipeline):
+    print(f"Finding Images: {subject} {session} {task}")
     images = []
 
     if pipeline == 'fmriprep':
@@ -41,7 +42,7 @@ def get_images(origin, wave, subject, session, task, pipeline):
 
     # resort the images by run number
     images.sort(key=lambda x: int(x.run_num), reverse=False)
-
+    print(f"{images}")
     return images
 
 
@@ -108,22 +109,22 @@ class preprocessed_image(object):
         self.hcp_fd_mask = f"{self.subject}_tfMRI_{self.root_name}_FD_mask.txt"
 
     def get_tr(self):
-        return BashCommand.get_tr(infile=self.file).run_command()
+        return BashCommand.GetTR(infile=self.file).run_command()
 
     def get_tr_count(self):
         return BashCommand.get_tr_count(infile=self.file).run_command()
 
     def get_voxel_dim(self, file):
-        dimensions_i = BashCommand.get_voxel_dimensions(infile=file, dimension='i').run_command()
-        dimensions_j = BashCommand.get_voxel_dimensions(infile=file, dimension='j').run_command()
-        dimensions_k = BashCommand.get_voxel_dimensions(infile=file, dimension='k').run_command()
+        dimensions_i = BashCommand.GetVoxelDimensions(infile=file, dimension='i').run_command()
+        dimensions_j = BashCommand.GetVoxelDimensions(infile=file, dimension='j').run_command()
+        dimensions_k = BashCommand.GetVoxelDimensions(infile=file, dimension='k').run_command()
         dimensions = f"{dimensions_i}x{dimensions_j}x{dimensions_k}".replace('-', '')
         return dimensions
 
     def get_image_dim(self, file):
-        dimensions_i = BashCommand.get_image_dimensions(infile=file, dimension='i').run_command()
-        dimensions_j = BashCommand.get_image_dimensions(infile=file, dimension='j').run_command()
-        dimensions_k = BashCommand.get_image_dimensions(infile=file, dimension='k').run_command()
+        dimensions_i = BashCommand.GetImageDimensions(infile=file, dimension='i').run_command()
+        dimensions_j = BashCommand.GetImageDimensions(infile=file, dimension='j').run_command()
+        dimensions_k = BashCommand.GetImageDimensions(infile=file, dimension='k').run_command()
         dimensions = f"{dimensions_i}x{dimensions_j}x{dimensions_k}".replace('-', '')
         return dimensions
 

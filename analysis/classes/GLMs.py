@@ -44,7 +44,6 @@ class GLM(object):
         self.regressors_models_labels = self.add_path_regressors_models_labels()
         self.roistats = self.generate_roistats()
 
-        return
 
     # This will build a list of tuples of equal size
     # adding a path to each of the regressors along the way
@@ -151,7 +150,7 @@ class VolumeGLM(GLM):
                      extension=self.extension)
 
 
-        self.deconvolve = BashCommand.deconvolve(
+        self.deconvolve = BashCommand.Deconvolve(
             local_times=True,
             x1D_stop=True,
             GOFORIT=5,
@@ -166,7 +165,7 @@ class VolumeGLM(GLM):
             xjpeg="X.jpg",
             nobucket=True)
 
-        self.remlfit = BashCommand.remlfit(
+        self.remlfit = BashCommand.Remlfit(
             matrix="X.xmat.1D",
             GOFORIT=5,
             input=self.input,
@@ -180,7 +179,6 @@ class VolumeGLM(GLM):
             nobout=True,
             verb=True)
 
-        return
 
     def generate_input(self):
         input_arg = ""
@@ -248,7 +246,7 @@ class SurfaceGLM(GLM):
                      roistats_designs_postfixes=self.roistats_designs_postfixes,
                      extension=self.extension)
 
-        self.deconvolve = BashCommand.deconvolve(
+        self.deconvolve = BashCommand.Deconvolve(
             local_times=True,
             x1D_stop=True,
             GOFORIT=5,
@@ -263,7 +261,7 @@ class SurfaceGLM(GLM):
             xjpeg=f"X_{self.hemisphere}.jpg",
             nobucket=True)
 
-        self.remlfit = BashCommand.remlfit(
+        self.remlfit = BashCommand.Remlfit(
             matrix=f"X.xmat_{self.hemisphere}.1D",
             GOFORIT=5,
             input=self.input,
@@ -277,7 +275,6 @@ class SurfaceGLM(GLM):
             nobout=True,
             verb=True)
 
-        return
 
     def generate_input(self):
         input_arg=""

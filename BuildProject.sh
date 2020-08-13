@@ -6,6 +6,7 @@ docker run --rm repronim/neurodocker:0.7.0 \
 	--pkg-manager apt \
 	--install connectome-workbench \
 	--afni version=latest method=binaries \
+	--fsl version=5.0.10 \
 	--miniconda create_env=neuro \
 	conda_install='python=3.6 numpy pandas traits yaml' \
 	--miniconda use_env=neuro \
@@ -28,6 +29,12 @@ apt-get install -y git && \
 curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && \ 
 apt-get install git-lfs && \
 git lfs install" >> Dockerfile
+
+#Install AWS to download dataset
+echo "RUN curl \"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip\" -o \"awscliv2.zip\" && \
+unzip awscliv2.zip && \
+./aws/install" >> Dockerfile
+
 #Get the atlases
 echo "RUN cd /home/ && \
 git lfs clone https://github.com/mitchem890/Atlases && \

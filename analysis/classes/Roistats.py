@@ -37,7 +37,7 @@ class roistats(object):
         return f"{self.subject}_timecourses_{self.session}_{self.design}_{self.subbrick}{self.postfix}_{atlas_file}.txt"
 
     def generate_command(self):
-        command = BashCommand.roistats(input=self.input_file,
+        command = BashCommand.Roistats(input=self.input_file,
                                        name=self.design,
                                        working_dir=self.working_dir,
                                        atlas=self.atlas,
