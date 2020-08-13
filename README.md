@@ -1,6 +1,6 @@
 # AFNI_Analysis
 
-*Pipeline is developed by the CCP lab at Washington University St. Louis. *
+*This pipeline is developed by the Cognitive Control Psy lab at Washington University St. Louis to replicate the standard analysis processing used on subjects in the Dual Mechanisms of Cognitive Control*
 
 
 
@@ -17,40 +17,39 @@ First you will want to Download the container using either singularity or docker
 
 This will create a singularity image name afni_analysis.simg in the location you are currently in.
 
-##Usage
+## Usage
 
 In order to run the container you'll probably want to create a bash file to make setting the parameters easier.
 Open your favorite text editor and paste the following in.
- 
-### Parameters
 
-     singularity run \
-     -B /my/desired/output/location/:/mnt \
-     -B /where/my/fmriprep/data/lives:/data:ro \
+```
+singularity run \
+[-B /local/bind/point:/mnt [-B /other/local/bind/point:/data:ro]] \
 afni_analysis.simg \
---wave wave1 \
---subject 132017 \
---session baseline proactive reactive \
---task Axcpt Cuedts Stern Stroop \
---origin /data/132017/derivatives/fmriprep/ \
---destination /mnt \
---preanalysis \
---analysis \
---volume \
---surface \
---events /mnt/Event_Files \
---pipeline fmriprep \
---ncpus 12
-
-
-
-
-
+[--download]
+--wave [wave] \
+--subject [SUBJECT [SUBJECT]] \
+--session [SESSION[SESSION]] \
+--task [TASK [TASK]] \
+--origin [ORIGIN_DIR] \
+--destination [DESTINATION_DIR] \
+[--preanalysis] \
+[--analysis] \
+[--volume] \
+[--surface] \
+--events [EVENTS_DIR] \
+--pipeline [PIPELINE] \
+--ncpus [NCPUS]
+--aux_analysis [AUX_ANALYSIS_DIR]
+```
 
 Then you will want to edit the parameters as needed.
 
-explanation of parameters:
--B
+### Parameters:
+This is an indepth explaination of the parameters that you will be using to run the container.  
+
+    -B
+
 This is called a bind point. singularity containers are an isolated system so the need to be given explicit direction of where they can read and write to your system. in this example I would have a local file location called: 
 /where/my/fmriprep/data/lives
 and I'm binding it to a point in the container called /data.
@@ -139,17 +138,3 @@ so in the example above. the program expects to find a folder called /mnt/Event_
 
 After you have made your file save it and run!
 It takes about 6 hours to run a complete subject on ccplinux1 running all 12 threads at once, but if you just want to test a single task in a session for your local machine. That should take much less time.
-
-Slate will respect the following variables, if set in your site's `_config.yml`:
-
-```yml
-title: [The title of your site]
-description: [A short description of your site's purpose]
-```
-
-Additionally, you may choose to set the following optional variables:
-
-```yml
-show_downloads: ["true" or "false" to indicate whether to provide a download URL]
-google_analytics: [Your Google Analytics tracking ID]
-```
