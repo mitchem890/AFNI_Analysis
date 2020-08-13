@@ -122,12 +122,13 @@ def validate_ncpus(ncpus):
 
 
 def validate_aux_analysis(aux_analysis):
-    try:
-        if not os.path.exists(aux_analysis):
+    if aux_analysis is not None:
+        try:
+            if not os.path.exists(aux_analysis):
+                raise OSError
+        except OSError:
+            print("aux_analysis path: " + aux_analysis + " Does not exist")
             raise OSError
-    except OSError:
-        print("aux_analysis path: " + aux_analysis + " Does not exist")
-        raise OSError
 
     return True
 
