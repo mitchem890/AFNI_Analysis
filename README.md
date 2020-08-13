@@ -3,22 +3,21 @@
 *Pipeline is developed by the CCP lab at Washington University St. Louis. *
 
 
-## Usage
+## Installation
+First you will want to Download the container using either singularity or docker
 
-To use the Afni_Analysis pipeline:
+###Download the container using docker:
 
-1. Download the container `_config.yml`:
-
-    ```yml
+    ```bash
     docker pull mitchem890/afni_analysis:latest
     ```
+###Download the container using singularity:
 
-2. Run the subject `Gemfile`:
-
-    ```ruby
-    docker run -v /home/mitchell/Desktop/:/mnt mitchem890/afni_analysis:latest --download --origin /mnt --subject 150423 --task Axcpt --wave wave1 --session baseline --destination /mnt --events /mnt --pipeline fmriprep --ncpus 1
-
+    ```bash
+    singularity build afni_analysis.simg docker://ccplabwustl/afni_analysis:latest
     ```
+
+##Usage
 
 ### Parameters
 
