@@ -48,7 +48,8 @@ Then you will want to edit the parameters as needed.
 ### Parameters:
 This is an indepth explaination of the parameters that you will be using to run the container.
 It will be easier if I use an example
-```singularity run \
+```
+singularity run \
 -B /my/desired/output/location/:/mnt \
 -B /where/my/fmriprep/data/lives:/data:ro \
 afni_analysis.simg \
@@ -148,6 +149,104 @@ This will tell the pipeline to run your own custom analysis after completing the
 This should point to a folder containing all of your bash scripts. This parameter takes more explaination
 `--aux_analysis /mnt/MyScripts`
 
-
 After you have made your file save it and run!
 It takes about 6 hours to run a complete subject on ccplinux1 running all 12 threads at once, but if you just want to test a single task in a session for your local machine. That should take much less time.
+
+
+## Aux_Analysis
+In order to make a better gradient from testing analysis from bash scripts to full production. I've implemented a way to do auxiliary analysis with the afni_analysis container.
+What does this mean:
+With a few edits of your bash script you can have it running inside the container. Making it easier to run mid-level test (before full on production, and after playing around with it on a few subjects), while still allowing for the benefits of having a locked down environment.
+
+### What is needed:
+Inorder to run this aux_analysis you will need to Create a folder in a mountable location.
+In that folder you will have your bash scripts that you want to use along with a .yaml file that will act as an orchestra maestro for your scripts.
+
+How the heck do I write a yaml file:
+you can check out the file attached as an example.
+But basically you will be laying out threads
+Each thread has three defining attributes:
+   
+thread_name: This will just to show you during runtime which thread is running
+   
+log_file: This will be written to the aux_analysis directory this will basically log every       command that is ran inside of the scripts, as well as a date time.
+   
+scripts: This is a list of all of the scripts that you want to run inside of the aux_analysis folder. They will run in the order that they are listed
+
+Your yaml file should always be named Aux_Analysis.yaml
+
+### What Changes do I need to make to my scripts:
+1.) Change the paths to be relative to what the container will see
+If you are pointing to a file in your script the container must be able to see that file and it must be in a path relative to what the container sees.
+so if your original script has something like:
+
+3dinfo /data/nil-bluearc/ccp-hcp/DMCC_ALL_BACKUPS/HCP_SUBJECTS_BACKUPS/fMRIPrep_AFNI_ANALYSIS/132017/INPUT_DATA/Axcpt/baseline/lpi_scale_blur4_tfMRI_AxcptBas1_AP.nii.gz
+
+
+You will want to have a path bound in the singularity call like:
+
+singularity run \
+-B /data/nil-bluearc/ccp-hcp/DMCC_ALL_BACKUPS/HCP_SUBJECTS_BACKUPS/fMRIPrep_AFNI_ANALYSIS/:/mnt \
+/data/nil-bluearc/ccp-hcp/afni_analysis_aux.simg
+
+
+then you will want to change your command to:
+
+3dinfo /mnt/132017/INPUT_DATA/Axcpt/baseline/lpi_scale_blur4_tfMRI_AxcptBas1_AP.nii.gz
+
+2.) Make sure you are only using standard functionality for bash, afni, wb-command, or fsl
+So some commands wont work if they are not default installs on linux
+We could install more things if need be but I would like to avoid that. If you cant figure out a way around this you can ask Nick Bloom Nick or Me to help you figure out a way around if all else fails we can install it on the container.
+
+3.) Your scripts cannot be interactive
+You should make it so that there are no external variables to your scripts. as you wont be able to pass variables to and from them at runtime
+
+4.) You will have access to user defined variables
+The user defined parameters are available as environment variables
+
+echo "This is my --origin $origin"
+echo "This is my --subjects $subjects"
+echo "This is my --wave $wave"
+echo "This is my --tasks parameter $tasks"
+echo "This is my --sessions $sessions"
+echo "This is my --destination $destination"
+echo "This is my --events $events"
+echo "This is my --run_volume $run_volume"
+echo "This is my --run_surface $run_surface"
+echo "This is my --run_analysis $run_analysis"
+echo "This is my --run_preanalysis $run_preanalysis"
+echo "This is my --pipeline $pipeline"
+echo "This is my --ncpus $ncpus"
+echo "This is my --aux_analysis $aux_analysis"
+
+All of the environment variables will be in string format when called in the shell
+If a variable has multiple parameters like '--sessions baseline proactive reactive'
+the parameters will be returned as one string that is space separated.
+this should allow you to do loops easier:
+
+for session in ${sessions}; do
+    echo ${session}
+done
+
+
+And you container call should look something like this:
+
+singularity run \
+-B /data/nil-bluearc/ccp-hcp/DMCC_ALL_BACKUPS/HCP_SUBJECTS_BACKUPS/fMRIPrep_AFNI_ANALYSIS/:/mnt \
+-B /data/nil-bluearc/ccp-hcp/DMCC_ALL_BACKUPS/HCP_SUBJECTS_BACKUPS/fMRIPrep_PREPROCESSED/${subject}:/data:ro \
+/data/nil-bluearc/ccp-hcp/afni_analysis_aux.simg \
+--wave wave1 \
+--subject 132017 \
+--session baseline proactive reactive \
+--task Axcpt Cuedts Stern Stroop \
+--origin /data/derivatives/fmriprep/ \
+--destination /mnt \
+--events /mnt/evts/DMCC2 \
+--pipeline fmriprep \
+--aux_analysis /mnt/MyScripts \
+--ncpus 12
+
+
+### Note:
+So far this has only been tested in a limited scenario. I'm up for suggestions if you have any. Also please let me know if you have any questions while you are trying it out.
+
