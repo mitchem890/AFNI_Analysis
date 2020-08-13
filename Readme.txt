@@ -1,5 +1,4 @@
-#added Download Command to download from openneuro
-#added requirements.txt to implement pytest
+
 #Docker hub has been setup to automatically build any new commits to github
 #Testing new chunks of python code with containers:
 #My basic process:
@@ -355,6 +354,7 @@ Run_Analysis_Pipeline.analysis_pipeline(origin='/mnt/LabWork/HCP_OUTPUT', destin
 # two for each atlas available a Tstas one and a Coef one
 
 
-
+#added Download Command to download from openneuro
+#added requirements.txt to implement pytest
 
 
