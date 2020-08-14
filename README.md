@@ -55,9 +55,10 @@ singularity run \
 -B /my/desired/output/location/:/mnt \
 -B /where/my/fmriprep/data/lives:/data:ro \
 afni_analysis.simg \
+--download \
 --wave wave1 \
---subject 132017 \
---session baseline proactive reactive \
+--subject 150423 \
+--session baseline \
 --task Axcpt Cuedts Stern Stroop \
 --origin /data/132017/derivatives/fmriprep/ \
 --destination /mnt \
