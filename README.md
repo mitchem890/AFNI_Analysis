@@ -9,7 +9,7 @@ First you will want to Download the container using either singularity or docker
 
 #### Download the container using docker:
 
-    docker pull mitchem890/afni_analysis:latest
+    docker pull ccplabwustl/afni_analysis:latest
    
 #### Download the container using singularity:
 
@@ -126,10 +126,8 @@ this should be set to `fmriprep` if you are running fmriprep data and `hcp` if y
 #### NCPUs `--ncpus` 
 This sets the number of threads that you want running simultaneously usually i would suggest using a range from 1-12 the max that the pipeline is able to run simutaneously is 12 because we have 4 tasks X 3 sessions
 
-
 #### Download `--download` 
 This tells the pipeline to Download the specified subject from OpenNeuro in the `--origin` location
-
 
 #### Aux_Analysis `--aux_analysis`
 This will tell the pipeline to run your own custom analysis after completing the standard pipline.
