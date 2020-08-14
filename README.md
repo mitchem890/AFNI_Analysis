@@ -7,11 +7,11 @@
 ## Installation
 First you will want to Download the container using either singularity or docker
 
-### Download the container using docker:
+#### Download the container using docker:
 
     docker pull mitchem890/afni_analysis:latest
    
-### Download the container using singularity:
+#### Download the container using singularity:
 
     singularity build afni_analysis.simg docker://ccplabwustl/afni_analysis:latest
 
